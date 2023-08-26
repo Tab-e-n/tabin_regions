@@ -1,0 +1,155 @@
+[gd_scene load_steps=9 format=3 uid="uid://didhhghxmey0r"]
+
+[ext_resource type="Script" path="res://setup_scene.gd" id="1_svc5r"]
+[ext_resource type="Texture2D" uid="uid://b11v165rsaphx" path="res://next.png" id="2_q4ghs"]
+[ext_resource type="Texture2D" uid="uid://b24er4e3fq8o6" path="res://ai_default.png" id="2_qggyn"]
+[ext_resource type="Texture2D" uid="uid://b7ruo67blmrg" path="res://ai_turtle.png" id="2_wi0e8"]
+[ext_resource type="Texture2D" uid="uid://tmryy03p6doc" path="res://ai_neuron.png" id="3_g3ljl"]
+[ext_resource type="Texture2D" uid="uid://1i36seg78ctk" path="res://ai_cheater.png" id="5_qe1ei"]
+[ext_resource type="Texture2D" uid="uid://deqhvnfw114vp" path="res://advance.png" id="5_x6iy8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kl6wx"]
+bg_color = Color(0, 0, 0, 0.498039)
+
+[node name="Setup_Scene" type="Node2D"]
+script = ExtResource("1_svc5r")
+
+[node name="cam" type="Camera2D" parent="."]
+position = Vector2(576, 320)
+
+[node name="map" type="Node2D" parent="."]
+
+[node name="map_list" type="ItemList" parent="."]
+z_index = 100
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 480.0
+offset_bottom = 608.0
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 512.0
+offset_top = 32.0
+offset_right = 1120.0
+offset_bottom = 216.0
+
+[node name="map_name" type="Label" parent="."]
+z_index = 100
+offset_left = 512.0
+offset_top = 32.0
+offset_right = 1120.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="lore" type="Label" parent="."]
+offset_left = 512.0
+offset_top = 80.0
+offset_right = 1120.0
+offset_bottom = 216.0
+horizontal_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="def" type="Control" parent="."]
+visible = false
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="map_data" type="Label" parent="def"]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 80.0
+offset_right = 1120.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="players" type="HSlider" parent="def"]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 192.0
+offset_right = 1120.0
+offset_bottom = 216.0
+max_value = 0.0
+
+[node name="diff" type="Control" parent="."]
+visible = false
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ai_turtle" type="TextureButton" parent="diff"]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 96.0
+offset_right = 672.0
+offset_bottom = 192.0
+texture_normal = ExtResource("2_wi0e8")
+
+[node name="ai_default" type="TextureButton" parent="diff"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 96.0
+offset_right = 800.0
+offset_bottom = 192.0
+texture_normal = ExtResource("2_qggyn")
+
+[node name="ai_neuron" type="TextureButton" parent="diff"]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 96.0
+offset_right = 928.0
+offset_bottom = 192.0
+texture_normal = ExtResource("3_g3ljl")
+
+[node name="ai_cheater" type="TextureButton" parent="diff"]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 96.0
+offset_right = 1056.0
+offset_bottom = 192.0
+texture_normal = ExtResource("5_qe1ei")
+
+[node name="preset" type="Label" parent="diff"]
+visible = false
+layout_mode = 0
+offset_left = 560.0
+offset_top = 80.0
+offset_right = 1072.0
+offset_bottom = 208.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_kl6wx")
+text = "MAP USES CUSTOM AI SETUP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="next_menu" type="TextureButton" parent="."]
+z_index = 100
+offset_left = 1056.0
+offset_top = 216.0
+offset_right = 1120.0
+offset_bottom = 280.0
+texture_normal = ExtResource("2_q4ghs")
+
+[node name="play" type="TextureButton" parent="."]
+z_index = 100
+offset_left = 992.0
+offset_top = 480.0
+offset_right = 1120.0
+offset_bottom = 608.0
+texture_normal = ExtResource("5_x6iy8")
+
+[connection signal="item_activated" from="map_list" to="." method="_on_map_list_item_activated"]
+[connection signal="item_selected" from="map_list" to="." method="_on_map_list_item_selected"]
+[connection signal="value_changed" from="def/players" to="." method="_on_players_value_changed"]
+[connection signal="pressed" from="diff/ai_turtle" to="." method="_on_ai_default_pressed"]
+[connection signal="pressed" from="diff/ai_default" to="." method="_on_ai_default_pressed"]
+[connection signal="pressed" from="diff/ai_neuron" to="." method="_on_ai_default_pressed"]
+[connection signal="pressed" from="diff/ai_cheater" to="." method="_on_ai_default_pressed"]
+[connection signal="pressed" from="next_menu" to="." method="_on_next_menu_pressed"]
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]

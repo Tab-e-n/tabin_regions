@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckbitpcqxs5ao"]
+
+[ext_resource type="Script" path="res://GameControl.gd" id="1_2axsc"]
+[ext_resource type="Script" path="res://GameCamera.gd" id="1_we6ai"]
+[ext_resource type="Texture2D" uid="uid://deqhvnfw114vp" path="res://advance.png" id="5_4j0ci"]
+[ext_resource type="StyleBox" uid="uid://l8vkqqi4prkx" path="res://style_label_normal_box.tres" id="5_p3dil"]
+[ext_resource type="Texture2D" uid="uid://66jp7txq175w" path="res://capital.png" id="6_awiss"]
+[ext_resource type="Script" path="res://AIControler.gd" id="6_wysxp"]
+
+[node name="GameControler" type="Node2D"]
+script = ExtResource("1_2axsc")
+
+[node name="AIControler" type="Node" parent="."]
+script = ExtResource("6_wysxp")
+
+[node name="GameCamera" type="Camera2D" parent="."]
+z_index = 30
+script = ExtResource("1_we6ai")
+
+[node name="Panel" type="Panel" parent="GameCamera"]
+show_behind_parent = true
+offset_left = -576.0
+offset_top = 192.0
+offset_right = 576.0
+offset_bottom = 320.0
+theme_override_styles/panel = ExtResource("5_p3dil")
+
+[node name="AdvanceTurn" type="TextureButton" parent="GameCamera"]
+offset_left = 416.0
+offset_top = 192.0
+offset_right = 544.0
+offset_bottom = 320.0
+texture_normal = ExtResource("5_4j0ci")
+
+[node name="Action" type="Label" parent="GameCamera"]
+offset_left = -416.0
+offset_top = 192.0
+offset_right = 416.0
+offset_bottom = 319.0
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Power" type="TextureRect" parent="GameCamera"]
+offset_left = -544.0
+offset_top = 192.0
+offset_right = -480.0
+offset_bottom = 256.0
+scale = Vector2(2, 2)
+texture = ExtResource("6_awiss")
+
+[node name="text" type="Label" parent="GameCamera/Power"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="turn_order" type="Polygon2D" parent="GameCamera"]
+position = Vector2(-576, -288)
+color = Color(0.247059, 0.247059, 0.247059, 1)
+polygon = PackedVector2Array(0, -32, 0, 32, 64, 32, 64, -32)
+
+[node name="win" type="Label" parent="GameCamera"]
+visible = false
+offset_left = -192.0
+offset_top = -64.0
+offset_right = 192.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("5_p3dil")
+text = "VICTORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="leave" type="Label" parent="GameCamera"]
+visible = false
+offset_left = -144.0
+offset_top = -48.0
+offset_right = 144.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("5_p3dil")
+text = "Press esc to
+confirm leaving..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cross" type="Polygon2D" parent="."]
+visible = false
+z_index = 25
+color = Color(0.137255, 0.137255, 0.137255, 1)
+polygon = PackedVector2Array(-32, 64, 0, 32, 32, 64, 64, 32, 32, 0, 64, -32, 32, -64, 0, -32, -32, -64, -64, -32, -32, 0, -64, 32)

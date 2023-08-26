@@ -1,0 +1,94 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl73eme14hwup"]
+
+[sub_resource type="GDScript" id="GDScript_6r6wn"]
+script/source = "extends Node2D
+
+var controlers : Array = [\"User Controled\", \"Simple\", \"Turtle\", \"Neural\", \"Cheater\", \"No One\"]
+
+@onready var window_size : Vector2 = get_viewport_rect().size
+
+const farthest_left : int = 576
+var farthest_right : int = 576
+
+var input_processing_buffer : float = 1
+
+func _ready():
+	var align : int = 0
+	for stats in GameStats.stats:
+#		print(stats)
+		var panel : Panel = Panel.new()
+		
+		panel.add_theme_stylebox_override(\"panel\", preload(\"res://style_label_normal_box.tres\"))
+		panel.size = Vector2(192, 640)
+		panel.modulate = stats[\"align color\"]
+		panel.position.x = 192 * align
+		
+		$columbs.add_child(panel)
+		
+		var sprite : Sprite2D = Sprite2D.new()
+		
+		sprite.texture = preload(\"res://capital.png\")
+		sprite.position.x = 192 * align + 32
+		sprite.position.y = 32
+		sprite.modulate = stats[\"align color\"]
+		
+		$columbs.add_child(sprite)
+		
+		var label : Label = Label.new()
+		label.position.x = 192 * align
+		#label.position = Vector2(-32, -32)
+		label.size = Vector2(64, 64)
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.text = stats[\"placement\"]
+		
+		$columbs.add_child(label)
+		
+		var columb : Label = Label.new()
+		
+		columb.size = Vector2(192, 192)
+		columb.position.x = 192 * align
+		columb.text = \"                \" + controlers[stats[\"controler\"]] + \"\\n\"
+		columb.text += \"\\nTurns lasted:\\n\" + String.num(stats[\"turns lasted\"])
+		columb.text += \"\\nFirst actions done:\\n\" + String.num(stats[\"first actions done\"])
+		columb.text += \"\\nBonus actions done:\\n\" + String.num(stats[\"bonus actions done\"])
+		columb.text += \"\\nEnemy units removed:\\n\" + String.num(stats[\"enemy units removed\"])
+		columb.text += \"\\nUnits lost:\\n\" + String.num(stats[\"units lost\"])
+		columb.text += \"\\nUnits mobilized:\\n\" + String.num(stats[\"units mobilized\"])
+		columb.text += \"\\nmost regions owned:\\n\" + String.num(stats[\"most regions owned\"])
+		columb.text += \"\\nmost capitals owned:\\n\" + String.num(stats[\"most capitals owned\"])
+		columb.text += \"\\nregions captured:\\n\" + String.num(stats[\"regions captured\"])
+		columb.text += \"\\nregions reinforced:\\n\" + String.num(stats[\"regions reinforced\"])
+		columb.text += \"\\ncapital regions captured:\\n\" + String.num(stats[\"capital regions captured\"])
+		
+		$columbs.add_child(columb)
+		
+		align += 1
+	
+	var columb_amount : int = GameStats.stats.size()
+	
+	if columb_amount > 6:
+		farthest_right += (columb_amount - 6) * 192
+
+func _input(event):
+	if event is InputEventKey and input_processing_buffer <= 0:
+		if event.pressed:
+			get_tree().change_scene_to_file(\"res://setup_scene.tscn\")
+
+func _physics_process(delta):
+	if input_processing_buffer > 0:
+		input_processing_buffer -= delta
+	var mouse_position = get_viewport().get_mouse_position()
+	if mouse_position.x > window_size.x - 64 and $cam.position.x < farthest_right:
+		$cam.position.x += 8
+	if mouse_position.x < 64 and $cam.position.x > farthest_left:
+		$cam.position.x -= 8
+"
+
+[node name="Stats" type="Node2D"]
+script = SubResource("GDScript_6r6wn")
+
+[node name="columbs" type="Node2D" parent="."]
+
+[node name="cam" type="Camera2D" parent="."]
+position = Vector2(576, 328)
