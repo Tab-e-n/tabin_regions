@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://cse41lvvvirpp"]
+
+[ext_resource type="Script" path="res://RegionControl.gd" id="1_ogcds"]
+[ext_resource type="Texture2D" uid="uid://1buoyg5qse3m" path="res://pic70732.webp" id="2_2baaa"]
+[ext_resource type="Script" path="res://Region.gd" id="3_14aoh"]
+
+[sub_resource type="GDScript" id="GDScript_hihxe"]
+script/source = "extends Node
+
+@export var align_color : Array = [
+		Color(0.43, 0.34, 0.41),
+		Color(0.67, 0.14, 0.2),
+		Color(0.54, 0.13, 0.68),
+		Color(0.15, 0.49, 0.74),
+		Color(0.19, 0.51, 0.3),
+		Color(0.61, 0.42, 0.11),
+		Color(0.54, 0.13, 0.68),
+		Color(0.15, 0.49, 0.74),
+		Color(0.19, 0.51, 0.3),
+		Color(0.61, 0.42, 0.11)
+]
+
+var connections : Array = [
+	[\"KØBENHAVN\", \"STOCKHOLM\"],
+	[\"LONDON\", \"EDINBURGH\"],
+]
+
+func _ready():
+	get_parent().connections = connections.duplicate()
+	get_parent().align_color = align_color.duplicate()
+	queue_free()
+"
+
+[node name="Node2D" type="Polygon2D"]
+color = Color(0.807843, 0.839216, 0.858824, 1)
+polygon = PackedVector2Array(-800, -536, 800, -536, 800, 536, -800, 536)
+script = ExtResource("1_ogcds")
+lore = "This map isn't historic."
+metadata/_edit_horizontal_guides_ = [-496.0, 496.0]
+metadata/_edit_vertical_guides_ = [-760.0, 760.0]
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_hihxe")
+align_color = [Color(0.392157, 0.372549, 0.34902, 1), Color(0.984314, 0.803922, 0.666667, 1), Color(0.827451, 0.713726, 0.419608, 1), Color(0.764706, 0.905882, 0.505882, 1), Color(0.47451, 0.741176, 0.662745, 1), Color(0.517647, 0.921569, 0.941176, 1), Color(0.403922, 0.619608, 0.807843, 1), Color(0.835294, 0.827451, 0.972549, 1), Color(0.729412, 0.537255, 0.768627, 1), Color(0.941176, 0.933333, 0.92549, 1)]
+
+[node name="Pic70732" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_2baaa")
+
+[node name="STOCKHOLM" type="Polygon2D" parent="."]
+position = Vector2(96, -464)
+polygon = PackedVector2Array(-96, 128, -88, 96, -32, 88, -16, 16, 16, -32, -160, -32, -160, 8, -136, 48, -136, 88, -128, 128)
+script = ExtResource("3_14aoh")
+
+[node name="KØBENHAVN" type="Polygon2D" parent="."]
+position = Vector2(-56, -352)
+polygon = PackedVector2Array(8, -24, 8, 8, -8, 16, -32, 32, -56, 16, -72, 0, -72, -16, -80, 8, -112, 16, -120, 0, -120, -32, -112, -88, -72, -96, -64, -112, -48, -120, -40, -96, -56, -80, -48, -56, -32, -56, -48, -32, -64, -16, -56, -16, -40, -24, -24, -16)
+script = ExtResource("3_14aoh")
+
+[node name="EDINBURGH" type="Polygon2D" parent="."]
+position = Vector2(-536, -440)
+polygon = PackedVector2Array(-8, 80, 64, 40, 48, 8, 32, 8, 24, -8, 48, -40, 48, -56, -64, -56, -72, -8, -48, 24, -32, 24, -32, 40, -48, 64, -40, 80)
+script = ExtResource("3_14aoh")
+alignment = 1
+
+[node name="LONDON" type="Polygon2D" parent="."]
+position = Vector2(-440, -208)
+polygon = PackedVector2Array(-32, -184, -104, -144, -104, -136, -80, -120, -80, -88, -96, -80, -120, -88, -128, -64, -112, -64, -120, -32, -144, -24, -144, -8, -104, 8, -160, 72, -144, 80, -128, 64, -104, 64, -88, 48, -72, 48, -64, 56, -48, 48, -8, 56, 16, 32, 32, 40, 64, 16, 56, -8, 64, -40, 56, -64, 24, -64, 24, -80, 8, -128, -8, -144, -16, -144)
+script = ExtResource("3_14aoh")
+alignment = 1
