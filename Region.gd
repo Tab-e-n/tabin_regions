@@ -28,7 +28,7 @@ func _process(delta):
 
 func color_self():
 	color = region_control.align_color[alignment]
-	city.self_modulate = region_control.align_color[alignment]
+	city.color_self(region_control.align_color[alignment])
 
 func _on_capital_pressed():
 	if region_control.is_user_controled:

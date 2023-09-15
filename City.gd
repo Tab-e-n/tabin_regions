@@ -43,3 +43,13 @@ func make_particle(mobilize : bool):
 	part.modulate = self_modulate
 	part.mobilize = mobilize
 	add_child(part) 
+
+func color_self(new_color : Color):
+	self_modulate = new_color
+	if new_color.v > 0.9:
+		text.self_modulate = Color(0, 0, 0)
+		region_name.self_modulate = Color(0, 0, 0)
+	else:
+		text.self_modulate = Color(1, 1, 1)
+		region_name.self_modulate = Color(1, 1, 1)
+		

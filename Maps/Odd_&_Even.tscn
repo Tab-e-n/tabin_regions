@@ -149,5 +149,5 @@ position = Vector2(-240, -232)
 polygon = PackedVector2Array(-64, 40, -48, 40, -48, 24, -32, 24, -32, 8, -48, 8, -72, -16, -88, -16, -88, 0, -64, 24)
 script = ExtResource("2_btpod")
 power = 6
-max_power = 10
+max_power = 9
 is_capital = true
