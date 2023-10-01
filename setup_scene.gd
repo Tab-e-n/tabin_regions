@@ -18,8 +18,17 @@ func _ready():
 		new_name = new_name.replace("_", " ")
 		$map_list.add_item(new_name)
 	
-	$map_list.select(0)
-	_on_map_list_item_selected(0)
+	var map = maps.find(MapSetup.current_map_name)
+	
+	if map == -1:
+		$map_list.select(0)
+		_on_map_list_item_selected(0)
+	else:
+		$map_list.select(map)
+		_on_map_list_item_selected(map)
+		$def/players.value = MapSetup.user_amount
+	
+	
 
 func _process(delta):
 	pass

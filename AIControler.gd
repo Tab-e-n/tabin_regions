@@ -75,14 +75,14 @@ func think_default():
 	
 #	print(owned_regions)
 	
-	if region_control.capital_amount[current_alignment - 1] == 0:
-		var forfeit : bool = true
-		for region in owned_regions[current_alignment]:
-			if region.power > 1:
-				forfeit = false
-				break
-		if forfeit:
-			CALL_forfeit = true
+#	if region_control.capital_amount[current_alignment - 1] == 0:
+#		var forfeit : bool = true
+#		for region in owned_regions[current_alignment]:
+#			if region.power > 1:
+#				forfeit = false
+#				break
+#		if forfeit:
+#			CALL_forfeit = true
 	
 	match region_control.current_action:
 		region_control.ACTION_NORMAL:
@@ -179,7 +179,7 @@ func calculate_benefit(region : Region, is_bonus : bool):
 			if region.is_capital and region.power != region.max_power:
 				benefit += 4
 		if threat >= -action_amount:
-			benefit += region.power
+			benefit += region.power / 2
 	else:
 		if region.is_capital:
 			benefit += 5
