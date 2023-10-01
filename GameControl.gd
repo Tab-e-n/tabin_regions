@@ -13,6 +13,7 @@ func _ready():
 	var packed_map : PackedScene = load("res://Maps/" + map)
 	region_control = packed_map.instantiate()
 	add_child(region_control)
+	move_child(region_control, 1)
 
 func _process(delta):
 	pass
