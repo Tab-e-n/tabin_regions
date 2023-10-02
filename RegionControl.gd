@@ -27,6 +27,7 @@ class_name RegionControl
 
 @export_subgroup("Users")
 @export var user_amount : int = 1
+@export var random_player_align_range : int = 0
 @export var max_user_amount : int = -1
 @export var use_preset_alignments : bool = false
 @export var preset_user_alignments : Array = []
@@ -92,6 +93,8 @@ func _ready():
 	
 	count_up_regions()
 	
+	if random_player_align_range < max_user_amount:
+		random_player_align_range = max_user_amount
 	
 	player_order.resize(align_amount - 1)
 	var players : Array = range(align_amount)
@@ -108,6 +111,8 @@ func _ready():
 	rng.randomize()
 	for i in range(players.size()):
 		var pos : int = rng.randi_range(0, players.size() - 1)
+		if random_player_align_range > 0 and i < random_player_align_range and not use_preset_alignments:
+			pos = rng.randi_range(0, random_player_align_range - i - 1)
 		var order : int = i
 		if use_preset_alignments and user_amount > 0:
 			order += user_amount
