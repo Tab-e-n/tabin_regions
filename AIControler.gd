@@ -17,7 +17,7 @@ var owned_regions : Dictionary = {}
 var current_moves : Dictionary = {}
 var previous_moves : Array = []
 
-var selected_capital : String = "Astoska"
+var selected_capital : String = ""
 
 var CALL_change_current_action : bool = false
 var CALL_turn_end : bool = false
@@ -56,6 +56,10 @@ func start_turn(align : int, control : int):
 		previous_moves = current_moves[current_alignment].duplicate()
 	current_moves[current_alignment] = []
 	
+	if region_control != null:
+		if current_controler == CONTROLER_CHEATER and region_control.current_turn % 6 == 0:
+			region_control.action_amount += 1
+	
 	call_deferred("think")
 
 func think():
@@ -65,6 +69,8 @@ func think():
 	
 	match current_controler:
 		CONTROLER_DEFAULT:
+			think_default()
+		CONTROLER_CHEATER:
 			think_default()
 	
 
@@ -129,10 +135,10 @@ func think_default_attack(is_bonus : bool = false):
 	
 	if eligable_regions.size() > 0:
 		selected_capital = eligable_regions[0].name
-		var highest_benefit = calculate_benefit(eligable_regions.pop_front(), is_bonus)
+		var highest_benefit = calculate_benefit_default(eligable_regions.pop_front(), is_bonus)
 		rng.randomize()
 		for region in eligable_regions:
-			var benefit = calculate_benefit(region, is_bonus)
+			var benefit = calculate_benefit_default(region, is_bonus)
 			if benefit > highest_benefit:
 				selected_capital = region.name
 				highest_benefit = benefit
@@ -162,9 +168,11 @@ func think_default_mobilize():
 			CALL_turn_end = true
 		else:
 			CALL_change_current_action = true
+			if region_control.current_turn % 6 == 0 and current_controler == CONTROLER_CHEATER:
+				region_control.bonus_action_amount += 1
 	
 
-func calculate_benefit(region : Region, is_bonus : bool):
+func calculate_benefit_default(region : Region, is_bonus : bool):
 	var action_amount : int
 	if not is_bonus:
 		action_amount = region_control.action_amount

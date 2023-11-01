@@ -28,7 +28,7 @@ func _ready():
 		_on_map_list_item_selected(map)
 		$def/players.value = MapSetup.user_amount
 	
-	
+	ai_selected_pos()
 
 func _process(delta):
 	pass
@@ -63,6 +63,7 @@ func _on_map_list_item_selected(index):
 	$def/players.value = current_map.user_amount
 	
 	$diff/preset.visible = current_map.use_custom_ai_setup
+	$diff/AiSelected.visible = !current_map.use_custom_ai_setup
 	
 	$lore.text = current_map.tag + "\n" + current_map.lore
 
@@ -86,6 +87,21 @@ func _on_next_menu_pressed():
 	$def.visible = current_menu == MENU_ALIGNMENTS
 	$diff.visible = current_menu == MENU_DIFFICULTY
 
+func ai_selected_pos():
+	match(MapSetup.ai_controler):
+		AIControler.CONTROLER_TURTLE:
+			$diff/AiSelected.position.x = 624
+		AIControler.CONTROLER_DEFAULT:
+			$diff/AiSelected.position.x = 752
+		AIControler.CONTROLER_NEURAL:
+			$diff/AiSelected.position.x = 880
+		AIControler.CONTROLER_CHEATER:
+			$diff/AiSelected.position.x = 1008
+
 func _on_ai_default_pressed():
 	MapSetup.ai_controler = AIControler.CONTROLER_DEFAULT
+	ai_selected_pos()
 
+func _on_ai_cheater_pressed():
+	MapSetup.ai_controler = AIControler.CONTROLER_CHEATER
+	ai_selected_pos()

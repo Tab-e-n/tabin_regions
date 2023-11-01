@@ -79,11 +79,16 @@ func _ready():
 		var region_0 : Region = get_node(link[0])
 		var region_1 : Region = get_node(link[1])
 		if region_0 == null or region_1 == null:
+			print(link[0], " or ", link[1], " does not exist.")
 			continue
 		if not region_0.connections.has(link[1]):
 			region_0.connections[link[1]] = link_diff
+		else:
+			print(link[0], " already has this connection.")
 		if not region_1.connections.has(link[0]):
 			region_1.connections[link[0]] = link_diff
+		else:
+			print(link[1], " already has this connection.")
 	
 	region_amount.resize(align_amount - 1)
 	capital_amount.resize(align_amount - 1)

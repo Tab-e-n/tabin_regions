@@ -8,6 +8,8 @@ class_name GameControl
 @onready var region_control : RegionControl
 @onready var ai_control : AIControler
 
+var hide_cross : float = 0
+
 func _ready():
 	map = MapSetup.current_map_name
 	var packed_map : PackedScene = load("res://Maps/" + map)
@@ -16,4 +18,9 @@ func _ready():
 	move_child(region_control, 1)
 
 func _process(delta):
-	pass
+	if cross.visible == true and hide_cross < 0:
+		hide_cross = 1
+	hide_cross -= delta
+	if hide_cross < 0:
+		cross.visible = false
+	

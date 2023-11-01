@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://didhhghxmey0r"]
+[gd_scene load_steps=10 format=3 uid="uid://didhhghxmey0r"]
 
 [ext_resource type="Script" path="res://setup_scene.gd" id="1_svc5r"]
+[ext_resource type="Texture2D" uid="uid://cci2sp743u6hi" path="res://ai_selected.png" id="2_1q3y1"]
 [ext_resource type="Texture2D" uid="uid://b11v165rsaphx" path="res://next.png" id="2_q4ghs"]
 [ext_resource type="Texture2D" uid="uid://b24er4e3fq8o6" path="res://ai_default.png" id="2_qggyn"]
 [ext_resource type="Texture2D" uid="uid://b7ruo67blmrg" path="res://ai_turtle.png" id="2_wi0e8"]
@@ -18,6 +19,7 @@ script = ExtResource("1_svc5r")
 position = Vector2(576, 320)
 
 [node name="map" type="Node2D" parent="."]
+z_index = -100
 
 [node name="map_list" type="ItemList" parent="."]
 z_index = 100
@@ -83,12 +85,18 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="AiSelected" type="Sprite2D" parent="diff"]
+position = Vector2(624, 144)
+texture = ExtResource("2_1q3y1")
+
 [node name="ai_turtle" type="TextureButton" parent="diff"]
+modulate = Color(0.447059, 0.447059, 0.447059, 1)
 layout_mode = 0
 offset_left = 576.0
 offset_top = 96.0
 offset_right = 672.0
 offset_bottom = 192.0
+disabled = true
 texture_normal = ExtResource("2_wi0e8")
 
 [node name="ai_default" type="TextureButton" parent="diff"]
@@ -100,11 +108,13 @@ offset_bottom = 192.0
 texture_normal = ExtResource("2_qggyn")
 
 [node name="ai_neuron" type="TextureButton" parent="diff"]
+modulate = Color(0.447059, 0.447059, 0.447059, 1)
 layout_mode = 0
 offset_left = 832.0
 offset_top = 96.0
 offset_right = 928.0
 offset_bottom = 192.0
+disabled = true
 texture_normal = ExtResource("3_g3ljl")
 
 [node name="ai_cheater" type="TextureButton" parent="diff"]
@@ -150,6 +160,6 @@ texture_normal = ExtResource("5_x6iy8")
 [connection signal="pressed" from="diff/ai_turtle" to="." method="_on_ai_default_pressed"]
 [connection signal="pressed" from="diff/ai_default" to="." method="_on_ai_default_pressed"]
 [connection signal="pressed" from="diff/ai_neuron" to="." method="_on_ai_default_pressed"]
-[connection signal="pressed" from="diff/ai_cheater" to="." method="_on_ai_default_pressed"]
+[connection signal="pressed" from="diff/ai_cheater" to="." method="_on_ai_cheater_pressed"]
 [connection signal="pressed" from="next_menu" to="." method="_on_next_menu_pressed"]
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]

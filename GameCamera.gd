@@ -19,6 +19,8 @@ func _input(event):
 	if event is InputEventKey:
 		if event.key_label != KEY_ESCAPE:
 			$leave.visible = false
+	if event is InputEventMouseButton:
+		$leave.visible = false
 
 func _deffered_ready():
 	for i in game_control.region_control.polygon:
@@ -42,7 +44,7 @@ func _deffered_ready():
 	
 	farthest_right -= window_size.x / 3
 	farthest_left += window_size.x / 3
-	farthest_down -= window_size.y / 3
+	farthest_down -= window_size.y / 3 - 64
 	farthest_up += window_size.y / 3
 #	print(farthest_right, " ",farthest_left, " ",farthest_down, " ",farthest_up,)
 	
@@ -93,6 +95,10 @@ func _physics_process(delta):
 	$Power.self_modulate = game_control.region_control.color
 	$AdvanceTurn.modulate.a = 1
 	$Power.self_modulate.a = 1
+	if $Power.self_modulate.v > 0.9:
+		$Power/text.self_modulate = Color(0, 0, 0)
+	else:
+		$Power/text.self_modulate = Color(1, 1, 1)
 	can_translate_messages()
 	if game_control.region_control.current_action == 0:
 		$Action.text = "FIRST ACTION"

@@ -1,0 +1,255 @@
+[gd_scene load_steps=4 format=3 uid="uid://o6yvmjiqoc22"]
+
+[ext_resource type="Script" path="res://RegionControl.gd" id="1_0s651"]
+[ext_resource type="Script" path="res://Region.gd" id="2_38p5v"]
+
+[sub_resource type="GDScript" id="GDScript_y0ddu"]
+script/source = "extends Node
+
+@export var align_color : Array = [
+	Color(0,0,0,1),
+	Color(0,0,0,1),
+	Color(0,0,0,1),
+	Color(0,0,0,1),
+	Color(0,0,0,1),
+	Color(0,0,0,1),
+]
+
+var connections : Array = [
+	[\"Madrid\", \"Lisboa\"],
+	[\"Cadiz\", \"Lisboa\"],
+	[\"Madrid\", \"Cadiz\"],
+	[\"Madrid\", \"Barcelona\"],
+	[\"Pamplona\", \"Barcelona\"],
+	[\"Madrid\", \"Pamplona\"],
+	[\"Ship\", \"Cadiz\"],
+	[\"Ship\", \"Barcelona\"],
+	[\"Ship\", \"Palermo\"],
+	[\"Ship\", \"Roma\"],
+	[\"Roma\", \"Palermo\"],
+	[\"Roma\", \"Brindisi\"],
+	[\"Brindisi\", \"Palermo\"],
+	[\"Roma\", \"Venezia\"],
+	[\"Roma\", \"Marseille\"],
+	[\"Paris\", \"Marseille\"],
+	[\"Marseille\", \"Barcelona\"],
+	[\"Pamplona\", \"Marseille\"],
+	[\"Ship\", \"Marseille\"],
+	[\"Pamplona\", \"Paris\"],
+	[\"Brest\", \"Paris\"],
+	[\"Pamplona\", \"Brest\"],
+	[\"Dieppe\", \"Paris\"],
+	[\"Brest\", \"Dieppe\"],
+	[\"London\", \"Dieppe\"],
+	[\"Cargoship\", \"Lisboa\"],
+	[\"Cargoship\", \"Brest\"],
+	[\"Pamplona\", \"Cargoship\"],
+	[\"London\", \"Edinburgh\"],
+	[\"London\", \"Dublin\"],
+	[\"Dublin\", \"Edinburgh\"],
+	[\"Dublin\", \"Cargoship\"],
+	[\"London\", \"Amsterdam\"],
+	[\"Bruxelles\", \"Amsterdam\"],
+	[\"Dieppe\", \"Bruxelles\"],
+	[\"Bruxelles\", \"Paris\"],
+	[\"Berlin\", \"Danzig\"],
+	[\"Berlin\", \"Essen\"],
+	[\"Essen\", \"Amsterdam\"],
+	[\"Frankfurt\", \"Essen\"],
+	[\"Berlin\", \"Frankfurt\"],
+	[\"Paris\", \"Frankfurt\"],
+	[\"Bruxelles\", \"Frankfurt\"],
+	[\"Munchen\", \"Frankfurt\"],
+	[\"Munchen\", \"Venezia\"],
+]
+
+func _ready():
+	get_parent().connections = connections.duplicate()
+	get_parent().align_color = align_color.duplicate()
+	queue_free()
+"
+
+[node name="RegionControl" type="Polygon2D"]
+color = Color(0.415686, 0.470588, 0.505882, 1)
+polygon = PackedVector2Array(-384, -384, 384, -384, 384, 384, -384, 384)
+script = ExtResource("1_0s651")
+lore = "This game started as a modification of a board game with this map as the first map ever created, before this digital version even existed. Only the colored regions can be attacked."
+align_amount = 6
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_y0ddu")
+align_color = [Color(0.392157, 0.372549, 0.34902, 1), Color(0.984314, 0.803922, 0.666667, 1), Color(0.352941, 0.709804, 0.435294, 1), Color(0.309804, 0.615686, 0.666667, 1), Color(0.803922, 0.890196, 0.552941, 1), Color(0.729412, 0.537255, 0.768627, 1)]
+
+[node name="London" type="Polygon2D" parent="."]
+position = Vector2(-136, -176)
+polygon = PackedVector2Array(-120, -208, -128, -176, -112, -168, -112, -152, -96, -152, -112, -120, -104, -112, -80, -112, -80, -96, -64, -88, -64, -64, -72, -56, -96, -64, -88, -56, -104, -40, -88, -48, -88, -24, -104, -16, -112, -16, -112, -8, -104, 0, -80, 8, -80, 16, -88, 16, -96, 24, -112, 48, -120, 56, -112, 64, -104, 56, -88, 48, -80, 56, -72, 40, -56, 40, -48, 48, -40, 40, -24, 40, -8, 32, 8, 32, 24, 24, 40, 16, 32, 0, 48, -16, 40, -40, 16, -48, 8, -72, 8, -88, -16, -104, -32, -152, -32, -168, -48, -160, -56, -168, -40, -200, -40, -208)
+script = ExtResource("2_38p5v")
+alignment = 1
+is_capital = true
+
+[node name="Edinburgh" type="Polygon2D" parent="."]
+position = Vector2(-208, -344)
+script = ExtResource("2_38p5v")
+alignment = 1
+
+[node name="Dublin" type="Polygon2D" parent="."]
+position = Vector2(-264, -232)
+polygon = PackedVector2Array(-8, 40, -8, 32, 0, 8, 0, -8, 8, -16, 8, -32, 16, -40, 8, -56, 0, -72, -24, -80, -32, -72, -40, -72, -64, -64, -48, -48, -64, -40, -80, -40, -88, -32, -80, -24, -88, -16, -88, 0, -80, 8, -88, 24, -96, 56, -80, 56, -80, 64, -56, 56, -56, 48, -48, 48, -24, 40)
+script = ExtResource("2_38p5v")
+alignment = 1
+
+[node name="Amsterdam" type="Polygon2D" parent="."]
+position = Vector2(-24, -168)
+polygon = PackedVector2Array(-8, -24, 0, -24, 0, 0, 8, 8, 16, 0, 16, -8, 16, -16, 16, -32, 32, -40, 56, -40, 56, -16, 56, -8, 48, 0, 56, 8, 48, 24, 32, 24, 32, 40, 24, 64, 16, 56, 16, 48, 8, 40, -16, 48, -24, 40, -32, 32, -32, 24, -24, 16)
+script = ExtResource("2_38p5v")
+alignment = 1
+
+[node name="Bruxelles" type="Polygon2D" parent="."]
+position = Vector2(-48, -112)
+polygon = PackedVector2Array(-24, -24, -16, -24, -8, -32, -8, -24, 8, -8, 32, -16, 40, -8, 40, 0, 48, 8, 56, 16, 48, 24, 64, 40, 48, 56, 32, 56, 24, 40, -8, 24, -16, 8, -16, -8)
+script = ExtResource("2_38p5v")
+alignment = 1
+
+[node name="Paris" type="Polygon2D" parent="."]
+position = Vector2(-96, -24)
+polygon = PackedVector2Array(-80, 160, -40, 184, -8, 184, 0, 192, 32, 192, 32, 184, 40, 176, 56, 160, 88, 168, 112, 176, 128, 176, 136, 168, 128, 160, 136, 144, 120, 128, 112, 112, 120, 104, 120, 88, 112, 80, 104, 80, 96, 72, 96, 64, 112, 56, 120, 40, 120, 24, 128, 8, 120, -8, 112, -8, 96, -32, 80, -32, 72, -48, 56, -56, 40, -64, 32, -80, 32, -96, 24, -112, 8, -104, 0, -80, -24, -64, -32, -48, -64, -48, -64, -64, -80, -64, -80, -48, -72, -24, -104, -24, -112, -32, -144, -24, -152, -16, -144, 8, -120, 8, -104, 16, -88, 24, -80, 48, -72, 56, -64, 88, -64, 136)
+script = ExtResource("2_38p5v")
+alignment = 2
+is_capital = true
+
+[node name="Marseille" type="Polygon2D" parent="."]
+position = Vector2(8, 152)
+script = ExtResource("2_38p5v")
+alignment = 2
+
+[node name="Brest" type="Polygon2D" parent="."]
+position = Vector2(-248, -40)
+script = ExtResource("2_38p5v")
+alignment = 2
+
+[node name="Dieppe" type="Polygon2D" parent="."]
+position = Vector2(-152, -72)
+script = ExtResource("2_38p5v")
+alignment = 2
+
+[node name="Cargoship" type="Polygon2D" parent="."]
+position = Vector2(-344, 56)
+offset = Vector2(112, 0)
+polygon = PackedVector2Array(-80, 0, -80, 16, -32, 16, -32, 8, -48, -8, -56, -8, -56, 0, -64, 0, -64, 8)
+script = ExtResource("2_38p5v")
+alignment = 2
+
+[node name="Madrid" type="Polygon2D" parent="."]
+position = Vector2(-280, 248)
+offset = Vector2(312, -200)
+polygon = PackedVector2Array(-376, 96, -376, 120, -368, 144, -376, 184, -384, 224, -376, 256, -384, 272, -360, 272, -320, 272, -312, 296, -296, 304, -280, 296, -272, 288, -256, 288, -256, 280, -232, 288, -232, 280, -216, 280, -208, 264, -192, 264, -184, 248, -168, 224, -176, 208, -160, 184, -136, 160, -112, 144, -96, 136, -96, 120, -128, 120, -136, 112, -152, 112, -168, 112, -208, 88, -248, 80, -264, 88, -296, 80, -328, 80, -344, 80)
+script = ExtResource("2_38p5v")
+alignment = 3
+is_capital = true
+
+[node name="Lisboa" type="Polygon2D" parent="."]
+position = Vector2(-352, 272)
+script = ExtResource("2_38p5v")
+alignment = 3
+
+[node name="Cadiz" type="Polygon2D" parent="."]
+position = Vector2(-280, 336)
+script = ExtResource("2_38p5v")
+alignment = 3
+
+[node name="Barcelona" type="Polygon2D" parent="."]
+position = Vector2(-152, 256)
+script = ExtResource("2_38p5v")
+alignment = 3
+
+[node name="Pamplona" type="Polygon2D" parent="."]
+position = Vector2(-168, 160)
+script = ExtResource("2_38p5v")
+alignment = 3
+
+[node name="Roma" type="Polygon2D" parent="."]
+position = Vector2(144, 184)
+polygon = PackedVector2Array(-24, 128, 40, 160, 56, 128, 72, 112, 80, 120, 104, 88, 88, 72, 96, 56, 120, 64, 128, 48, 96, 32, 80, 24, 80, 8, 56, 8, 24, -32, 24, -48, 0, -64, 0, -80, 8, -88, 0, -104, 24, -104, 24, -120, 24, -136, 8, -144, -8, -136, -8, -120, -32, -112, -40, -120, -40, -144, -48, -144, -48, -128, -64, -136, -72, -128, -88, -128, -120, -120, -120, -104, -128, -96, -120, -80, -104, -64, -112, -48, -104, -40, -72, -64, -56, -64, -48, -32, -24, -8, 8, 24, 24, 32, 32, 40, 48, 48, 64, 64, 72, 112, 56, 120, 16, 128, 0, 120, -8, 120)
+script = ExtResource("2_38p5v")
+alignment = 4
+is_capital = true
+
+[node name="Ship" type="Polygon2D" parent="."]
+position = Vector2(56, 288)
+polygon = PackedVector2Array(-88, 8, -80, 16, -48, 16, -32, 8, -40, 8, -56, -16, -56, 8, -64, 8, -72, -16, -80, 8, -88, 0)
+script = ExtResource("2_38p5v")
+alignment = 4
+
+[node name="Palermo" type="Polygon2D" parent="."]
+position = Vector2(184, 328)
+script = ExtResource("2_38p5v")
+alignment = 4
+
+[node name="Brindisi" type="Polygon2D" parent="."]
+position = Vector2(240, 216)
+script = ExtResource("2_38p5v")
+alignment = 4
+
+[node name="Venezia" type="Polygon2D" parent="."]
+position = Vector2(136, 80)
+script = ExtResource("2_38p5v")
+alignment = 4
+
+[node name="Berlin" type="Polygon2D" parent="."]
+position = Vector2(184, -144)
+polygon = PackedVector2Array(-160, 152, -160, 144, -152, 128, -160, 112, -168, 112, -184, 88, -168, 72, -184, 56, -176, 48, -184, 40, -176, 16, -176, 0, -160, 0, -152, -16, -160, -24, -152, -32, -152, -64, -128, -64, -128, -56, -120, -64, -112, -72, -96, -64, -72, -72, -64, -80, -56, -72, -32, -88, -8, -96, 0, -88, -8, -80, 8, -80, 16, -72, 32, -80, 64, -88, 72, -96, 88, -104, 112, -96, 128, -88, 128, -104, 144, -112, 160, -104, 160, -120, 152, -128, 160, -144, 176, -136, 184, -112, 200, -104, 200, -56, 160, -40, 152, -48, 136, -32, 128, -40, 112, -32, 88, -8, 88, 0, 96, 24, 96, 32, 104, 40, 112, 56, 120, 72, 104, 80, 96, 80, 80, 72, 80, 64, 72, 64, 64, 72, 56, 64, 56, 56, 40, 48, 24, 40, -8, 48, -40, 72, -32, 88, 0, 112, -8, 128, -32, 136, -24, 152, -56, 152, -88, 160, -96, 152, -128, 144, -128, 152)
+script = ExtResource("2_38p5v")
+alignment = 5
+is_capital = true
+
+[node name="Danzig" type="Polygon2D" parent="."]
+position = Vector2(312, -232)
+script = ExtResource("2_38p5v")
+alignment = 5
+
+[node name="Frankfurt" type="Polygon2D" parent="."]
+position = Vector2(48, -80)
+script = ExtResource("2_38p5v")
+alignment = 5
+
+[node name="Munchen" type="Polygon2D" parent="."]
+position = Vector2(112, -32)
+script = ExtResource("2_38p5v")
+alignment = 5
+
+[node name="Essen" type="Polygon2D" parent="."]
+position = Vector2(64, -160)
+script = ExtResource("2_38p5v")
+alignment = 5
+
+[node name="Zurich" type="Polygon2D" parent="."]
+position = Vector2(40, 40)
+offset = Vector2(-40, -40)
+polygon = PackedVector2Array(0, 40, 0, 48, 8, 56, 16, 56, 24, 64, 56, 56, 72, 56, 80, 48, 96, 56, 96, 40, 104, 40, 104, 32, 96, 32, 88, 24, 80, 32, 80, 24, 88, 8, 56, 0, 56, 8, 24, 8, 24, 16, 16, 32)
+script = ExtResource("2_38p5v")
+
+[node name="Kobenhavn" type="Polygon2D" parent="."]
+position = Vector2(152, -280)
+polygon = PackedVector2Array(-80, 56, -72, 64, -64, 64, -48, 56, -40, 40, -48, 40, -56, 32, -48, 24, -56, 16, -64, 0, -56, -8, -56, 0, -48, 8, -32, 16, -16, 0, -8, 8, 8, -8, 0, -16, -16, -16, -32, -24, -40, -8, -48, -8, -40, -24, -32, -32, -32, -40, -40, -40, -48, -56, -32, -64, -32, -88, -48, -88, -56, -72, -80, -64, -96, -24, -88, -8, -96, 8, -80, 16, -88, 32, -80, 40)
+script = ExtResource("2_38p5v")
+
+[node name="Stockholm" type="Polygon2D" parent="."]
+position = Vector2(264, -368)
+polygon = PackedVector2Array(-120, -16, 16, -16, 0, -8, 0, 0, -16, 8, -16, 24, -24, 56, -32, 72, -64, 72, -64, 88, -72, 104, -80, 96, -96, 104, -96, 96, -96, 48, -112, 32, -120, 8)
+script = ExtResource("2_38p5v")
+
+[node name="Warszawa" type="Polygon2D" parent="."]
+position = Vector2(368, -152)
+offset = Vector2(-368, 152)
+polygon = PackedVector2Array(384, -200, 384, -72, 376, -80, 376, -88, 360, -88, 336, -72, 304, -72, 288, -104, 280, -112, 280, -120, 272, -144, 272, -152, 296, -176, 312, -184, 320, -176, 336, -192, 344, -184, 384, -208, 384, -248, 368, -256, 360, -280, 344, -288, 352, -296, 352, -312, 352, -328, 360, -344, 376, -360, 384, -360)
+script = ExtResource("2_38p5v")
+
+[node name="Wien" type="Polygon2D" parent="."]
+position = Vector2(248, -8)
+polygon = PackedVector2Array(136, -64, 136, 104, 120, 112, 120, 120, 112, 120, 72, 112, 64, 120, 56, 112, 32, 112, 24, 104, 32, 96, 32, 88, 24, 80, 0, 72, 0, 64, -16, 64, -32, 72, -40, 88, -56, 88, -64, 112, -80, 104, -80, 56, -96, 48, -112, 56, -112, 72, -136, 80, -144, 72, -144, 40, -152, 40, -160, 32, -168, 40, -168, 32, -160, 16, -152, 24, -120, 16, -88, 16, -96, 0, -72, -8, -64, -24, -96, -48, -104, -64, -72, -88, -40, -96, -8, -80, -8, -72, 0, -64, 8, -72, 16, -72, 16, -64, 32, -56, 40, -56, 56, -64, 88, -64, 112, -80, 128, -80, 128, -72)
+script = ExtResource("2_38p5v")
+
+[node name="Sarajevo" type="Polygon2D" parent="."]
+position = Vector2(328, 160)
+polygon = PackedVector2Array(-144, -56, -136, -80, -120, -80, -112, -96, -96, -104, -80, -104, -80, -96, -56, -88, -48, -80, -48, -72, -56, -64, -48, -56, -24, -56, -16, -48, -8, -56, 32, -48, 40, -48, 40, -56, 56, -64, 56, 88, 40, 80, 40, 96, 56, 112, 56, 152, 48, 152, 56, 160, 48, 176, 48, 192, 40, 184, 32, 192, 24, 184, 16, 192, 16, 168, 8, 152, 0, 160, 0, 144, -8, 144, -8, 136, -16, 104, -24, 112, -24, 96, -32, 80, -32, 32, -56, 16, -72, 0, -80, -16, -96, -16, -128, -32, -128, -48, -136, -56)
+script = ExtResource("2_38p5v")
