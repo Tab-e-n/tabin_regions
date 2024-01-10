@@ -1,6 +1,7 @@
 extends Camera2D
 class_name GameCamera
 
+
 @onready var game_control : GameControl = get_parent()
 @onready var window_size : Vector2 = get_viewport_rect().size
 
@@ -11,9 +12,11 @@ var farthest_down : int = 0
 
 var win_timer : float = -1
 
+
 func _ready():
 	game_control.game_camera = self
 	call_deferred("_deffered_ready")
+
 
 func _input(event):
 	if event is InputEventKey:
@@ -21,6 +24,7 @@ func _input(event):
 			$leave.visible = false
 	if event is InputEventMouseButton:
 		$leave.visible = false
+
 
 func _deffered_ready():
 	for i in game_control.region_control.polygon:
@@ -71,6 +75,7 @@ func _deffered_ready():
 		rep.color = game_control.region_control.align_color[play_order[i]]
 		$turn_order.add_child(rep)
 
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("escape"):
 		if $leave.visible:
@@ -81,14 +86,15 @@ func _physics_process(delta):
 		if win_timer <= 0:
 			get_tree().change_scene_to_file("res://stats.tscn")
 			return
+	
 	var mouse_position = get_viewport().get_mouse_position()
-	if mouse_position.x > window_size.x - 64 and position.x < farthest_right:
+	if (mouse_position.x > window_size.x - 64 or Input.is_action_pressed("right")) and position.x < farthest_right:
 		position.x += 8
-	if mouse_position.x < 64 and position.x > farthest_left:
+	if (mouse_position.x < 64 or Input.is_action_pressed("left")) and position.x > farthest_left:
 		position.x -= 8
-	if mouse_position.y > window_size.y - 64 and position.y < farthest_down:
+	if (mouse_position.y > window_size.y - 64 or Input.is_action_pressed("down")) and position.y < farthest_down:
 		position.y += 8
-	if mouse_position.y < 64 and position.y > farthest_up:
+	if (mouse_position.y < 64 or Input.is_action_pressed("up")) and position.y > farthest_up:
 		position.y -= 8
 	
 	$AdvanceTurn.modulate = game_control.region_control.color
@@ -111,6 +117,7 @@ func _physics_process(delta):
 		$Power/text.text = String.num(game_control.region_control.bonus_action_amount)
 	
 	$AdvanceTurn.visible = game_control.region_control.is_user_controled
+
 
 func win(align_victory : int):
 	$win.visible = true

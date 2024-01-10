@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://xlu4wp5m8phb"]
+[gd_scene load_steps=5 format=3 uid="uid://xlu4wp5m8phb"]
 
 [ext_resource type="Script" path="res://RegionControl.gd" id="1_qwc4r"]
 [ext_resource type="Script" path="res://Region.gd" id="2_iirrf"]
@@ -14,6 +14,7 @@ var connections : Array = [
 	[\"Tsuna\", \"Lake\"],
 	[\"Water\", \"Tsuna\"],
 	[\"Wind\", \"Hill\"],
+	[\"Wind\", \"Rain\"],
 	[\"Rain\", \"Tsuna\"],
 	[\"Shore\", \"Tsuna\"],
 	[\"Rain\", \"Shore\"],
@@ -24,6 +25,47 @@ var connections : Array = [
 	[\"Laser\", \"Shore\"],
 	[\"Rain\", \"Laser\"],
 	[\"Laser\", \"Hill\"],
+	[\"Water\", \"Smoke\"],
+	[\"Smoke\", \"Lake\"],
+	[\"Smoke\", \"Oil\"],
+	[\"Fish\", \"Lake\"],
+	[\"Smoke\", \"Fish\"],
+	[\"Fish\", \"Oil\"],
+	[\"Thunder\", \"Oil\"],
+	[\"Smoke\", \"Thunder\"],
+	[\"Fire\", \"Thunder\"],
+	[\"Fire\", \"Hell\"],
+	[\"Hell\", \"Thunder\"],
+	[\"Hell\", \"Hydrogen\"],
+	[\"Hydrogen\", \"Thunder\"],
+	[\"Hydrogen\", \"Oil\"],
+	[\"Volcano\", \"Hell\"],
+	[\"Fire\", \"Volcano\"],
+	[\"Magma\", \"Volcano\"],
+	[\"Earth\", \"Magma\"],
+	[\"Earth\", \"Groundma\"],
+	[\"Groundma\", \"Magma\"],
+	[\"Groundma\", \"Metal\"],
+	[\"Metal\", \"Magma\"],
+	[\"Coal\", \"Magma\"],
+	[\"Metal\", \"Coal\"],
+	[\"Coal\", \"Volcano\"],
+	[\"Coal\", \"Ash\"],
+	[\"Ash\", \"Hell\"],
+	[\"Volcano\", \"Ash\"],
+	[\"Earth\", \"Dust\"],
+	[\"Dust\", \"Groundma\"],
+	[\"Dust\", \"Erosion\"],
+	[\"Wind\", \"Erosion\"],
+	[\"Tornado\", \"Erosion\"],
+	[\"Tornado\", \"Hill\"],
+	[\"Erosion\", \"Hill\"],
+	[\"Tornado\", \"Fan\"],
+	[\"Fan\", \"Erosion\"],
+	[\"Dust\", \"Fan\"],
+	[\"Sand\", \"Fan\"],
+	[\"Dust\", \"Sand\"],
+	[\"Groundma\", \"Sand\"],
 ]
 
 func _ready():
@@ -32,13 +74,49 @@ func _ready():
 	queue_free()
 "
 
+[sub_resource type="GDScript" id="GDScript_xu8xq"]
+script/source = "extends Node
+
+@onready var control : RegionControl = get_parent()
+var turn : int
+
+func _ready():
+	turn = control.current_turn
+
+func _physics_process(delta):
+	if control.dummy:
+		return
+	if turn != control.current_turn:
+		var magic : Region = control.get_node(\"Magic Hill\")
+		var decreased : bool = false
+		if magic.power == magic.max_power:
+			magic.power = 1
+			decreased = true
+			control.get_node(\"Earth\").reinforce()
+			control.get_node(\"Earth\").city.call_deferred(\"make_particle\", false)
+			control.get_node(\"Water\").reinforce()
+			control.get_node(\"Water\").city.call_deferred(\"make_particle\", false)
+			control.get_node(\"Wind\").reinforce()
+			control.get_node(\"Wind\").city.call_deferred(\"make_particle\", false)
+			control.get_node(\"Fire\").reinforce()
+			control.get_node(\"Fire\").city.call_deferred(\"make_particle\", false)
+		magic.reinforce()
+		magic.city.call_deferred(\"make_particle\", decreased)
+		turn = control.current_turn
+"
+
 [node name="RegionControl" type="Polygon2D"]
+color = Color(0.47451, 0.47451, 0.47451, 1)
+polygon = PackedVector2Array(0, 528, -216, 344, -512, 272, -512, 24, -632, -296, -272, -328, -8, -488, 384, -368, 496, -192, 520, 56, 360, 152, 272, 384)
 script = ExtResource("1_qwc4r")
 lore = "Long ago, the four elements of the magic hill lived in peace, that is until they all went coo coo crazy and started fighting each other. That is when this map takes place. Every so often, the magic hill gives each element more power to their capital."
 align_amount = 5
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_hq4v5")
+
+[node name="Magic Hill Mechanic" type="Node" parent="."]
+script = SubResource("GDScript_xu8xq")
 
 [node name="Magic Hill" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-40, 16, -16, 32, 0, 56, 24, 48, 40, 24, 56, 16, 56, -8, 40, -24, 8, -40, -16, -32, -48, -32, -40, -8)
@@ -67,7 +145,7 @@ alignment = 2
 is_capital = true
 
 [node name="Fire" type="Polygon2D" parent="."]
-position = Vector2(104, 64)
+position = Vector2(104, 56)
 polygon = PackedVector2Array(-16, -56, 0, -56, 0, -32, -16, -16, -16, 0, -24, -8, -32, -24, -24, -40, -40, -32, -32, -8, -40, 0, -32, 32, -8, 48, 32, 40, 48, 24, 56, 0, 48, -24, 40, -32, 40, -48, 24, -40, 32, -32, 24, -16, 8, -24, 16, -40, 8, -64, 0, -64)
 script = ExtResource("2_iirrf")
 alignment = 1
@@ -77,6 +155,7 @@ is_capital = true
 position = Vector2(96, -216)
 polygon = PackedVector2Array(-88, 8, -80, 0, -48, 0, -8, 16, 8, 40, 56, 8, 80, -40, 80, -64, 40, -64, 16, -40, -32, -32, -48, -48, -40, -72, -8, -88, 24, -80, 40, -64, 80, -64, 80, -72, 40, -96, -8, -104, -40, -88, -80, -56, -88, -8)
 script = ExtResource("2_iirrf")
+power = 0
 
 [node name="Tsuna" type="Polygon2D" parent="."]
 position = Vector2(-56, -224)
@@ -87,6 +166,7 @@ script = ExtResource("2_iirrf")
 position = Vector2(-200, -112)
 polygon = PackedVector2Array(104, 24, 88, 32, 80, 32, 88, 0, 56, -8, 24, -24, -16, -56, -16, -8, -16, 24, -24, 72, 0, 48, 16, 48, 64, 56, 104, 48, 112, 32)
 script = ExtResource("2_iirrf")
+power = 0
 
 [node name="Rain" type="Polygon2D" parent="."]
 position = Vector2(-136, -168)
@@ -102,8 +182,107 @@ script = ExtResource("2_iirrf")
 position = Vector2(-8, -344)
 polygon = PackedVector2Array(-136, 0, -104, 0, -40, -16, 0, -8, 0, 16, -32, 24, 0, 40, 24, 24, 0, 24, 0, -8, 40, -8, 88, 24, 104, 16, 48, -24, -48, -32, -104, -16, -136, -16)
 script = ExtResource("2_iirrf")
+power = 0
 
 [node name="Laser" type="Polygon2D" parent="."]
 position = Vector2(-248, -200)
 polygon = PackedVector2Array(24, 48, 24, 24, 48, 32, 56, 16, 32, 8, 32, 0, -152, -96, -160, -80, -16, 0, 0, 16, 8, 48)
 script = ExtResource("2_iirrf")
+power = 0
+
+[node name="Smoke" type="Polygon2D" parent="."]
+position = Vector2(152, -144)
+polygon = PackedVector2Array(-40, 72, -32, 40, -40, 8, -40, -24, -8, -48, 24, -64, 40, -88, 40, -64, 24, -32, 0, -24, -8, 16, 0, 40, -8, 88, -40, 104, -72, 112, -48, 88)
+script = ExtResource("2_iirrf")
+
+[node name="Oil" type="Polygon2D" parent="."]
+position = Vector2(272, -152)
+polygon = PackedVector2Array(-96, -16, -112, -8, -120, 24, -112, 40, -88, 40, -64, 24, -48, 40, -16, 24, 0, 8, 32, 16, 56, -8, 40, -32, 24, -40, 24, -64, 8, -96, -16, -88, -40, -80, -56, -96, -72, -88, -64, -64, -72, -48)
+script = ExtResource("2_iirrf")
+
+[node name="Fish" type="Polygon2D" parent="."]
+position = Vector2(216, -288)
+polygon = PackedVector2Array(-48, 64, -32, 32, -32, -8, -8, 16, 16, -8, 88, -8, 104, 8, 104, 24, 16, 48, -8, 32)
+script = ExtResource("2_iirrf")
+power = 0
+
+[node name="Thunder" type="Polygon2D" parent="."]
+position = Vector2(152, -16)
+polygon = PackedVector2Array(-72, 0, -16, -8, 8, -48, 56, -56, 72, -72, 40, -72, 8, -88, 48, -80, 96, -96, 128, -104, 88, -80, 72, -48, 64, -16, 24, 8, 48, -16, 56, -40, 24, -32, 0, 8)
+script = ExtResource("2_iirrf")
+
+[node name="Hell" type="Polygon2D" parent="."]
+position = Vector2(224, 112)
+polygon = PackedVector2Array(-112, 8, -72, -8, -51.5186, -38.7221, -48, -64, -56, -96, -40, -96, -32, -72, -32, -40, -16, -16, 0, -56, 16, -48, 8, -8, 24, 8, 32, -24, 56, -16, 40, 16, 56, 24, 64, 16, 72, 16, 64, 32, 48, 56, 32, 56, 40, 40, 32, 32, 16, 64, 0, 56, 16, 32, -8, 24, -32, 56, -48, 40, -24, 16, -48, 0, -72, 16, -96, 24)
+script = ExtResource("2_iirrf")
+power = 0
+
+[node name="Hydrogen" type="Polygon2D" parent="."]
+position = Vector2(272, -8)
+polygon = PackedVector2Array(-80, 16, -64, 32, 8, -32, 48, 0, -24, 64, -8, 80, 152, -64, 128, -80, 64, -16, 16, -48, 80, -120, 56, -136)
+script = ExtResource("2_iirrf")
+power = 0
+
+[node name="Volcano" type="Polygon2D" parent="."]
+position = Vector2(96, 144)
+polygon = PackedVector2Array(-40, 8, -32, -8, -16, -8, -8, 8, -16, 24, -32, 24, -40, 40, -64, 40, -40, 64, 8, 72, 32, 48, 40, 24, 40, 8, 8, -24, -24, -48, -56, -32, -64, -16, -72, 16, -72, 32, -48, 32, -40, 16)
+script = ExtResource("2_iirrf")
+
+[node name="Magma" type="Polygon2D" parent="."]
+position = Vector2(0, 168)
+polygon = PackedVector2Array(-48, -16, -24, -32, -8, -16, 0, 8, -16, 16, -32, 8, -24, 24, -40, 32, -24, 32, -16, 48, -8, 32, 8, 16, 32, 24, 48, 48, 24, 56, 0, 24, 8, 48, -8, 56, 16, 72, -16, 80, -32, 64, -16, 56, -56, 56, -48, 40, -80, 48, -96, 40, -72, 24, -120, 0, -96, -16, -80, 0, -72, 16, -48, 16, -56, -8)
+script = ExtResource("2_iirrf")
+
+[node name="Groundma" type="Polygon2D" parent="."]
+position = Vector2(-216, 224)
+offset = Vector2(64, -56)
+polygon = PackedVector2Array(48, -24, -40, 56, -16, 88, -40, 112, -120, 24, -88, 0, -64, 24, 24, -40)
+script = ExtResource("2_iirrf")
+power = 0
+
+[node name="Metal" type="Polygon2D" parent="."]
+position = Vector2(-80, 248)
+polygon = PackedVector2Array(-88, -32, 8, 56, 64, 72, 64, 32, -16, -32, -56, -48)
+script = ExtResource("2_iirrf")
+power = 0
+
+[node name="Coal" type="Polygon2D" parent="."]
+position = Vector2(56, 256)
+polygon = PackedVector2Array(0, -32, -48, 0, -64, 40, -40, 80, 16, 96, 56, 64, 56, 32, 40, 40, 16, 32, 8, 16, -8, 16, -16, 32, -16, 48, 0, 56, 8, 56, 16, 40, 32, 40, 24, 64, -8, 64, -32, 48, -16, 8, 16, 0, 32, 32, 56, 32, 56, 16, 40, -24)
+script = ExtResource("2_iirrf")
+
+[node name="Ash" type="Polygon2D" parent="."]
+position = Vector2(184, 224)
+polygon = PackedVector2Array(-72, 16, -64, 8, -56, 8, -56, 0, -40, -8, -48, -24, -32, -32, -24, -32, -16, -48, -8, -48, 0, -40, 24, -48, 24, -40, 40, -32, 40, -32, 56, -40, 56, -32, 72, -24, 88, -24, 96, -8, 88, 0, 72, 8, 80, 16, 72, 24, 64, 16, 56, 24, 48, 16, 40, 16, 32, 32, 40, 32, 48, 40, 40, 48, 24, 40, 16, 48, 8, 32, -8, 40, -8, 48, 0, 56, -8, 64, -16, 64, -32, 56, -40, 48, -48, 64, -56, 64, -64, 56, -64, 48, -56, 40, -64, 32, -64, 32)
+script = ExtResource("2_iirrf")
+power = 0
+
+[node name="Dust" type="Polygon2D" parent="."]
+position = Vector2(-176, 112)
+offset = Vector2(168, -104)
+polygon = PackedVector2Array(-128, 80, -128, 112, -168, 144, -192, 136, -216, 80, -160, 72)
+script = ExtResource("2_iirrf")
+
+[node name="Erosion" type="Polygon2D" parent="."]
+position = Vector2(-232, 32)
+offset = Vector2(40, -32)
+polygon = PackedVector2Array(-32, 72, -56, 56, -80, 40, -80, 16, -64, -16, -48, -24, -56, -32, -56, -40, -48, -40, -48, -56, -32, -64, -40, -48, -40, -32, -40, -24, -48, -8, -56, 0, -48, 24, -24, 8, -16, 0, -8, 0, -8, -8, 0, -16, 16, -16, 24, -8, 32, -16, 48, -16, 48, -8, 40, -8, 32, 0, 40, 0, 56, 0, 48, 8, 40, 8, 24, 8, 16, -8, 8, 0, 8, 8, 24, 16, 32, 16, 24, 24, 16, 24, 0, 16, -8, 8, -8, 16, -16, 16, -8, 24, 0, 32, 8, 48, 16, 48, 24, 56, 8, 72)
+script = ExtResource("2_iirrf")
+
+[node name="Tornado" type="Polygon2D" parent="."]
+position = Vector2(-288, -40)
+polygon = PackedVector2Array(16, 40, 64, -72, -16, 16, 32, -64, 0, -56, -40, -56, -72, -8, -64, -40, -152, -16, -192, 0, -144, 8, -128, -16, -136, 24, -112, 32, -72, 32, -48, 8, -56, 48, -40, 64, -8, 88)
+script = ExtResource("2_iirrf")
+power = 0
+
+[node name="Fan" type="Polygon2D" parent="."]
+position = Vector2(-304, 80)
+polygon = PackedVector2Array(-8, -40, 16, 8, 40, -8, 72, 0, 72, 16, 16, 16, 48, 32, 48, 56, 32, 64, 16, 24, 16, 56, -8, 72, -24, 64, 8, 24, -16, 32, -40, 24, -48, 8, 8, 16, 0, 8, -16, -16)
+script = ExtResource("2_iirrf")
+
+[node name="Sand" type="Polygon2D" parent="."]
+position = Vector2(-336, 192)
+offset = Vector2(336, -192)
+polygon = PackedVector2Array(-208, 136, -296, 200, -328, 216, -360, 240, -400, 248, -384, 224, -376, 192, -352, 160, -320, 160, -256, 144, -216, 120)
+script = ExtResource("2_iirrf")
+power = 0

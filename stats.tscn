@@ -71,7 +71,7 @@ func _ready():
 		farthest_right += (columb_amount - 6) * 192
 
 func _input(event):
-	if event is InputEventKey and input_processing_buffer <= 0:
+	if (event is InputEventKey or event is InputEventMouseButton) and input_processing_buffer <= 0:
 		if event.pressed:
 			get_tree().change_scene_to_file(\"res://setup_scene.tscn\")
 

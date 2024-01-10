@@ -73,7 +73,7 @@ func _ready():
 color = Color(0.415686, 0.470588, 0.505882, 1)
 polygon = PackedVector2Array(-384, -384, 384, -384, 384, 384, -384, 384)
 script = ExtResource("1_0s651")
-lore = "This game started as a modification of a board game with this map as the first map ever created, before this digital version even existed. Only the colored regions can be attacked."
+lore = "This game started as a modification of a board game with this map. Only the colored regions can be attacked."
 align_amount = 6
 
 [node name="Node" type="Node" parent="."]
