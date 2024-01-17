@@ -9,6 +9,7 @@ class_name GameControl
 @onready var ai_control : AIControler
 
 var hide_cross : float = 0
+var cities_visible : bool = false
 
 func _ready():
 	map = MapSetup.current_map_name
@@ -17,10 +18,14 @@ func _ready():
 	add_child(region_control)
 	move_child(region_control, 1)
 
+
 func _process(delta):
 	if cross.visible == true and hide_cross < 0:
 		hide_cross = 1
 	hide_cross -= delta
 	if hide_cross < 0:
 		cross.visible = false
+	
+	if Input.is_action_just_pressed("hide_capitals"):
+		cities_visible = not cities_visible
 	

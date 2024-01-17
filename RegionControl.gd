@@ -24,6 +24,7 @@ class_name RegionControl
 		Color("673a2b"), # brown
 ]
 @export var connections : Array = []
+@export var city_size : float = 1
 
 @export_subgroup("Users")
 @export var user_amount : int = 1
@@ -151,7 +152,7 @@ func _ready():
 	
 	reset()
 
-func _process(delta):
+func _process(_delta):
 	if dummy:
 		return
 	

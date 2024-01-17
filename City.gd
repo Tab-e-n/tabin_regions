@@ -14,7 +14,9 @@ func _ready():
 	else:
 		texture_normal = preload("res://city.png")
 	z_index = 20
-	position = Vector2(-32, -32)
+	var city_size : float = region.region_control.city_size
+	position = Vector2(-32 * city_size, -32 * city_size)
+	scale = Vector2(city_size, city_size)
 	
 	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -30,10 +32,11 @@ func _ready():
 	region_name.z_index = 1
 	add_child(region_name)
 
-func _process(delta):
+func _process(_delta):
 	text.text = String.num(region.power)
 	if !region.region_control.dummy:
 		region_name.visible = is_hovered()
+		visible = not region.region_control.game_control.cities_visible
 
 func make_particle(mobilize : bool):
 	var part : Sprite2D = Sprite2D.new()

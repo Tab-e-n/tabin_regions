@@ -246,6 +246,98 @@ var connections : Array = [
 	[\"Caribbean\", \"Haiti\"],
 	[\"Cuba\", \"Haiti\"],
 	[\"Caribbean\", \"Cuba\"],
+	[\"Florida\", \"Cuba\"],
+	[\"Florida\", \"Georgia\"],
+	[\"Florida\", \"Alabama\"],
+	[\"Alabama\", \"Georgia\"],
+	[\"Alabama\", \"Tennessee\"],
+	[\"Mississippi\", \"Tennessee\"],
+	[\"Alabama\", \"Mississippi\"],
+	[\"Louisiana\", \"Mississippi\"],
+	[\"Arkansas\", \"Mississippi\"],
+	[\"Louisiana\", \"Texas\"],
+	[\"Arkansas\", \"Texas\"],
+	[\"Arkansas\", \"Oklahoma\"],
+	[\"Oklahoma\", \"Texas\"],
+	[\"New Mexico\", \"Texas\"],
+	[\"New Mexico\", \"Colorado\"],
+	[\"New Mexico\", \"Arizona\"],
+	[\"Louisiana\", \"Arkansas\"],
+	[\"Tennessee\", \"Georgia\"],
+	[\"North Calorina\", \"Tennessee\"],
+	[\"Arkansas\", \"Tennessee\"],
+	[\"Missouri\", \"Tennessee\"],
+	[\"Arkansas\", \"Missouri\"],
+	[\"Illinois\", \"Missouri\"],
+	[\"Illinois\", \"Iowa\"],
+	[\"Illinois\", \"Wisconsin\"],
+	[\"Wisconsin\", \"Iowa\"],
+	[\"Virginia\", \"Tennessee\"],
+	[\"Kentucky\", \"Tennessee\"],
+	[\"Virginia\", \"Kentucky\"],
+	[\"Missouri\", \"Kentucky\"],
+	[\"Missouri\", \"Kansas\"],
+	[\"Colorado\", \"Kansas\"],
+	[\"Missouri\", \"Nebraska\"],
+	[\"Colorado\", \"Nebraska\"],
+	[\"Missouri\", \"Iowa\"],
+	[\"Minnesota\", \"Iowa\"],
+	[\"Minnesota\", \"North Dakota\"],
+	[\"South Dakota\", \"North Dakota\"],
+	[\"Montana\", \"North Dakota\"],
+	[\"Minnesota\", \"South Dakota\"],
+	[\"Iowa\", \"Nebraska\"],
+	[\"Iowa\", \"South Dakota\"],
+	[\"South Dakota\", \"Nebraska\"],
+	[\"Wyoming\", \"Nebraska\"],
+	[\"South Dakota\", \"Wyoming\"],
+	[\"South Dakota\", \"Montana\"],
+	[\"Montana\", \"Wyoming\"],
+	[\"Idaho\", \"Wyoming\"],
+	[\"Utah\", \"Wyoming\"],
+	[\"Idaho\", \"Utah\"],
+	[\"Arizona\", \"Utah\"],
+	[\"Arizona\", \"California\"],
+	[\"Arizona\", \"Nevada\"],
+	[\"Montana\", \"Idaho\"],
+	[\"Nevada\", \"Idaho\"],
+	[\"Washington\", \"Idaho\"],
+	[\"Washington\", \"Oregon\"],
+	[\"Oregon\", \"Idaho\"],
+	[\"Oregon\", \"California\"],
+	[\"Oregon\", \"Nevada\"],
+	[\"Nevada\", \"California\"],
+	[\"Nebraska\", \"Kansas\"],
+	[\"Oklahoma\", \"Kansas\"],
+	[\"Oklahoma\", \"Colorado\"],
+	[\"Utah\", \"Colorado\"],
+	[\"Utah\", \"Nevada\"],
+	[\"Wyoming\", \"Colorado\"],
+	[\"Missouri\", \"Oklahoma\"],
+	[\"North Calorina\", \"Virginia\"],
+	[\"West Marylaware\", \"Virginia\"],
+	[\"West Marylaware\", \"New York Jersey\"],
+	[\"West Marylaware\", \"Pennsylvania\"],
+	[\"West Marylaware\", \"Ohio\"],
+	[\"Kentucky\", \"Ohio\"],
+	[\"Kentucky\", \"Indiana\"],
+	[\"Wisconsin\", \"Indiana\"],
+	[\"Wisconsin\", \"Minnesota\"],
+	[\"Kentucky\", \"Illinois\"],
+	[\"Illinois\", \"Indiana\"],
+	[\"Indiana\", \"Ohio\"],
+	[\"Indiana\", \"Michigan\"],
+	[\"Minnesota\", \"Michigan\"],
+	[\"Michigan\", \"Ohio\"],
+	[\"Michigan\", \"Wisconsin\"],
+	[\"West Marylaware\", \"Kentucky\"],
+	[\"Ohio\", \"Pennsylvania\"],
+	[\"Pennsylvania\", \"New York Jersey\"],
+	[\"North-East Coast\", \"New York Jersey\"],
+	[\"South Calorina\", \"Georgia\"],
+	[\"North Calorina\", \"Georgia\"],
+	[\"South Calorina\", \"North Calorina\"],
+	[\"Japan\", \"Hawaii\"],
 ]
 
 func _ready():
@@ -259,6 +351,7 @@ color = Color(0.435294, 0.545098, 0.6, 1)
 polygon = PackedVector2Array(-3200, -1848, 3200, -1848, 3200, 1848, -3200, 1848)
 script = ExtResource("1_5aq8s")
 lore = "The Classic. Some smaller countries had their territories combined together."
+city_size = 0.85
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_omqxc")
@@ -861,4 +954,210 @@ script = ExtResource("3_b6jsf")
 [node name="Guyana" type="Polygon2D" parent="."]
 position = Vector2(-1752, -192)
 polygon = PackedVector2Array(-32, 8, 0, 40, 0, 56, -16, 64, -16, 88, 0, 88, 0, 104, 16, 104, 24, 96, 48, 88, 48, 72, 40, 64, 40, 56, 24, 48, 24, 32, 32, 24, 48, 0, 32, -16, 24, -16, 24, -24, 16, -40, -8, -56, -24, -40, -24, -24, -32, -8)
+script = ExtResource("3_b6jsf")
+
+[node name="Florida" type="Polygon2D" parent="."]
+position = Vector2(-2128, -688)
+polygon = PackedVector2Array(-96, -40, -64, -40, -56, -24, -48, -24, -40, -32, -32, -32, -16, -16, -24, 8, -16, 40, 0, 64, 0, 72, 16, 72, 24, 56, 24, 0, 16, -48, -8, -48, -48, -56, -88, -56)
+script = ExtResource("3_b6jsf")
+
+[node name="Georgia" type="Polygon2D" parent="."]
+position = Vector2(-2128, -768)
+polygon = PackedVector2Array(-48, 24, -8, 32, 16, 32, 24, 16, 40, 0, 16, -56, -24, -56, -32, -8, -40, 16)
+script = ExtResource("3_b6jsf")
+
+[node name="South Calorina" type="Polygon2D" parent="."]
+position = Vector2(-2072, -808)
+polygon = PackedVector2Array(-16, 40, 0, 32, 32, 8, 40, 8, 24, -16, 8, -16, -8, -24, -32, -24, -40, -16)
+script = ExtResource("3_b6jsf")
+
+[node name="Alabama" type="Polygon2D" parent="."]
+position = Vector2(-2184, -784)
+polygon = PackedVector2Array(-56, 56, -40, 56, -32, 40, 8, 40, 16, 32, 24, 8, 32, -40, -16, -40)
+script = ExtResource("3_b6jsf")
+
+[node name="North Calorina" type="Polygon2D" parent="."]
+position = Vector2(-2024, -840)
+polygon = PackedVector2Array(-112, 16, -88, 16, -80, 8, -56, 8, -40, 16, -24, 16, -8, 40, 8, 24, 24, 16, 48, 0, 56, -8, 56, -24, -48, -24, -72, -8, -96, 0)
+script = ExtResource("3_b6jsf")
+
+[node name="Tennessee" type="Polygon2D" parent="."]
+position = Vector2(-2168, -840)
+polygon = PackedVector2Array(-72, 16, 32, 16, 48, 0, 72, -8, 96, -24, -40, -24, -64, 0)
+script = ExtResource("3_b6jsf")
+
+[node name="Mississippi" type="Polygon2D" parent="."]
+position = Vector2(-2240, -792)
+polygon = PackedVector2Array(0, 64, -24, 64, -16, 48, -56, 48, -32, 24, -24, 0, 0, -32, 40, -32)
+script = ExtResource("3_b6jsf")
+
+[node name="Louisiana" type="Polygon2D" parent="."]
+position = Vector2(-2296, -728)
+polygon = PackedVector2Array(32, -64, -24, -64, -24, -24, -40, 8, -8, 8, 0, 24, 16, 24, 32, 16, 32, 0, 40, -16, 0, -16, 24, -40)
+script = ExtResource("3_b6jsf")
+
+[node name="Texas" type="Polygon2D" parent="."]
+position = Vector2(-2432, -752)
+polygon = PackedVector2Array(-128, -8, -128, 0, -112, 16, -112, 40, -96, 48, -72, 32, -48, 32, -32, 104, -16, 112, 0, 112, 0, 96, 8, 80, 24, 64, 40, 64, 64, 40, 96, 32, 112, 0, 112, -40, 104, -40, 88, -48, 48, -48, 40, -56, 16, -56, 8, -64, 24, -104, -32, -104, -64, -8)
+script = ExtResource("3_b6jsf")
+
+[node name="Virginia" type="Polygon2D" parent="."]
+position = Vector2(-1992, -888)
+polygon = PackedVector2Array(-112, 24, 24, 24, 24, -8, 16, -16, 16, -32, 0, -32, -24, -16, -40, -8, -56, 8, -72, 16, -80, 8)
+script = ExtResource("3_b6jsf")
+
+[node name="West Marylaware" type="Polygon2D" parent="."]
+position = Vector2(-2040, -904)
+polygon = PackedVector2Array(-32, 24, -32, 16, -40, 8, -40, 0, -24, -8, -16, -16, -8, -16, 8, -32, 16, -24, 72, -32, 104, -16, 104, 0, 80, 24, 80, 0, 72, -8, 72, 8, 64, 0, 64, -16, 48, -16, 24, 0, 8, 8, -8, 24, -24, 32)
+script = ExtResource("3_b6jsf")
+
+[node name="North-East Coast" type="Polygon2D" parent="."]
+position = Vector2(-1816, -1040)
+polygon = PackedVector2Array(-56, 40, -56, 16, -40, -16, -8, -16, -8, -24, 0, -24, 48, -80, 56, -72, 72, -72, 64, -32, 72, -8, 48, 0, 32, 0, 16, 16, 0, 16, -16, 32, 0, 40, 0, 56, -8, 64, -32, 64, -72, 88, -88, 88, -88, 72)
+script = ExtResource("3_b6jsf")
+
+[node name="New York Jersey" type="Polygon2D" parent="."]
+position = Vector2(-1912, -1008)
+polygon = PackedVector2Array(-88, 24, -16, 24, 0, 32, 0, 40, -16, 56, -16, 72, -40, 80, -24, 88, -24, 104, -8, 104, 0, 72, 8, 56, 8, 40, 40, 8, 40, -16, 56, -48, 24, -48, -8, -32, -24, -16, -56, -16, -72, -8, -64, 0, -88, 16)
+script = ExtResource("3_b6jsf")
+
+[node name="Pennsylvania" type="Polygon2D" parent="."]
+position = Vector2(-1968, -960)
+polygon = PackedVector2Array(-64, 24, -40, -32, -32, -32, -32, -24, 40, -24, 56, -16, 56, -8, 40, 8, 40, 24, 16, 32, 0, 24, -56, 32)
+script = ExtResource("3_b6jsf")
+
+[node name="Ohio" type="Polygon2D" parent="."]
+position = Vector2(-2064, -952)
+polygon = PackedVector2Array(56, -40, 8, -24, -32, -24, -48, 40, -40, 40, -32, 48, -16, 48, 0, 40, 8, 32, 16, 32, 32, 16)
+script = ExtResource("3_b6jsf")
+
+[node name="Kentucky" type="Polygon2D" parent="."]
+position = Vector2(-2128, -888)
+polygon = PackedVector2Array(-80, 24, 24, 24, 56, 8, 56, 0, 48, -8, 48, -16, 32, -16, 24, -24, 16, -24, -32, 0, -48, 0, -64, 8, -80, 8)
+script = ExtResource("3_b6jsf")
+
+[node name="Indiana" type="Polygon2D" parent="."]
+position = Vector2(-2128, -936)
+polygon = PackedVector2Array(-48, 48, -32, 48, 16, 24, 32, -40, -16, -40, -32, 24)
+script = ExtResource("3_b6jsf")
+
+[node name="Illinois" type="Polygon2D" parent="."]
+position = Vector2(-2184, -928)
+polygon = PackedVector2Array(-40, -8, -16, -32, 0, -48, 0, -56, 40, -56, 40, -48, 24, 16, 8, 40, -8, 48, -24, 48, -32, 40, -24, 24, -40, 8)
+script = ExtResource("3_b6jsf")
+
+[node name="Michigan" type="Polygon2D" parent="."]
+position = Vector2(-2072, -1024)
+polygon = PackedVector2Array(-56, 48, 16, 48, 32, 32, 40, 8, 40, -8, 24, 0, 40, -24, 40, -56, 24, -64, 8, -64, -8, -56, -24, -72, -32, -72, -24, -80, -48, -72, -56, -64, -72, -64, -72, -56, -64, -48, -48, -48, -40, -40, -40, -24, 0, -48, 40, -48, 40, -32, 32, -40, 16, -40, 0, -24, -16, -16, -24, 0, -32, 32)
+script = ExtResource("3_b6jsf")
+
+[node name="Arkansas" type="Polygon2D" parent="."]
+position = Vector2(-2288, -832)
+offset = Vector2(8, 8)
+polygon = PackedVector2Array(-32, -32, -48, 32, 16, 32, 40, 0, 48, -16, 40, -32)
+script = ExtResource("3_b6jsf")
+
+[node name="Oklahoma" type="Polygon2D" parent="."]
+position = Vector2(-2368, -832)
+polygon = PackedVector2Array(-96, -24, -96, -32, 64, -32, 56, -24, 40, 40, 24, 32, -16, 32, -24, 24, -48, 24, -56, 16, -40, -24)
+script = ExtResource("3_b6jsf")
+
+[node name="Missouri" type="Polygon2D" parent="."]
+position = Vector2(-2256, -896)
+polygon = PackedVector2Array(-56, 40, 16, 40, 24, 56, 48, 32, 48, 16, 40, 8, 48, -8, 32, -24, 32, -40, 16, -48, -40, -48, -32, -32, -32, -24, -48, 32)
+script = ExtResource("3_b6jsf")
+
+[node name="Kansas" type="Polygon2D" parent="."]
+position = Vector2(-2360, -896)
+polygon = PackedVector2Array(-80, 32, -56, -32, 72, -32, 72, -24, 56, 32)
+script = ExtResource("3_b6jsf")
+
+[node name="Nebraska" type="Polygon2D" parent="."]
+position = Vector2(-2360, -960)
+polygon = PackedVector2Array(-88, 8, -48, 8, -56, 32, 72, 32, 64, 16, 64, -24, 56, -32, 40, -32, 32, -40, -64, -40)
+script = ExtResource("3_b6jsf")
+
+[node name="Iowa" type="Polygon2D" parent="."]
+position = Vector2(-2240, -976)
+polygon = PackedVector2Array(-56, -8, -56, 32, 0, 32, 16, 40, 56, 0, 56, -8, 48, -16, 48, -32, -48, -32, -48, -16)
+script = ExtResource("3_b6jsf")
+
+[node name="Wisconsin" type="Polygon2D" parent="."]
+position = Vector2(-2152, -1040)
+polygon = PackedVector2Array(8, -48, -24, -48, -32, -32, -48, -24, -56, 0, -32, 24, -40, 32, -40, 48, -32, 56, 8, 56, 8, 64, 16, 64, 16, 48, 24, 24, 40, -8, 40, -24, 32, -32, 16, -32, 8, -40)
+script = ExtResource("3_b6jsf")
+
+[node name="Minnesota" type="Polygon2D" parent="."]
+position = Vector2(-2224, -1080)
+polygon = PackedVector2Array(-64, 72, -40, 16, -24, -64, 8, -64, 16, -72, 24, -72, 24, -56, 32, -48, 48, -56, 56, -48, 64, -48, 72, -40, 88, -48, 104, -40, 64, -16, 56, -8, 48, -8, 40, 8, 24, 16, 16, 40, 40, 64, 32, 72)
+script = ExtResource("3_b6jsf")
+
+[node name="North Dakota" type="Polygon2D" parent="."]
+position = Vector2(-2320, -1104)
+polygon = PackedVector2Array(-48, -40, 72, -40, 56, 40, -80, 40)
+script = ExtResource("3_b6jsf")
+
+[node name="South Dakota" type="Polygon2D" parent="."]
+position = Vector2(-2344, -1032)
+polygon = PackedVector2Array(-56, -32, -64, -8, -80, 32, 16, 32, 24, 40, 40, 40, 48, 48, 56, 40, 56, 24, 80, -32)
+script = ExtResource("3_b6jsf")
+
+[node name="New Mexico" type="Polygon2D" parent="."]
+position = Vector2(-2536, -808)
+polygon = PackedVector2Array(-88, 56, -72, 56, -64, 48, 40, 48, 72, -48, 72, -56, -32, -56)
+script = ExtResource("3_b6jsf")
+
+[node name="Colorado" type="Polygon2D" parent="."]
+position = Vector2(-2488, -904)
+polygon = PackedVector2Array(-80, 40, 48, 40, 72, -24, 80, -48, -40, -48)
+script = ExtResource("3_b6jsf")
+
+[node name="Wyoming" type="Polygon2D" parent="."]
+position = Vector2(-2488, -1000)
+polygon = PackedVector2Array(-72, 24, -80, 48, 40, 48, 64, 0, 80, -40, -40, -40, -48, -32)
+script = ExtResource("3_b6jsf")
+
+[node name="Montana" type="Polygon2D" parent="."]
+position = Vector2(-2480, -1088)
+polygon = PackedVector2Array(-48, 48, 72, 48, 112, -56, -96, -56, -104, -16, -96, 8, -104, 32, -96, 32, -88, 56, -56, 56)
+script = ExtResource("3_b6jsf")
+
+[node name="Idaho" type="Polygon2D" parent="."]
+position = Vector2(-2600, -1008)
+polygon = PackedVector2Array(24, -136, 8, -136, -24, -56, -24, -40, -48, -16, -72, 32, 40, 32, 64, -24, 32, -24, 24, -48, 16, -48, 24, -72, 16, -96)
+script = ExtResource("3_b6jsf")
+
+[node name="Washington" type="Polygon2D" parent="."]
+position = Vector2(-2672, -1096)
+polygon = PackedVector2Array(-80, 40, -24, 40, 0, 32, 48, 32, 80, -48, 0, -48, 0, -24, -16, -16, -16, -32, -32, -32, -40, -24, -56, 8)
+script = ExtResource("3_b6jsf")
+
+[node name="Utah" type="Polygon2D" parent="."]
+position = Vector2(-2592, -912)
+polygon = PackedVector2Array(-72, 48, 24, 48, 64, -40, 24, -40, 32, -64, -16, -64)
+script = ExtResource("3_b6jsf")
+
+[node name="Oregon" type="Polygon2D" parent="."]
+position = Vector2(-2712, -1016)
+polygon = PackedVector2Array(40, 40, -80, 40, -80, 24, -64, 0, -40, -40, 16, -40, 40, -48, 88, -48, 88, -32, 64, -8)
+script = ExtResource("3_b6jsf")
+
+[node name="Nevada" type="Polygon2D" parent="."]
+position = Vector2(-2688, -920)
+polygon = PackedVector2Array(-64, 16, -8, 88, 8, 72, 16, 72, 80, -56, -32, -56)
+script = ExtResource("3_b6jsf")
+
+[node name="Arizona" type="Polygon2D" parent="."]
+position = Vector2(-2640, -808)
+polygon = PackedVector2Array(-72, 32, -16, 56, 16, 56, 72, -56, -24, -56, -32, -40, -40, -40, -56, -24, -48, 0)
+script = ExtResource("3_b6jsf")
+
+[node name="California" type="Polygon2D" parent="."]
+position = Vector2(-2768, -872)
+polygon = PackedVector2Array(-24, -104, 48, -104, 16, -32, 72, 40, 80, 64, 56, 96, 8, 96, 8, 80, -8, 64, -32, 56, -40, 24, -40, -16, -48, -32, -48, -64, -40, -88)
+script = ExtResource("3_b6jsf")
+
+[node name="Hawaii" type="Polygon2D" parent="."]
+position = Vector2(2768, -664)
+polygon = PackedVector2Array(-32, -16, -16, -16, -8, -8, 8, -8, 8, 0, 32, 0, 24, 8, 24, 32, 32, 24, 56, 32, 48, 48, 32, 56, 24, 48, 24, 16, 0, 16, -8, 0, -24, -8)
 script = ExtResource("3_b6jsf")

@@ -4,7 +4,11 @@ class_name AIControler
 @onready var game_control : GameControl = get_parent()
 @onready var region_control : RegionControl
 
-@export var thinking_timer : float = 0.5
+const THINKING_TIMER_DEFAULT : float = 0.5
+const THINKING_TIMER_SPEEDRUN : float = 0.05
+
+var speedrun_ai : bool = false
+var thinking_timer : float = THINKING_TIMER_DEFAULT
 
 enum {CONTROLER_USER, CONTROLER_DEFAULT, CONTROLER_TURTLE, CONTROLER_NEURAL, CONTROLER_CHEATER, CONTROLER_DUMMY}
 
@@ -33,6 +37,13 @@ func set_region_control():
 	
 
 func _process(delta):
+	if Input.is_action_just_pressed("ai_speedrun"):
+		speedrun_ai = not speedrun_ai
+		if speedrun_ai:
+			thinking_timer = THINKING_TIMER_SPEEDRUN
+		else:
+			thinking_timer = THINKING_TIMER_DEFAULT
+	
 	if region_control.dummy:
 		return
 #	print(timer)
@@ -187,6 +198,7 @@ func calculate_benefit_default(region : Region, is_bonus : bool):
 			if region.is_capital and region.power != region.max_power:
 				benefit += 4
 		if threat >= -action_amount:
+			@warning_ignore("integer_division")
 			benefit += region.power / 2
 	else:
 		if region.is_capital:

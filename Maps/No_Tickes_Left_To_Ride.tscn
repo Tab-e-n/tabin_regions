@@ -87,7 +87,7 @@ var connections : Array = [
 	[\"MARSEILLE\", \"PAMPLONA\"],
 	[\"BARCELONA\", \"MARSEILLE\"],
 	[\"MARSEILLE\", \"ZURICH\", 1],
-	[\"MARSEILLE\", \"ROMA\", 1],
+	[\"MARSEILLE\", \"ROMA\"],
 	[\"PARIS\", \"ZURICH\", 1],
 	[\"PARIS\", \"MARSEILLE\"],
 	[\"PARIS\", \"FRANKFURT\"],
@@ -184,6 +184,7 @@ polygon = PackedVector2Array(-24, 48, -24, 16, -48, 0, -48, -8, -24, -40, 16, -4
 script = ExtResource("3_14aoh")
 power = 2
 max_power = 7
+is_capital = true
 
 [node name="ZAGRAB" type="Polygon2D" parent="."]
 position = Vector2(48, 152)
@@ -200,7 +201,6 @@ power = 0
 position = Vector2(288, 256)
 polygon = PackedVector2Array(-56, 8, -48, -16, -32, -16, -40, -40, 32, -40, 72, -56, 104, -56, 136, -40, 112, -24, 104, 0, 96, 8, 104, 16, 80, 24, 56, 32, 40, 40, 24, 16, -16, 24)
 script = ExtResource("3_14aoh")
-power = 0
 
 [node name="BUCURESTI" type="Polygon2D" parent="."]
 position = Vector2(376, 152)
@@ -213,6 +213,7 @@ position = Vector2(256, 424)
 offset = Vector2(-256, -424)
 polygon = PackedVector2Array(248, 488, 232, 480, 224, 488, 216, 472, 208, 480, 200, 472, 192, 432, 184, 416, 176, 424, 184, 448, 168, 424, 168, 400, 160, 376, 152, 376, 144, 368, 160, 360, 144, 344, 136, 288, 224, 272, 272, 288, 312, 280, 320, 304, 392, 280, 416, 320, 392, 328, 384, 320, 368, 336, 344, 336, 312, 320, 296, 336, 288, 320, 272, 328, 288, 352, 264, 360, 240, 336, 240, 360, 256, 384, 256, 400, 288, 416, 288, 432, 272, 424, 280, 448, 256, 432, 256, 464, 248, 464)
 script = ExtResource("3_14aoh")
+power = 0
 
 [node name="WIEN" type="Polygon2D" parent="."]
 position = Vector2(72, 8)
@@ -234,7 +235,7 @@ position = Vector2(160, -288)
 offset = Vector2(-160, 288)
 polygon = PackedVector2Array(144, -72, 136, -64, 120, -72, 104, -88, 88, -96, 80, -88, 72, -96, 72, -112, 56, -104, 24, -128, 24, -152, 16, -184, 24, -224, 24, -224, 16, -264, 48, -280, 64, -280, 96, -304, 144, -304, 176, -320, 200, -312, 208, -360, 232, -336, 232, -320, 256, -304, 256, -256, 200, -224, 192, -232, 152, -224, 104, -176, 112, -120, 128, -112, 144, -88)
 script = ExtResource("3_14aoh")
-power = 2
+power = 0
 
 [node name="BERLIN" type="Polygon2D" parent="."]
 position = Vector2(-16, -168)

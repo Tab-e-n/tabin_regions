@@ -29,26 +29,38 @@ func _input(event):
 func _deffered_ready():
 	for i in game_control.region_control.polygon:
 		if i.x > farthest_right:
+			@warning_ignore("narrowing_conversion")
 			farthest_right = i.x
 		if i.x < farthest_left:
+			@warning_ignore("narrowing_conversion")
 			farthest_left = i.x
 		if i.y > farthest_down:
+			@warning_ignore("narrowing_conversion")
 			farthest_down = i.y
 		if i.y < farthest_up:
+			@warning_ignore("narrowing_conversion")
 			farthest_up = i.y
 	
 	if farthest_right < window_size.x / 2:
+		@warning_ignore("narrowing_conversion")
 		farthest_right = window_size.x / 2
 	if farthest_left > -window_size.x / 2:
+		@warning_ignore("narrowing_conversion")
 		farthest_left = -window_size.x / 2
 	if farthest_down < window_size.y / 2:
+		@warning_ignore("narrowing_conversion")
 		farthest_down = window_size.y / 2
 	if farthest_up > -window_size.y / 2:
+		@warning_ignore("narrowing_conversion")
 		farthest_up = -window_size.y / 2
 	
+	@warning_ignore("narrowing_conversion")
 	farthest_right -= window_size.x / 3
+	@warning_ignore("narrowing_conversion")
 	farthest_left += window_size.x / 3
+	@warning_ignore("narrowing_conversion")
 	farthest_down -= window_size.y / 3 - 64
+	@warning_ignore("narrowing_conversion")
 	farthest_up += window_size.y / 3
 #	print(farthest_right, " ",farthest_left, " ",farthest_down, " ",farthest_up,)
 	

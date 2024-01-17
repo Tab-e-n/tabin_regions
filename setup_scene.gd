@@ -30,7 +30,7 @@ func _ready():
 	
 	ai_selected_pos()
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_players_value_changed(value):

@@ -23,7 +23,7 @@ func _ready():
 	
 	color_self()
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func color_self():
