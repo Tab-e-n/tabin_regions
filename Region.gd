@@ -120,4 +120,5 @@ func make_region_arrows():
 			arrow.to_position = target_node.position
 			arrow.from_color = region_control.align_color[alignment]
 			arrow.to_color = region_control.align_color[target_node.alignment]
+			arrow.to_name = target
 			region_control.add_child(arrow)
