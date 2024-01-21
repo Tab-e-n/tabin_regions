@@ -98,6 +98,10 @@ func ai_selected_pos():
 		AIControler.CONTROLER_CHEATER:
 			$diff/AiSelected.position.x = 1008
 
+func _on_ai_turtle_pressed():
+	MapSetup.ai_controler = AIControler.CONTROLER_TURTLE
+	ai_selected_pos()
+
 func _on_ai_default_pressed():
 	MapSetup.ai_controler = AIControler.CONTROLER_DEFAULT
 	ai_selected_pos()
@@ -105,3 +109,5 @@ func _on_ai_default_pressed():
 func _on_ai_cheater_pressed():
 	MapSetup.ai_controler = AIControler.CONTROLER_CHEATER
 	ai_selected_pos()
+
+

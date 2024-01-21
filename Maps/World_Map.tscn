@@ -52,6 +52,7 @@ var connections : Array = [
 	[\"Estonia, Latvia, Lithuania\", \"Belarus\"],
 	[\"Poland\", \"Estonia, Latvia, Lithuania\"],
 	[\"Finland\", \"Estonia, Latvia, Lithuania\"],
+	[\"Finland\", \"Karelia, Murmansk\"],
 	[\"Ukraine\", \"Belarus\"],
 	[\"Poland\", \"Ukraine\"],
 	[\"Czechoslovakia\", \"Ukraine\"],
@@ -68,6 +69,7 @@ var connections : Array = [
 	[\"Denmark\", \"Germany\"],
 	[\"Denmark\", \"Sweden\"],
 	[\"Denmark\", \"Norway\"],
+	[\"Karelia, Murmansk\", \"Norway\"],
 	[\"Norway\", \"Sweden\"],
 	[\"Finland\", \"Sweden\"],
 	[\"Norway\", \"Finland\"],
@@ -102,6 +104,7 @@ var connections : Array = [
 	[\"United Arab Emirates, Quatar\", \"Persian Gulf\"],
 	[\"Iran\", \"Persian Gulf\"],
 	[\"Iran\", \"Turkmenistan\"],
+	[\"Iran\", \"United Arab Emirates, Quatar\"],
 	[\"Uzbekistan\", \"Turkmenistan\"],
 	[\"Uzbekistan\", \"Tajikistan\"],
 	[\"Kyrgyzstan\", \"Tajikistan\"],
@@ -236,6 +239,22 @@ var connections : Array = [
 	[\"Malaysia\", \"Philippines\"],
 	[\"Sulawesi\", \"Kalimantan\"],
 	[\"Myanmar\", \"Bangladesh\"],
+	[\"Central India\", \"Bangladesh\"],
+	[\"South India\", \"Sri Lanka\"],
+	[\"South India\", \"West India\"],
+	[\"Central India\", \"West India\"],
+	[\"South India\", \"Central India\"],
+	[\"East India\", \"Nepal\"],
+	[\"East India\", \"Central India\"],
+	[\"Central India\", \"Nepal\"],
+	[\"North India\", \"Nepal\"],
+	[\"North India\", \"Central India\"],
+	[\"North India\", \"West India\"],
+	[\"North India\", \"Pakistan\"],
+	[\"West India\", \"Pakistan\"],
+	[\"East India\", \"Bhutan\"],
+	[\"East India\", \"Bangladesh\"],
+	[\"East India\", \"Myanmar\"],
 	[\"Cambodia\", \"Thailand\"],
 	[\"Myanmar\", \"Laos\"],
 	[\"Laos\", \"Thailand\"],
@@ -261,7 +280,9 @@ var connections : Array = [
 	[\"Caribbean\", \"Nicaragua\"],
 	[\"Honduras\", \"Nicaragua\"],
 	[\"Caribbean\", \"Honduras\"],
-	[\"Caribbean\", \"Guatemala, Belize\"],
+	[\"East Mexico\", \"Guatemala, Belize\"],
+	[\"East Mexico\", \"Cuba\"],
+	[\"East Mexico\", \"South Mexico\"],
 	[\"El Salvador\", \"Honduras\"],
 	[\"El Salvador\", \"Guatemala, Belize\"],
 	[\"Guatemala, Belize\", \"Honduras\"],
@@ -285,9 +306,14 @@ var connections : Array = [
 	[\"Arkansas\", \"Texas\"],
 	[\"Arkansas\", \"Oklahoma\"],
 	[\"Oklahoma\", \"Texas\"],
+	[\"North Mexico\", \"Texas\"],
+	[\"North Mexico\", \"Central Mexico\"],
+	[\"Central Mexico\", \"Texas\"],
+	[\"Central Mexico\", \"South Mexico\"],
 	[\"New Mexico\", \"Texas\"],
 	[\"New Mexico\", \"Colorado\"],
 	[\"New Mexico\", \"Arizona\"],
+	[\"New Mexico\", \"North Mexico\"],
 	[\"Louisiana\", \"Arkansas\"],
 	[\"Tennessee\", \"Georgia\"],
 	[\"Calorina\", \"Tennessee\"],
@@ -311,6 +337,8 @@ var connections : Array = [
 	[\"Montana\", \"North Dakota\"],
 	[\"Montana\", \"British Columbia\"],
 	[\"Yukon\", \"British Columbia\"],
+	[\"Yukon\", \"Alaska\"],
+	[\"Alaska\", \"British Columbia\"],
 	[\"Canada Northwest Territories 1\", \"British Columbia\"],
 	[\"Yukon\", \"Canada Northwest Territories 1\"],
 	[\"Saskatchewan\", \"Montana\"],
@@ -338,8 +366,10 @@ var connections : Array = [
 	[\"Idaho\", \"Utah\"],
 	[\"Arizona\", \"Utah\"],
 	[\"Arizona\", \"California\"],
+	[\"Arizona\", \"North Mexico\"],
 	[\"Baja California\", \"California\"],
 	[\"Baja California\", \"Hawaii\"],
+	[\"Baja California\", \"North Mexico\"],
 	[\"Hawaii\", \"California\"],
 	[\"Arizona\", \"Nevada\"],
 	[\"Montana\", \"Idaho\"],
@@ -414,6 +444,16 @@ var connections : Array = [
 	[\"South Australia\", \"New South Wales\"],
 	[\"Queensland\", \"New South Wales\"],
 	[\"New South Wales\", \"Victoria\"],
+	[\"Neutral Antarctic\", \"Chilean Antarctic\"],
+	[\"Argentina Antarctic\", \"Chilean Antarctic\"],
+	[\"Argentina Antarctic\", \"Norway Antarctic\"],
+	[\"Australia Antarctic\", \"Norway Antarctic\"],
+	[\"Australia Antarctic\", \"New Zealand Antarctic\"],
+	[\"Neutral Antarctic\", \"New Zealand Antarctic\"],
+	[\"New Zealand\", \"New Zealand Antarctic\"],
+	[\"South Africa, Lesotho, Eswatini\", \"Norway Antarctic\"],
+	[\"Madagascar\", \"Australia Antarctic\"],
+	[\"Falklands\", \"Chilean Antarctic\"],
 ]
 
 func _ready():
@@ -491,6 +531,11 @@ script = ExtResource("3_b6jsf")
 [node name="Finland" type="Polygon2D" parent="."]
 position = Vector2(-144, -1472)
 polygon = PackedVector2Array(-56, -16, -40, -24, -32, -8, -24, 0, -48, 16, -80, 40, -80, 56, -72, 72, -72, 88, -56, 96, -48, 104, -24, 104, -8, 96, 32, 96, 32, 80, 48, 72, 72, 48, 64, 32, 48, 8, 40, 0, 40, -24, 32, -32, 40, -48, 16, -64, 8, -88, -24, -88, -32, -64, -64, -64, -48, -40)
+script = ExtResource("3_b6jsf")
+
+[node name="Karelia, Murmansk" type="Polygon2D" parent="."]
+position = Vector2(-48, -1488)
+polygon = PackedVector2Array(-48, 88, -32, 96, -32, 88, -16, 80, 16, 112, 32, 104, 32, 96, 16, 80, 32, 72, 32, 64, 24, 56, 32, 48, 40, 56, 40, 72, 56, 88, 64, 80, 48, 64, 40, 48, 48, 32, 32, 32, 16, 16, 16, 0, 8, -8, -8, -8, -24, -24, -16, -24, 0, -16, 48, -8, 64, 0, 80, 0, 96, -8, 104, -16, 104, -32, 88, -40, 72, -40, 48, -56, 8, -64, -16, -64, -32, -72, -56, -72, -72, -64, -80, -48, -56, -32, -64, -16, -56, -8, -56, 16, -48, 24, -32, 48, -24, 64)
 script = ExtResource("3_b6jsf")
 
 [node name="Poland" type="Polygon2D" parent="."]
@@ -941,12 +986,43 @@ script = ExtResource("3_b6jsf")
 
 [node name="Nepal" type="Polygon2D" parent="."]
 position = Vector2(976, -696)
-polygon = PackedVector2Array(-48, -8, 0, 24, 32, 32, 56, 48, 96, 48, 104, 56, 112, 56, 112, 32, 120, 24, 112, 16, 64, 16, -16, -32, -40, -32, -40, -24, -48, -16)
+polygon = PackedVector2Array(-48, -8, 0, 24, 32, 32, 56, 48, 96, 48, 104, 56, 112, 56, 112, 32, 120, 24, 120, 16, 64, 16, -16, -32, -40, -32, -40, -24, -48, -16)
+script = ExtResource("3_b6jsf")
+
+[node name="Sri Lanka" type="Polygon2D" parent="."]
+position = Vector2(984, -224)
+polygon = PackedVector2Array(-8, -48, -16, -32, -16, 16, 0, 32, 8, 32, 24, 16, 24, 0, 16, -24)
+script = ExtResource("3_b6jsf")
+
+[node name="South India" type="Polygon2D" parent="."]
+position = Vector2(912, -376)
+polygon = PackedVector2Array(-64, -8, -56, -32, -24, -48, -16, -56, -16, -96, -8, -136, 8, -144, 48, -152, 56, -128, 56, -104, 48, -88, 56, -72, 96, -88, 136, -104, 80, -48, 56, -32, 48, -16, 56, 8, 56, 32, 48, 80, 16, 136, 0, 136, -16, 104, -24, 72, -40, 48, -56, 8)
+script = ExtResource("3_b6jsf")
+
+[node name="West India" type="Polygon2D" parent="."]
+position = Vector2(848, -544)
+polygon = PackedVector2Array(112, 16, 128, -8, 152, -16, 152, -32, 128, -40, 88, -56, 72, -88, 24, -104, 16, -88, 32, -80, 16, -64, 0, -64, 0, -72, -16, -72, -24, -48, -48, -72, -80, -72, -88, -56, -136, -40, -112, -24, -96, -24, -88, -32, -88, -16, -112, -8, -88, 24, -64, 24, -56, 16, -56, -8, -48, -8, -40, 8, -40, 48, -24, 96, -16, 136, 0, 160, 8, 136, 40, 120, 48, 112, 48, 72, 56, 32, 72, 24)
+script = ExtResource("3_b6jsf")
+
+[node name="North India" type="Polygon2D" parent="."]
+position = Vector2(848, -728)
+polygon = PackedVector2Array(0, -120, -24, -96, -64, -104, -56, -64, -24, -40, -80, 48, -104, 48, -112, 72, -80, 112, -48, 112, -24, 136, -16, 112, 0, 112, 0, 120, 16, 120, 32, 104, 16, 96, 24, 80, 32, 48, 24, 8, 80, 24, 80, 16, 88, 8, 88, 0, 56, -24, 40, -40, 32, -48, 48, -56, 48, -72, 32, -88, 48, -104, 48, -120, 32, -128, 16, -128)
+script = ExtResource("3_b6jsf")
+
+[node name="East India" type="Polygon2D" parent="."]
+position = Vector2(1216, -688)
+offset = Vector2(-16, 24)
+polygon = PackedVector2Array(56, -24, 40, -24, 32, -32, 32, -40, 24, -48, 0, -48, -40, -16, -48, -16, -40, -8, -40, 8, -48, 16, -80, 16, -104, 8, -96, -8, -96, -16, -104, -16, -104, -8, -112, 0, -112, 24, -104, 64, -104, 48, -88, 32, -72, 32, -72, 40, -32, 40, -24, 56, -56, 80, -56, 88, -40, 88, -24, 80, -8, 104, -8, 72, 8, 72, 16, 40, 32, 8, 56, 0)
+script = ExtResource("3_b6jsf")
+
+[node name="Central India" type="Polygon2D" parent="."]
+position = Vector2(1024, -600)
+polygon = PackedVector2Array(24, 120, 32, 104, 56, 96, 56, 72, 72, 64, 88, 64, 88, 32, 80, 24, 80, 8, 72, 0, 64, -40, 56, -40, 48, -48, 8, -48, -16, -64, -48, -72, -96, -104, -152, -120, -144, -80, -152, -48, -104, -32, -88, 0, -48, 16, -24, 24, -24, 40, -48, 48, -64, 72, -56, 96, -56, 120, -64, 136, -56, 152)
 script = ExtResource("3_b6jsf")
 
 [node name="Bhutan" type="Polygon2D" parent="."]
 position = Vector2(1128, -664)
-polygon = PackedVector2Array(-8, 16, 24, 16, 32, 8, 32, -8, 16, -16, -16, -16, -24, -8, -32, 8)
+polygon = PackedVector2Array(-8, 16, 24, 16, 32, 8, 32, -8, 24, -16, -24, -16, -24, -8, -32, 8)
 script = ExtResource("3_b6jsf")
 
 [node name="Thailand" type="Polygon2D" parent="."]
@@ -1090,6 +1166,11 @@ position = Vector2(-1624, 672)
 polygon = PackedVector2Array(-40, -64, -40, 16, -24, 32, -8, 32, 8, 40, 32, 40, 56, 16, 48, -8, -24, -64)
 script = ExtResource("3_b6jsf")
 
+[node name="Falklands" type="Polygon2D" parent="."]
+position = Vector2(-1560, 1080)
+polygon = PackedVector2Array(16, 8, 24, 0, 16, -8, -8, -16, -16, -8, -24, 8, -24, 16, -8, 0, -8, 8, 0, 16, 8, 8)
+script = ExtResource("3_b6jsf")
+
 [node name="Caribbean" type="Polygon2D" parent="."]
 position = Vector2(-2000, -400)
 polygon = PackedVector2Array(-96, -64, -96, -56, -88, -48, -72, -56, 120, -56, 136, -56, 144, -64, 136, -72, 120, -72, 112, -64, 112, -56, -64, -56, -64, -64, -72, -72, -88, -72)
@@ -1189,7 +1270,7 @@ script = ExtResource("3_b6jsf")
 
 [node name="Texas" type="Polygon2D" parent="."]
 position = Vector2(-2432, -752)
-polygon = PackedVector2Array(-128, -8, -128, 0, -112, 16, -112, 40, -96, 48, -72, 32, -48, 32, -32, 104, -16, 112, 0, 112, 0, 96, 8, 80, 24, 64, 40, 64, 64, 40, 96, 32, 112, 0, 112, -40, 104, -40, 88, -48, 48, -48, 40, -56, 16, -56, 8, -64, 24, -104, -32, -104, -64, -8)
+polygon = PackedVector2Array(-128, -8, -128, 0, -112, 16, -112, 40, -96, 48, -72, 32, -48, 32, -40, 72, -32, 104, -16, 112, 0, 112, 0, 96, 8, 80, 24, 64, 40, 64, 64, 40, 96, 32, 112, 0, 112, -40, 104, -40, 88, -48, 48, -48, 40, -56, 16, -56, 8, -64, 24, -104, -32, -104, -64, -8)
 script = ExtResource("3_b6jsf")
 
 [node name="Virginia" type="Polygon2D" parent="."]
@@ -1344,6 +1425,26 @@ position = Vector2(-2736, -672)
 polygon = PackedVector2Array(-24, -104, -24, -72, -16, -40, 0, -16, -8, -8, -24, 0, -8, 16, 8, 24, 24, 40, 16, 56, 16, 72, 32, 80, 48, 104, 56, 96, 56, 80, 40, 72, 40, 32, 32, 24, 32, 8, 24, 0, 16, -32, 0, -48, 0, -72, 8, -88, 8, -104)
 script = ExtResource("3_b6jsf")
 
+[node name="North Mexico" type="Polygon2D" parent="."]
+position = Vector2(-2600, -672)
+polygon = PackedVector2Array(128, -8, 104, 16, 96, 32, 104, 48, 96, 64, 80, 56, 64, 56, 64, 72, 40, 72, 24, 104, 8, 104, 0, 96, -8, 112, -48, 56, -64, 40, -64, 24, -80, -8, -88, -16, -96, -32, -104, -56, -104, -80, -128, -88, -128, -104, -112, -104, -56, -80, -8, -80, 0, -88, 40, -88, 40, -80, 56, -64, 56, -40, 72, -32, 96, -48, 120, -48)
+script = ExtResource("3_b6jsf")
+
+[node name="Central Mexico" type="Polygon2D" parent="."]
+position = Vector2(-2528, -560)
+polygon = PackedVector2Array(-32, 104, -16, 88, 0, 96, 24, 56, 48, 32, 56, 32, 64, 16, 72, 16, 72, -24, 80, -56, 96, -80, 80, -80, 64, -88, 56, -120, 32, -96, 24, -80, 32, -64, 24, -48, 8, -56, -8, -56, -8, -40, -32, -40, -48, -8, -64, -8, -72, -16, -80, 0, -80, 24, -88, 48, -88, 64, -56, 96)
+script = ExtResource("3_b6jsf")
+
+[node name="South Mexico" type="Polygon2D" parent="."]
+position = Vector2(-2472, -456)
+polygon = PackedVector2Array(-88, 0, -48, 24, -24, 32, 0, 48, 24, 48, 40, 40, 64, 40, 72, 16, 64, -8, 40, -16, 24, -40, 24, -56, 16, -72, 16, -88, 8, -88, 0, -72, -8, -72, -32, -48, -56, -8, -72, -16)
+script = ExtResource("3_b6jsf")
+
+[node name="East Mexico" type="Polygon2D" parent="."]
+position = Vector2(-2312, -488)
+polygon = PackedVector2Array(-96, 72, -88, 48, -96, 24, -56, 16, -32, 8, -16, -16, -8, -40, 8, -40, 24, -48, 48, -48, 56, -40, 56, -32, 40, -16, 32, 8, 24, 16, 0, 40, -16, 40, -24, 32, -40, 48, -32, 56, -24, 72, -48, 72, -64, 88, -64, 104)
+script = ExtResource("3_b6jsf")
+
 [node name="Newfoundland" type="Polygon2D" parent="."]
 position = Vector2(-1536, -1136)
 polygon = PackedVector2Array(-56, 16, -48, 24, -24, 32, 24, 24, -8, 40, 8, 40, 32, 24, 32, 40, 40, 40, 40, 48, 56, 40, 56, 24, 48, 32, 56, 16, 40, 24, 40, 16, 48, 0, 48, -16, 32, -8, 16, -16, 32, -48, 32, -56, 8, -48, -16, -24, -24, -8, -40, 8)
@@ -1420,6 +1521,11 @@ offset = Vector2(0, 160)
 polygon = PackedVector2Array(112, -104, 96, -128, 80, -128, 80, -152, 80, -168, 72, -184, 72, -200, 80, -216, 88, -232, 80, -248, 112, -272, 104, -280, 80, -288, -136, -112, -120, -96, -112, -104)
 script = ExtResource("3_b6jsf")
 
+[node name="Alaska" type="Polygon2D" parent="."]
+position = Vector2(-2784, -1488)
+polygon = PackedVector2Array(256, -72, 40, 104, 56, 120, 64, 136, 88, 136, 112, 168, 112, 208, 104, 224, 88, 232, 96, 216, 88, 208, 88, 192, 72, 192, 72, 216, 56, 224, 48, 216, 56, 208, 64, 192, 56, 184, 56, 176, 64, 168, 72, 176, 72, 184, 88, 184, 96, 168, 88, 160, 80, 160, 72, 168, 56, 160, 64, 152, 72, 152, 88, 152, 80, 144, 56, 152, 48, 136, 32, 120, 8, 112, -16, 112, -40, 104, -64, 104, -80, 120, -112, 120, -144, 128, -160, 128, -136, 112, -120, 104, -88, 96, -88, 88, -120, 96, -152, 112, -168, 120, -184, 128, -192, 136, -248, 160, -216, 160, -192, 144, -176, 144, -256, 192, -272, 184, -248, 168, -264, 168, -328, 192, -392, 216, -400, 208, -392, 200, -352, 184, -328, 176, -288, 160, -272, 152, -248, 136, -272, 136, -288, 144, -304, 136, -312, 144, -320, 144, -328, 136, -312, 128, -296, 112, -296, 104, -328, 120, -336, 112, -336, 104, -320, 96, -320, 80, -296, 72, -272, 64, -264, 56, -248, 48, -240, 56, -224, 48, -200, 48, -160, 24, -160, 16, -176, 16, -192, 24, -224, 24, -240, 16, -232, 8, -216, -8, -176, -16, -160, -8, -136, 0, -128, -8, -96, -8, -112, -16, -136, -40, -136, -56, -80, -64, -40, -80, -16, -80, 8, -88, 56, -96, 96, -96, 136, -88, 200, -80, 232, -80)
+script = ExtResource("3_b6jsf")
+
 [node name="Canada Northwest Territories 1" type="Polygon2D" parent="."]
 position = Vector2(-2424, -1456)
 polygon = PackedVector2Array(-104, 56, -88, 56, -72, 80, 72, 80, 72, 72, 56, 64, 64, 56, 88, 56, 96, 48, 88, 40, 72, 40, 64, 32, 80, 24, 72, -8, 40, -16, 64, -24, 72, -32, 40, -32, 56, -40, 80, -40, 104, -48, 128, -48, 144, -72, 160, -104, 136, -112, 120, -104, 104, -104, 104, -120, 88, -112, 72, -96, 56, -112, 48, -112, 32, -96, 24, -96, 16, -104, 8, -96, -8, -96, -16, -104, -24, -104, -40, -88, -72, -88, -104, -64, -96, -48, -112, -16, -112, 0, -104, 16)
@@ -1431,6 +1537,39 @@ polygon = PackedVector2Array(-96, 72, -64, 72, -48, 64, -16, 56, 8, 40, 32, 40, 
 script = ExtResource("3_b6jsf")
 
 [node name="Hawaii" type="Polygon2D" parent="."]
-position = Vector2(2720, -624)
+position = Vector2(3064, -680)
 polygon = PackedVector2Array(-32, -16, -16, -16, -8, -8, 8, -8, 8, 0, 32, 0, 24, 8, 24, 32, 32, 24, 56, 32, 48, 48, 32, 56, 24, 48, 24, 16, 0, 16, -8, 0, -24, -8)
+script = ExtResource("3_b6jsf")
+
+[node name="Neutral Antarctic" type="Polygon2D" parent="."]
+position = Vector2(-2128, 1608)
+offset = Vector2(104, 88)
+polygon = PackedVector2Array(232, 136, -248, 136, -296, 120, -360, 96, -392, 80, -360, 80, -264, 88, -144, 88, -120, 80, -40, 80, -64, 72, -144, 72, -216, 64, -248, 40, -288, 32, -336, 24, -296, 16, -256, 16, -240, 8, -240, 0, -248, -8, -296, -16, -376, -16, -400, -32, -440, -32, -432, -16, -416, -16, -408, -8, -416, 0, -448, -8, -464, -16, -464, -32, -448, -24, -440, -32, -456, -48, -456, -56, -424, -56, -400, -48, -376, -40, -352, -48, -344, -56, -344, -64, -352, -80, -376, -88, -392, -96, -384, -104, -368, -104, -328, -112, -304, -104, -288, -120, -272, -120, -256, -112, -200, -112, -184, -120, -160, -120, -144, -112, -128, -120, -112, -120, -80, -112, -56, -120, -32, -112, -24, -128, -16, -128, 0, -112, 8, -112, 16, -128, 24, -128, 40, -104, 48, -120, 80, -120, 96, -104, 112, -112, 120, -112, 144, -104, 152, -112, 152, -120, 120, -120, 112, -128, 112, -136, 128, -144, 120, -152, 88, -144, 64, -152, 64, -160, 80, -176, 128, -184, 168, -176, 168, -168, 128, -160, 152, -144, 192, -144, 208, -136, 232, -144)
+script = ExtResource("3_b6jsf")
+
+[node name="Chilean Antarctic" type="Polygon2D" parent="."]
+position = Vector2(-1568, 1584)
+offset = Vector2(8, 104)
+polygon = PackedVector2Array(-232, 144, 248, 144, 248, 16, 160, 0, 104, -24, 64, -32, 16, -48, 56, -48, 72, -56, 104, -64, 56, -64, 48, -72, 24, -80, 24, -88, 72, -72, 120, -72, 152, -88, 184, -96, 192, -112, 208, -120, 192, -152, 152, -192, 136, -208, 104, -216, 72, -224, 64, -232, 72, -248, 104, -256, 104, -272, 96, -280, 128, -296, 152, -312, 144, -320, 96, -304, 72, -288, 40, -240, 56, -192, 40, -200, 16, -216, 0, -200, 24, -192, 40, -184, 24, -176, 8, -168, 32, -160, 40, -152, 64, -152, 72, -160, 72, -176, 56, -184, 56, -192, 88, -176, 104, -152, 88, -136, 48, -136, -8, -144, -16, -152, -32, -136, -80, -136, -104, -144, -112, -152, -128, -144, -144, -144, -152, -152, -168, -136, -232, -136)
+script = ExtResource("3_b6jsf")
+
+[node name="Argentina Antarctic" type="Polygon2D" parent="."]
+position = Vector2(-1088, 1656)
+polygon = PackedVector2Array(-224, 48, -224, 176, 320, 176, 320, -64, 280, -56, 256, -56, 232, -48, 192, -40, 160, -32, 144, -16, 160, 0, 192, 0, 224, 8, 264, 0, 272, 8, 248, 8, 240, 16, 248, 24, 272, 24, 240, 32, 200, 40, 112, 48, 80, 56, -16, 56, -72, 64, -96, 80, -120, 56, -144, 56, -193, 41, -192, 32, -160, 32, -24, 32, -16, 24, 40, 24, 56, 8, 48, -8, 24, -16, 40, -24, 32, -32, -8, -32, -32, -16, -24, 8, -40, 16, -56, 16, -40, 32, -144, 32, -136, 24, -144, 16, -160, 16, -176, 24, -192, 8, -208, 16, -208, 24, -192, 31, -193, 40)
+script = ExtResource("3_b6jsf")
+
+[node name="Norway Antarctic" type="Polygon2D" parent="."]
+position = Vector2(-328, 1528)
+polygon = PackedVector2Array(-440, 64, -440, 304, 456, 304, 456, -104, 432, -96, 416, -80, 416, -64, 408, -56, 392, -64, 392, -80, 376, -72, 368, -72, 344, -88, 328, -88, 296, -56, 256, -48, 192, -48, 176, -56, 152, -56, 136, -48, 112, -40, 72, -40, 48, -24, 32, -24, 0, -40, -24, -40, -96, -40, -120, -32, -160, -24, -176, -32, -192, -32, -200, -40, -224, -24, -232, -24, -248, -40, -264, -16, -288, -40, -320, -8, -344, -8, -376, 0, -376, 8, -368, 16, -352, 16, -384, 40, -392, 56)
+script = ExtResource("3_b6jsf")
+
+[node name="Australia Antarctic" type="Polygon2D" parent="."]
+position = Vector2(552, 1512)
+offset = Vector2(88, -40)
+polygon = PackedVector2Array(-512, 360, 448, 360, 448, -80, 400, -64, 376, -72, 352, -80, 328, -80, 304, -64, 264, -72, 232, -72, 216, -80, 184, -72, 168, -80, 120, -64, 96, -64, 80, -72, 56, -64, 16, -64, -8, -40, -72, -24, -128, 16, -152, 24, -168, 16, -160, 8, -144, 0, -144, -16, -160, -24, -144, -32, -112, -48, -104, -64, -120, -72, -192, -72, -240, -80, -264, -80, -288, -104, -304, -112, -328, -104, -352, -80, -384, -80, -424, -64, -464, -56, -512, -48)
+script = ExtResource("3_b6jsf")
+
+[node name="New Zealand Antarctic" type="Polygon2D" parent="."]
+position = Vector2(1344, 1688)
+polygon = PackedVector2Array(-256, 144, 128, 144, 256, 72, 192, 72, 96, 64, 64, 40, 48, 8, 56, -8, 128, -40, 168, -40, 200, -88, 256, -112, 312, -136, 360, -144, 400, -168, 384, -184, 312, -224, 240, -232, 184, -264, 112, -272, 40, -272, 0, -256, -40, -272, -72, -264, -104, -264, -120, -272, -184, -248, -216, -264, -240, -280, -256, -296)
 script = ExtResource("3_b6jsf")

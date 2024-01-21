@@ -11,7 +11,14 @@ var speedrun_ai : bool = false
 var thinking_timer : float = THINKING_TIMER_DEFAULT
 
 enum {CONTROLER_USER, CONTROLER_DEFAULT, CONTROLER_TURTLE, CONTROLER_NEURAL, CONTROLER_CHEATER, CONTROLER_DUMMY}
-const PACKED_CONTROLERS : Array = [null, preload("res://AINormal.gd"), preload("res://AINormal.gd"), preload("res://AINormal.gd"), preload("res://AINormal.gd")]
+const PACKED_CONTROLERS : Array = [
+	null, # CONTROLER_USER (can be just null)
+	preload("res://AINormal.gd"), # CONTROLER_DEFAULT
+	preload("res://AITurtle.gd"), # CONTROLER_TURTLE
+	null, # CONTROLER_NEURAL
+	preload("res://AINormal.gd"), # CONTROLER_CHEATER
+	null # CONTROLER_DUMMY
+] 
 
 var current_alignment : int
 var current_controler : int
@@ -98,15 +105,6 @@ func think():
 	
 	find_owned_regions()
 	
-#	if region_control.capital_amount[current_alignment - 1] == 0:
-#		var forfeit : bool = true
-#		for region in owned_regions[current_alignment]:
-#			if region.power > 1:
-#				forfeit = false
-#				break
-#		if forfeit:
-#			CALL_forfeit = true
-	
 	match region_control.current_action:
 		region_control.ACTION_NORMAL:
 			if controlers[current_controler].has_method("think_normal"):
@@ -155,6 +153,10 @@ func get_bonus_action_amount() -> int:
 
 func get_alingment_amout() -> int:
 	return region_control.align_amount
+
+
+func get_capitol_amount() -> int:
+	return region_control.capital_amount[current_alignment - 1]
 
 
 func timer_ended():
