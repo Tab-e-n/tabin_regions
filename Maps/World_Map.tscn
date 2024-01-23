@@ -109,6 +109,14 @@ var connections : Array = [
 	[\"Uzbekistan\", \"Tajikistan\"],
 	[\"Kyrgyzstan\", \"Tajikistan\"],
 	[\"Uzbekistan\", \"Kyrgyzstan\"],
+	[\"Northern Mongolia\", \"Altai Mountains\"],
+	[\"Northern Mongolia\", \"Central Mongolia\"],
+	[\"Northern Mongolia\", \"Eastern Mongolia\"],
+	[\"Central Mongolia\", \"Altai Mountains\"],
+	[\"Central Mongolia\", \"Gobi Desert\"],
+	[\"Central Mongolia\", \"Eastern Mongolia\"],
+	[\"Eastern Mongolia\", \"Gobi Desert\"],
+	[\"Gobi Desert\", \"Altai Mountains\"],
 	[\"Afghanistan\", \"Turkmenistan\"],
 	[\"Iran\", \"Afghanistan\"],
 	[\"Afghanistan\", \"Tajikistan\"],
@@ -271,7 +279,11 @@ var connections : Array = [
 	[\"Colombia\", \"Peru\"],
 	[\"Peru\", \"Ecuador\"],
 	[\"Peru\", \"Bolivia\"],
+	[\"Peru\", \"North Chile\"],
+	[\"North Chile\", \"Bolivia\"],
 	[\"Paraguay\", \"Bolivia\"],
+	[\"Paraguay\", \"North Greater Argentina\"],
+	[\"North Greater Argentina\", \"Bolivia\"],
 	[\"Caribbean\", \"Venezuela\"],
 	[\"Caribbean\", \"Panama\"],
 	[\"Costa Rica\", \"Panama\"],
@@ -423,6 +435,7 @@ var connections : Array = [
 	[\"North-East Coast of USA\", \"Bay of Fundy\"],
 	[\"Labrador\", \"Quebec\"],
 	[\"Labrador\", \"Newfoundland\"],
+	[\"Bay of Fundy\", \"Newfoundland\"],
 	[\"Newfoundland\", \"Quebec\"],
 	[\"Ontario\", \"Quebec\"],
 	[\"Calorina\", \"Georgia\"],
@@ -454,6 +467,30 @@ var connections : Array = [
 	[\"South Africa, Lesotho, Eswatini\", \"Norway Antarctic\"],
 	[\"Madagascar\", \"Australia Antarctic\"],
 	[\"Falklands\", \"Chilean Antarctic\"],
+	[\"Tierra del Feugo\", \"Chilean Antarctic\"],
+	[\"Tierra del Feugo\", \"South Chile\"],
+	[\"Falklands\", \"Tierra del Feugo\"],
+	[\"Santa Cruz\", \"Tierra del Feugo\"],
+	[\"Santa Cruz\", \"Chubut\"],
+	[\"South Chile\", \"Chubut\"],
+	[\"Santa Cruz\", \"South Chile\"],
+	[\"Remaining Patagonica\", \"Chubut\"],
+	[\"Remaining Patagonica\", \"South Chile\"],
+	[\"Remaining Patagonica\", \"Central Chile\"],
+	[\"Central Chile\", \"South Chile\"],
+	[\"Buenos Aires\", \"Uruguay\"],
+	[\"Buenos Aires\", \"Central Argentina\"],
+	[\"Buenos Aires\", \"Remaining Patagonica\"],
+	[\"Nuevo Cuyo\", \"Central Argentina\"],
+	[\"Nuevo Cuyo\", \"Central Chile\"],
+	[\"North Chile\", \"Central Chile\"],
+	[\"Nuevo Cuyo\", \"North Greater Argentina\"],
+	[\"North Chile\", \"North Greater Argentina\"],
+	[\"Nuevo Cuyo\", \"Remaining Patagonica\"],
+	[\"Remaining Patagonica\", \"Central Argentina\"],
+	[\"Central Argentina\", \"Uruguay\"],
+	[\"Central Argentina\", \"North Greater Argentina\"],
+	[\"North Greater Argentina\", \"Uruguay\"],
 ]
 
 func _ready():
@@ -680,6 +717,31 @@ script = ExtResource("3_b6jsf")
 [node name="Tajikistan" type="Polygon2D" parent="."]
 position = Vector2(688, -920)
 polygon = PackedVector2Array(-40, 32, -24, 40, 0, 40, 24, 8, 40, 16, 40, 40, 48, 48, 72, 32, 96, 40, 96, 16, 64, -8, -8, -8, -8, -16, 8, -24, 8, -40, -8, -40, -16, -24, -40, -8, -24, 8, -24, 24)
+script = ExtResource("3_b6jsf")
+
+[node name="Altai Mountains" type="Polygon2D" parent="."]
+position = Vector2(1024, -1136)
+polygon = PackedVector2Array(40, 80, 8, 80, -16, 72, -16, 48, -32, 32, -56, 16, -72, 16, -96, 0, -104, -8, -96, -16, -88, -16, -64, -32, -48, -48, -24, -40, 0, -40, 8, -32, 24, -24, 32, -32, 56, -24, 56, -16, 80, -8, 96, -8, 104, 8, 96, 16, 96, 24, 104, 24, 104, 32, 96, 48, 72, 40, 56, 24, 32, 24, 24, 16, 16, 24, 40, 40, 24, 48, 32, 72)
+script = ExtResource("3_b6jsf")
+
+[node name="Northern Mongolia" type="Polygon2D" parent="."]
+position = Vector2(1144, -1168)
+polygon = PackedVector2Array(-64, 8, -48, 0, -64, -16, -64, -32, -56, -40, 8, -24, 24, -8, 48, 0, 56, 0, 72, -8, 104, 0, 128, 8, 144, 16, 144, 24, 128, 24, 136, 32, 104, 32, 96, 24, 96, 32, 88, 40, 80, 32, 80, 48, 96, 56, 88, 56, 88, 64, 80, 64, 56, 48, 48, 40, 32, 32, 8, 24, 8, 40, -16, 40, -24, 24, -40, 24, -64, 16)
+script = ExtResource("3_b6jsf")
+
+[node name="Central Mongolia" type="Polygon2D" parent="."]
+position = Vector2(1224, -1088)
+polygon = PackedVector2Array(-72, -24, -64, -8, -40, -8, -24, 24, 0, 56, 16, 48, 16, 40, 24, 32, 16, 16, 24, 16, 24, 8, 32, 0, 40, 0, 40, -8, 64, 0, 80, 0, 80, -8, 96, -8, 80, -24, 80, -48, 64, -56, 48, -56, 56, -48, 24, -48, 16, -56, 16, -48, 8, -40, 0, -48, 0, -32, 16, -24, 8, -24, 8, -16, 0, -16, -24, -32, -32, -40, -48, -48, -72, -56, -72, -40, -96, -40, -104, -32, -104, -24)
+script = ExtResource("3_b6jsf")
+
+[node name="Gobi Desert" type="Polygon2D" parent="."]
+position = Vector2(1184, -1040)
+polygon = PackedVector2Array(-120, -16, -80, 0, -72, 8, -48, 32, 8, 40, 48, 40, 104, 56, 128, 56, 160, 40, 192, 40, 208, 32, 224, 8, 208, 0, 208, -16, 192, -40, 176, -40, 160, -48, 160, -40, 152, -40, 144, -48, 136, -32, 128, -48, 120, -56, 120, -48, 104, -48, 80, -56, 80, -48, 72, -48, 64, -40, 64, -32, 56, -32, 64, -16, 56, -8, 56, 0, 40, 8, 16, -24, 0, -56, -24, -56, -32, -72, -56, -72, -56, -64, -64, -48, -88, -56, -104, -72, -128, -72, -136, -80, -144, -72, -120, -56, -136, -48, -128, -24)
+script = ExtResource("3_b6jsf")
+
+[node name="Eastern Mongolia" type="Polygon2D" parent="."]
+position = Vector2(1384, -1112)
+polygon = PackedVector2Array(-96, -40, -64, -32, -40, -40, -24, -40, -8, -56, 8, -56, 24, -48, 32, -56, 48, -48, 40, -8, 56, 0, 64, -8, 80, 0, 80, -8, 96, -8, 120, 8, 136, 16, 136, 24, 96, 24, 80, 32, 80, 40, 72, 48, 56, 48, 40, 64, 16, 56, 8, 56, -8, 32, -24, 32, -40, 24, -40, 32, -48, 32, -56, 24, -64, 40, -72, 24, -80, 16, -64, 16, -80, 0, -80, -24, -96, -32)
 script = ExtResource("3_b6jsf")
 
 [node name="Kyrgyzstan" type="Polygon2D" parent="."]
@@ -1166,9 +1228,64 @@ position = Vector2(-1624, 672)
 polygon = PackedVector2Array(-40, -64, -40, 16, -24, 32, -8, 32, 8, 40, 32, 40, 56, 16, 48, -8, -24, -64)
 script = ExtResource("3_b6jsf")
 
+[node name="Buenos Aires" type="Polygon2D" parent="."]
+position = Vector2(-1688, 760)
+polygon = PackedVector2Array(-32, 88, -32, -48, -16, -48, 8, -64, 40, -56, 56, -24, 64, -16, 72, 0, 64, 16, 56, 32, 40, 40, 24, 40, 8, 48, -16, 40, -16, 48, -8, 56, -8, 80, -16, 88)
+script = ExtResource("3_b6jsf")
+
+[node name="Central Argentina" type="Polygon2D" parent="."]
+position = Vector2(-1728, 664)
+polygon = PackedVector2Array(64, -56, 56, -48, 48, -56, 24, -48, 40, -96, 0, -104, -16, -56, -24, -64, -48, -72, -72, -64, -72, -32, -56, -16, -56, 64, 8, 64, 8, 48, 24, 48, 48, 32, 80, 40, 64, 24)
+script = ExtResource("3_b6jsf")
+
+[node name="North Greater Argentina" type="Polygon2D" parent="."]
+position = Vector2(-1792, 520)
+polygon = PackedVector2Array(-88, -72, -72, -56, -88, -40, -96, -32, -96, 24, -104, 32, -104, 40, -72, 40, -56, 48, -40, 48, -8, 80, 16, 72, 40, 80, 48, 88, 64, 40, 104, 48, 88, 96, 112, 88, 120, 96, 128, 88, 144, 88, 136, 80, 136, 72, 152, 48, 184, 24, 184, 0, 176, -8, 168, -8, 168, 8, 144, 32, 112, 32, 96, 16, 104, 0, 104, -24, 56, -48, 40, -48, 8, -80, 8, -96, -16, -88, -24, -80, -40, -88, -64, -88, -80, -72)
+script = ExtResource("3_b6jsf")
+
+[node name="Nuevo Cuyo" type="Polygon2D" parent="."]
+position = Vector2(-1832, 704)
+polygon = PackedVector2Array(48, 48, 0, 48, 0, 72, -24, 72, -40, 72, -48, 56, -48, 32, -48, -24, -56, -48, -64, -72, -64, -96, -72, -112, -72, -128, -64, -144, -32, -144, -16, -136, 0, -136, 32, -104, 32, -72, 48, -56)
+script = ExtResource("3_b6jsf")
+
 [node name="Falklands" type="Polygon2D" parent="."]
 position = Vector2(-1560, 1080)
 polygon = PackedVector2Array(16, 8, 24, 0, 16, -8, -8, -16, -16, -8, -24, 8, -24, 16, -8, 0, -8, 8, 0, 16, 8, 8)
+script = ExtResource("3_b6jsf")
+
+[node name="Tierra del Feugo" type="Polygon2D" parent="."]
+position = Vector2(-1696, 1136)
+polygon = PackedVector2Array(-40, -24, -16, -48, 0, -24, 24, -8, 40, 0, 64, 0, 56, 16, 32, 24, 16, 16, -8, 16, -48, 0, -80, -16, -64, -24)
+script = ExtResource("3_b6jsf")
+
+[node name="Santa Cruz" type="Polygon2D" parent="."]
+position = Vector2(-1760, 1016)
+polygon = PackedVector2Array(16, -56, -56, -48, -56, -16, -48, 0, -56, 16, -40, 40, -24, 48, -16, 64, 8, 80, 32, 88, 48, 72, 32, 64, 32, 56, 24, 48, 24, 40, 32, 32, 48, 24, 40, 16, 40, 0, 56, -16, 56, -24, 48, -32, 32, -40)
+script = ExtResource("3_b6jsf")
+
+[node name="Chubut" type="Polygon2D" parent="."]
+position = Vector2(-1784, 912)
+polygon = PackedVector2Array(40, 48, 40, 40, 48, 24, 56, 24, 64, 16, 64, 8, 56, -8, 64, -16, 80, -24, 80, -32, 72, -40, 56, -32, -72, -32, -48, 8, -40, 32, -32, 56)
+script = ExtResource("3_b6jsf")
+
+[node name="North Chile" type="Polygon2D" parent="."]
+position = Vector2(-1912, 448)
+polygon = PackedVector2Array(-16, 112, -16, 64, -8, 48, -16, 40, -24, 16, -24, 8, -16, -8, -16, -32, -24, -48, -24, -64, -32, -88, -32, -96, -24, -112, -8, -112, 8, -80, 8, -48, 32, 0, 48, 16, 24, 40, 24, 96, 16, 104, 16, 112)
+script = ExtResource("3_b6jsf")
+
+[node name="Central Chile" type="Polygon2D" parent="."]
+position = Vector2(-1904, 736)
+polygon = PackedVector2Array(8, -176, -24, -176, -32, -152, -24, -136, -24, -104, -8, -64, -8, -16, -16, 24, -24, 32, 0, 72, 0, 112, 8, 128, 16, 168, 24, 168, 24, 136, 32, 128, 40, 112, 40, 56, 24, 24, 24, -56, 8, -104, 8, -128, 0, -144, 0, -160)
+script = ExtResource("3_b6jsf")
+
+[node name="South Chile" type="Polygon2D" parent="."]
+position = Vector2(-1832, 976)
+polygon = PackedVector2Array(-32, -128, -40, -112, -40, -80, -32, -48, -24, -32, -32, -40, -40, -56, -48, -56, -40, -40, -40, -16, -40, 8, -32, 0, -24, 16, -32, 32, -16, 64, 8, 96, 16, 112, 32, 112, 56, 144, 72, 136, 96, 136, 104, 128, 80, 120, 56, 104, 48, 88, 32, 80, 16, 56, 24, 40, 16, 24, 16, -8, 0, -56, -24, -96)
+script = ExtResource("3_b6jsf")
+
+[node name="Remaining Patagonica" type="Polygon2D" parent="."]
+position = Vector2(-1792, 816)
+polygon = PackedVector2Array(-80, -40, -72, -24, -72, 32, -64, 64, 64, 64, 56, 48, 40, 32, 56, 24, 72, 32, 72, -88, 8, -88, 8, -64, -40, -64, -40, -40)
 script = ExtResource("3_b6jsf")
 
 [node name="Caribbean" type="Polygon2D" parent="."]

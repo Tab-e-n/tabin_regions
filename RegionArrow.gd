@@ -7,6 +7,7 @@ class_name RegionArrow
 @export var from_color : Color
 @export var to_color : Color
 
+@export var darken : bool = false
 @export var to_name : String
 
 var timer : float = 2
@@ -38,8 +39,11 @@ func _ready():
 	add_point(from_position)
 	add_point(to_position)
 	gradient = Gradient.new()
-	gradient.set_color(0, from_color * Color(0.5, 0.5, 0.5))
-	gradient.set_color(1, to_color * Color(0.5, 0.5, 0.5))
+	var dark : Color = Color(0.6, 0.6, 0.6)
+	if darken:
+		dark = Color(0.25, 0.25, 0.25)
+	gradient.set_color(0, from_color * dark)
+	gradient.set_color(1, to_color * dark)
 	#gradient.add_point(0, from_color)
 	#gradient.add_point(1, to_color)
 	

@@ -121,4 +121,6 @@ func make_region_arrows():
 			arrow.from_color = region_control.align_color[alignment]
 			arrow.to_color = region_control.align_color[target_node.alignment]
 			arrow.to_name = target
+			if connections[target] > 0:
+				arrow.darken = true
 			region_control.add_child(arrow)
