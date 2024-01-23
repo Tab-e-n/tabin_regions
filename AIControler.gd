@@ -17,7 +17,7 @@ const PACKED_CONTROLERS : Array = [
 	preload("res://AITurtle.gd"), # CONTROLER_TURTLE
 	null, # CONTROLER_NEURAL
 	preload("res://AINormal.gd"), # CONTROLER_CHEATER
-	null # CONTROLER_DUMMY
+	preload("res://AIDummy.gd") # CONTROLER_DUMMY
 ] 
 
 var current_alignment : int

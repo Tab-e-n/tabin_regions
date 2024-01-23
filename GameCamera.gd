@@ -2,6 +2,10 @@ extends Camera2D
 class_name GameCamera
 
 
+const PLAY_ORDER_SPACING : int = 48
+const PREVENT_CAMERA_MOVEMENT_START : float = 1
+
+
 @onready var game_control : GameControl = get_parent()
 @onready var window_size : Vector2 = get_viewport_rect().size
 
@@ -12,6 +16,7 @@ var farthest_down : int = 0
 
 var win_timer : float = -1
 
+var cam_movement_stop : float = PREVENT_CAMERA_MOVEMENT_START
 
 func _ready():
 	game_control.game_camera = self
@@ -75,17 +80,24 @@ func _deffered_ready():
 	
 	get_node("AdvanceTurn").pressed.connect(game_control.region_control.change_current_action)
 	
-	$turn_order.polygon[2].x = 64 * (game_control.region_control.align_amount - 1)
-	$turn_order.polygon[3].x = 64 * (game_control.region_control.align_amount - 1)
+	$turn_order.polygon[2].x = PLAY_ORDER_SPACING * (game_control.region_control.align_amount - 1)
+	$turn_order.polygon[3].x = PLAY_ORDER_SPACING * (game_control.region_control.align_amount - 1)
 	
 	var play_order : Array = game_control.region_control.player_order.duplicate()
 	for i in range(play_order.size()):
-		var rep : Polygon2D = Polygon2D.new()
-		var polygon : PackedVector2Array = [Vector2(-24, -24),Vector2(-24, 24),Vector2(24, 24),Vector2(24, -24),Vector2(-24, -24)]
-		rep.set_polygon(polygon.duplicate())
-		rep.position.x = 32 + 64 * i
-		rep.color = game_control.region_control.align_color[play_order[i]]
-		$turn_order.add_child(rep)
+		var spr : Sprite2D = Sprite2D.new()
+		spr.texture = preload("res://turn_order_players.png")
+		spr.hframes = 6
+		spr.frame = game_control.region_control.player_controlers[play_order[i] - 1]
+		spr.position.x = PLAY_ORDER_SPACING / 2 + PLAY_ORDER_SPACING * i
+		spr.modulate = game_control.region_control.align_color[play_order[i]]
+		$turn_order.add_child(spr)
+#		var rep : Polygon2D = Polygon2D.new()
+#		var polygon : PackedVector2Array = [Vector2(-24, -24),Vector2(-24, 24),Vector2(24, 24),Vector2(24, -24),Vector2(-24, -24)]
+#		rep.set_polygon(polygon.duplicate())
+#		rep.position.x = 32 + 64 * i
+#		rep.color = game_control.region_control.align_color[play_order[i]]
+#		$turn_order.add_child(rep)
 
 
 func _physics_process(delta):
@@ -99,15 +111,18 @@ func _physics_process(delta):
 			get_tree().change_scene_to_file("res://stats.tscn")
 			return
 	
-	var mouse_position = get_viewport().get_mouse_position()
-	if (mouse_position.x > window_size.x - 64 or Input.is_action_pressed("right")) and position.x < farthest_right:
-		position.x += 8
-	if (mouse_position.x < 64 or Input.is_action_pressed("left")) and position.x > farthest_left:
-		position.x -= 8
-	if (mouse_position.y > window_size.y - 64 or Input.is_action_pressed("down")) and position.y < farthest_down:
-		position.y += 8
-	if (mouse_position.y < 64 or Input.is_action_pressed("up")) and position.y > farthest_up:
-		position.y -= 8
+	if cam_movement_stop > 0:
+		cam_movement_stop -= 1
+	else:
+		var mouse_position = get_viewport().get_mouse_position()
+		if (mouse_position.x > window_size.x - 64 or Input.is_action_pressed("right")) and position.x < farthest_right:
+			position.x += 8
+		if (mouse_position.x < 64 or Input.is_action_pressed("left")) and position.x > farthest_left:
+			position.x -= 8
+		if (mouse_position.y > window_size.y - 64 or Input.is_action_pressed("down")) and position.y < farthest_down:
+			position.y += 8
+		if (mouse_position.y < 64 or Input.is_action_pressed("up")) and position.y > farthest_up:
+			position.y -= 8
 	
 	$AdvanceTurn.modulate = game_control.region_control.color
 	$Power.self_modulate = game_control.region_control.color

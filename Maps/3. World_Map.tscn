@@ -500,7 +500,7 @@ func _ready():
 "
 
 [node name="RegionControl" type="Polygon2D"]
-color = Color(0.435294, 0.545098, 0.6, 1)
+color = Color(0.6, 0.6, 0.6, 1)
 polygon = PackedVector2Array(-3200, -1848, 3200, -1848, 3200, 1848, -3200, 1848)
 script = ExtResource("1_5aq8s")
 lore = "The Classic. Some smaller countries had their territories combined together.  A lot of borders are fucky. This is the dumbest project i ever took up."

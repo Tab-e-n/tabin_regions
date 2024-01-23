@@ -57,7 +57,7 @@ func _on_map_list_item_selected(index):
 	$def/map_data.text = ("Preset Turn Order" if current_map.use_preset_alignments else "Random Turn Order") + "\nLEADERS: " + String.num(current_map.align_amount - 1) + "\nPLAYERS: " + String.num($def/players.value)
 	
 	if current_map.max_user_amount >= 0:
-		$def/players.max_value = current_map.max_user_amount - 1
+		$def/players.max_value = current_map.max_user_amount
 	else:
 		$def/players.max_value = current_map.align_amount - 1
 	$def/players.value = current_map.user_amount

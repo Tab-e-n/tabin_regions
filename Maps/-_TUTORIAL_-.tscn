@@ -1,0 +1,411 @@
+[gd_scene load_steps=8 format=3 uid="uid://dneybbcxl420n"]
+
+[ext_resource type="Script" path="res://RegionControl.gd" id="1_fhy2h"]
+[ext_resource type="Script" path="res://Region.gd" id="2_bnykq"]
+
+[sub_resource type="GDScript" id="GDScript_ojoeb"]
+script/source = "extends Node
+
+@export var align_color : Array = [
+	Color(\"6e5769\"),
+	Color(\"1a905e\"), # green
+	Color(\"ab2433\"), # red
+]
+
+var connections : Array = [
+	[\"Mobi\", \"Cobi\"],
+	[\"Tobi\", \"Cobi\"],
+	[\"Tobi\", \"Gobi\"],
+	[\"Greenland\", \"Green Acres\"],
+	[\"Green Hill\", \"Green Acres\"],
+	[\"Green Hill\", \"Central Lake\"],
+	[\"Lunar Bay\", \"Central Lake\"],
+	[\"Lunar Bay\", \"Turtle Road\"],
+	[\"Turtle Road\", \"Central Lake\"],
+	[\"Turtle Road\", \"Redland\"],
+	[\"Turtle Road\", \"Red Plains\"],
+	[\"Red Plains\", \"Redland\"],
+	[\"Red Mountains\", \"Redland\"],
+	[\"Red Water\", \"Redland\"],
+	[\"Red Mountains\", \"Red Plains\"],
+	[\"Green Hill\", \"Lunar Bay\"],
+	[\"Central Lake\", \"Green Acres\"],
+	[\"Greg\", \"Green Acres\"],
+	[\"Greg\", \"Tshenkovitse\"],
+	[\"Greg\", \"Central Lake\"],
+	[\"Central Lake\", \"Tshenkovitse\"],
+	[\"Red Water\", \"Tshenkovitse\", 1],
+	[\"Red Water\", \"Forgotten Capital\"],
+	[\"Greenland\", \"Green Hill\"],
+]
+
+func _ready():
+	get_parent().connections = connections.duplicate()
+	get_parent().align_color = align_color.duplicate()
+	queue_free()
+"
+
+[sub_resource type="GDScript" id="GDScript_sn1dp"]
+script/source = "extends Polygon2D
+
+
+func _ready():
+	if get_parent().dummy:
+		visible = true
+	else:
+		queue_free()
+"
+
+[sub_resource type="GDScript" id="GDScript_4jbmf"]
+script/source = "extends Label
+
+
+func _ready():
+	visible = true
+
+
+func _physics_process(delta):
+	if get_parent().current_action != 0 and visible:
+		visible = false
+		get_parent().get_node(\"actions_mobilize\").visible = true
+"
+
+[sub_resource type="GDScript" id="GDScript_4l5p2"]
+script/source = "extends Label
+
+
+func _ready():
+	visible = false
+
+
+func _physics_process(delta):
+	if get_parent().current_action != 1 and visible:
+		visible = false
+		get_parent().get_node(\"actions_bonus\").visible = true
+"
+
+[sub_resource type="GDScript" id="GDScript_378v5"]
+script/source = "extends Label
+
+
+func _ready():
+	visible = false
+
+
+func _physics_process(delta):
+	if get_parent().current_action != 2 and visible:
+		visible = false
+		get_parent().get_node(\"actions_end\").visible = true
+"
+
+[node name="- TUTORIAL -" type="Polygon2D"]
+color = Color(0.47451, 0.47451, 0.47451, 1)
+polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 3528, -1024, 3528)
+script = ExtResource("1_fhy2h")
+tag = "Challenge"
+lore = "An interactive tutorial, where you learn the mechanics of the game."
+random_player_align_range = 1
+max_user_amount = 1
+use_custom_ai_setup = true
+ai_controler = 2
+custom_ai_setup = [2, 2]
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_ojoeb")
+
+[node name="spoilerwall" type="Polygon2D" parent="."]
+visible = false
+z_index = 1
+color = Color(0.298039, 0.298039, 0.298039, 1)
+polygon = PackedVector2Array(2048, -1536, 2048, 1536, -2048, 1536, -2048, -1536)
+script = SubResource("GDScript_sn1dp")
+
+[node name="tut" type="Label" parent="spoilerwall"]
+offset_left = -512.0
+offset_top = -40.0
+offset_right = 709.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 64
+text = "TUTORIAL FOR THE VIDEO GAME, WOW!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="intro" type="Label" parent="."]
+offset_left = -192.0
+offset_top = -232.0
+offset_right = 192.0
+offset_bottom = 28.0
+text = "Welcome to Regions!
+
+This map will try to explain the basics of
+how to play the game in an interactive manner.
+
+You win the game by capturing all regions that
+are controled by opposing forces.
+
+Before we can start crushing our enemies,
+we need to learn how to control the game.
+To move the camera. You can do this by
+hovering the mouse by the edge of the window.
+
+\\/ \\/ \\/ The tutorial continues below \\/ \\/ \\/"
+horizontal_alignment = 1
+
+[node name="region" type="Label" parent="."]
+offset_left = -256.0
+offset_top = 384.0
+offset_right = 256.0
+offset_bottom = 488.0
+text = "Here we can see a basic region.
+
+Regions are colorful polygons representing an area.
+They always contain a city (the circle) somewhere in their bounds. 
+"
+horizontal_alignment = 1
+
+[node name="region2" type="Label" parent="."]
+offset_left = -208.0
+offset_top = 688.0
+offset_right = 208.0
+offset_bottom = 896.0
+text = "The number in the city tells you
+the regions current power.
+
+If you hover your mouse over the city,
+you will see the regions name and
+then the regions maximum power in brackets.
+
+\\/ \\/ \\/ The tutorial continues below \\/ \\/ \\/
+"
+horizontal_alignment = 1
+
+[node name="Examplia" type="Polygon2D" parent="."]
+position = Vector2(0, 592)
+polygon = PackedVector2Array(-136, -16, -72, -80, 48, -88, 120, -40, 128, 32, 56, 72, -40, 72, -112, 48)
+script = ExtResource("2_bnykq")
+
+[node name="actions_first" type="Label" parent="."]
+offset_left = -352.0
+offset_top = 1152.0
+offset_right = 350.0
+offset_bottom = 1542.0
+text = "By now you probably noticed the bar on the bottom of the screen.
+This bar shows you two important things: How many actions you
+can currently do, and the current phase of the turn.
+
+Your turn starts with the phase \"first action\".
+In this phase, you can do either click on an enemy city to attempt to capture it
+and the surrounding region.
+
+You are eligible to capture a region if the combined power
+of your connected regions is bigger than the region's power.
+You can see a region's connections by hovering over the region's city.
+If the attack you want to do fails, a grey cross will show up.
+If this happens, your action will not be used up.
+
+Try capturing by clicking on the regions below!
+"
+horizontal_alignment = 1
+script = SubResource("GDScript_4jbmf")
+
+[node name="actions_mobilize" type="Label" parent="."]
+visible = false
+offset_left = -352.0
+offset_top = 1256.0
+offset_right = 350.0
+offset_bottom = 1542.0
+text = "Good job!
+
+When you run out of first actions, you enter the second
+phase of your turn \"mobilization\".
+
+Here you can click on your cities with excess power to turn that
+power into bonus actions. If a city has only 1 power, you cannot
+turn that power into bonus actions.
+
+Once you are done mobilizing, click the button in the bottom right
+corner to advance to the last phase."
+horizontal_alignment = 1
+script = SubResource("GDScript_4l5p2")
+
+[node name="actions_bonus" type="Label" parent="."]
+visible = false
+offset_left = -352.0
+offset_top = 1280.0
+offset_right = 350.0
+offset_bottom = 1540.0
+text = "Bonus actions act the same as first actions.
+
+During both first and bonus actions, you can
+click on an allied city to reinforce it. This will consume
+an action an increase the region's power by 1.
+You can only increase the power up to the region's max power.
+
+Once you use all of your bonus actions,
+your turn ends and your opponents will get
+to play out their turns."
+horizontal_alignment = 1
+script = SubResource("GDScript_378v5")
+
+[node name="actions_end" type="Label" parent="."]
+visible = false
+offset_left = -352.0
+offset_top = 1516.0
+offset_right = 350.0
+offset_bottom = 1542.0
+text = "\\/ \\/ \\/ The tutorial continues below \\/ \\/ \\/
+"
+horizontal_alignment = 1
+
+[node name="Mobi" type="Polygon2D" parent="."]
+position = Vector2(-312, 1584)
+polygon = PackedVector2Array(48, -24, -16, -32, -72, -24, -112, 0, -112, 64, -80, 104, -16, 128, 40, 104, 96, 104, 120, 64, 128, 24, 104, 8)
+script = ExtResource("2_bnykq")
+alignment = 1
+power = 3
+max_power = 3
+
+[node name="Cobi" type="Polygon2D" parent="."]
+position = Vector2(-72, 1664)
+polygon = PackedVector2Array(-127.49, 23.2991, -103.49, -8.70093, -95.4902, -48.7009, -39.4902, -48.7009, -7.49023, -64.7009, 40.5098, -32.7009, 80.5098, -32.7009, 96.5098, 15.2991, 72.5098, 47.2991, 80.5098, 71.2991, 40.5098, 79.2991, 8.50977, 55.2991, -39.4902, 71.2991, -71.4902, 31.2991)
+script = ExtResource("2_bnykq")
+alignment = 1
+max_power = 3
+
+[node name="Tobi" type="Polygon2D" parent="."]
+position = Vector2(112, 1672)
+polygon = PackedVector2Array(-95.9182, 37.5596, -87.9182, 61.5596, -7.91821, 29.5596, 48.0818, 45.5596, 120.082, 29.5596, 128.082, -18.4404, 96.0818, -66.4404, 40.0818, -42.4404, -23.9182, -66.4404, -87.9182, -42.4404, -71.9182, 5.55957)
+script = ExtResource("2_bnykq")
+power = 0
+max_power = 2
+
+[node name="Gobi" type="Polygon2D" parent="."]
+position = Vector2(346, 1658)
+polygon = PackedVector2Array(-129.742, -57.9722, -89.7419, -9.97217, -97.7419, 46.0278, -41.7419, 38.0278, 6.25806, 62.0278, 46.2581, 62.0278, 78.2581, 30.0278, 78.2581, -17.9722, 38.2581, -41.9722, -1.74194, -49.9722, -49.7419, -73.9722, -97.7419, -65.9722)
+script = ExtResource("2_bnykq")
+max_power = 2
+
+[node name="last" type="Label" parent="."]
+offset_left = -352.0
+offset_top = 2016.0
+offset_right = 350.0
+offset_bottom = 2144.0
+text = "As said before, you win the game by capturing all regions that
+are controled by opposing forces. This doesn't mean you
+have to capture EVERY region, just the ones that aren't neutral.
+
+After this text is a map that contains regions belonging to the red player.
+Once you captured their regions, you have completed the tutorial!
+"
+horizontal_alignment = 1
+
+[node name="last2" type="Label" parent="."]
+offset_left = -936.0
+offset_top = 2368.0
+offset_right = -234.0
+offset_bottom = 2498.0
+text = "This is your capital region. ---> 
+You can tell it is a capital because the city isn't a
+circle, but rather two overlaying squares. You get a
+first action for every capital you own, so capturing
+and defending capitals is important!"
+horizontal_alignment = 1
+
+[node name="last3" type="Label" parent="."]
+offset_left = -848.0
+offset_top = 3080.0
+offset_right = -146.0
+offset_bottom = 3210.0
+text = "Hover your mouse over Tshenkovitse or Red Water.
+Notice how their connection is darker than
+the other connections? This is because this connection
+reduces the power of the region when attacking, making
+an offencive push between these two region harder."
+horizontal_alignment = 1
+
+[node name="Greenland" type="Polygon2D" parent="."]
+position = Vector2(-256, 2416)
+polygon = PackedVector2Array(-88, 128, -64, 64, -80, 40, -112, 8, -104, -40, -88, -80, -32, -80, 40, -96, 104, -88, 120, -56, 80, -24, 40, 24, 16, 72, -8, 112, -56, 120)
+script = ExtResource("2_bnykq")
+alignment = 1
+is_capital = true
+
+[node name="Green Acres" type="Polygon2D" parent="."]
+position = Vector2(-328, 2600)
+polygon = PackedVector2Array(-16, -40, 24, -48, 64, -56, 128, 8, 112, 112, 56, 112, -40, 128, -96, 104, -56, 16)
+script = ExtResource("2_bnykq")
+power = 0
+
+[node name="Green Hill" type="Polygon2D" parent="."]
+position = Vector2(-152, 2560)
+offset = Vector2(-8, -72)
+polygon = PackedVector2Array(-48, -32, -88, 48, 0, 136, 152, 136, 200, 88, 216, 24, 192, -8, 144, -32, 88, -40, 64, -8, 64, 32, 80, 72, 112, 64, 96, 16, 120, 0, 152, 8, 168, 40, 144, 88, 72, 88, 40, 64, 32, 24, 16, -16)
+script = ExtResource("2_bnykq")
+power = 0
+
+[node name="Greg" type="Polygon2D" parent="."]
+position = Vector2(-328, 2784)
+polygon = PackedVector2Array(8, -48, -32, -40, -120, -64, -192, 48, -192, 88, -152, 24, -112, -24, -48, 0, -120, 32, -144, 104, -136, 136, -104, 56, -32, 24, 8, 40, 56, 24, 88, 64, 72, 144, 112, 72, 88, 16, 128, 16, 184, 112, 184, 48, 136, -16, 88, -40, 56, -32)
+script = ExtResource("2_bnykq")
+
+[node name="Tshenkovitse" type="Polygon2D" parent="."]
+position = Vector2(-224, 3032)
+polygon = PackedVector2Array(-208, -112, -104, -128, -24, -72, 96, -104, 152, -128, 232, -120, 240, -56, 192, -32, 112, -8, 64, 16, -24, 40, -88, 24, -160, -24, -208, -48, -272, -56, -320, -88, -344, -136, -328, -160, -296, -120, -240, -96)
+script = ExtResource("2_bnykq")
+max_power = 7
+
+[node name="Red Water" type="Polygon2D" parent="."]
+position = Vector2(64, 3040)
+polygon = PackedVector2Array(-272, 48, -280, 88, -256, 128, -232, 184, -200, 216, -160, 200, -168, 168, -176, 120, -120, 88, -72, 48, 0, 32, 80, 32, 160, 32, 224, 8, 240, -16, 224, -64, 200, -72, 112, -48, 40, -48, -16, -48, -64, -32, -112, -16, -160, 8, -208, 32)
+script = ExtResource("2_bnykq")
+max_power = 7
+
+[node name="Forgotten Capital" type="Polygon2D" parent="."]
+position = Vector2(-8, 3192)
+polygon = PackedVector2Array(-40, -48, -72, 0, -56, 56, 24, 96, 104, 80, 120, -8, 80, -72, 8, -80)
+script = ExtResource("2_bnykq")
+power = 2
+is_capital = true
+
+[node name="Central Lake" type="Polygon2D" parent="."]
+position = Vector2(-8, 2752)
+offset = Vector2(0, 440)
+polygon = PackedVector2Array(-160, -544, -112, -504, -120, -456, -96, -384, -8, -336, 56, -360, 112, -384, 136, -408, 136, -448, 112, -472, 40, -504, -8, -512, -64, -512, -112, -504, -160, -544, -136, -552, 0, -552, 88, -552, 128, -536, 160, -488, 176, -456, 184, -408, 168, -360, 96, -312, 72, -304, 24, -296, -32, -304, -88, -304, -112, -320, -120, -352, -136, -392, -160, -424, -192, -448, -192, -480, -192, -512, -176, -560)
+script = ExtResource("2_bnykq")
+max_power = 6
+
+[node name="Lunar Bay" type="Polygon2D" parent="."]
+position = Vector2(128, 2576)
+polygon = PackedVector2Array(-104, 48, -40, 48, 8, 72, 48, 128, 64, 176, 104, 88, 80, 8, 24, -16, -32, -16, -72, 8)
+script = ExtResource("2_bnykq")
+
+[node name="Turtle Road" type="Polygon2D" parent="."]
+position = Vector2(272, 2744)
+polygon = PackedVector2Array(-96, 88, -64, 16, -24, -64, 16, -80, 72, -88, 152, -88, 192, -56, 248, -32, 288, -24, 304, -8, 280, 8, 208, 0, 160, -32, 112, -48, 72, -24, 40, 24, 8, 72, -24, 96, -64, 112)
+script = ExtResource("2_bnykq")
+alignment = 2
+
+[node name="Red Plains" type="Polygon2D" parent="."]
+position = Vector2(376, 2800)
+polygon = PackedVector2Array(8, -88, -24, -64, -88, 32, 0, 64, 80, 88, 136, 72, 176, 48, 192, 0, 184, -32, 96, -40, 48, -72)
+script = ExtResource("2_bnykq")
+power = 0
+
+[node name="Red Mountains" type="Polygon2D" parent="."]
+position = Vector2(552, 2936)
+polygon = PackedVector2Array(16, -80, 56, 0, 136, 64, 104, 136, 80, 184, 8, 192, -40, 168, -32, 136, -24, 96, -40, 72, -88, 48, -128, 72, -136, 40, -128, -8, -144, -48, -96, -32, -40, -48)
+script = ExtResource("2_bnykq")
+
+[node name="Redland" type="Polygon2D" parent="."]
+position = Vector2(376, 2944)
+offset = Vector2(40, -24)
+polygon = PackedVector2Array(-152, -64, -104, 0, -120, 48, -72, 136, 8, 200, 40, 176, 0, 104, -16, 64, -8, 8, -24, -40, -136, -80)
+script = ExtResource("2_bnykq")
+alignment = 2
+is_capital = true
+
+[node name="Hills" type="Line2D" parent="."]
+position = Vector2(64, 3040)
+points = PackedVector2Array(-304, 40, -256, 32, -224, 8, -176, 0, -136, -24, -104, -40, -72, -40, -40, -48, -16, -56)
+width = 20.0
+default_color = Color(0.247059, 0.247059, 0.247059, 1)

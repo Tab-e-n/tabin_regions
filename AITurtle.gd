@@ -63,14 +63,17 @@ func think_normal(is_bonus : bool = false):
 			controler.selected_capital = eligable_regions[0].name
 			var highest_benefit = calculate_benefit_default(eligable_regions.pop_front(), is_bonus)
 			rng.randomize()
+			var results : Array = []
 			for region in eligable_regions:
 				var benefit = calculate_benefit_default(region, is_bonus)
 				if benefit > highest_benefit:
-					controler.selected_capital = region.name
+					results = [region.name]
 					highest_benefit = benefit
-				if benefit == highest_benefit and rng.randi_range(0, 1):
-					controler.selected_capital = region.name
+				if benefit == highest_benefit:
+					results.append(region.name)
 					highest_benefit = benefit
+			if results:
+				controler.selected_capital = results[rng.randi_range(0, results.size() - 1)]
 		else:
 			controler.CALL_change_current_action = true
 

@@ -57,9 +57,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="turn_order" type="Polygon2D" parent="GameCamera"]
-position = Vector2(-576, -288)
+position = Vector2(-568, -280)
 color = Color(0.247059, 0.247059, 0.247059, 1)
-polygon = PackedVector2Array(0, -32, 0, 32, 64, 32, 64, -32)
+polygon = PackedVector2Array(0, -40, 0, 48, 64, 48, 64, -40)
 
 [node name="win" type="Label" parent="GameCamera"]
 visible = false
