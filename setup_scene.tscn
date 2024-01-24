@@ -64,18 +64,29 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_left = 512.0
 offset_top = 80.0
-offset_right = 1120.0
-offset_bottom = 192.0
+offset_right = 704.0
+offset_bottom = 216.0
+theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 24
-horizontal_alignment = 1
+horizontal_alignment = 2
 
 [node name="players" type="HSlider" parent="def"]
 layout_mode = 0
-offset_left = 512.0
-offset_top = 192.0
-offset_right = 1120.0
-offset_bottom = 216.0
+offset_left = 712.0
+offset_top = 152.0
+offset_right = 1112.0
+offset_bottom = 184.0
 max_value = 0.0
+
+[node name="aliances" type="HSlider" parent="def"]
+layout_mode = 0
+offset_left = 712.0
+offset_top = 184.0
+offset_right = 1112.0
+offset_bottom = 216.0
+min_value = 1.0
+max_value = 1.0
+value = 1.0
 
 [node name="diff" type="Control" parent="."]
 visible = false
@@ -155,6 +166,7 @@ texture_normal = ExtResource("5_x6iy8")
 [connection signal="item_activated" from="map_list" to="." method="_on_map_list_item_activated"]
 [connection signal="item_selected" from="map_list" to="." method="_on_map_list_item_selected"]
 [connection signal="value_changed" from="def/players" to="." method="_on_players_value_changed"]
+[connection signal="value_changed" from="def/aliances" to="." method="_on_players_value_changed"]
 [connection signal="pressed" from="diff/ai_turtle" to="." method="_on_ai_turtle_pressed"]
 [connection signal="pressed" from="diff/ai_default" to="." method="_on_ai_default_pressed"]
 [connection signal="pressed" from="diff/ai_neuron" to="." method="_on_ai_default_pressed"]

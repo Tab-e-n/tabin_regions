@@ -503,6 +503,7 @@ func _ready():
 color = Color(0.6, 0.6, 0.6, 1)
 polygon = PackedVector2Array(-3200, -1848, 3200, -1848, 3200, 1848, -3200, 1848)
 script = ExtResource("1_5aq8s")
+complexity = "Medium"
 lore = "The Classic. Some smaller countries had their territories combined together.  A lot of borders are fucky. This is the dumbest project i ever took up."
 align_amount = 16
 city_size = 0.85

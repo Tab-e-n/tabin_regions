@@ -92,12 +92,15 @@ func _deffered_ready():
 		spr.position.x = PLAY_ORDER_SPACING / 2 + PLAY_ORDER_SPACING * i
 		spr.modulate = game_control.region_control.align_color[play_order[i]]
 		$turn_order.add_child(spr)
-#		var rep : Polygon2D = Polygon2D.new()
-#		var polygon : PackedVector2Array = [Vector2(-24, -24),Vector2(-24, 24),Vector2(24, 24),Vector2(24, -24),Vector2(-24, -24)]
-#		rep.set_polygon(polygon.duplicate())
-#		rep.position.x = 32 + 64 * i
-#		rep.color = game_control.region_control.align_color[play_order[i]]
-#		$turn_order.add_child(rep)
+		if game_control.region_control.aliances_active:
+			var label : Label = Label.new()
+			label.size = Vector2(PLAY_ORDER_SPACING, 48)
+			label.clip_text = true
+			label.text = String.num_int64(game_control.region_control.alignment_aliances[play_order[i]])
+			label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			label.position.x = PLAY_ORDER_SPACING * i
+			$turn_order.add_child(label)
 
 
 func _physics_process(delta):
@@ -124,8 +127,8 @@ func _physics_process(delta):
 		if (mouse_position.y < 64 or Input.is_action_pressed("up")) and position.y > farthest_up:
 			position.y -= 8
 	
-	$AdvanceTurn.modulate = game_control.region_control.color
-	$Power.self_modulate = game_control.region_control.color
+	$AdvanceTurn.modulate = game_control.region_control.align_color[game_control.region_control.current_player]
+	$Power.self_modulate = game_control.region_control.align_color[game_control.region_control.current_player]
 	$AdvanceTurn.modulate.a = 1
 	$Power.self_modulate.a = 1
 	if $Power.self_modulate.v > 0.9:
@@ -134,6 +137,7 @@ func _physics_process(delta):
 		$Power/text.self_modulate = Color(1, 1, 1)
 	can_translate_messages()
 	if game_control.region_control.current_action == 0:
+		$Action.text = "FIRST ACTION"
 		$Action.text = "FIRST ACTION"
 		$Power/text.text = String.num(game_control.region_control.action_amount)
 	if game_control.region_control.current_action == 1:

@@ -32,11 +32,13 @@ func _ready():
 	region_name.z_index = 1
 	add_child(region_name)
 
+
 func _process(_delta):
 	text.text = String.num(region.power)
 	if !region.region_control.dummy:
 		region_name.visible = is_hovered()
 		visible = not region.region_control.game_control.cities_visible
+
 
 func make_particle(mobilize : bool):
 	var part : Sprite2D = Sprite2D.new()
@@ -46,6 +48,7 @@ func make_particle(mobilize : bool):
 	part.modulate = self_modulate
 	part.mobilize = mobilize
 	add_child(part) 
+
 
 func color_self(new_color : Color):
 	self_modulate = new_color

@@ -121,9 +121,10 @@ func _ready():
 "
 
 [node name="Node2D" type="Polygon2D"]
-color = Color(0.415686, 0.470588, 0.505882, 1)
+color = Color(0.509804, 0.509804, 0.509804, 1)
 polygon = PackedVector2Array(-832, -576, 832, -576, 832, 576, -832, 576)
 script = ExtResource("1_ogcds")
+complexity = "Simple"
 lore = "This map isn't historicly or geographycally accurate."
 align_amount = 9
 metadata/_edit_horizontal_guides_ = [-496.0, 496.0]

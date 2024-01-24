@@ -34,7 +34,7 @@ var connections : Array = [
 	[\"Greg\", \"Tshenkovitse\"],
 	[\"Greg\", \"Central Lake\"],
 	[\"Central Lake\", \"Tshenkovitse\"],
-	[\"Red Water\", \"Tshenkovitse\", 1],
+	[\"Red Water\", \"Tshenkovitse\"],
 	[\"Red Water\", \"Forgotten Capital\"],
 	[\"Greenland\", \"Green Hill\"],
 ]
@@ -103,12 +103,14 @@ color = Color(0.47451, 0.47451, 0.47451, 1)
 polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 3528, -1024, 3528)
 script = ExtResource("1_fhy2h")
 tag = "Challenge"
+complexity = "Beginner"
 lore = "An interactive tutorial, where you learn the mechanics of the game."
-random_player_align_range = 1
+allow_map_spec_change = false
 max_user_amount = 1
+use_preset_alignments = true
+preset_user_alignments = [1, 2]
 use_custom_ai_setup = true
 ai_controler = 2
-custom_ai_setup = [2, 2]
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_ojoeb")
@@ -311,18 +313,6 @@ first action for every capital you own, so capturing
 and defending capitals is important!"
 horizontal_alignment = 1
 
-[node name="last3" type="Label" parent="."]
-offset_left = -848.0
-offset_top = 3080.0
-offset_right = -146.0
-offset_bottom = 3210.0
-text = "Hover your mouse over Tshenkovitse or Red Water.
-Notice how their connection is darker than
-the other connections? This is because this connection
-reduces the power of the region when attacking, making
-an offencive push between these two region harder."
-horizontal_alignment = 1
-
 [node name="Greenland" type="Polygon2D" parent="."]
 position = Vector2(-256, 2416)
 polygon = PackedVector2Array(-88, 128, -64, 64, -80, 40, -112, 8, -104, -40, -88, -80, -32, -80, 40, -96, 104, -88, 120, -56, 80, -24, 40, 24, 16, 72, -8, 112, -56, 120)
@@ -403,9 +393,3 @@ polygon = PackedVector2Array(-152, -64, -104, 0, -120, 48, -72, 136, 8, 200, 40,
 script = ExtResource("2_bnykq")
 alignment = 2
 is_capital = true
-
-[node name="Hills" type="Line2D" parent="."]
-position = Vector2(64, 3040)
-points = PackedVector2Array(-304, 40, -256, 32, -224, 8, -176, 0, -136, -24, -104, -40, -72, -40, -40, -48, -16, -56)
-width = 20.0
-default_color = Color(0.247059, 0.247059, 0.247059, 1)

@@ -70,9 +70,10 @@ func _ready():
 "
 
 [node name="RegionControl" type="Polygon2D"]
-color = Color(0.415686, 0.470588, 0.505882, 1)
+color = Color(0.509804, 0.509804, 0.509804, 1)
 polygon = PackedVector2Array(-384, -384, 384, -384, 384, 384, -384, 384)
 script = ExtResource("1_0s651")
+complexity = "Simple"
 lore = "This game started as a modification of a board game with this map. Only the colored regions can be attacked."
 align_amount = 6
 

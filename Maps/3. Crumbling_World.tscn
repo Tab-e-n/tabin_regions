@@ -12,6 +12,8 @@ var connections : Array = [
 	[\"Spicc\", \"Kansas\"],
 	[\"Spicc\", \"Flr\"],
 	[\"Spicc\", \"Dongo Water\"],
+	[\"Spicc\", \"Smidgen\"],
+	[\"Dong Isle\", \"Dongo Water\"],
 	[\"Flr\", \"Kansas\"],
 	[\"Krona\", \"Kansas\"],
 	[\"Krona\", \"Cranberries\"],
@@ -38,6 +40,9 @@ var connections : Array = [
 	[\"Crang\", \"Bongo Water\"],
 	[\"Bong Isle\", \"Bongo Water\"],
 	[\"Bong Isle\", \"Dongo Water\"],
+	[\"Smidgen\", \"Dongo Water\"],
+	[\"Dong Isle\", \"Bongo Water\"],
+	[\"Bong Isle\", \"Dong Isle\"],
 	[\"Land of Light\", \"Crang\"],
 	[\"Land of Light\", \"Spikes by the Ocean\"],
 	[\"Krona\", \"Last Hold\"],
@@ -54,6 +59,8 @@ var connections : Array = [
 	[\"Ero Plateau\", \"Cremicon\"],
 	[\"Jebroni\", \"Cremicon\"],
 	[\"Jebroni\", \"Grugrugr\"],
+	[\"Jebroni\", \"Jebro Egg\"],
+	[\"Jebro Egg\", \"Grugrugr\"],
 	[\"Jebroni\", \"Lakebeach\"],
 	[\"South Dambodill\", \"Kansas\"],
 	[\"South Dambodill\", \"Dambodill Highlands\"],
@@ -70,7 +77,10 @@ var connections : Array = [
 	[\"Flatvla\", \"Lakebeach\"],
 	[\"Dinsta Lower\", \"Bleche Bridge\"],
 	[\"Dinsta Lower\", \"Dinsta Upper\"],
+	[\"Dinsta Lower\", \"Beachlake\"],
+	[\"Beachlake\", \"Dinsta Upper\"],
 	[\"Grugrugr\", \"Dinsta Upper\"],
+	[\"Grugrugr\", \"Beachlake\"],
 	[\"Bleche\", \"Bleche Bridge\"],
 	[\"Bleche\", \"Grunchy Coast\"],
 	[\"Grunchy Coast\", \"Bleche Bridge\"],
@@ -89,13 +99,18 @@ var connections : Array = [
 	[\"Bluarc\", \"Ghandala\"],
 	[\"Bluarc\", \"Little Riddle\"],
 	[\"Bluarc\", \"Outer Lands\"],
+	[\"Bluarc\", \"Hop Port\"],
+	[\"Hop Port\", \"Outer Lands\"],
 	[\"Gnawfus\", \"Raltan Highs\"],
 	[\"Gnawfus\", \"Bungeron\"],
 	[\"Bungeron\", \"Raltan Highs\"],
 	[\"Bungeron\", \"Campytopia\"],
 	[\"Bungeron\", \"Hyperspace Portal\"],
-	[\"Hyperspace\", \"Hyperspace Portal\"],
-	[\"Hyperspace\", \"Outer Lands\"],
+	[\"Hyperspace 1\", \"Hyperspace Portal\"],
+	[\"Hyperspace 1\", \"Outer Lands\"],
+	[\"Hyperspace 2\", \"Hyperspace Portal\"],
+	[\"Hyperspace 2\", \"Outer Lands\"],
+	[\"Hyperspace 2\", \"Hyperspace 1\"],
 	[\"Campytopia\", \"Raltan Highs\"],
 	[\"Raltan Lows\", \"Last Hold\"],
 	[\"Great Yu\", \"Last Hold\"],
@@ -126,14 +141,16 @@ func _process(delta):
 	if region_control.current_player == 4:
 		var align_left = 0
 		for i in region_control.region_amount.size():
-			if region_control.region_amount[i] == 0:
+			if region_control.region_amount[i] > 0:
 				align_left += 1
 		if align_left <= 3 and region_control.get_node(\"Corruption4\").alignment == 0:
-			region_control.get_node(\"Corruption4\").incoming_attack(4, 2)
-			region_control.get_node(\"Corruption5\").incoming_attack(4, 2)
-		if align_left == 2 and region_control.get_node(\"Corruption6\").alignment == 0:
-			region_control.get_node(\"Corruption6\").incoming_attack(4, 2)
-			region_control.get_node(\"Corruption7\").incoming_attack(4, 2)
+			print(region_control.region_amount)
+			region_control.get_node(\"Corruption4\").change_alignment(4)
+			region_control.get_node(\"Corruption5\").change_alignment(4)
+		if align_left <= 2 and region_control.get_node(\"Corruption6\").alignment == 0:
+			print(region_control.region_amount)
+			region_control.get_node(\"Corruption6\").change_alignment(4)
+			region_control.get_node(\"Corruption7\").change_alignment(4)
 		if region_control.region_amount[3] <= region_control.capital_amount[3]:
 			region_control.game_control.ai_control.CALL_forfeit = true
 	
@@ -143,6 +160,7 @@ func _process(delta):
 color = Color(0.47451, 0.47451, 0.47451, 1)
 polygon = PackedVector2Array(-592, -688, 256, -800, 864, -440, 944, 88, 360, 800, -152, 928, -560, 600, -784, 8)
 script = ExtResource("1_vngco")
+complexity = "Medium"
 lore = "Can you be the last faction standing in a slowly corrupting world? You could obviously team up and destroy the corruption together, but who would do that?"
 align_amount = 5
 align_color = [Color(0.431373, 0.341176, 0.411765, 1), Color(0.929412, 0.521569, 0.552941, 1), Color(0.341176, 0.956863, 0.478431, 1), Color(0.466667, 0.580392, 0.94902, 1), Color(0.258824, 0, 0.160784, 1)]
@@ -150,6 +168,9 @@ random_player_align_range = 3
 max_user_amount = 3
 use_custom_ai_setup = true
 custom_ai_setup = [1, 1, 1, 2]
+aliances_active = true
+automatic_aliances = true
+autoaliance_divisions_amount = 4
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_1kfg4")
@@ -317,9 +338,19 @@ position = Vector2(-72, 704)
 polygon = PackedVector2Array(-88, 24, -80, -16, -40, -56, 8, -32, 96, -24, 168, -8, 144, 40, 80, 40, 24, 32, -40, 56, -80, 56)
 script = ExtResource("2_arjpy")
 
+[node name="Dong Isle" type="Polygon2D" parent="."]
+position = Vector2(16, 608)
+polygon = PackedVector2Array(-56, 32, -80, 0, -88, -24, -56, -40, -16, -40, 40, -32, 64, -24, 72, 8, 72, 32, 56, 72, 8, 64, -8, 32)
+script = ExtResource("2_arjpy")
+
 [node name="Dongo Water" type="Polygon2D" parent="."]
 position = Vector2(136, 584)
 polygon = PackedVector2Array(-16, -80, 16, -56, 0, -32, 8, 0, 24, 8, 56, 8, 56, 40, 40, 72, 24, 80, 0, 80, -16, 64, -32, 96, -56, 96, -40, 64, -24, 48, -8, 48, 8, 56, 24, 48, 24, 32, 8, 16, -16, 8, -32, 8, -48, 0, -48, -16, -40, -40, -56, -64)
+script = ExtResource("2_arjpy")
+
+[node name="Smidgen" type="Polygon2D" parent="."]
+position = Vector2(264, 512)
+polygon = PackedVector2Array(-32, -8, -8, 16, -8, 40, -24, 64, -48, 64, -64, 80, -64, 112, -32, 136, -16, 128, 8, 112, 0, 80, 24, 72, 40, 64, 64, 56, 72, 48, 72, 16, 56, 0, 40, -8, 16, -16, -16, -64, -16, -16)
 script = ExtResource("2_arjpy")
 power = 0
 
@@ -377,20 +408,31 @@ position = Vector2(136, -528)
 polygon = PackedVector2Array(0, 56, 24, 56, 56, 64, 96, 32, 96, -40, 64, -80, 48, -64, 64, -24, 64, 16, 40, 32, 16, 32, -8, 32, -32, 0, -16, -40, 8, -64, -16, -96, -56, -64, -64, -16, -56, 24, -24, 64)
 script = ExtResource("2_arjpy")
 
-[node name="Hyperspace" type="Polygon2D" parent="."]
-position = Vector2(-112, -584)
+[node name="Hyperspace 1" type="Polygon2D" parent="."]
+position = Vector2(-120, -624)
 polygon = PackedVector2Array(120, 8, 104, -32, 80, -40, 48, -8, 16, 16, -8, 8, -32, -8, -48, -8, -88, 0, -120, 24, -136, 0, -104, -24, -80, -40, -64, -48, -16, -48, 0, -32, 24, -40, 48, -56, 80, -64, 104, -64, 128, -40, 136, -8, 184, 0, 176, 24, 152, 16)
 script = ExtResource("2_arjpy")
 
+[node name="Hyperspace 2" type="Polygon2D" parent="."]
+position = Vector2(-120, -576)
+offset = Vector2(0, -48)
+polygon = PackedVector2Array(16, 40, 56, 24, 88, 0, 120, 24, 160, 32, 176, 32, 176, 48, 120, 48, 96, 32, 72, 32, 56, 56, 32, 72, 0, 88, -16, 96, -40, 96, -56, 72, -72, 56, -96, 56, -112, 32, -96, 24, -80, 24, -64, 32, -48, 40, -32, 56, -8, 64, 8, 56)
+script = ExtResource("2_arjpy")
+
 [node name="Outer Lands" type="Polygon2D" parent="."]
-position = Vector2(-280, -544)
-polygon = PackedVector2Array(-32, 0, -24, -32, 24, -40, 64, 24, 24, 8, 40, 32, -24, 16, -40, 56, -72, 64, -56, 88, -32, 112, -64, 104, -8, 144, -80, 112, -112, 112, -120, 96, -112, 72, -88, 56, -96, 16, -64, 0, -96, -64, -40, 0)
+position = Vector2(-288, -560)
+polygon = PackedVector2Array(-32, 0, -24, -32, 24, -40, 64, 24, 24, 8, 40, 32, -24, 16, -40, 56, -72, 64, -56, 88, -32, 112, -64, 104, -8, 144, -80, 112, -112, 104, -120, 112, -136, 120, -152, 120, -152, 104, -136, 96, -120, 96, -112, 72, -88, 56, -96, 16, -64, 0, -96, -64, -40, 0)
+script = ExtResource("2_arjpy")
+
+[node name="Hop Port" type="Polygon2D" parent="."]
+position = Vector2(-344, -376)
+polygon = PackedVector2Array(-24, -16, 8, 40, 32, 56, 48, 32, 24, 8, 40, -32, 0, -56, -24, -64, -32, -24)
 script = ExtResource("2_arjpy")
 power = 0
 
 [node name="Campytopia" type="Polygon2D" parent="."]
 position = Vector2(112, -336)
-polygon = PackedVector2Array(-48, -16, -32, 32, -24, 32, 24, 40, 56, 24, 80, -8, 64, -40, 16, -24, -32, -24)
+polygon = PackedVector2Array(-32, 8, 0, 16, 16, 8, 0, -16)
 script = ExtResource("2_arjpy")
 
 [node name="Ero Plateau" type="Polygon2D" parent="."]
@@ -464,9 +506,19 @@ position = Vector2(640, -120)
 polygon = PackedVector2Array(-32, 16, -32, 40, 8, 40, 64, 24, 80, -16, 64, -48, 24, -48, 8, -80, 24, -112, -8, -144, -32, -128, -40, -96, -48, -64, -64, -48, -104, -48, -96, -32, -56, -40, -24, -24)
 script = ExtResource("2_arjpy")
 
+[node name="Beachlake" type="Polygon2D" parent="."]
+position = Vector2(512, -152)
+polygon = PackedVector2Array(-64, -32, -56, -8, -56, 24, -72, 48, -88, 72, -104, 88, -88, 80, -72, 64, -56, 56, 0, 56, 24, 40, 24, 0, 16, -16, -24, -32)
+script = ExtResource("2_arjpy")
+
 [node name="Grugrugr" type="Polygon2D" parent="."]
 position = Vector2(528, -232)
 polygon = PackedVector2Array(-72, -24, -72, 8, -88, 40, -40, 40, 0, 56, 40, 56, 56, 40, 72, -24, 96, -40, 72, -72, 32, -48)
+script = ExtResource("2_arjpy")
+
+[node name="Jebro Egg" type="Polygon2D" parent="."]
+position = Vector2(648, -320)
+polygon = PackedVector2Array(-32, -32, -48, 8, -24, 32, 24, 16, 64, -32, 56, -64, 24, -64, -8, -56)
 script = ExtResource("2_arjpy")
 power = 0
 

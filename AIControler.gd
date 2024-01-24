@@ -117,22 +117,35 @@ func think():
 				controlers[current_controler].call("think_bonus")
 
 
-func find_owned_regions():
-	owned_regions[current_alignment] = []
+func find_owned_regions(alignment : int = current_alignment):
+	owned_regions[alignment] = []
 	for region in region_control.get_children():
 		if not region is Region:
 			continue
-		if region.alignment != current_alignment:
+		if region.alignment != alignment:
 			continue
-		owned_regions[current_alignment].append(region)
+		owned_regions[alignment].append(region)
 
 
 func used_region_previously(region_name) -> bool:
 	return previous_moves.has(region_name)
 
 
-func get_owned_regions() -> Array:
-	return owned_regions[current_alignment]
+func get_owned_regions(alignment : int = current_alignment) -> Array:
+	if owned_regions.has(alignment):
+		return owned_regions[alignment].duplicate()
+	else:
+		return []
+
+
+func get_allied_regions(alignment : int = current_alignment) -> Array:
+	var allied_regs : Array = []
+	for i in range(region_control.align_amount - 1):
+		if alignment_friendly(alignment, i + 1) and alignment != i + 1:
+			find_owned_regions(i + 1)
+			allied_regs.append_array(get_owned_regions(i + 1))
+#	print(allied_regs)
+	return allied_regs
 
 
 func get_region(connection_name : String) -> Region:
@@ -151,12 +164,16 @@ func get_bonus_action_amount() -> int:
 	return region_control.bonus_action_amount
 
 
-func get_alingment_amout() -> int:
+func get_alingment_amount() -> int:
 	return region_control.align_amount
 
 
 func get_capitol_amount() -> int:
 	return region_control.capital_amount[current_alignment - 1]
+
+
+func alignment_friendly(your_align, opposing_align) -> bool:
+	return region_control.alignment_friendly(your_align, opposing_align)
 
 
 func timer_ended():

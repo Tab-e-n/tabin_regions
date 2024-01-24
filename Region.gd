@@ -26,19 +26,35 @@ func _ready():
 func _process(_delta):
 	pass
 
+
+func change_alignment(align : int):
+	if alignment > 0:
+		region_control.region_amount[alignment - 1] -= 1
+		if is_capital:
+			region_control.capital_amount[alignment - 1] -= 1
+	alignment = align
+	color_self()
+	if alignment > 0:
+		region_control.region_amount[alignment - 1] += 1
+		if is_capital:
+			region_control.capital_amount[alignment - 1] += 1
+
+
 func color_self():
 	color = region_control.align_color[alignment]
 	city.color_self(region_control.align_color[alignment])
 
+
 func _on_capital_pressed():
-	if region_control.is_user_controled:
+	if region_control.is_user_controled and !region_control.dummy:
 		action_decided()
+
 
 func action_decided():
 	city.call_deferred("make_particle", region_control.current_action == region_control.ACTION_MOBILIZE)
 	if region_control.current_action != region_control.ACTION_MOBILIZE:
-		if region_control.current_player == alignment:
-			if reinforce():
+		if region_control.alignment_friendly(region_control.current_player, alignment):
+			if reinforce(region_control.current_player):
 				region_control.action_done()
 				return
 		elif can_attack(region_control.current_player):
@@ -52,15 +68,14 @@ func action_decided():
 				region_control.action_done()
 				return
 		region_control.cross(position)
-	
 
-func can_attack(attack_align : int):
-	var can : bool = false
+
+func can_attack(attack_align : int) -> bool:
 	for region in connections.keys():
 		if region_control.get_node(region).alignment == attack_align:
-			can = true
-			break
-	return can
+			return true
+	return false
+
 
 func incoming_attack(attack_align : int, attack_power : int = 0, test_only : bool = false):
 	for region in connections.keys():
@@ -72,20 +87,14 @@ func incoming_attack(attack_align : int, attack_power : int = 0, test_only : boo
 		GameStats.stats[attack_align]["enemy units removed"] += power
 		GameStats.stats[alignment]["units lost"] += power
 		power = 1
-		if alignment != 0:
-			region_control.region_amount[alignment - 1] -= 1
-			if is_capital:
-				region_control.capital_amount[alignment - 1] -= 1
-		alignment = attack_align
+		change_alignment(attack_align)
 		GameStats.stats[alignment]["regions captured"] += 1
-		region_control.region_amount[alignment - 1] += 1
 		if is_capital:
 			GameStats.stats[alignment]["capital regions captured"] += 1
-			region_control.capital_amount[alignment - 1] += 1
-		color_self()
 		return true
 	else:
 		return false
+
 
 func attack_power_difference(attack_align : int):
 	var attack_power = 0
@@ -94,22 +103,23 @@ func attack_power_difference(attack_align : int):
 			attack_power += max(region_control.get_node(region).power - connections[region], 0)
 	return power - attack_power
 
-func reinforce(addon_power : int = 1):
-	power += addon_power
-	if power > max_power:
-		power = max_power
+
+func reinforce(reinforce_align : int = alignment, addon_power : int = 1):
+	if power == max_power:
 		return false
-	GameStats.stats[alignment]["regions reinforced"] += 1
+	power += addon_power
+	GameStats.stats[reinforce_align]["regions reinforced"] += 1
 	return true
 
-func mobilize():
-	if power > 1:
-		GameStats.stats[alignment]["units mobilized"] += 1
-		power -= 1
-		region_control.bonus_action_amount += 1
-		return true
-	return false
-	
+
+func mobilize(mobilize_align : int = alignment):
+	if power <= 1:
+		return false
+	GameStats.stats[mobilize_align]["units mobilized"] += 1
+	power -= 1
+	region_control.bonus_action_amount += 1
+	return true
+
 
 func make_region_arrows():
 	for target in connections.keys():

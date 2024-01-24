@@ -1,0 +1,351 @@
+[gd_scene load_steps=5 format=3 uid="uid://02bnffpw4xmq"]
+
+[ext_resource type="Script" path="res://RegionControl.gd" id="1_hywy4"]
+[ext_resource type="Script" path="res://Region.gd" id="2_lql3s"]
+
+[sub_resource type="GDScript" id="GDScript_ojoeb"]
+script/source = "extends Node
+
+var connections : Array = [
+	[\"Blupital\", \"Blue Beach\"],
+	[\"Blupital\", \"Bluh Bluh\"],
+	[\"Bluh Bluh\", \"Blue Beach\"],
+	[\"Bluh Bluh\", \"Midland\"],
+	[\"Midland\", \"Blue Beach\"],
+	[\"Bluh Bluh\", \"Mushroom Meadow\"],
+	[\"Greenopolis\", \"Green Grass Eat My\"],
+	[\"Greenopolis\", \"Frederic's Land\"],
+	[\"Frederic's Land\", \"Green Grass Eat My\"],
+	[\"Frederic's Land\", \"Baffin Coast\"],
+	[\"Lake of Dess\", \"Green Grass Eat My\"],
+	[\"Lake of Dess\", \"Mushroom Meadow\"],
+	[\"Mushroom Meadow\", \"Green Grass Eat My\"],
+	[\"Lake of Dess\", \"Baffin Coast\"],
+	[\"Lake of Dess\", \"Lamanch Lowlands\"],
+	[\"Lake of Dess\", \"Lahama\"],
+	[\"Lake of Dess\", \"Crampus Country\"],
+	[\"Mushroom Meadow\", \"Crampus Country\"],
+	[\"Mushroom Meadow\", \"Midland\"],
+	[\"Midland\", \"Crampus Country\"],
+	[\"Midland\", \"Last Coast\"],
+	[\"Last Coast\", \"Crampus Country\"],
+	[\"Lahama\", \"Lamanch Lowlands\"],
+	[\"Lamanch Grove\", \"Lamanch Lowlands\"],
+	[\"Lahama\", \"Red Camping\"],
+	[\"Lamanch Grove\", \"Red Camping\"],
+	[\"Lamanch Grove\", \"Last Coast\"],
+	[\"Last Coast\", \"Red Camping\"],
+	[\"Crampus Country\", \"Red Camping\"],
+	[\"Lamanch Lowlands\", \"Baffin Coast\"],
+	[\"Frederic's Land\", \"Lake of Dess\"],
+	[\"Grunchy Grunch\", \"Green Grass Eat My\"],
+	[\"Grunchy Grunch\", \"Bluh Bluh\"],
+	[\"Grunchy Grunch\", \"Mushroom Meadow\"],
+	[\"Southern Lamanch\", \"Northern Lamanch\", 1],
+	[\"Lamanch Lowlands\", \"Northern Lamanch\"],
+	[\"Lamanch Grove\", \"Northern Lamanch\"],
+	[\"Lamanch Grove\", \"Red Bay\"],
+	[\"Red Bay\", \"Northern Lamanch\"],
+	[\"Southern Lamanch\", \"Red Bay\"],
+	[\"Southern Lamanch\", \"Redville\"],
+	[\"Red Downtown\", \"Red Bay\"],
+	[\"Red Downtown\", \"Redville\"],
+	[\"Southern Lamanch\", \"Red Downtown\"],
+]
+
+func _ready():
+	get_parent().connections = connections.duplicate()
+	queue_free()
+"
+
+[sub_resource type="GDScript" id="GDScript_sn1dp"]
+script/source = "extends Polygon2D
+
+
+func _ready():
+	if get_parent().dummy:
+		visible = true
+	else:
+		queue_free()
+"
+
+[node name="- TUTORIAL -" type="Polygon2D"]
+color = Color(0.47451, 0.47451, 0.47451, 1)
+polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 2368, -1024, 2368)
+script = ExtResource("1_hywy4")
+tag = "Challenge"
+complexity = "Simple"
+lore = "A follow-up on the previous tutorial, explains to you the remaining gameplay mechanics. CAN BE SKIPPED, I RECOMMEND YOU PLAY ONLY BEGINNER MAPS UNTIL YOU COMPLETE THIS."
+align_amount = 4
+align_color = [Color(0.431373, 0.341176, 0.411765, 1), Color(0.101961, 0.564706, 0.368627, 1), Color(0.14902, 0.490196, 0.741176, 1), Color(0.670588, 0.141176, 0.2, 1)]
+allow_map_spec_change = false
+max_user_amount = 1
+use_preset_alignments = true
+preset_user_alignments = [1, 2, 3]
+use_custom_ai_setup = true
+aliances_active = true
+alignment_aliances = [0, 1, 1, 2]
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_ojoeb")
+
+[node name="spoilerwall" type="Polygon2D" parent="."]
+visible = false
+z_index = 21
+color = Color(0.298039, 0.298039, 0.298039, 1)
+polygon = PackedVector2Array(2048, -1536, 2048, 1536, -2048, 1536, -2048, -1536)
+script = SubResource("GDScript_sn1dp")
+
+[node name="tut" type="Label" parent="spoilerwall"]
+offset_left = -512.0
+offset_top = -40.0
+offset_right = 709.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 64
+text = "TUTORIAL FOR THE VIDEO GAME, WOW!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="intro" type="Label" parent="."]
+offset_left = -376.0
+offset_top = -232.0
+offset_right = 376.0
+offset_bottom = 28.0
+text = "Welcome to the Advanced Tutorial!
+
+If you haven't played the previous tutorial, press
+ESC twice to exit back to the main menu.
+You will not know how to play the game without
+playing that one first.
+
+Let's start with an UI element you may have already noticed on your own,
+the rectangle with colorful figures in the top left corner. This represents
+the order in which the different leader play. Right now, green starts, then
+blue plays, and red is last. Players almost always start before computers.
+
+You may also notice that there are numbers on the figures. This is because
+of an optional feature you may enable while playing, called \"aliances\".
+Leaders with the same number are on a team and play together. This means
+that you have a friend in this tutorial! :D
+
+Allied leaders cannot attack each other, and win if they are the last ones left.
+You can also perform a special action with your allies; instead of attacking
+opposing regions or reinforcing your regions, you can reinforce an allies
+region. Here is a blue region where you can try it out:"
+horizontal_alignment = 1
+
+[node name="Examplia" type="Polygon2D" parent="."]
+position = Vector2(0, 480)
+polygon = PackedVector2Array(-136, -16, -72, -80, 48, -88, 120, -40, 128, 32, 56, 72, -40, 72, -112, 48)
+script = ExtResource("2_lql3s")
+alignment = 2
+
+[node name="intro2" type="Label" parent="."]
+offset_left = -376.0
+offset_top = 640.0
+offset_right = 376.0
+offset_bottom = 832.0
+text = "The rest of the tutorial are just a few factoids that didn't mention up to this point,
+they are strewn around the edges of the map.
+
+Cooperate with your blue ally and beat red to complete this tutorial!"
+horizontal_alignment = 1
+
+[node name="hills" type="Label" parent="."]
+offset_left = -808.0
+offset_top = 1736.0
+offset_right = -232.0
+offset_bottom = 1888.0
+text = "Hover over a city from one of the two regions neighboring there -->
+You see how the connection between them is darker than other
+connections? That is because that connection reduces the power
+of an attack by 1. In order to capture a region connected by a
+darker connection, you need 1 more power than usual."
+horizontal_alignment = 1
+
+[node name="skip_turn" type="Label" parent="."]
+offset_left = -800.0
+offset_top = 944.0
+offset_right = -168.0
+offset_bottom = 1178.0
+text = "As you know, the bottom right button changes the turn phase.
+However, you don't need to press the button, because you can use
+the keyboard shortcut ctrl + space to advance the turn phase instead.
+
+If you press alt on top of that (so ctrl + alt + space), you will end
+your turn nomatter which phase you are currently in.
+
+If you still have some first actions left, and you advance the turn phase, the
+remaining first actions you have will be converted into bonus actions."
+horizontal_alignment = 1
+
+[node name="speedrun" type="Label" parent="."]
+offset_left = 264.0
+offset_top = 1272.0
+offset_right = 568.0
+offset_bottom = 1336.0
+text = "Feel like the AI is going too slow?
+Speed it up with ctrl + alt + enter!"
+horizontal_alignment = 1
+
+[node name="forfeit" type="Label" parent="."]
+offset_left = -272.0
+offset_top = 2088.0
+offset_right = 128.0
+offset_bottom = 2192.0
+text = "If you ever feel like it is impossible to win, you
+can press ctrl + alt + \"-\" to forfeit, turning all
+your regions neutral."
+horizontal_alignment = 1
+
+[node name="hide" type="Label" parent="."]
+offset_left = 328.0
+offset_top = 1728.0
+offset_right = 744.0
+offset_bottom = 1872.0
+text = "If you want to look at just the regions on their
+own with no cities, press ctrl + H.
+
+There is something behind this city,
+try hiding cities so you can see it!"
+horizontal_alignment = 1
+
+[node name="Blupital" type="Polygon2D" parent="."]
+position = Vector2(224, 1032)
+polygon = PackedVector2Array(-104, 96, -72, 56, -88, -16, -56, -64, 0, -88, 64, -64, 104, -8, 72, 48, -8, 80, -48, 136)
+script = ExtResource("2_lql3s")
+alignment = 2
+is_capital = true
+
+[node name="Greenopolis" type="Polygon2D" parent="."]
+position = Vector2(-416, 1352)
+polygon = PackedVector2Array(-104, -16, -152, -32, -136, -72, -112, -104, -72, -96, -64, -144, 8, -128, 16, -64, 80, -56, 80, 40, 8, 40, 8, 96, -72, 96, -72, 48, -112, 40)
+script = ExtResource("2_lql3s")
+alignment = 1
+is_capital = true
+
+[node name="Redville" type="Polygon2D" parent="."]
+position = Vector2(-176, 1888)
+polygon = PackedVector2Array(-32, -72, -56, 16, -104, 72, -128, 112, -96, 128, -64, 112, -16, 128, 0, 96, 24, 88, 40, 48, 56, 24, 72, 8, 32, -16, 16, -56, -16, -72)
+script = ExtResource("2_lql3s")
+alignment = 3
+is_capital = true
+
+[node name="Red Downtown" type="Polygon2D" parent="."]
+position = Vector2(-24, 1936)
+polygon = PackedVector2Array(-112, 16, -104, 0, -88, -24, -72, -40, -32, -32, 40, -32, 96, -40, 96, 0, 120, 16, 72, 32, 48, 48, 24, 48, -8, 40, -32, 32, -64, 48, -80, 64, -120, 80, -160, 80, -144, 56, -120, 40)
+script = ExtResource("2_lql3s")
+
+[node name="Green Grass Eat My" type="Polygon2D" parent="."]
+position = Vector2(-280, 1328)
+polygon = PackedVector2Array(-112, -48, -112, -80, -32, -80, 16, -48, 64, -32, 104, -40, 152, -24, 208, 0, 208, 32, 184, 48, 160, 40, 120, 48, 88, 32, 56, 32, 24, 48, -8, 40, -48, 40, -48, -40)
+script = ExtResource("2_lql3s")
+power = 0
+
+[node name="Frederic\'s Land" type="Polygon2D" parent="."]
+position = Vector2(-312, 1432)
+polygon = PackedVector2Array(-88, -32, -88, 24, -128, 24, -112, 72, -104, 96, -80, 112, -64, 112, -48, 88, -32, 72, -24, 80, -16, 72, -24, 64, 16, 56, 24, 40, 24, 16, 32, -8, 48, -16, 72, -32, 80, -64, 56, -48, 24, -56, -16, -56, -16, -32)
+script = ExtResource("2_lql3s")
+
+[node name="Baffin Coast" type="Polygon2D" parent="."]
+position = Vector2(-304, 1536)
+polygon = PackedVector2Array(-32, 8, -16, 16, 24, 48, 40, 80, 72, 104, 72, 72, 80, 40, 88, 16, 64, -8, 48, -24, 32, -32, -8, -16, -16, -24, -24, -16, -16, -8)
+script = ExtResource("2_lql3s")
+max_power = 4
+
+[node name="Grunchy Grunch" type="Polygon2D" parent="."]
+position = Vector2(-96, 1248)
+offset = Vector2(32, 16)
+polygon = PackedVector2Array(-104, 16, -8, 56, -8, 24, 24, 8, 56, 16, 72, -8, 72, -104, 48, -112, 24, -88, 8, -72, -8, -80, -24, -104, -64, -112, -72, -96, -64, -64, -144, -48, -128, -32, -104, -32, -88, -24, -88, -8)
+script = ExtResource("2_lql3s")
+
+[node name="Bluh Bluh" type="Polygon2D" parent="."]
+position = Vector2(88, 1184)
+polygon = PackedVector2Array(-72, -24, -24, -24, 0, -24, 24, -48, 80, -8, 88, 0, 80, 72, 48, 48, 32, 32, -8, 40, -16, 64, -32, 88, -56, 96, -88, 96, -72, 72)
+script = ExtResource("2_lql3s")
+
+[node name="Crampus Country" type="Polygon2D" parent="."]
+position = Vector2(72, 1432)
+polygon = PackedVector2Array(-80, 80, -72, 88, -24, 80, 8, 32, 48, 80, 96, 72, 120, 16, 96, -24, 56, -56, 32, -80, 8, -80, -24, -64, -8, -32, -32, -24, -48, -24, -64, -16, -56, 32)
+script = ExtResource("2_lql3s")
+power = 2
+
+[node name="Last Coast" type="Polygon2D" parent="."]
+position = Vector2(200, 1520)
+polygon = PackedVector2Array(24, 80, 8, 48, 16, 24, 40, 0, 56, -40, 48, -72, 40, -104, 0, -72, -32, 0, -40, 40, -8, 80)
+script = ExtResource("2_lql3s")
+
+[node name="Midland" type="Polygon2D" parent="."]
+position = Vector2(128, 1304)
+polygon = PackedVector2Array(-64, -32, -40, 0, -40, 40, -16, 40, 48, 96, 72, 136, 104, 104, 40, 8, 40, -40, -8, -80, -40, -72, -48, -48)
+script = ExtResource("2_lql3s")
+
+[node name="Mushroom Meadow" type="Polygon2D" parent="."]
+position = Vector2(-8, 1336)
+polygon = PackedVector2Array(-56, -48, -56, 24, 8, 72, 32, 64, 48, 64, 56, 56, 48, 32, 88, 8, 88, -32, 64, -56, 40, -48, 0, -48, -32, -56)
+script = ExtResource("2_lql3s")
+
+[node name="Blue Beach" type="Polygon2D" parent="."]
+position = Vector2(208, 1240)
+polygon = PackedVector2Array(80, -144, 16, -120, -24, -64, -32, 72, 32, 168, 24, 64, 32, -40)
+script = ExtResource("2_lql3s")
+power = 0
+
+[node name="Northern Lamanch" type="Polygon2D" parent="."]
+position = Vector2(-160, 1728)
+offset = Vector2(96, 32)
+polygon = PackedVector2Array(-48, -56, 40, -32, 136, -24, 144, 32, 120, 56, 88, 48, 56, 24, 16, 40, -16, 40, -32, 24, -48, 0, -80, -8, -104, -8, -128, -32, -128, -72)
+script = ExtResource("2_lql3s")
+
+[node name="Southern Lamanch" type="Polygon2D" parent="."]
+position = Vector2(8, 1864)
+offset = Vector2(-104, -16)
+polygon = PackedVector2Array(-104, -96, -40, -72, -8, -40, 32, -24, 80, -24, 120, -16, 152, -8, 176, -16, 176, 8, 168, 40, 104, 48, 48, 48, -8, 40, -40, 16, -56, -24, -96, -40, -112, -40)
+script = ExtResource("2_lql3s")
+
+[node name="Lake of Dess" type="Polygon2D" parent="."]
+position = Vector2(-176, 1464)
+polygon = PackedVector2Array(-72, 40, -32, 80, 32, 120, 144, 96, 160, 48, 184, 0, 176, -48, 144, -72, 104, -96, 80, -80, 56, -88, 16, -80, -16, -96, -48, -96, -56, -64, -96, -32, -104, -16, -104, 8, -80, 0, -56, -24, -24, -32, 0, -32, 32, -48, 96, -48, 112, -24, 128, 0, 112, 32, 96, 40, 80, 48, 56, 48, 32, 48, 16, 32, 0, 16, -32, 16, -56, 16, -64, 24, -88, 32)
+script = ExtResource("2_lql3s")
+max_power = 7
+
+[node name="Lamanch Lowlands" type="Polygon2D" parent="."]
+position = Vector2(-96, 1640)
+polygon = PackedVector2Array(-128, 8, -104, 40, -16, 56, 72, 80, 72, 48, 80, 16, 80, -16, 56, -16, 24, -16, -8, -24, -16, -56, -56, -48, -112, -88, -128, -32)
+script = ExtResource("2_lql3s")
+
+[node name="Lamanch Grove" type="Polygon2D" parent="."]
+position = Vector2(96, 1704)
+polygon = PackedVector2Array(-104, -80, -104, -40, -112, -8, -112, 16, -16, 24, -8, 56, 64, 48, 96, 24, 112, -8, 152, -16, 168, -48, 152, -88, 128, -96, 96, -96, 64, -80, 64, -32, 16, -48, -40, -16, -56, -56)
+script = ExtResource("2_lql3s")
+power = 0
+max_power = 6
+
+[node name="Red Bay" type="Polygon2D" parent="."]
+position = Vector2(136, 1824)
+polygon = PackedVector2Array(-48, -56, -48, -8, -48, 32, -56, 72, -56, 112, -8, 128, 64, 120, 104, 104, 88, 80, 48, 64, 32, 32, 48, 0, 56, -40, 56, -88, 24, -64)
+script = ExtResource("2_lql3s")
+
+[node name="Red Camping" type="Polygon2D" parent="."]
+position = Vector2(80, 1592)
+polygon = PackedVector2Array(-88, 24, -32, 48, -24, 88, 32, 56, 72, 72, 72, 24, 104, 8, 72, -32, 80, -80, 32, -72, 0, -112, -24, -72, -80, -64, -56, -16)
+script = ExtResource("2_lql3s")
+alignment = 3
+
+[node name="Lahama" type="Polygon2D" parent="."]
+position = Vector2(-48, 1592)
+polygon = PackedVector2Array(-56, -8, -48, 16, -24, 24, 32, 24, 64, -16, 40, -64, 24, -24)
+script = ExtResource("2_lql3s")
+power = 0
+max_power = 4
+
+[node name="???" type="Polygon2D" parent="."]
+position = Vector2(536, 1920)
+polygon = PackedVector2Array(0, -16, -8, -24, -16, -24, -24, -16, -24, -8, -16, 8, 0, 24, 16, 8, 24, -8, 24, -16, 16, -24, 8, -24)
+script = ExtResource("2_lql3s")
+
+[node name="Lamanch" type="Line2D" parent="."]
+position = Vector2(384, 1496)
+points = PackedVector2Array(-584, 240, -552, 264, -536, 264, -520, 280, -496, 280, -480, 304, -464, 304, -440, 320, -424, 304, -400, 312, -376, 304, -352, 328, -336, 320, -312, 328, -304, 304)
+width = 20.0
+default_color = Color(0.247059, 0.247059, 0.247059, 1)

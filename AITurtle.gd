@@ -46,7 +46,7 @@ func think_normal(is_bonus : bool = false):
 	#			print("connected_name: ", connection_name)
 				var connection = controler.get_region(connection_name)
 	#			print("connected: ", connection.name)
-				if connection.alignment == current_alignment:
+				if controler.alignment_friendly(current_alignment, connection.alignment):
 	#				print("friendly alignment")
 					continue
 				if connection.alignment != 0:
@@ -136,8 +136,8 @@ func calculate_benefit_default(region : Region, is_bonus : bool):
 
 func determine_attacks(region : Region):
 	var attacks : Array = []
-	for align in range(controler.get_alingment_amout() - 1):
-		if align + 1 == current_alignment:
+	for align in range(controler.get_alingment_amount() - 1):
+		if controler.alignment_friendly(current_alignment, align + 1):
 			continue
 		attacks.append(region.attack_power_difference(align + 1))
 	var biggest_threat : int = attacks.pop_front()
