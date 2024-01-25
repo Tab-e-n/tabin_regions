@@ -135,9 +135,15 @@ func _ready():
 	region_control.connections = connections.duplicate()
 	if region_control.dummy:
 		queue_free()
+		return
+	call_deferred(\"set_corruption_aliance\")
 
 
-func _process(delta):
+func set_corruption_aliance():
+	region_control.alignment_aliances[4] = 0
+
+
+func _process(_delta):
 	if region_control.current_player == 4:
 		var align_left = 0
 		for i in region_control.region_amount.size():
@@ -168,9 +174,6 @@ random_player_align_range = 3
 max_user_amount = 3
 use_custom_ai_setup = true
 custom_ai_setup = [1, 1, 1, 2]
-aliances_active = true
-automatic_aliances = true
-autoaliance_divisions_amount = 4
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_1kfg4")

@@ -7,6 +7,7 @@ const PREVENT_CAMERA_MOVEMENT_START : float = 1
 
 
 @onready var game_control : GameControl = get_parent()
+@onready var region_control : RegionControl
 @onready var window_size : Vector2 = get_viewport_rect().size
 
 var farthest_left : int = 0
@@ -32,7 +33,9 @@ func _input(event):
 
 
 func _deffered_ready():
-	for i in game_control.region_control.polygon:
+	region_control = game_control.region_control
+	
+	for i in region_control.polygon:
 		if i.x > farthest_right:
 			@warning_ignore("narrowing_conversion")
 			farthest_right = i.x
@@ -78,29 +81,43 @@ func _deffered_ready():
 	if position.y < farthest_up:
 		position.y = farthest_up
 	
-	get_node("AdvanceTurn").pressed.connect(game_control.region_control.change_current_action)
+	get_node("AdvanceTurn").pressed.connect(region_control.change_current_action)
 	
-	$turn_order.polygon[2].x = PLAY_ORDER_SPACING * (game_control.region_control.align_amount - 1)
-	$turn_order.polygon[3].x = PLAY_ORDER_SPACING * (game_control.region_control.align_amount - 1)
+	call_deferred("_ready_play_order")
 	
-	var play_order : Array = game_control.region_control.player_order.duplicate()
+	region_control.turn_ended.connect(update_turn_order)
+
+
+func _ready_play_order():
+	$turn_order.polygon[2].x = PLAY_ORDER_SPACING * (region_control.align_amount - 1)
+	$turn_order.polygon[3].x = PLAY_ORDER_SPACING * (region_control.align_amount - 1)
+	
+	var play_order : Array = region_control.player_order.duplicate()
 	for i in range(play_order.size()):
 		var spr : Sprite2D = Sprite2D.new()
+		spr.name = String.num(play_order[i])
 		spr.texture = preload("res://turn_order_players.png")
 		spr.hframes = 6
-		spr.frame = game_control.region_control.player_controlers[play_order[i] - 1]
+		spr.frame = region_control.player_controlers[play_order[i] - 1]
+		@warning_ignore("integer_division")
 		spr.position.x = PLAY_ORDER_SPACING / 2 + PLAY_ORDER_SPACING * i
-		spr.modulate = game_control.region_control.align_color[play_order[i]]
+		spr.self_modulate = region_control.align_color[play_order[i]]
 		$turn_order.add_child(spr)
-		if game_control.region_control.aliances_active:
+		if region_control.aliances_active:
 			var label : Label = Label.new()
+			label.name = String.num(play_order[i]) + "_txt"
 			label.size = Vector2(PLAY_ORDER_SPACING, 48)
 			label.clip_text = true
-			label.text = String.num_int64(game_control.region_control.alignment_aliances[play_order[i]])
+			label.text = String.num_int64(region_control.alignment_aliances[play_order[i]])
 			label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			label.position.x = PLAY_ORDER_SPACING * i
-			$turn_order.add_child(label)
+			@warning_ignore("integer_division")
+			label.position.x = -PLAY_ORDER_SPACING / 2
+			if spr.self_modulate.v > region_control.COLOR_TOO_BRIGHT:
+				label.self_modulate = Color(0, 0, 0)
+			else:
+				label.self_modulate = Color(1, 1, 1)
+			spr.add_child(label)
 
 
 func _physics_process(delta):
@@ -127,8 +144,8 @@ func _physics_process(delta):
 		if (mouse_position.y < 64 or Input.is_action_pressed("up")) and position.y > farthest_up:
 			position.y -= 8
 	
-	$AdvanceTurn.modulate = game_control.region_control.align_color[game_control.region_control.current_player]
-	$Power.self_modulate = game_control.region_control.align_color[game_control.region_control.current_player]
+	$AdvanceTurn.modulate = region_control.align_color[region_control.current_player]
+	$Power.self_modulate = region_control.align_color[region_control.current_player]
 	$AdvanceTurn.modulate.a = 1
 	$Power.self_modulate.a = 1
 	if $Power.self_modulate.v > 0.9:
@@ -136,21 +153,33 @@ func _physics_process(delta):
 	else:
 		$Power/text.self_modulate = Color(1, 1, 1)
 	can_translate_messages()
-	if game_control.region_control.current_action == 0:
+	if region_control.current_action == 0:
 		$Action.text = "FIRST ACTION"
 		$Action.text = "FIRST ACTION"
-		$Power/text.text = String.num(game_control.region_control.action_amount)
-	if game_control.region_control.current_action == 1:
+		$Power/text.text = String.num(region_control.action_amount)
+	if region_control.current_action == 1:
 		$Action.text = "MOBILIZE"
-		$Power/text.text = String.num(game_control.region_control.bonus_action_amount)
-	if game_control.region_control.current_action == 2:
+		$Power/text.text = String.num(region_control.bonus_action_amount)
+	if region_control.current_action == 2:
 		$Action.text = "BONUS ACTION"
-		$Power/text.text = String.num(game_control.region_control.bonus_action_amount)
+		$Power/text.text = String.num(region_control.bonus_action_amount)
 	
-	$AdvanceTurn.visible = game_control.region_control.is_user_controled
+	$AdvanceTurn.visible = region_control.is_user_controled
+
+
+func update_turn_order():
+	var play_order : Array = region_control.player_order.duplicate()
+	for i in range(region_control.align_amount - 1):
+		var leader = $turn_order.get_node(String.num(play_order[i]))
+		leader.visible = region_control.region_amount[play_order[i] - 1]
+		if $turn_order.has_node(String.num(play_order[i]) + "_txt"):
+			var aliance_text = $turn_order.get_node(String.num(play_order[i]) + "_txt")
+			var aliance = region_control.alignment_aliances[play_order[i]]
+			if aliance_text.text != String.num_int64(aliance):
+				aliance_text.text = String.num_int64(aliance)
 
 
 func win(align_victory : int):
 	$win.visible = true
-	$win.modulate = game_control.region_control.align_color[align_victory]
+	$win.modulate = region_control.align_color[align_victory]
 	win_timer = 5

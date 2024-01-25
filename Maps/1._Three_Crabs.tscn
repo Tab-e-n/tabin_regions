@@ -1,0 +1,382 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfay4pr4yf2os"]
+
+[ext_resource type="Script" path="res://RegionControl.gd" id="1_pkf2y"]
+[ext_resource type="Script" path="res://Region.gd" id="3_0snln"]
+
+[sub_resource type="GDScript" id="GDScript_uxvrr"]
+script/source = "extends Node
+
+
+var connections : Array = [
+	[\"Crack Valley\", \"Cracked Island Beach\"],
+	[\"Crack Valley\", \"Searing Hills\"],
+	[\"Portal Outskirts\", \"Searing Hills\"],
+	[\"Crack Valley\", \"Portal\"],
+	[\"Crack Valley\", \"Other Beach\"],
+	[\"Crack Valley\", \"Cramas\"],
+	[\"Fishing Beach\", \"Cramas\"],
+	[\"Fishing Beach\", \"Searing Grove\"],
+	[\"Fisherland\", \"Searing Grove\"],
+	[\"Fisherland\", \"Fish Trail\"],
+	[\"Fisherland\", \"Rasmas\"],
+	[\"Rasmas\", \"Fish Trail\"],
+	[\"Trailside\", \"Fish Trail\"],
+	[\"Fisherland\", \"Rocky Coast\"],
+	[\"Rasmas\", \"Rocky Coast\"],
+	[\"Rasmas\", \"Grunch\"],
+	[\"Rasmas\", \"Serpants Eye\"],
+	[\"Serpants Eye\", \"Grunch\"],
+	[\"Gimehed\", \"Grunch\"],
+	[\"Gimehed\", \"Serpants Eye\"],
+	[\"Rasmas\", \"Trailside\"],
+	[\"Serpants Eye\", \"Trailside\"],
+	[\"Rocky Coast\", \"Fish Trail\"],
+	[\"Searing Grove\", \"Cramas\"],
+	[\"Cramas\", \"Other Beach\"],
+	[\"Portal\", \"Cracked Island Beach\"],
+	[\"Portal\", \"Portal Outskirts\"],
+	[\"Little Capricus\", \"Portal Outskirts\"],
+	[\"Little Capricus\", \"West Great Plateau\"],
+	[\"Credit\", \"Portal Outskirts\"],
+	[\"Credit\", \"Leaving Region\"],
+	[\"Credit\", \"River Hills\"],
+	[\"Village Port\", \"River Hills\"],
+	[\"Village Market\", \"River Hills\"],
+	[\"Village Port\", \"Village Center\"],
+	[\"Village Port\", \"Village Market\"],
+	[\"Village Market\", \"Village Center\"],
+	[\"Village Port\", \"Village Entrance\"],
+	[\"Village Entrance\", \"Village Center\"],
+	[\"River Hills\", \"Leaving Region\"],
+	[\"Turnaround\", \"Leaving Region\"],
+	[\"Little Capricus\", \"Leaving Region\"],
+	[\"Turnaround\", \"Stationary\"],
+	[\"West Great Plateau\", \"Stationary\"],
+	[\"North Great Plateau\", \"Stationary\"],
+	[\"West Great Plateau\", \"North Great Plateau\"],
+	[\"West Great Plateau\", \"Hole\"],
+	[\"West Great Plateau\", \"Center Great Plateau\"],
+	[\"West Great Plateau\", \"South Great Plateau\"],
+	[\"West Great Plateau\", \"Little Plateau\"],
+	[\"Little Plateau\", \"South Great Plateau\"],
+	[\"South Great Plateau\", \"Center Great Plateau\"],
+	[\"South Great Plateau\", \"Serpants Eye\"],
+	[\"Serpants Eye\", \"Center Great Plateau\"],
+	[\"Gimehed\", \"Center Great Plateau\"],
+	[\"South Great Plateau\", \"Fish Trail\"],
+	[\"Trailside\", \"South Great Plateau\"],
+	[\"Center Great Plateau\", \"North Great Plateau\"],
+	[\"Turnaround\", \"Hole\"],
+	[\"Little Capricus\", \"Hole\"],
+	[\"Little Capricus\", \"Little Plateau\"],
+	[\"Hole\", \"Stationary\"],
+	[\"Portal Outskirts\", \"Cracked Island Beach\"],
+	[\"Portal\", \"Searing Hills\"],
+	[\"Searing Grove\", \"Searing Hills\"],
+	[\"South Great Plateau\", \"Searing Hills\"],
+	[\"Trias\", \"Crop Hills\"],
+	[\"Left Side of the Road\", \"Crop Hills\"],
+	[\"Right Side of the Road\", \"Crop Hills\"],
+	[\"Left Side of the Road\", \"Right Side of the Road\"],
+	[\"Left Side of the Road\", \"Ruins\"],
+	[\"Left Side of the Road\", \"Village Port\"],
+	[\"Village Port\", \"Ruins\"],
+	[\"Village Entrance\", \"Ruins\"],
+	[\"Ruins\", \"Right Side of the Road\"],
+	[\"Trias\", \"Stationary\"],
+	[\"Portal\", \"Giant Enemy Crab\"],
+]
+
+
+func _ready():
+	get_parent().connections = connections.duplicate()
+	queue_free()
+"
+
+[node name="Triple Trouble" type="Polygon2D"]
+color = Color(0.47451, 0.47451, 0.47451, 1)
+polygon = PackedVector2Array(-456, -232, -224, -424, 88, -448, 296, -368, 520, -176, 504, 128, 432, 328, 240, 456, -8, 480, -296, 400, -472, 304, -536, 96)
+script = ExtResource("1_pkf2y")
+complexity = "Beginner"
+lore = "A trio of clans at war."
+align_amount = 4
+align_color = [Color(0.431373, 0.341176, 0.411765, 1), Color(0.929412, 0.521569, 0.552941, 1), Color(0.341176, 0.956863, 0.478431, 1), Color(0.466667, 0.580392, 0.94902, 1), Color(0.541176, 0.129412, 0.678431, 1)]
+city_size = 0.8
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_uxvrr")
+
+[node name="Giant Enemy Crab" type="Polygon2D" parent="."]
+position = Vector2(-352, 160)
+polygon = PackedVector2Array(-24, 16, -8, 24, 0, 24, 16, 16, 32, 24, 40, 0, 40, -8, 32, -16, 24, -16, 24, -8, 8, -24, 8, -32, 16, -32, 8, -48, -8, -32, -24, -24, -32, -8)
+script = ExtResource("3_0snln")
+alignment = 4
+power = 10
+max_power = 10
+
+[node name="Trias" type="Polygon2D" parent="."]
+position = Vector2(-16, -216)
+polygon = PackedVector2Array(-56, 8, -40, 16, -32, 16, -16, 16, -24, 24, -8, 24, 16, 40, 24, 24, 32, 0, 32, -24, 48, -32, 40, -40, 16, -24, 0, -40, 0, -24, -8, -16, -16, -16, -40, -8)
+script = ExtResource("3_0snln")
+alignment = 2
+max_power = 4
+is_capital = true
+
+[node name="Crop Hills" type="Polygon2D" parent="."]
+position = Vector2(-72, -280)
+polygon = PackedVector2Array(-48, 56, -32, 56, -8, 32, 8, 40, 16, 32, 24, 32, 32, 16, 56, 32, 56, 8, 72, -8, 56, -8, 48, -24, 32, -24, 16, -40, 0, -40, -8, -32, -24, -32, -32, -24, -32, -40, -48, -24, -56, 0, -56, 24)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Left Side of the Road" type="Polygon2D" parent="."]
+position = Vector2(-144, -224)
+polygon = PackedVector2Array(-48, 72, -24, 72, -16, 64, -8, 64, -8, 48, 0, 24, 24, 0, 16, -32, 16, -40, 0, -40, -16, -16, -24, 16, -24, 40, -32, 56)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Right Side of the Road" type="Polygon2D" parent="."]
+position = Vector2(-192, -248)
+offset = Vector2(8, 24)
+polygon = PackedVector2Array(16, 16, -16, 8, -32, -8, -24, -32, -8, -40, 8, -24, 16, -24, 16, -32, 8, -48, 24, -64, 40, -64, 64, -80, 56, -56, 56, -40, 40, -40, 24, -16)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Ruins" type="Polygon2D" parent="."]
+position = Vector2(-200, -192)
+polygon = PackedVector2Array(-16, -40, -24, -16, -40, 8, -48, 32, -32, 40, 8, 40, -16, 16, -24, 16, -16, 0, -16, -8, 0, 0, -8, 8, 8, 16, 16, 8, 8, 8, 0, -16, 8, -16, 24, -8, 8, -8, 16, 0, 8, 0, 24, 8, 16, 16, 8, 24, 0, 24, 0, 16, -16, 8, -16, 16, 8, 40, 24, 24, 32, 8, 32, -16, 0, -24)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Village Port" type="Polygon2D" parent="."]
+position = Vector2(-176, -128)
+polygon = PackedVector2Array(24, 8, 16, -8, 32, -16, 32, -24, 16, -16, 8, -24, -24, -24, -24, 8, -40, 8, -40, 40, -24, 40, -16, 64, -8, 48, 8, 24)
+script = ExtResource("3_0snln")
+
+[node name="Village Center" type="Polygon2D" parent="."]
+position = Vector2(-256, -96)
+polygon = PackedVector2Array(-64, 0, -64, -16, -56, -24, -56, -40, -16, -40, -16, -24, 0, -24, 0, -16, 16, -16, 16, -24, 40, -24, 40, 8, 16, 8, 16, 32, -8, 32, -8, 16, -24, 16, -24, 48, -40, 48, -56, 40, -56, 24, -72, 8)
+script = ExtResource("3_0snln")
+
+[node name="Village Entrance" type="Polygon2D" parent="."]
+position = Vector2(-264, -160)
+offset = Vector2(24, 24)
+polygon = PackedVector2Array(-72, 0, -72, -8, -64, -24, -56, -40, -40, -40, -32, -48, -24, -48, -16, -56, 0, -48, -8, -24, 8, -16, 40, -16, 40, 16, 0, 16, 0, 24, -16, 24, -16, 16, -32, 16, -32, 0)
+script = ExtResource("3_0snln")
+
+[node name="Village Market" type="Polygon2D" parent="."]
+position = Vector2(-248, -40)
+offset = Vector2(16, -16)
+polygon = PackedVector2Array(-48, 8, -32, 24, -16, 24, 0, 32, 8, 16, 24, 8, 40, -8, 32, -32, -8, -32, -8, -8, -32, -8, -32, -24, -48, -24)
+script = ExtResource("3_0snln")
+
+[node name="Cracked Island Beach" type="Polygon2D" parent="."]
+position = Vector2(-144, 192)
+polygon = PackedVector2Array(-80, -32, -64, -16, -64, -8, -72, -8, -72, 8, -64, 24, -48, 24, -40, 0, -24, -8, -24, 8, -16, 32, 0, 56, 8, 56, 8, 40, 24, 48, 40, 56, 40, 48, 24, 24, 24, -24, 16, -32, -24, -32, -24, -40, -32, -40, -32, -16, -48, -16, -72, -40)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Crack Valley" type="Polygon2D" parent="."]
+position = Vector2(-56, 216)
+polygon = PackedVector2Array(-64, -16, -24, -48, -8, -72, 0, -56, 8, -48, 16, -48, 32, -32, 48, -32, 64, -40, 80, -56, 88, -56, 88, 16, 80, 16, 48, 8, 24, 8, 0, 24, -32, 32, -48, 32, -48, 24, -64, 0)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Cramas" type="Polygon2D" parent="."]
+position = Vector2(64, 200)
+polygon = PackedVector2Array(-32, -40, -16, -40, 24, -24, 48, -8, 32, 16, 16, 24, 8, 56, 0, 80, -16, 80, -24, 72, -32, 56)
+script = ExtResource("3_0snln")
+alignment = 1
+max_power = 4
+is_capital = true
+
+[node name="Fishing Beach" type="Polygon2D" parent="."]
+position = Vector2(112, 264)
+polygon = PackedVector2Array(-40, -8, -32, 0, -32, 24, -16, 40, -32, 48, -32, 56, 0, 72, 0, 56, 16, 64, 24, 64, 32, 56, 32, 40, 24, 32, 32, 16, 24, 16, 32, -24, 40, -32, 48, -56, 40, -72, 40, -96, 32, -112, 16, -88, 8, -88, 0, -72, -16, -48, -32, -40)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Searing Grove" type="Polygon2D" parent="."]
+position = Vector2(80, 136)
+polygon = PackedVector2Array(-48, 24, -32, 24, 8, 40, 32, 56, 40, 40, 48, 40, 64, 16, 64, 0, 72, -8, 72, -16, 64, -24, 40, -24, 32, -40, 16, -32, 0, -32, -16, -48, -32, -48, -24, -56, -16, -56, -32, -64, -40, -48, -48, -48)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Searing Hills" type="Polygon2D" parent="."]
+position = Vector2(-16, 120)
+polygon = PackedVector2Array(-24, -48, -40, -16, -32, -8, -32, 8, -24, 24, -8, 40, 48, 40, 48, -48, 96, -96, 88, -104, 40, -56, 24, -48, 32, -32, 40, -24, 24, -32, 8, -40, 8, -24, 0, -24, -16, -32, -16, -40)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Portal" type="Polygon2D" parent="."]
+position = Vector2(-80, 104)
+polygon = PackedVector2Array(24, 0, 16, 40, 0, 64, -40, 96, -40, 64, -48, 56, -32, -8, -24, -32, 8, -32, 32, -16)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Portal Outskirts" type="Polygon2D" parent="."]
+position = Vector2(-96, 48)
+polygon = PackedVector2Array(-72, 104, -72, 112, -32, 112, -16, 48, -8, 24, 24, 24, 48, 40, 56, 24, 48, 16, 40, -8, 32, -24, 24, -24, 24, -48, 16, -40, -8, -40, -24, -24, -40, -16, -48, -16, -48, -8, -48, 8, -64, 40, -64, 96)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Credit" type="Polygon2D" parent="."]
+position = Vector2(-160, 8)
+polygon = PackedVector2Array(-40, 64, -48, 72, -40, 80, -32, 72, -40, 72, -32, 56, -32, 48, -16, 48, -16, 32, 0, 24, 16, 16, 16, 24, 24, 24, 24, 8, 32, 8, 32, 0, 16, -8, 16, -16, 32, -24, 32, -32, 16, -40, 0, -40, 8, -48, 0, -56, -24, -32, -16, -8, -16, 0, -32, 0, -40, 16, -40, 64)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Leaving Region" type="Polygon2D" parent="."]
+position = Vector2(-120, -80)
+polygon = PackedVector2Array(-40, 0, -40, -8, -24, -16, -24, -24, -8, -40, 0, -40, 16, -32, 32, -32, 32, -8, 40, 8, 40, 32, 32, 40, 16, 40, -8, 56, -24, 48, -16, 32, -32, 24, -24, 16)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Turnaround" type="Polygon2D" parent="."]
+position = Vector2(-96, -152)
+polygon = PackedVector2Array(-32, 32, -40, 24, -40, 16, -24, 0, -32, -16, -8, -32, 8, -40, 24, -32, 24, -24, 48, -8, 48, 8, 40, 32, 32, 40, 24, 40, 32, 32, 24, 24, 8, 24, 8, 40, -8, 40, -24, 32)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Stationary" type="Polygon2D" parent="."]
+position = Vector2(-24, -168)
+polygon = PackedVector2Array(-48, -16, -40, -24, -16, -24, 0, -24, 24, -8, 40, 0, 48, 16, 16, 48, 8, 48, 8, 24, -24, 24, -24, 8, -48, -8)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Hole" type="Polygon2D" parent="."]
+position = Vector2(-40, -104)
+polygon = PackedVector2Array(-32, -8, -32, 8, -24, 8, -24, 24, -8, 40, 8, 40, 32, 32, 40, 16, 32, 16, 24, 24, 16, 16, 16, 8, 32, 8, 40, 16, 40, -24, 32, -16, 24, -16, 24, -40, -8, -40, -16, -16, -24, -8)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Little Capricus" type="Polygon2D" parent="."]
+position = Vector2(-48, -32)
+polygon = PackedVector2Array(-56, -8, -40, 8, -16, 8, -24, 32, -24, 40, -16, 32, 0, 48, 24, 32, 48, 0, 16, -32, 0, -32, -16, -48, -32, -40, -32, -16, -40, -8)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="West Great Plateau" type="Polygon2D" parent="."]
+position = Vector2(16, -80)
+polygon = PackedVector2Array(-48, 16, -16, 48, 24, 56, 48, 32, 48, -8, 40, -56, 32, -64, 8, -72, -16, -48, -16, -8, -24, 8)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="North Great Plateau" type="Polygon2D" parent="."]
+position = Vector2(112, -168)
+polygon = PackedVector2Array(-96, 0, -88, 16, -64, 24, -56, 32, -24, 16, 8, 24, 56, 24, 48, 8, 56, 0, 64, -16, 64, -24, 32, -40, 40, -48, 32, -56, 16, -48, 0, -24, -16, -32, -24, -40, -40, -40, -56, -32, -64, -32, -72, -16, -56, 0, -64, 8)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Center Great Plateau" type="Polygon2D" parent="."]
+position = Vector2(104, -104)
+polygon = PackedVector2Array(-40, 56, -8, 56, 48, 80, 64, 64, 64, 48, 40, 16, 48, -8, 56, -16, 64, -40, 16, -40, -16, -48, -48, -32, -40, 16)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="South Great Plateau" type="Polygon2D" parent="."]
+position = Vector2(112, 0)
+polygon = PackedVector2Array(-72, -24, -40, 0, -40, 16, -32, 24, 0, 32, 16, 48, 40, 48, 64, 24, 64, 0, 56, -16, 40, -24, -16, -48, -48, -48)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Gimehed" type="Polygon2D" parent="."]
+position = Vector2(200, -80)
+polygon = PackedVector2Array(-56, -8, -32, 24, -16, 32, -8, 24, 24, 16, 40, 24, 64, 24, 48, 8, 56, -8, 56, -16, 16, -40, -8, -40, -32, -64, -40, -40, -48, -32)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Fisherland" type="Polygon2D" parent="."]
+position = Vector2(200, 96)
+polygon = PackedVector2Array(-32, -24, -40, -8, -40, 0, -56, 16, -48, 24, -32, 8, -24, 24, -16, 24, -16, 40, -8, 40, 8, 48, 16, 56, 32, 48, 56, 48, 40, 16, 24, -8, 0, -40, 24, -56, -16, -56, -16, -32)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Fish Trail" type="Polygon2D" parent="."]
+position = Vector2(232, 56)
+offset = Vector2(32, -24)
+polygon = PackedVector2Array(-104, 8, -40, 8, -64, 24, -40, 56, -8, 40, 8, 8, 48, 8, 48, -8, -88, -8)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Rocky Coast" type="Polygon2D" parent="."]
+position = Vector2(304, 56)
+polygon = PackedVector2Array(-48, 88, -32, 88, -24, 80, -24, 64, -16, 56, -8, 40, -16, 32, 0, 16, 32, 0, 48, -24, 8, -24, 8, -16, -32, -16, -48, 16, -80, 32, -64, 56)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Rasmas" type="Polygon2D" parent="."]
+position = Vector2(320, -8)
+polygon = PackedVector2Array(-48, -24, -40, 8, -8, 24, -8, 40, 32, 40, 40, 8, 16, -24, 0, -40, -32, -48)
+script = ExtResource("3_0snln")
+alignment = 3
+max_power = 4
+is_capital = true
+
+[node name="Grunch" type="Polygon2D" parent="."]
+position = Vector2(280, -96)
+polygon = PackedVector2Array(-40, -48, -16, -40, 8, -16, 32, -16, 48, 0, 24, 16, 16, 32, 32, 32, 40, 48, 8, 40, -16, 40, -32, 24, -24, 8, -24, 0, -64, -24, -48, -32)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Trailside" type="Polygon2D" parent="."]
+position = Vector2(208, 8)
+offset = Vector2(16, -16)
+polygon = PackedVector2Array(-56, -8, -24, -8, -8, 0, 16, 0, 24, -8, 40, -16, 48, -24, 56, 8, 88, 24, 88, 32, -48, 32, -48, 8)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Serpants Eye" type="Polygon2D" parent="."]
+position = Vector2(240, -40)
+offset = Vector2(-24, 0)
+polygon = PackedVector2Array(-64, 16, -48, 24, -16, 24, 0, 32, 24, 32, 32, 24, 48, 16, 56, 8, 72, -16, 24, -16, 8, -24, -24, -16, -32, -8, -48, -16, -48, 0)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Little Plateau" type="Polygon2D" parent="."]
+position = Vector2(8, 8)
+polygon = PackedVector2Array(-56, 8, -48, 24, -16, 32, 0, 32, 8, 24, 24, 24, 48, 0, 64, 0, 64, -8, 32, -32, -8, -40, -32, -8)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="River Hills" type="Polygon2D" parent="."]
+position = Vector2(-184, -56)
+polygon = PackedVector2Array(-24, 48, 0, 32, 24, 8, 24, -8, 16, -24, 24, -40, 32, -48, 32, -64, 16, -48, 0, -24, -8, -8, -24, 8, -40, 16, -48, 32, -40, 48)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4
+
+[node name="Other Beach" type="Polygon2D" parent="."]
+position = Vector2(-48, 272)
+polygon = PackedVector2Array(-48, 24, -24, 40, -8, 32, 0, 24, 8, 32, 16, 24, 16, 16, 24, 8, 32, 8, 48, -8, 64, -8, 72, -16, 80, -16, 80, -40, 72, -40, 40, -48, 16, -48, -8, -32, -40, -24, -32, -8, -40, 8, -40, 16)
+script = ExtResource("3_0snln")
+power = 0
+max_power = 4

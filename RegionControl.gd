@@ -2,6 +2,14 @@ extends Polygon2D
 class_name RegionControl
 
 
+signal turn_ended
+signal turn_phase_changed(phase)
+signal game_ended(winner)
+
+
+const COLOR_TOO_BRIGHT : float = 0.9
+
+
 @onready var bg_color : Color = color
 @onready var game_control : GameControl
 
@@ -104,11 +112,11 @@ func _ready():
 		if not region_0.connections.has(link[1]):
 			region_0.connections[link[1]] = link_diff
 		else:
-			print(link[0], " already has this connection.")
+			print("connection ", link[0], " - ", link[1], " already exists.")
 		if not region_1.connections.has(link[0]):
 			region_1.connections[link[0]] = link_diff
 		else:
-			print(link[1], " already has this connection.")
+			print("connection ", link[1], " - ", link[0], " already exists.")
 	
 	region_amount.resize(align_amount - 1)
 	capital_amount.resize(align_amount - 1)
@@ -202,7 +210,7 @@ func count_up_regions():
 	for region in get_children():
 		if not region is Region:
 			continue
-		if region.alignment == 0:
+		if region.alignment == 0 or region.alignment >= align_amount:
 			continue
 		region_amount[region.alignment - 1] += 1
 		if region.is_capital:
@@ -238,6 +246,9 @@ func change_current_action():
 	if current_action == ACTION_NORMAL and action_amount > 0:
 		bonus_action_amount = action_amount
 	current_action += 1
+	
+	turn_phase_changed.emit(current_action)
+	
 	if current_action == ACTION_MODES_AMOUNT:
 		current_action = ACTION_NORMAL
 		turn_end()
@@ -270,6 +281,8 @@ func turn_end():
 	last_turn_region_amount = region_amount.duplicate()
 	
 	reset()
+	
+	turn_ended.emit()
 
 
 func check_victory():
@@ -297,6 +310,8 @@ func victory(align_victory : int):
 	for i in range(align_amount - 1):
 		if GameStats.stats[i + 1]["placement"] == "N/A":
 			GameStats.stats[i + 1]["placement"] = placement
+	
+	game_ended.emit(align_victory)
 
 
 func reset():
@@ -323,11 +338,11 @@ func forfeit():
 
 
 func convert_alignment(align_old : int, align_new : int):
-	if align_old < 0 or align_old > align_amount:
+	if align_old < 0:
 		push_warning("Alignment ", align_old, " cannot be converted.")
 		return
-	if align_new < 0 or align_new > align_amount:
-		push_warning("Alignment ", align_old, " cannot be converted to.")
+	if align_new < 0:
+		push_warning("Alignment ", align_new, " cannot be converted to.")
 		return
 	
 	for region in get_children():
@@ -337,6 +352,10 @@ func convert_alignment(align_old : int, align_new : int):
 
 
 func alignment_friendly(your_align, opposing_align) -> bool:
+	if your_align < 0 or your_align >= align_amount:
+		return false
+	if opposing_align < 0 or opposing_align >= align_amount:
+		return false
 	return alignment_aliances[your_align] == alignment_aliances[opposing_align]
 #	if your_align == opposing_align:
 #		return true

@@ -38,7 +38,7 @@ func _process(_delta):
 	pass
 
 
-func _on_players_value_changed(value):
+func _on_players_value_changed(_value):
 	map_data_text()
 
 
@@ -72,6 +72,7 @@ func _on_map_list_item_selected(index):
 	
 	$def/aliances.visible = not current_map.aliances_active and current_map.allow_map_spec_change
 	$def/aliances.max_value = current_map.align_amount - 1
+	$def/aliances.value = 1
 	
 	$diff/preset.visible = current_map.use_custom_ai_setup or not current_map.allow_map_spec_change
 	$diff/AiSelected.visible = !current_map.use_custom_ai_setup and current_map.allow_map_spec_change
