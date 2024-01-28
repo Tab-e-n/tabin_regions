@@ -24,6 +24,10 @@ GameStats="*res://GameStats.gd"
 
 window/size/resizable=false
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 plus_turn={

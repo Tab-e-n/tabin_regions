@@ -15,7 +15,7 @@ const PACKED_CONTROLERS : Array = [
 	null, # CONTROLER_USER (can be just null)
 	preload("res://AINormal.gd"), # CONTROLER_DEFAULT
 	preload("res://AITurtle.gd"), # CONTROLER_TURTLE
-	null, # CONTROLER_NEURAL
+	preload("res://AINeural.gd"), # CONTROLER_NEURAL
 	preload("res://AINormal.gd"), # CONTROLER_CHEATER
 	preload("res://AIDummy.gd") # CONTROLER_DUMMY
 ] 
@@ -117,6 +117,37 @@ func think():
 				controlers[current_controler].call("think_bonus")
 
 
+func timer_ended():
+#	print("timer ended")
+	var should_think : bool = true
+	if CALL_forfeit:
+		reset_CALL()
+		region_control.forfeit()
+		should_think = false
+#		current_moves[current_alignment].append(3)
+	elif CALL_turn_end:
+		reset_CALL()
+		region_control.turn_end()
+		should_think = false
+#		current_moves[current_alignment].append(2)
+	elif CALL_change_current_action:
+		reset_CALL()
+		region_control.change_current_action()
+#		current_moves[current_alignment].append(1)
+	else:
+		region_control.get_node(selected_capital).action_decided()
+		current_moves[current_alignment].append(selected_capital)
+	if should_think:
+		think()
+#	print(current_moves)
+
+
+func reset_CALL():
+	CALL_forfeit = false
+	CALL_turn_end = false
+	CALL_change_current_action = false
+
+
 func find_owned_regions(alignment : int = current_alignment):
 	owned_regions[alignment] = []
 	for region in region_control.get_children():
@@ -153,7 +184,7 @@ func get_region(connection_name : String) -> Region:
 
 
 func get_current_moves() -> Array:
-	return current_moves[current_alignment]
+	return current_moves[current_alignment].duplicate()
 
 
 func get_action_amount() -> int:
@@ -176,31 +207,6 @@ func alignment_friendly(your_align, opposing_align) -> bool:
 	return region_control.alignment_friendly(your_align, opposing_align)
 
 
-func timer_ended():
-#	print("timer ended")
-	var should_think : bool = true
-	if CALL_forfeit:
-		reset_CALL()
-		region_control.forfeit()
-		should_think = false
-#		current_moves[current_alignment].append(3)
-	elif CALL_turn_end:
-		reset_CALL()
-		region_control.turn_end()
-		should_think = false
-#		current_moves[current_alignment].append(2)
-	elif CALL_change_current_action:
-		reset_CALL()
-		region_control.change_current_action()
-#		current_moves[current_alignment].append(1)
-	else:
-		region_control.get_node(selected_capital).action_decided()
-		current_moves[current_alignment].append(selected_capital)
-	if should_think:
-		think()
-#	print(current_moves)
+func alignment_neutral(align) -> bool:
+	return region_control.alignment_neutral(align)
 
-func reset_CALL():
-	CALL_forfeit = false
-	CALL_turn_end = false
-	CALL_change_current_action = false

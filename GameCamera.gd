@@ -97,7 +97,7 @@ func _ready_play_order():
 		var spr : Sprite2D = Sprite2D.new()
 		spr.name = String.num(play_order[i])
 		spr.texture = preload("res://turn_order_players.png")
-		spr.hframes = 6
+		spr.hframes = AIControler.PACKED_CONTROLERS.size()
 		spr.frame = region_control.player_controlers[play_order[i] - 1]
 		@warning_ignore("integer_division")
 		spr.position.x = PLAY_ORDER_SPACING / 2 + PLAY_ORDER_SPACING * i

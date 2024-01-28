@@ -49,7 +49,7 @@ func think_normal(is_bonus : bool = false):
 				if controler.alignment_friendly(current_alignment, connection.alignment):
 	#				print("friendly alignment")
 					continue
-				if connection.alignment != 0:
+				if not controler.alignment_neutral(connection.alignment):
 					in_threat = true
 	#				print("not neutral")
 				if not connection.incoming_attack(current_alignment, 0, true):

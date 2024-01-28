@@ -360,3 +360,7 @@ func alignment_friendly(your_align, opposing_align) -> bool:
 #	if your_align == opposing_align:
 #		return true
 #	return false
+
+
+func alignment_neutral(align) -> bool:
+	return align == 0 or align >= align_amount

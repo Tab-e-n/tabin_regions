@@ -48,7 +48,7 @@ func think_normal(is_bonus : bool = false):
 			if controler.alignment_friendly(current_alignment, connection.alignment):
 #				print("friendly alignment")
 				continue
-			if connection.alignment != 0:
+			if not controler.alignment_neutral(connection.alignment):
 				in_threat = true
 #				print("align ", connection.alignment)
 			if region.alignment != current_alignment:
@@ -107,7 +107,7 @@ func think_mobilize():
 		else:
 			controler.CALL_change_current_action = true
 			if controler.region_control.current_turn % 6 == 0 and controler_id == controler.CONTROLER_CHEATER:
-				controler.region_control.bonus_action_amount += 1
+				controler.region_control.bonus_action_amount += controler.region_control.bonus_action_amount
 
 
 func calculate_benefit_default(region : Region, is_bonus : bool):
