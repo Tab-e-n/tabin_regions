@@ -21,21 +21,21 @@ const COLOR_TOO_BRIGHT : float = 0.9
 @export var align_amount : int = 3
 @export var align_color : Array = [
 		Color("6e5769"),
-		Color("ab2433"), # red
-		Color("1a905e"), # green
-		Color("267dbd"), # blue
-		Color("af5b02"), # gold
-		Color("8a21ad"), # purple
+		Color("a72b37"), # red
+		Color("368d61"), # green
+		Color("2b7dba"), # blue
+		Color("ae5b15"), # gold
+		Color("8927a8"), # purple
 		Color("ed858d"), # pink
-		Color("57f47a"), # lime
-		Color("7794f2"), # teal
-		Color("cfe518"), # yellow
+		Color("7ded92"), # lime
+		Color("7795ed"), # teal
+		Color("d7e06b"), # yellow
 		Color("d7cac0"), # silver
-		Color("f0289b"), # magenta
+		Color("dd4f96"), # magenta
 		Color("395621"), # grass
 		Color("213775"), # navy
 		Color("673a2b"), # brown
-		Color("420029"), # violet
+		Color("3f0628"), # violet
 ]
 @export var connections : Array = []
 @export var city_size : float = 1

@@ -1,0 +1,169 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqebjllyfg8lj"]
+
+[ext_resource type="Script" path="res://RegionControl.gd" id="1_eipre"]
+[ext_resource type="Script" path="res://Region.gd" id="2_nmcrs"]
+
+[sub_resource type="GDScript" id="GDScript_iphdy"]
+script/source = "extends Node
+
+var connections : Array = [
+	[\"Cellar\", \"Act Right\"],
+	[\"Abstract\", \"Act Right\"],
+	[\"Cellar\", \"Clutterfunk\"],
+	[\"Abstract\", \"Clutterfunk\"],
+	[\"Abstract\", \"Crawling\"],
+	[\"Cellar\", \"Afterblaze\"],
+	[\"Cellar\", \"Tassel Town\"],
+	[\"Cellar\", \"Eek!\"],
+	[\"Eek!\", \"Tassel Town\"],
+	[\"Nichibotsu\", \"Tassel Town\"],
+	[\"Tassel Town\", \"Afterblaze\"],
+	[\"Afterblaze\", \"Clutterfunk\"],
+	[\"Afterblaze\", \"Prison Island\"],
+	[\"Clutterfunk\", \"Act Right\"],
+	[\"Crawling\", \"Act Right\"],
+	[\"Abstract\", \"Act Right\"],
+	[\"Abstract\", \"Prison Island\"],
+	[\"Abstract\", \"No Hook\"],
+	[\"Crawling\", \"Dark Beach\"],
+	[\"Crawling\", \"Rally Remix\"],
+	[\"Crawling\", \"No Hook\"],
+	[\"No Hook\", \"Rally Remix\"],
+	[\"Rally Remix\", \"Dark Beach\"],
+	[\"Cellar\", \"Sand Canyon\"],
+	[\"Giftig\", \"Sand Canyon\"],
+	[\"Giftig\", \"Handagote\"],
+	[\"Stilton\", \"Handagote\"],
+	[\"Stilton\", \"BBF\"],
+	[\"Handagote\", \"Sand Canyon\"],
+	[\"Handagote\", \"Nichibotsu\"],
+	[\"BBF\", \"Nichibotsu\"],
+	[\"Eek!\", \"Nichibotsu\"],
+	[\"Nichibotsu\", \"Sand Canyon\"],
+	[\"Eek!\", \"Sand Canyon\"],
+]
+
+
+func _ready():
+	get_parent().connections = connections.duplicate()
+	queue_free()
+"
+
+[node name="cumbersome" type="Polygon2D"]
+position = Vector2(0, 8)
+color = Color(0.47451, 0.47451, 0.47451, 1)
+polygon = PackedVector2Array(448, 56, 424, -144, 328, -248, 176, -312, 32, -320, -72, -256, -112, -104, -264, -128, -440, -96, -480, 40, -424, 216, -256, 352, -24, 416, 224, 440, 384, 480, 408, 328)
+script = ExtResource("1_eipre")
+complexity = "Beginner"
+lore = "We played on music land twice. (No joke)"
+align_color = [Color(0.431373, 0.341176, 0.411765, 1), Color(0.866667, 0.309804, 0.588235, 1), Color(0.537255, 0.152941, 0.658824, 1)]
+
+[node name="setter" type="Node" parent="."]
+script = SubResource("GDScript_iphdy")
+
+[node name="Cellar" type="Polygon2D" parent="."]
+position = Vector2(88, 88)
+offset = Vector2(-80, -80)
+polygon = PackedVector2Array(32, 56, 48, 48, 56, 24, 72, 24, 88, 0, 112, 8, 120, 40, 152, 48, 168, 64, 160, 80, 144, 96, 144, 112, 128, 112, 112, 120, 96, 144, 16, 96, 24, 72)
+script = ExtResource("2_nmcrs")
+
+[node name="Act Right" type="Polygon2D" parent="."]
+position = Vector2(-40, 144)
+offset = Vector2(-8, -48)
+polygon = PackedVector2Array(0, 16, 16, 16, 72, -16, 48, 56, 40, 72, 32, 80, 16, 88, 0, 88, -16, 80, -24, 72, -32, 56, -56, -16)
+script = ExtResource("2_nmcrs")
+
+[node name="Sand Canyon" type="Polygon2D" parent="."]
+position = Vector2(176, -16)
+polygon = PackedVector2Array(-8, 64, -40, 56, -48, 24, -80, 16, -96, -8, -96, -24, -112, -32, -120, -48, -104, -64, -112, -80, -104, -88, -80, -96, -56, -80, -40, -48, -32, -32, -16, -24, 8, -24, 24, -8, 24, 24, 16, 40, 0, 48)
+script = ExtResource("2_nmcrs")
+power = 0
+
+[node name="Crawling" type="Polygon2D" parent="."]
+position = Vector2(-128, 112)
+offset = Vector2(-32, -24)
+polygon = PackedVector2Array(72, 64, 48, -8, 24, -24, 24, -40, 48, -48, 72, -40, 88, -8, 80, -48, 48, -56, 88, -56, 104, -40, 96, -64, 72, -64, 96, -72, 120, -64, 104, -80, 72, -72, 56, -80, 24, -72, 16, -48, 8, -40, 8, -24, 0, 0, 24, 72)
+script = ExtResource("2_nmcrs")
+power = 0
+
+[node name="Giftig" type="Polygon2D" parent="."]
+position = Vector2(72, -152)
+polygon = PackedVector2Array(-72, 80, -56, 80, -40, 64, -16, 56, 0, 40, 24, 32, 32, 24, 48, 16, 80, 16, 72, -8, 56, -48, 40, -64, 16, -72, -8, -72, -32, -64, -48, -48, -56, -8, -64, 48)
+script = ExtResource("2_nmcrs")
+alignment = 2
+is_capital = true
+
+[node name="Clutterfunk" type="Polygon2D" parent="."]
+position = Vector2(32, 168)
+polygon = PackedVector2Array(-8, -48, 72, 0, 32, 72, -24, 40, -16, 24, 24, 48, 32, 40, -8, 16, 0, 0, 24, 24, 40, 0, 32, -8, 16, 16, 8, 8, 16, -16, 8, -24, 0, 0, -8, 16, -16, 8, -24, 16, -16, 24, -24, 40, -56, 24, -32, 8, -24, -16)
+script = ExtResource("2_nmcrs")
+
+[node name="Handagote" type="Polygon2D" parent="."]
+position = Vector2(152, -112)
+polygon = PackedVector2Array(-48, -8, -24, 8, 0, 56, 16, 64, 40, 64, 64, 88, 96, 80, 88, 56, 64, 32, 40, 32, 24, 24, 16, 16, 16, -8, 24, -40, 0, -48, 8, -16, -24, -16)
+script = ExtResource("2_nmcrs")
+power = 0
+
+[node name="Afterblaze" type="Polygon2D" parent="."]
+position = Vector2(144, 184)
+offset = Vector2(-16, -16)
+polygon = PackedVector2Array(-16, -8, 0, -32, 24, -16, 32, -56, 72, -32, 40, -8, 56, 0, 64, 24, 56, 40, 40, 48, 16, 48, 8, 88, -32, 72, 0, 40, -24, 24, -8, 0)
+script = ExtResource("2_nmcrs")
+
+[node name="Stilton" type="Polygon2D" parent="."]
+position = Vector2(232, -136)
+offset = Vector2(-16, 16)
+polygon = PackedVector2Array(-40, 24, -24, 32, 16, 32, 56, 24, 72, 0, 72, -16, 64, -32, 48, -40, 32, -40, 32, -48, 32, -64, 8, -72, -8, -72, -24, -64, -32, -40, -40, 0)
+script = ExtResource("2_nmcrs")
+
+[node name="Dark Beach" type="Polygon2D" parent="."]
+position = Vector2(-192, 80)
+polygon = PackedVector2Array(32, -16, 24, 8, -16, 16, -16, 40, -48, 48, -48, 24, -72, 24, -120, 0, -136, -24, -128, -56, -112, -56, -96, -56, -80, -40, -80, -64, -64, -72, -40, -64, -32, -56, -24, -40, -16, -64, 0, -64, 16, -56, 24, -56, 24, -72, 0, -80, -16, -80, -24, -72, -48, -88, -80, -88, -88, -64, -112, -72, -136, -64, -128, -48, -144, -64, -144, -80, -120, -96, -96, -88, -96, -104, -72, -120, -40, -112, -32, -96, -16, -104, 8, -104, 32, -88, 32, -64, 24, -56, 24, -48, 32, -40, 32, -40)
+script = ExtResource("2_nmcrs")
+alignment = 1
+is_capital = true
+
+[node name="Tassel Town" type="Polygon2D" parent="."]
+position = Vector2(248, 144)
+offset = Vector2(-48, -48)
+polygon = PackedVector2Array(-40, 8, 0, 32, 8, 48, 24, 64, 56, 72, 88, 72, 128, 64, 160, 48, 168, 8, 152, -32, 128, -48, 96, -56, 120, -40, 136, -24, 144, -8, 136, 24, 88, 32, 64, 24, 32, 8, 8, 16, -24, -8)
+script = ExtResource("2_nmcrs")
+
+[node name="Nichibotsu" type="Polygon2D" parent="."]
+position = Vector2(248, 16)
+offset = Vector2(8, 24)
+polygon = PackedVector2Array(24, -8, 80, 40, 64, 48, 24, 16, -8, 32, -32, 24, -48, 8, -56, -8, -48, -32, -48, -56, -8, -64, 16, -56, 40, -40, 56, -16, 96, 0, 88, 8)
+script = ExtResource("2_nmcrs")
+
+[node name="BBF" type="Polygon2D" parent="."]
+position = Vector2(280, -64)
+polygon = PackedVector2Array(-24, -16, 0, -24, 16, -48, 40, -56, 56, -32, 56, -16, 48, 0, 64, 8, 72, 24, 64, 48, 24, 64, 8, 48, -24, 32, 16, 24, 0, 16, -8, 8, 8, -8, 0, -8)
+script = ExtResource("2_nmcrs")
+
+[node name="Eek!" type="Polygon2D" parent="."]
+position = Vector2(192, 64)
+polygon = PackedVector2Array(-16, -8, -8, -24, 0, -32, 8, -8, 24, 8, 48, 16, 32, 32, 16, 40, -16, 16, -8, 8)
+script = ExtResource("2_nmcrs")
+max_power = 3
+
+[node name="Abstract" type="Polygon2D" parent="."]
+position = Vector2(-40, 224)
+polygon = PackedVector2Array(-48, -64, -40, -48, 104, 24, 96, 40, 48, 16, 32, 32, 16, 40, -8, 40, -24, 32, -32, 24, -40, 8, -40, -8, -32, -24, -48, -40, -64, -64)
+script = ExtResource("2_nmcrs")
+
+[node name="Prison Island" type="Polygon2D" parent="."]
+position = Vector2(96, 288)
+polygon = PackedVector2Array(-8, -24, 32, -16, 48, 8, 96, 0, 104, 16, 96, 48, 56, 48, 8, 40, -40, 24, -32, 8)
+script = ExtResource("2_nmcrs")
+
+[node name="Rally Remix" type="Polygon2D" parent="."]
+position = Vector2(-208, 168)
+offset = Vector2(40, -16)
+polygon = PackedVector2Array(-32, -48, 0, -56, 40, 64, 0, 72, -16, 24, -136, 56, -144, 24, -24, 0)
+script = ExtResource("2_nmcrs")
+power = 0
+
+[node name="No Hook" type="Polygon2D" parent="."]
+position = Vector2(-104, 256)
+polygon = PackedVector2Array(-32, -88, -8, -88, 8, -64, 24, -56, 16, -40, 16, -16, 32, 8, 64, 16, 80, 16, 72, 32, 48, 32, 8, 24, -16, 8, -24, -16, -16, -40)
+script = ExtResource("2_nmcrs")
