@@ -59,7 +59,7 @@ func _process(_delta):
 "
 
 [node name="RegionControl" type="Polygon2D"]
-color = Color(0.47451, 0.47451, 0.47451, 1)
+color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(592, -248, 312, 504, -312, 504, -520, 216, -504, -72, -264, -528, 304, -520)
 script = ExtResource("1_pi7kk")
 complexity = "Simple"

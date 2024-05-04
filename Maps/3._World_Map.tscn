@@ -106,9 +106,25 @@ var connections : Array = [
 	[\"Iran\", \"Turkmenistan\"],
 	[\"Iran\", \"United Arab Emirates, Quatar\"],
 	[\"Uzbekistan\", \"Turkmenistan\"],
+	[\"Uzbekistan\", \"Caspian Basin\"],
+	[\"Uzbekistan\", \"Central West Kazakhstan\"],
+	[\"Caspian Basin\", \"Turkmenistan\"],
+	[\"Caspian Basin\", \"Central West Kazakhstan\"],
 	[\"Uzbekistan\", \"Tajikistan\"],
 	[\"Kyrgyzstan\", \"Tajikistan\"],
 	[\"Uzbekistan\", \"Kyrgyzstan\"],
+	[\"Uzbekistan\", \"Kazakh Desert\"],
+	[\"Kazakh Desert\", \"Kyrgyzstan\"],
+	[\"Kazakh Desert\", \"Almaty Province\"],
+	[\"Kazakh Desert\", \"Central Kazakhstan\"],
+	[\"Kazakh Desert\", \"Central West Kazakhstan\"],
+	[\"Central Kazakhstan\", \"Almaty Province\"],
+	[\"Central Kazakhstan\", \"Altai\"],
+	[\"Central Kazakhstan\", \"Kazakhstani North\"],
+	[\"Central Kazakhstan\", \"Central West Kazakhstan\"],
+	[\"Central West Kazakhstan\", \"Kazakhstani North\"],
+	[\"Almaty Province\", \"Kyrgyzstan\"],
+	[\"Altai\", \"Altai Mountains\"],
 	[\"Northern Mongolia\", \"Altai Mountains\"],
 	[\"Northern Mongolia\", \"Central Mongolia\"],
 	[\"Northern Mongolia\", \"Eastern Mongolia\"],
@@ -500,7 +516,7 @@ func _ready():
 "
 
 [node name="RegionControl" type="Polygon2D"]
-color = Color(0.6, 0.6, 0.6, 1)
+color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-3200, -1848, 3200, -1848, 3200, 1848, -3200, 1848)
 script = ExtResource("1_5aq8s")
 complexity = "Medium"
@@ -712,7 +728,42 @@ script = ExtResource("3_b6jsf")
 
 [node name="Uzbekistan" type="Polygon2D" parent="."]
 position = Vector2(544, -1000)
-polygon = PackedVector2Array(-112, 32, -128, -16, -128, -56, -88, -72, -16, -16, 32, -24, 80, 32, 104, 32, 144, 0, 152, 8, 136, 24, 152, 32, 184, 32, 192, 40, 152, 56, 152, 40, 136, 40, 128, 56, 104, 72, 120, 88, 120, 104, 104, 112, 88, 112, 88, 96, 24, 72, -8, 32, -32, 32, -56, 0, -80, 0, -96, 32)
+polygon = PackedVector2Array(-112, 32, -128, -16, -128, -56, -88, -72, -56, -48, -16, -16, 32, -24, 80, 32, 104, 32, 144, 0, 152, 8, 136, 24, 152, 32, 184, 32, 192, 40, 152, 56, 152, 40, 136, 40, 128, 56, 104, 72, 120, 88, 120, 104, 104, 112, 88, 112, 88, 96, 24, 72, -8, 32, -32, 32, -56, 0, -80, 0, -96, 32)
+script = ExtResource("3_b6jsf")
+
+[node name="Caspian Basin" type="Polygon2D" parent="."]
+position = Vector2(312, -1136)
+polygon = PackedVector2Array(-24, 56, -40, 48, -40, 32, -80, 8, -80, -32, -72, -40, -56, -24, -48, -32, -48, -48, -24, -64, 0, -64, 40, -48, 32, -24, 48, -16, 56, 16, 96, 48, 104, 80, 104, 120, 120, 168, 72, 136, 56, 152, 48, 136, 24, 128, 0, 96, 16, 80, 40, 80, 56, 96, 64, 72, 48, 72, 48, 48, 24, 32, 8, 32)
+script = ExtResource("3_b6jsf")
+
+[node name="Kazakh Desert" type="Polygon2D" parent="."]
+position = Vector2(632, -1024)
+polygon = PackedVector2Array(-144, -24, -152, -48, -136, -56, -136, -64, -144, -72, -160, -64, -176, -48, -176, -64, -144, -96, -128, -96, -112, -80, -56, -56, 88, -56, 96, -48, 128, -24, 144, -16, 168, 16, 104, 16, 96, 24, 80, 16, 72, 16, 56, 24, 16, 56, -8, 56, -56, 0, -104, 8)
+script = ExtResource("3_b6jsf")
+
+[node name="Central Kazakhstan" type="Polygon2D" parent="."]
+position = Vector2(688, -1136)
+polygon = PackedVector2Array(-184, 16, -168, 0, -152, 8, -144, -8, -120, -8, -104, -40, -88, -48, -88, -32, -56, -32, -48, -48, -32, -40, -16, -56, 24, -32, 48, -48, 80, -40, 64, -64, 72, -72, 96, -48, 104, -56, 136, -40, 176, -16, 200, 40, 184, 40, 176, 24, 96, 24, 104, 40, 56, 40, 32, 56, -112, 56, -168, 32)
+script = ExtResource("3_b6jsf")
+
+[node name="Kazakhstani North" type="Polygon2D" parent="."]
+position = Vector2(568, -1216)
+polygon = PackedVector2Array(-48, 80, -72, 64, -72, 56, -64, 48, -80, 24, -96, 24, -128, 8, -112, 0, -120, -16, -96, -16, -120, -32, -120, -40, -96, -40, -16, -56, -8, -64, 24, -64, 40, -40, 80, -40, 80, -32, 88, -32, 120, -48, 152, -24, 192, 8, 184, 16, 200, 40, 168, 32, 144, 48, 104, 24, 88, 40, 72, 32, 64, 48, 32, 48, 32, 32, 16, 40, 0, 72, -24, 72, -32, 88)
+script = ExtResource("3_b6jsf")
+
+[node name="Central West Kazakhstan" type="Polygon2D" parent="."]
+position = Vector2(432, -1144)
+polygon = PackedVector2Array(-16, 88, 24, 72, 24, 56, 56, 24, 72, 24, 88, 8, 64, -8, 64, -16, 72, -24, 56, -48, 40, -48, 40, -40, 16, -32, -8, -40, -40, -48, -56, -40, -80, -40, -88, -16, -72, -8, -64, 24, -24, 56)
+script = ExtResource("3_b6jsf")
+
+[node name="Altai" type="Polygon2D" parent="."]
+position = Vector2(888, -1136)
+polygon = PackedVector2Array(0, 40, 24, 32, 16, 16, 40, 0, 32, -8, 16, -16, 0, -16, -8, -32, -40, -48, -80, -48, -64, -40, -24, -16)
+script = ExtResource("3_b6jsf")
+
+[node name="Almaty Province" type="Polygon2D" parent="."]
+position = Vector2(800, -1056)
+polygon = PackedVector2Array(56, 64, 56, 32, 32, 0, 72, 0, 72, -40, 64, -56, -16, -56, -8, -40, -48, -32, -72, -16, -40, 8, -24, 16, 0, 48, 24, 48)
 script = ExtResource("3_b6jsf")
 
 [node name="Tajikistan" type="Polygon2D" parent="."]

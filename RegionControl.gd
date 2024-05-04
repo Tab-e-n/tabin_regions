@@ -20,7 +20,7 @@ const COLOR_TOO_BRIGHT : float = 0.9
 
 @export var align_amount : int = 3
 @export var align_color : Array = [
-		Color("6e5769"),
+		Color("625775"),
 		Color("a72b37"), # red
 		Color("368d61"), # green
 		Color("2b7dba"), # blue

@@ -51,7 +51,7 @@ func _ready():
 "
 
 [node name="tetramap" type="Polygon2D"]
-color = Color(0.47451, 0.47451, 0.47451, 1)
+color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(512, -416, 512, -512, 416, -608, -96, -608, -352, -352, -512, -352, -608, -256, -608, 64, -320, 352, -320, 608, -224, 704, 192, 704, 576, 320, 672, 320, 768, 224, 768, -160)
 script = ExtResource("1_k072d")
 complexity = "Beginner"

@@ -89,3 +89,4 @@ locale/translation_remaps={}
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.364706, 0.364706, 0.439216, 1)

@@ -70,7 +70,7 @@ func _ready():
 "
 
 [node name="- TUTORIAL -" type="Polygon2D"]
-color = Color(0.47451, 0.47451, 0.47451, 1)
+color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 2368, -1024, 2368)
 script = ExtResource("1_hywy4")
 tag = "Challenge"
@@ -92,7 +92,7 @@ script = SubResource("GDScript_ojoeb")
 [node name="spoilerwall" type="Polygon2D" parent="."]
 visible = false
 z_index = 21
-color = Color(0.298039, 0.298039, 0.298039, 1)
+color = Color(0.192157, 0.192157, 0.266667, 1)
 polygon = PackedVector2Array(2048, -1536, 2048, 1536, -2048, 1536, -2048, -1536)
 script = SubResource("GDScript_sn1dp")
 
