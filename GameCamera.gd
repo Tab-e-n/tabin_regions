@@ -89,8 +89,15 @@ func _deffered_ready():
 
 
 func _ready_play_order():
-	$turn_order.polygon[2].x = PLAY_ORDER_SPACING * (region_control.align_amount - 1)
-	$turn_order.polygon[3].x = PLAY_ORDER_SPACING * (region_control.align_amount - 1)
+	var size : float = PLAY_ORDER_SPACING * (region_control.align_amount - 1)
+	$turn_order.polygon[2].x = size
+	$turn_order.polygon[3].x = size
+	var max_size : float = get_viewport_rect().size.x
+	print(size)
+	if size > max_size:
+		$turn_order.scale.x = max_size / size
+		$turn_order.scale.y = $turn_order.scale.x
+	
 	
 	var play_order : Array = region_control.player_order.duplicate()
 	for i in range(play_order.size()):

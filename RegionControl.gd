@@ -20,22 +20,43 @@ const COLOR_TOO_BRIGHT : float = 0.9
 
 @export var align_amount : int = 3
 @export var align_color : Array = [
-		Color("625775"),
+		Color("625775"), # purplish gray
+		
 		Color("a72b37"), # red
 		Color("368d61"), # green
 		Color("2b7dba"), # blue
-		Color("ae5b15"), # gold
+		Color("ae5b15"), # orange
 		Color("8927a8"), # purple
-		Color("ed858d"), # pink
-		Color("7ded92"), # lime
-		Color("7795ed"), # teal
-		Color("d7e06b"), # yellow
-		Color("d7cac0"), # silver
-		Color("dd4f96"), # magenta
-		Color("395621"), # grass
+		
+		Color("ed858d"), # salmon
+		Color("c5ebbf"), # pistachio
 		Color("213775"), # navy
+		Color("a58260"), # dirt
+		Color("dd4f96"), # magenta
+		
+		Color("deaac7"), # pink
+		Color("6da63d"), # vibrant green
+		Color("7795ed"), # teal
+		Color("d09f15"), # gold
+		Color("b177c9"), # lavender
+		
+		Color("7a0e43"), # violet
+		Color("395621"), # grass
+		Color("556aa2"), # denim
+		Color("d7e06b"), # yellow
+		Color("895870"), # dim lavender
+		
+		Color("3f0628"), # dark red
+		Color("7ded92"), # lime
+		Color("2b4456"), # swamp
+		Color("d7cac0"), # tan
+		Color("828387"), # gray
+		
 		Color("673a2b"), # brown
-		Color("3f0628"), # violet
+		Color("4e543a"), # tank
+		Color("b6b7eb"), # silver
+		Color("eda75b"), # sandstorm
+		Color("305d4d"), # dark green
 ]
 @export var connections : Array = []
 @export var city_size : float = 1

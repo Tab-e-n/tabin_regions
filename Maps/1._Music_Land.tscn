@@ -9,7 +9,6 @@ script/source = "extends Node
 
 var connections : Array = [
 	[\"Cellar\", \"Act Right\"],
-	[\"Abstract\", \"Act Right\"],
 	[\"Cellar\", \"Clutterfunk\"],
 	[\"Abstract\", \"Clutterfunk\"],
 	[\"Abstract\", \"Crawling\"],

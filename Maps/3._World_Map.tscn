@@ -7,14 +7,6 @@
 [sub_resource type="GDScript" id="GDScript_omqxc"]
 script/source = "extends Node
 
-@export var align_color : Array = [
-	Color(0,0,0,1),
-	Color(0,0,0,1),
-	Color(0,0,0,1),
-	Color(0,0,0,1),
-	Color(0,0,0,1),
-	Color(0,0,0,1),
-]
 
 var connections : Array = [
 	[\"Czechoslovakia\", \"Germany\"],
@@ -511,7 +503,6 @@ var connections : Array = [
 
 func _ready():
 	get_parent().connections = connections.duplicate()
-#	get_parent().align_color = align_color.duplicate()
 	queue_free()
 "
 
@@ -521,7 +512,7 @@ polygon = PackedVector2Array(-3200, -1848, 3200, -1848, 3200, 1848, -3200, 1848)
 script = ExtResource("1_5aq8s")
 complexity = "Medium"
 lore = "The Classic. Some smaller countries had their territories combined together.  A lot of borders are fucky. This is the dumbest project i ever took up."
-align_amount = 16
+align_amount = 30
 city_size = 0.85
 
 [node name="Node" type="Node" parent="."]
@@ -536,6 +527,7 @@ texture = ExtResource("2_57qtc")
 position = Vector2(-320, -1160)
 polygon = PackedVector2Array(-40, -8, -16, 32, 0, 32, 16, 16, 48, 24, 48, 40, 64, 48, 72, 40, 96, 40, 104, 32, 128, 32, 144, 16, 120, 8, 72, 8, 24, -24, -8, -24)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="Switzerland" type="Polygon2D" parent="."]
 position = Vector2(-424, -1096)
@@ -556,6 +548,8 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-296, -1416)
 polygon = PackedVector2Array(-56, 128, -40, 136, -24, 128, -8, 128, 8, 104, 8, 72, 40, 48, 16, 24, 16, 8, 32, -16, 72, -40, 72, -56, 96, -72, 104, -96, 88, -120, 56, -128, 40, -120, 16, -120, -8, -104, -8, -88, -32, -72, -40, -40, -56, -32, -72, -16, -72, 8, -56, 16, -80, 72, -64, 88, -72, 104, -56, 112)
 script = ExtResource("3_b6jsf")
+alignment = 18
+is_capital = true
 
 [node name="Norway" type="Polygon2D" parent="."]
 position = Vector2(-344, -1520)
@@ -601,6 +595,8 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-528, -1088)
 polygon = PackedVector2Array(16, 88, 16, 72, 24, 64, 48, 64, 56, 72, 72, 72, 88, 56, 72, 40, 88, 16, 64, 0, 88, -24, 96, -48, 72, -64, 0, -96, -40, -64, -64, -64, -64, -48, -120, -48, -120, -24, -104, -16, -88, -16, -64, 24, -72, 64, -64, 80, -32, 80, -16, 88)
 script = ExtResource("3_b6jsf")
+alignment = 3
+is_capital = true
 
 [node name="Netherlands, Belgium" type="Polygon2D" parent="."]
 position = Vector2(-488, -1216)
@@ -623,6 +619,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-640, -944)
 polygon = PackedVector2Array(-80, -88, 40, -80, 48, -64, 80, -64, 96, -56, 128, -56, 104, -24, 88, -24, 56, 8, 64, 32, 16, 72, -24, 72, -40, 88, -72, 64, -64, 40, -64, 0, -48, -40, -96, -64)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="Portugal" type="Polygon2D" parent="."]
 position = Vector2(-728, -944)
@@ -633,11 +630,14 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-592, -1216)
 polygon = PackedVector2Array(-64, 56, -48, 48, 48, 32, 40, 16, 56, 8, 48, -8, 32, -8, 32, -32, 0, -64, -24, -72, 8, -96, 0, -112, -24, -104, -24, -128, -48, -112, -64, -120, -80, -104, -64, -96, -56, -72, -40, -64, -48, -48, -24, -48, -24, -16, -40, -16, -56, 16, -24, 24, -48, 32)
 script = ExtResource("3_b6jsf")
+alignment = 2
 
 [node name="Ireland" type="Polygon2D" parent="."]
 position = Vector2(-696, -1232)
 polygon = PackedVector2Array(-40, 32, -16, 40, -8, 32, 32, 16, 32, -16, 40, -24, 40, -48, 0, -24, -24, -24, -24, 0, -16, 8, -40, 16)
 script = ExtResource("3_b6jsf")
+alignment = 2
+is_capital = true
 
 [node name="Iceland" type="Polygon2D" parent="."]
 position = Vector2(-816, -1464)
@@ -664,6 +664,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(8, -1136)
 polygon = PackedVector2Array(-200, 8, -184, -8, -184, -24, -160, -40, -176, -64, -64, -56, -48, -72, -8, -72, 8, -56, 40, -32, 72, -32, 80, -24, 104, -24, 112, -8, 112, 16, 88, 40, 24, 56, -8, 56, -24, 40, -48, 56, -64, 40, -64, 32, -88, 8, -120, 8, -128, 16, -184, 16)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="Romania" type="Polygon2D" parent="."]
 position = Vector2(-136, -1080)
@@ -674,6 +675,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-240, -1048)
 polygon = PackedVector2Array(-96, -40, -96, -16, -88, -16, -64, 24, -40, 32, -8, 48, 16, 72, 24, 112, 40, 88, 80, 72, 104, 72, 120, 80, 128, 80, 136, 72, 168, 56, 168, 24, 144, 8, 136, 16, 72, 24, 64, 0, 48, 0, 32, -32, 64, -72, 48, -80, 24, -80, 16, -72, -8, -72, -16, -64, -32, -72, -48, -40)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="Mediterranean Sea" type="Polygon2D" parent="."]
 position = Vector2(-232, -832)
@@ -695,6 +697,8 @@ script = ExtResource("3_b6jsf")
 position = Vector2(64, -928)
 polygon = PackedVector2Array(-184, -16, -160, 0, -160, 16, -144, 48, -128, 56, -104, 56, -96, 64, -72, 56, -40, 72, -8, 56, 24, 56, 56, 48, 80, 56, 96, 48, 128, 48, 136, 40, 168, 40, 160, 16, 160, -8, 144, -24, 144, -48, 104, -56, 88, -40, 32, -40, -16, -64, -56, -64, -80, -40, -112, -40, -120, -16, -144, -24, -160, -24)
 script = ExtResource("3_b6jsf")
+alignment = 5
+is_capital = true
 
 [node name="Black Sea" type="Polygon2D" parent="."]
 position = Vector2(-8, -1024)
@@ -815,6 +819,8 @@ script = ExtResource("3_b6jsf")
 position = Vector2(240, -600)
 polygon = PackedVector2Array(-168, -88, -168, -104, -144, -104, -112, -120, -112, -144, -128, -160, -88, -168, -64, -168, 32, -96, 48, -104, 72, -88, 96, -88, 112, -64, 136, -40, 136, -24, 160, 0, 168, 32, 216, 40, 240, 56, 224, 96, 176, 120, 136, 120, 96, 136, 88, 152, 56, 160, 32, 152, 8, 160, -8, 184, -16, 168, -16, 144, -32, 136, -32, 112, -72, 80, -72, 56, -88, 16)
 script = ExtResource("3_b6jsf")
+alignment = 9
+is_capital = true
 
 [node name="Persian Gulf" type="Polygon2D" parent="."]
 position = Vector2(384, -656)
@@ -835,6 +841,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(440, -600)
 polygon = PackedVector2Array(-40, 0, -32, 32, 16, 40, 32, 24, 40, -8, 48, -24, 40, -32, 32, -24, 16, -8, 8, 16, -8, 8, -16, 0, -32, 8, -48, -8, -56, -32, -64, -40, -64, -24)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="Georgia, Armenia, Azerbaijan" type="Polygon2D" parent="."]
 position = Vector2(192, -992)
@@ -845,6 +852,8 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-16, -656)
 polygon = PackedVector2Array(-96, -104, -88, 112, 16, 112, 32, 104, 64, 104, 72, 120, 88, 120, 112, 80, 112, 64, 40, -64, 56, -56, 72, -24, 88, -32, 88, -64, 72, -96, 32, -96, 24, -104, 0, -104, -24, -88, -64, -104)
 script = ExtResource("3_b6jsf")
+alignment = 29
+is_capital = true
 
 [node name="Libya" type="Polygon2D" parent="."]
 position = Vector2(-264, -672)
@@ -1047,36 +1056,44 @@ script = ExtResource("3_b6jsf")
 position = Vector2(312, 360)
 polygon = PackedVector2Array(-40, 24, -72, 72, -64, 128, -32, 152, -16, 136, 0, 128, 16, 88, 32, 32, 56, -32, 64, -72, 72, -128, 56, -152, 40, -144, 40, -120, 24, -104, 24, -88, -8, -64, -32, -64, -56, -24)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="New Zealand" type="Polygon2D" parent="."]
 position = Vector2(2488, 872)
 polygon = PackedVector2Array(-152, 88, -136, 96, -104, 96, -72, 72, -40, 48, -16, 40, 56, -8, 64, -16, 80, -8, 120, -40, 192, -88, 176, -96, 160, -88, 144, -104, 160, -120, 160, -136, 128, -168, 128, -144, 120, -88, 80, -64, 96, -40, 72, -24, 40, -32, 8, -8, -48, 32, -88, 40, -128, 64, -144, 72)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="Western Australia" type="Polygon2D" parent="."]
 position = Vector2(1704, 488)
 polygon = PackedVector2Array(208, -216, 168, 0, 128, 152, 88, 168, 48, 176, 0, 208, -40, 200, -104, 232, -128, 232, -152, 216, -160, 200, -136, 192, -128, 168, -128, 80, -136, 48, -120, 32, -128, 0, -128, -16, -120, -24, -112, -48, -64, -80, -32, -88, 0, -104, 32, -104, 64, -144, 64, -160, 80, -176, 88, -160, 104, -168, 96, -184, 120, -192, 128, -208, 152, -232, 176, -232, 184, -224, 192, -200, 200, -216)
 script = ExtResource("3_b6jsf")
+alignment = 10
 
 [node name="South Australia" type="Polygon2D" parent="."]
 position = Vector2(1960, 616)
 polygon = PackedVector2Array(-88, -128, 112, -128, 96, -64, 56, 72, 32, 168, 16, 160, 16, 144, 24, 136, 24, 112, 8, 112, 16, 96, 8, 88, -8, 112, -8, 128, -24, 120, -8, 104, 8, 72, 0, 64, -16, 80, -32, 104, -40, 88, -32, 64, -40, 56, -40, 40, -80, 24, -128, 24)
 script = ExtResource("3_b6jsf")
+alignment = 10
 
 [node name="Northern Australia" type="Polygon2D" parent="."]
 position = Vector2(1960, 368)
 polygon = PackedVector2Array(-48, -96, -32, -96, -32, -104, -40, -112, -32, -128, -16, -144, 0, -152, 24, -152, 32, -168, 112, -152, 88, -128, 72, -96, 120, -64, 72, 120, -88, 120)
 script = ExtResource("3_b6jsf")
+alignment = 10
 
 [node name="Queensland" type="Polygon2D" parent="."]
 position = Vector2(2168, 432)
 polygon = PackedVector2Array(-112, 120, 56, 120, 80, 112, 112, 112, 152, 104, 160, 72, 144, 48, 128, 32, 128, 8, 112, 0, 112, -40, 64, -72, 64, -120, 56, -128, 56, -168, 32, -176, 32, -208, 16, -256, 0, -224, 0, -208, -8, -192, -16, -152, -32, -112, -48, -104, -56, -104, -72, -120, -88, -128, -136, 56, -96, 56)
 script = ExtResource("3_b6jsf")
+alignment = 10
+is_capital = true
 
 [node name="Victoria" type="Polygon2D" parent="."]
 position = Vector2(2048, 768)
 polygon = PackedVector2Array(104, 8, 80, -16, 72, -24, 56, -32, 40, -32, 8, -48, -8, -64, -32, -80, -56, 16, -32, 24, -16, 32, 8, 16, 16, 16, 24, 32, 40, 32, 64, 8)
 script = ExtResource("3_b6jsf")
+alignment = 10
 
 [node name="New South Wales" type="Polygon2D" parent="."]
 position = Vector2(2136, 640)
@@ -1112,27 +1129,33 @@ script = ExtResource("3_b6jsf")
 position = Vector2(912, -376)
 polygon = PackedVector2Array(-64, -8, -56, -32, -24, -48, -16, -56, -16, -96, -8, -136, 8, -144, 48, -152, 56, -128, 56, -104, 48, -88, 56, -72, 96, -88, 136, -104, 80, -48, 56, -32, 48, -16, 56, 8, 56, 32, 48, 80, 16, 136, 0, 136, -16, 104, -24, 72, -40, 48, -56, 8)
 script = ExtResource("3_b6jsf")
+alignment = 12
 
 [node name="West India" type="Polygon2D" parent="."]
 position = Vector2(848, -544)
 polygon = PackedVector2Array(112, 16, 128, -8, 152, -16, 152, -32, 128, -40, 88, -56, 72, -88, 24, -104, 16, -88, 32, -80, 16, -64, 0, -64, 0, -72, -16, -72, -24, -48, -48, -72, -80, -72, -88, -56, -136, -40, -112, -24, -96, -24, -88, -32, -88, -16, -112, -8, -88, 24, -64, 24, -56, 16, -56, -8, -48, -8, -40, 8, -40, 48, -24, 96, -16, 136, 0, 160, 8, 136, 40, 120, 48, 112, 48, 72, 56, 32, 72, 24)
 script = ExtResource("3_b6jsf")
+alignment = 12
 
 [node name="North India" type="Polygon2D" parent="."]
 position = Vector2(848, -728)
 polygon = PackedVector2Array(0, -120, -24, -96, -64, -104, -56, -64, -24, -40, -80, 48, -104, 48, -112, 72, -80, 112, -48, 112, -24, 136, -16, 112, 0, 112, 0, 120, 16, 120, 32, 104, 16, 96, 24, 80, 32, 48, 24, 8, 80, 24, 80, 16, 88, 8, 88, 0, 56, -24, 40, -40, 32, -48, 48, -56, 48, -72, 32, -88, 48, -104, 48, -120, 32, -128, 16, -128)
 script = ExtResource("3_b6jsf")
+alignment = 12
 
 [node name="East India" type="Polygon2D" parent="."]
 position = Vector2(1216, -688)
 offset = Vector2(-16, 24)
 polygon = PackedVector2Array(56, -24, 40, -24, 32, -32, 32, -40, 24, -48, 0, -48, -40, -16, -48, -16, -40, -8, -40, 8, -48, 16, -80, 16, -104, 8, -96, -8, -96, -16, -104, -16, -104, -8, -112, 0, -112, 24, -104, 64, -104, 48, -88, 32, -72, 32, -72, 40, -32, 40, -24, 56, -56, 80, -56, 88, -40, 88, -24, 80, -8, 104, -8, 72, 8, 72, 16, 40, 32, 8, 56, 0)
 script = ExtResource("3_b6jsf")
+alignment = 12
 
 [node name="Central India" type="Polygon2D" parent="."]
 position = Vector2(1024, -600)
 polygon = PackedVector2Array(24, 120, 32, 104, 56, 96, 56, 72, 72, 64, 88, 64, 88, 32, 80, 24, 80, 8, 72, 0, 64, -40, 56, -40, 48, -48, 8, -48, -16, -64, -48, -72, -96, -104, -152, -120, -144, -80, -152, -48, -104, -32, -88, 0, -48, 16, -24, 24, -24, 40, -48, 48, -64, 72, -56, 96, -56, 120, -64, 136, -56, 152)
 script = ExtResource("3_b6jsf")
+alignment = 12
+is_capital = true
 
 [node name="Bhutan" type="Polygon2D" parent="."]
 position = Vector2(1128, -664)
@@ -1164,11 +1187,14 @@ script = ExtResource("3_b6jsf")
 position = Vector2(1632, -48)
 polygon = PackedVector2Array(-80, -56, -96, -32, -96, -16, -88, -8, -88, 8, -72, 16, -72, 40, -64, 56, -40, 56, -32, 64, -16, 64, -8, 56, 0, 64, 16, 64, 24, 80, 48, 64, 56, 24, 72, 8, 80, -32, 96, -32, 104, -40, 96, -48, 88, -56, 88, -64, 72, -80, 80, -104, 72, -112, 48, -112, 32, -96, 32, -80, 24, -64, 24, -56, 16, -40, -24, -40, -32, -32, -56, -32, -80, -48)
 script = ExtResource("3_b6jsf")
+alignment = 13
+is_capital = true
 
 [node name="Sulawesi" type="Polygon2D" parent="."]
 position = Vector2(1760, -8)
 polygon = PackedVector2Array(-16, 72, 0, 72, 0, 24, 8, 8, 16, 8, 24, 40, 40, 72, 48, 72, 56, 64, 56, 40, 32, 0, 32, -16, 48, -16, 56, -32, 48, -40, 16, -24, 0, -40, 8, -64, 32, -64, 64, -56, 80, -56, 96, -72, 104, -88, 96, -88, 72, -72, 48, -80, 16, -80, 0, -64, -8, -32, -24, 0, -24, 24, -16, 32, -16, 56, -24, 64)
 script = ExtResource("3_b6jsf")
+alignment = 13
 
 [node name="Java" type="Polygon2D" parent="."]
 position = Vector2(1544, 104)
@@ -1194,6 +1220,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(1904, -24)
 polygon = PackedVector2Array(-24, 32, -32, 40, -24, 48, -16, 48, -8, 40, 48, 40, 56, 48, 64, 48, 64, 40, 56, 32, 24, 24, 16, 32, 8, 32, 16, 40, 0, 40, -8, 40, -16, 32, 1, -53, 16, -40, 8, -56, 24, -56, 8, -64, 24, -80, 8, -72, 8, -80, 24, -88, 16, -88, 0, -80, 0, -64, 0, -48, -16, 32)
 script = ExtResource("3_b6jsf")
+alignment = 13
 
 [node name="Papua New Guinea" type="Polygon2D" parent="."]
 position = Vector2(2216, 72)
@@ -1224,6 +1251,8 @@ script = ExtResource("3_b6jsf")
 position = Vector2(1944, -848)
 polygon = PackedVector2Array(-120, 56, -104, 64, -96, 80, -80, 96, -72, 96, -72, 64, -88, 48, -80, 32, -64, 24, -64, 56, -56, 56, -32, 40, -32, 32, -24, 24, -16, 48, 0, 40, 0, 16, 16, 24, 64, 0, 64, -16, 48, -48, 56, -72, 24, -112, 8, -128, 0, -144, 16, -152, 24, -136, 40, -152, 64, -160, 64, -176, 40, -184, 0, -192, -32, -216, -40, -208, -24, -192, -16, -176, -32, -168, -32, -144, -16, -144, 0, -120, -8, -112, 16, -72, 8, -56, -8, -56, 0, -40, -8, -32, -24, -40, -24, -8, -64, 0, -80, -8, -80, 8, -104, 32, -128, 56, -136, 56, -136, 72)
 script = ExtResource("3_b6jsf")
+alignment = 6
+is_capital = true
 
 [node name="North Korea" type="Polygon2D" parent="."]
 position = Vector2(1712, -944)
@@ -1284,21 +1313,26 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-1688, 760)
 polygon = PackedVector2Array(-32, 88, -32, -48, -16, -48, 8, -64, 40, -56, 56, -24, 64, -16, 72, 0, 64, 16, 56, 32, 40, 40, 24, 40, 8, 48, -16, 40, -16, 48, -8, 56, -8, 80, -16, 88)
 script = ExtResource("3_b6jsf")
+alignment = 22
+is_capital = true
 
 [node name="Central Argentina" type="Polygon2D" parent="."]
 position = Vector2(-1728, 664)
 polygon = PackedVector2Array(64, -56, 56, -48, 48, -56, 24, -48, 40, -96, 0, -104, -16, -56, -24, -64, -48, -72, -72, -64, -72, -32, -56, -16, -56, 64, 8, 64, 8, 48, 24, 48, 48, 32, 80, 40, 64, 24)
 script = ExtResource("3_b6jsf")
+alignment = 22
 
 [node name="North Greater Argentina" type="Polygon2D" parent="."]
 position = Vector2(-1792, 520)
 polygon = PackedVector2Array(-88, -72, -72, -56, -88, -40, -96, -32, -96, 24, -104, 32, -104, 40, -72, 40, -56, 48, -40, 48, -8, 80, 16, 72, 40, 80, 48, 88, 64, 40, 104, 48, 88, 96, 112, 88, 120, 96, 128, 88, 144, 88, 136, 80, 136, 72, 152, 48, 184, 24, 184, 0, 176, -8, 168, -8, 168, 8, 144, 32, 112, 32, 96, 16, 104, 0, 104, -24, 56, -48, 40, -48, 8, -80, 8, -96, -16, -88, -24, -80, -40, -88, -64, -88, -80, -72)
 script = ExtResource("3_b6jsf")
+alignment = 22
 
 [node name="Nuevo Cuyo" type="Polygon2D" parent="."]
 position = Vector2(-1832, 704)
 polygon = PackedVector2Array(48, 48, 0, 48, 0, 72, -24, 72, -40, 72, -48, 56, -48, 32, -48, -24, -56, -48, -64, -72, -64, -96, -72, -112, -72, -128, -64, -144, -32, -144, -16, -136, 0, -136, 32, -104, 32, -72, 48, -56)
 script = ExtResource("3_b6jsf")
+alignment = 22
 
 [node name="Falklands" type="Polygon2D" parent="."]
 position = Vector2(-1560, 1080)
@@ -1314,11 +1348,13 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-1760, 1016)
 polygon = PackedVector2Array(16, -56, -56, -48, -56, -16, -48, 0, -56, 16, -40, 40, -24, 48, -16, 64, 8, 80, 32, 88, 48, 72, 32, 64, 32, 56, 24, 48, 24, 40, 32, 32, 48, 24, 40, 16, 40, 0, 56, -16, 56, -24, 48, -32, 32, -40)
 script = ExtResource("3_b6jsf")
+alignment = 22
 
 [node name="Chubut" type="Polygon2D" parent="."]
 position = Vector2(-1784, 912)
 polygon = PackedVector2Array(40, 48, 40, 40, 48, 24, 56, 24, 64, 16, 64, 8, 56, -8, 64, -16, 80, -24, 80, -32, 72, -40, 56, -32, -72, -32, -48, 8, -40, 32, -32, 56)
 script = ExtResource("3_b6jsf")
+alignment = 22
 
 [node name="North Chile" type="Polygon2D" parent="."]
 position = Vector2(-1912, 448)
@@ -1339,6 +1375,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-1792, 816)
 polygon = PackedVector2Array(-80, -40, -72, -24, -72, 32, -64, 64, 64, 64, 56, 48, 40, 32, 56, 24, 72, 32, 72, -88, 8, -88, 8, -64, -40, -64, -40, -40)
 script = ExtResource("3_b6jsf")
+alignment = 22
 
 [node name="Caribbean" type="Polygon2D" parent="."]
 position = Vector2(-2000, -400)
@@ -1405,6 +1442,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-2128, -688)
 polygon = PackedVector2Array(-96, -40, -64, -40, -56, -24, -48, -24, -40, -32, -32, -32, -16, -16, -24, 8, -16, 40, 0, 64, 0, 72, 16, 72, 24, 56, 24, 0, 16, -48, -8, -48, -48, -56, -88, -56)
 script = ExtResource("3_b6jsf")
+alignment = 21
 
 [node name="Georgia" type="Polygon2D" parent="."]
 position = Vector2(-2128, -768)
@@ -1441,6 +1479,8 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-2432, -752)
 polygon = PackedVector2Array(-128, -8, -128, 0, -112, 16, -112, 40, -96, 48, -72, 32, -48, 32, -40, 72, -32, 104, -16, 112, 0, 112, 0, 96, 8, 80, 24, 64, 40, 64, 64, 40, 96, 32, 112, 0, 112, -40, 104, -40, 88, -48, 48, -48, 40, -56, 16, -56, 8, -64, 24, -104, -32, -104, -64, -8)
 script = ExtResource("3_b6jsf")
+alignment = 21
+is_capital = true
 
 [node name="Virginia" type="Polygon2D" parent="."]
 position = Vector2(-1992, -888)
@@ -1461,6 +1501,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-1912, -1008)
 polygon = PackedVector2Array(-88, 24, -16, 24, 0, 32, 0, 40, -16, 56, -16, 72, -40, 80, -24, 88, -24, 104, -8, 104, 0, 72, 8, 56, 8, 40, 40, 8, 40, -16, 56, -48, 24, -48, -8, -32, -24, -16, -56, -16, -72, -8, -64, 0, -88, 16)
 script = ExtResource("3_b6jsf")
+alignment = 8
 
 [node name="Pennsylvania" type="Polygon2D" parent="."]
 position = Vector2(-1968, -960)
@@ -1471,6 +1512,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-2064, -952)
 polygon = PackedVector2Array(56, -40, 8, -24, -32, -24, -48, 40, -40, 40, -32, 48, -16, 48, 0, 40, 8, 32, 16, 32, 32, 16)
 script = ExtResource("3_b6jsf")
+alignment = 21
 
 [node name="Kentucky" type="Polygon2D" parent="."]
 position = Vector2(-2128, -888)
@@ -1563,6 +1605,8 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-2672, -1096)
 polygon = PackedVector2Array(-80, 40, -24, 40, 0, 32, 48, 32, 80, -48, 0, -48, 0, -24, -16, -16, -16, -32, -32, -32, -40, -24, -56, 8)
 script = ExtResource("3_b6jsf")
+alignment = 8
+is_capital = true
 
 [node name="Utah" type="Polygon2D" parent="."]
 position = Vector2(-2592, -912)
@@ -1588,6 +1632,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-2768, -872)
 polygon = PackedVector2Array(-24, -104, 48, -104, 16, -32, 72, 40, 80, 64, 56, 96, 8, 96, 8, 80, -8, 64, -32, 56, -40, 24, -40, -16, -48, -32, -48, -64, -40, -88)
 script = ExtResource("3_b6jsf")
+alignment = 8
 
 [node name="Baja California" type="Polygon2D" parent="."]
 position = Vector2(-2736, -672)
@@ -1603,16 +1648,20 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-2528, -560)
 polygon = PackedVector2Array(-32, 104, -16, 88, 0, 96, 24, 56, 48, 32, 56, 32, 64, 16, 72, 16, 72, -24, 80, -56, 96, -80, 80, -80, 64, -88, 56, -120, 32, -96, 24, -80, 32, -64, 24, -48, 8, -56, -8, -56, -8, -40, -32, -40, -48, -8, -64, -8, -72, -16, -80, 0, -80, 24, -88, 48, -88, 64, -56, 96)
 script = ExtResource("3_b6jsf")
+alignment = 27
+is_capital = true
 
 [node name="South Mexico" type="Polygon2D" parent="."]
 position = Vector2(-2472, -456)
 polygon = PackedVector2Array(-88, 0, -48, 24, -24, 32, 0, 48, 24, 48, 40, 40, 64, 40, 72, 16, 64, -8, 40, -16, 24, -40, 24, -56, 16, -72, 16, -88, 8, -88, 0, -72, -8, -72, -32, -48, -56, -8, -72, -16)
 script = ExtResource("3_b6jsf")
+alignment = 27
 
 [node name="East Mexico" type="Polygon2D" parent="."]
 position = Vector2(-2312, -488)
 polygon = PackedVector2Array(-96, 72, -88, 48, -96, 24, -56, 16, -32, 8, -16, -16, -8, -40, 8, -40, 24, -48, 48, -48, 56, -40, 56, -32, 40, -16, 32, 8, 24, 16, 0, 40, -16, 40, -24, 32, -40, 48, -32, 56, -24, 72, -48, 72, -64, 88, -64, 104)
 script = ExtResource("3_b6jsf")
+alignment = 27
 
 [node name="Newfoundland" type="Polygon2D" parent="."]
 position = Vector2(-1536, -1136)
@@ -1633,11 +1682,14 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-1800, -1184)
 polygon = PackedVector2Array(-120, 0, -144, 88, -136, 112, -88, 128, -24, 128, -24, 120, -16, 120, 32, 64, 40, 72, 56, 72, 88, 56, 104, 64, 120, 64, 136, 48, 120, 32, 88, 40, 80, 48, 56, 48, 40, 56, 56, 40, 88, 32, 104, 16, 136, 16, 200, 24, 216, 16, 240, -8, 280, -8, 280, -24, 184, -32, 184, -48, 176, -32, 168, -32, 152, -48, 144, -72, 144, -88, 152, -96, 176, -88, 200, -88, 216, -80, 240, -192, 208, -160, 184, -152, 168, -152, 144, -168, 152, -184, 160, -200, 160, -208, 144, -216, 128, -240, 104, -232, 72, -240, 48, -216, 32, -200, 32, -176, 8, -168, 8, -152, 16, -136, 8, -112, -32, -88, -64, -80, -72, -40, -88, -8)
 script = ExtResource("3_b6jsf")
+alignment = 11
 
 [node name="Ontario" type="Polygon2D" parent="."]
 position = Vector2(-2032, -1184)
 polygon = PackedVector2Array(-176, 32, -160, 16, -144, -8, -120, -40, 40, -120, 64, -104, 80, -96, 88, -88, 112, -96, 128, -80, 112, -64, 112, -48, 104, -40, 104, -24, 112, -16, 112, 0, 88, 88, 96, 112, 144, 128, 112, 144, 56, 152, 48, 168, 56, 176, 16, 176, -8, 192, 0, 168, 8, 168, 32, 136, 56, 136, 64, 120, 48, 104, 24, 104, 0, 96, 0, 72, -8, 56, -40, 40, -48, 48, -64, 56, -88, 64, -104, 56, -120, 64, -128, 56, -136, 56, -144, 48, -160, 56, -168, 48, -168, 32)
 script = ExtResource("3_b6jsf")
+alignment = 11
+is_capital = true
 
 [node name="Manitoba" type="Polygon2D" parent="."]
 position = Vector2(-2176, -1280)
@@ -1694,6 +1746,7 @@ script = ExtResource("3_b6jsf")
 position = Vector2(-2784, -1488)
 polygon = PackedVector2Array(256, -72, 40, 104, 56, 120, 64, 136, 88, 136, 112, 168, 112, 208, 104, 224, 88, 232, 96, 216, 88, 208, 88, 192, 72, 192, 72, 216, 56, 224, 48, 216, 56, 208, 64, 192, 56, 184, 56, 176, 64, 168, 72, 176, 72, 184, 88, 184, 96, 168, 88, 160, 80, 160, 72, 168, 56, 160, 64, 152, 72, 152, 88, 152, 80, 144, 56, 152, 48, 136, 32, 120, 8, 112, -16, 112, -40, 104, -64, 104, -80, 120, -112, 120, -144, 128, -160, 128, -136, 112, -120, 104, -88, 96, -88, 88, -120, 96, -152, 112, -168, 120, -184, 128, -192, 136, -248, 160, -216, 160, -192, 144, -176, 144, -256, 192, -272, 184, -248, 168, -264, 168, -328, 192, -392, 216, -400, 208, -392, 200, -352, 184, -328, 176, -288, 160, -272, 152, -248, 136, -272, 136, -288, 144, -304, 136, -312, 144, -320, 144, -328, 136, -312, 128, -296, 112, -296, 104, -328, 120, -336, 112, -336, 104, -320, 96, -320, 80, -296, 72, -272, 64, -264, 56, -248, 48, -240, 56, -224, 48, -200, 48, -160, 24, -160, 16, -176, 16, -192, 24, -224, 24, -240, 16, -232, 8, -216, -8, -176, -16, -160, -8, -136, 0, -128, -8, -96, -8, -112, -16, -136, -40, -136, -56, -80, -64, -40, -80, -16, -80, 8, -88, 56, -96, 96, -96, 136, -88, 200, -80, 232, -80)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="Canada Northwest Territories 1" type="Polygon2D" parent="."]
 position = Vector2(-2424, -1456)
@@ -1715,6 +1768,7 @@ position = Vector2(-2128, 1608)
 offset = Vector2(104, 88)
 polygon = PackedVector2Array(232, 136, -248, 136, -296, 120, -360, 96, -392, 80, -360, 80, -264, 88, -144, 88, -120, 80, -40, 80, -64, 72, -144, 72, -216, 64, -248, 40, -288, 32, -336, 24, -296, 16, -256, 16, -240, 8, -240, 0, -248, -8, -296, -16, -376, -16, -400, -32, -440, -32, -432, -16, -416, -16, -408, -8, -416, 0, -448, -8, -464, -16, -464, -32, -448, -24, -440, -32, -456, -48, -456, -56, -424, -56, -400, -48, -376, -40, -352, -48, -344, -56, -344, -64, -352, -80, -376, -88, -392, -96, -384, -104, -368, -104, -328, -112, -304, -104, -288, -120, -272, -120, -256, -112, -200, -112, -184, -120, -160, -120, -144, -112, -128, -120, -112, -120, -80, -112, -56, -120, -32, -112, -24, -128, -16, -128, 0, -112, 8, -112, 16, -128, 24, -128, 40, -104, 48, -120, 80, -120, 96, -104, 112, -112, 120, -112, 144, -104, 152, -112, 152, -120, 120, -120, 112, -128, 112, -136, 128, -144, 120, -152, 88, -144, 64, -152, 64, -160, 80, -176, 128, -184, 168, -176, 168, -168, 128, -160, 152, -144, 192, -144, 208, -136, 232, -144)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="Chilean Antarctic" type="Polygon2D" parent="."]
 position = Vector2(-1568, 1584)

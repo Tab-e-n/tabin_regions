@@ -1,6 +1,10 @@
 extends Polygon2D
 class_name Region
 
+
+const TEXTURE_SIZE : Vector2 = Vector2(1024, 1024)
+
+
 @export var alignment : int = 0
 
 @export var power : int = 1
@@ -10,9 +14,12 @@ class_name Region
 
 @export var connections : Dictionary = {}
 
+
 @onready var region_control : RegionControl = get_parent()
 
+
 var city : City = City.new()
+
 
 func _ready():
 	city.is_capital = is_capital

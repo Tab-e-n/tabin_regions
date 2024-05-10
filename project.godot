@@ -22,7 +22,8 @@ GameStats="*res://GameStats.gd"
 
 [display]
 
-window/size/resizable=false
+window/size/viewport_height=640
+window/stretch/mode="canvas_items"
 
 [filesystem]
 
