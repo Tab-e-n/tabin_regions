@@ -1,6 +1,8 @@
 extends Node
 
+
 var default_stats : Dictionary = {
+	"alignment name" : "",
 	"align color" : Color(0, 0, 0, 0),
 	"controler" : 0,
 	"placement" : "N/A",
@@ -19,9 +21,40 @@ var default_stats : Dictionary = {
 
 var stats : Array = []
 
+
 func reset_statistics(align_amount):
 	stats.clear()
 	stats.resize(align_amount)
 	for i in range(align_amount):
 		stats[i] = default_stats.duplicate()
-	
+
+
+func stat_exists(align : int, key : String) -> bool:
+	if align < 0 or align >= stats.size():
+		push_warning("Alignment ", align, " isn't in the statistics table.")
+		return false
+	if not stats[align].has(key):
+		push_warning("Statistic ", key, " doesn't exist.")
+		return false
+	return true
+
+
+func add_to_stat(align : int, key : String, value):
+	if not stat_exists(align, key):
+		return
+	if not typeof(stats[align][key]) in [TYPE_FLOAT, TYPE_INT]:
+		return
+	stats[align][key] += value
+
+
+func set_stat(align : int, key : String, value):
+	if not stat_exists(align, key):
+		return
+	stats[align][key] = value
+
+
+func get_stat(align : int, key : String):
+	if not stat_exists(align, key):
+		return null
+	return stats[align][key]
+

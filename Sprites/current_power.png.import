@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1i36seg78ctk"
-path="res://.godot/imported/ai_cheater.png-dae185dee7c176cd7f84f8a21352f3d5.ctex"
+uid="uid://jb8ugdvfra1h"
+path="res://.godot/imported/current_power.png-9d1bdaaca8d9e4ebc76efd82b51b6ca4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ai_cheater.png"
-dest_files=["res://.godot/imported/ai_cheater.png-dae185dee7c176cd7f84f8a21352f3d5.ctex"]
+source_file="res://Sprites/current_power.png"
+dest_files=["res://.godot/imported/current_power.png-9d1bdaaca8d9e4ebc76efd82b51b6ca4.ctex"]
 
 [params]
 

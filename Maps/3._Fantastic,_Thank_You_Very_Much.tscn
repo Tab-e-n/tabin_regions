@@ -112,6 +112,7 @@ script = ExtResource("1_qwc4r")
 complexity = "Medium"
 lore = "Long ago, the four elements of the magic hill lived in peace, that is until they all went coo coo crazy and started fighting each other. That is when this map takes place. Every so often, the magic hill gives each element more power to their capital."
 align_amount = 5
+align_names = Array[String](["", "Fire", "Wind", "Water", "Earth"])
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_hq4v5")

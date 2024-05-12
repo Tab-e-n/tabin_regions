@@ -1,6 +1,7 @@
 extends Node2D
 class_name GameControl
 
+
 @export var map : String = "Testlandia.tscn"
 
 @onready var game_camera : GameCamera
@@ -10,6 +11,7 @@ class_name GameControl
 
 var hide_cross : float = 0
 var cities_visible : bool = false
+
 
 func _ready():
 	map = MapSetup.current_map_name
@@ -28,4 +30,4 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("hide_capitals"):
 		cities_visible = not cities_visible
-	
+		game_camera.CommandCallout.new_callout("Toggle hide capitols")

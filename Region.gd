@@ -1,8 +1,12 @@
+@tool
 extends Polygon2D
 class_name Region
 
 
 const TEXTURE_SIZE : Vector2 = Vector2(1024, 1024)
+
+
+enum RENDER_MODE {DISABLED, ALIGNMENT, POWER, MAX_POWER, CAPITAL}
 
 
 @export var alignment : int = 0
@@ -15,13 +19,20 @@ const TEXTURE_SIZE : Vector2 = Vector2(1024, 1024)
 @export var connections : Dictionary = {}
 
 
-@onready var region_control : RegionControl = get_parent()
+@onready var region_control : RegionControl = get_parent() as RegionControl
 
 
-var city : City = City.new()
+@onready var city : City
+
+
+var tool_render_mode : int = RENDER_MODE.ALIGNMENT
 
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
+	
+	city = City.new()
 	city.is_capital = is_capital
 	add_child(city)
 	if !region_control.dummy:
@@ -31,7 +42,24 @@ func _ready():
 	color_self()
 
 func _process(_delta):
-	pass
+	if Engine.is_editor_hint() and region_control:
+		tool_render_mode = region_control.render_mode
+		match(tool_render_mode):
+			RENDER_MODE.DISABLED:
+				color = Color(1, 1, 1, 1)
+			RENDER_MODE.ALIGNMENT:
+				color = region_control.align_color[alignment]
+			RENDER_MODE.POWER:
+				var c : float = 1.0 - clampf(power, 0, 20) * 0.05
+				color =  Color(c, c, c, 1)
+			RENDER_MODE.MAX_POWER:
+				var c : float = 1.0 - clampf(max_power - 1, 0, 20) * 0.05
+				color =  Color(c, c, c, 1)
+			RENDER_MODE.CAPITAL:
+				if is_capital:
+					color = Color(0.9, 1, 0.9, 1)
+				else:
+					color = Color(0.3, 0.1, 0.1, 1)
 
 
 func change_alignment(align : int):
@@ -91,13 +119,17 @@ func incoming_attack(attack_align : int, attack_power : int = 0, test_only : boo
 	if attack_power > power:
 		if test_only:
 			return true
-		GameStats.stats[attack_align]["enemy units removed"] += power
-		GameStats.stats[alignment]["units lost"] += power
+		GameStats.add_to_stat(attack_align, "enemy units removed", power)
+		GameStats.add_to_stat(alignment, "units lost", power)
+#		GameStats.stats[attack_align]["enemy units removed"] += power
+#		GameStats.stats[alignment]["units lost"] += power
 		power = 1
 		change_alignment(attack_align)
-		GameStats.stats[alignment]["regions captured"] += 1
+		GameStats.add_to_stat(attack_align, "regions captured", 1)
+#		GameStats.stats[alignment]["regions captured"] += 1
 		if is_capital:
-			GameStats.stats[alignment]["capital regions captured"] += 1
+			GameStats.add_to_stat(attack_align, "capital regions captured", 1)
+#			GameStats.stats[alignment]["capital regions captured"] += 1
 		return true
 	else:
 		return false
@@ -115,20 +147,23 @@ func reinforce(reinforce_align : int = alignment, addon_power : int = 1):
 	if power == max_power:
 		return false
 	power += addon_power
-	GameStats.stats[reinforce_align]["regions reinforced"] += 1
+	GameStats.add_to_stat(reinforce_align, "regions reinforced", 1)
+#	GameStats.stats[reinforce_align]["regions reinforced"] += 1
 	return true
 
 
 func mobilize(mobilize_align : int = alignment):
 	if power <= 1:
 		return false
-	GameStats.stats[mobilize_align]["units mobilized"] += 1
+	GameStats.add_to_stat(mobilize_align, "units mobilized", 1)
+#	GameStats.stats[mobilize_align]["units mobilized"] += 1
 	power -= 1
 	region_control.bonus_action_amount += 1
 	return true
 
 
 func make_region_arrows():
+	var i : int = 0
 	for target in connections.keys():
 		if region_control.has_node(target):
 			var arrow : RegionArrow = RegionArrow.new()
@@ -138,6 +173,8 @@ func make_region_arrows():
 			arrow.from_color = region_control.align_color[alignment]
 			arrow.to_color = region_control.align_color[target_node.alignment]
 			arrow.to_name = target
+			arrow.num = i
 			if connections[target] > 0:
 				arrow.darken = true
 			region_control.add_child(arrow)
+			i += 1

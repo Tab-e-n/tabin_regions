@@ -29,35 +29,38 @@ func think_normal(is_bonus : bool = false):
 #	print("think default first")
 	var eligable_regions : Array = []
 	
-#	print(eligable_regions)
-	
 	var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 	
 	for region in controler.get_owned_regions():
 		if region.power != region.max_power:
 			eligable_regions.append(region)
+	
+#	print(eligable_regions)
+	
 	if eligable_regions.size() > 0:
 		controler.selected_capital = eligable_regions[rng.randi_range(0, eligable_regions.size() - 1)].name
 	else:
 		for region in controler.get_owned_regions():
-	#		print("owned: ", region.name)
+#			print("owned: ", region.name)
 			var in_threat : bool = false
 			for connection_name in region.connections.keys():
-	#			print("connected_name: ", connection_name)
+#				print("connected_name: ", connection_name)
 				var connection = controler.get_region(connection_name)
-	#			print("connected: ", connection.name)
+#				print("connected: ", connection.name)
 				if controler.alignment_friendly(current_alignment, connection.alignment):
-	#				print("friendly alignment")
+#					print("friendly alignment")
 					continue
 				if not controler.alignment_neutral(connection.alignment):
 					in_threat = true
-	#				print("not neutral")
+#					print("not neutral")
 				if not connection.incoming_attack(current_alignment, 0, true):
-	#				print("cannot attack")
+#					print("cannot attack")
 					continue
 				eligable_regions.append(connection)
 			if in_threat and region.power != region.max_power:
 				eligable_regions.append(region)
+		
+#		print(eligable_regions)
 		
 		if eligable_regions.size() > 0:
 			controler.selected_capital = eligable_regions[0].name
@@ -88,7 +91,7 @@ func think_mobilize():
 #		if forfeit:
 #			CALL_forfeit = true
 	
-	if controler.get_capitol_amount() == 0:
+	if controler.get_capital_amount() == 0:
 		var no_more_extra : bool = true
 		for region in controler.get_owned_regions():
 			var threat : int = determine_attacks(region)

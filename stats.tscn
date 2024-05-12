@@ -18,7 +18,7 @@ func _ready():
 #		print(stats)
 		var panel : Panel = Panel.new()
 		
-		panel.add_theme_stylebox_override(\"panel\", preload(\"res://style_label_normal_box.tres\"))
+		panel.add_theme_stylebox_override(\"panel\", preload(\"res://Styles/style_label_normal_box.tres\"))
 		panel.size = Vector2(192, 640)
 		panel.modulate = stats[\"align color\"]
 		panel.position.x = 192 * align
@@ -27,7 +27,7 @@ func _ready():
 		
 		var sprite : Sprite2D = Sprite2D.new()
 		
-		sprite.texture = preload(\"res://capital.png\")
+		sprite.texture = preload(\"res://Sprites/capital.png\")
 		sprite.position.x = 192 * align + 32
 		sprite.position.y = 32
 		sprite.modulate = stats[\"align color\"]
@@ -46,9 +46,12 @@ func _ready():
 		
 		var columb : Label = Label.new()
 		
+		columb.clip_text = true
+		columb.position.y += 8
 		columb.size = Vector2(192, 192)
 		columb.position.x = 192 * align
-		columb.text = \"                \" + controlers[stats[\"controler\"]] + \"\\n\"
+		var funny_spacing_value : String = \"                \"
+		columb.text = funny_spacing_value + stats[\"alignment name\"] + \"\\n\" + funny_spacing_value + controlers[stats[\"controler\"]]
 		columb.text += \"\\nTurns lasted:\\n\" + String.num(stats[\"turns lasted\"])
 		columb.text += \"\\nFirst actions done:\\n\" + String.num(stats[\"first actions done\"])
 		columb.text += \"\\nBonus actions done:\\n\" + String.num(stats[\"bonus actions done\"])
@@ -71,7 +74,7 @@ func _ready():
 		farthest_right += (columb_amount - 6) * 192
 
 func _input(event):
-	if (event is InputEventKey or event is InputEventMouseButton) and input_processing_buffer <= 0:
+	if event is InputEventMouseButton and input_processing_buffer <= 0:
 		if event.pressed:
 			get_tree().change_scene_to_file(\"res://setup_scene.tscn\")
 
@@ -91,4 +94,4 @@ script = SubResource("GDScript_6r6wn")
 [node name="columbs" type="Node2D" parent="."]
 
 [node name="cam" type="Camera2D" parent="."]
-position = Vector2(576, 328)
+position = Vector2(576, 320)

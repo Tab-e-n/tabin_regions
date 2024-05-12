@@ -140,7 +140,7 @@ func _ready():
 
 
 func set_corruption_aliance():
-	region_control.alignment_aliances[4] = 0
+	region_control.alignment_aliances[4] = -1
 
 
 func _process(_delta):
@@ -170,6 +170,7 @@ complexity = "Medium"
 lore = "Can you be the last faction standing in a slowly corrupting world? You could obviously team up and destroy the corruption together, but who would do that?"
 align_amount = 5
 align_color = [Color(0.384314, 0.341176, 0.458824, 1), Color(0.929412, 0.521569, 0.552941, 1), Color(0.490196, 0.929412, 0.572549, 1), Color(0.466667, 0.584314, 0.929412, 1), Color(0.247059, 0.0235294, 0.156863, 1)]
+align_names = Array[String](["", "Spicy Guys", "Jeb & Ron", "Blue People", "Corruption"])
 random_player_align_range = 3
 max_user_amount = 3
 use_custom_ai_setup = true

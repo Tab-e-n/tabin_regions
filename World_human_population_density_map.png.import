@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cci2sp743u6hi"
-path="res://.godot/imported/ai_selected.png-9ba015268dfee0da61822a0aafdf2d2f.ctex"
+uid="uid://b24kkje6cu2lg"
+path="res://.godot/imported/World_human_population_density_map.png-5bd8866b2beeb0c79cbee43a7ca1b4aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ai_selected.png"
-dest_files=["res://.godot/imported/ai_selected.png-9ba015268dfee0da61822a0aafdf2d2f.ctex"]
+source_file="res://World_human_population_density_map.png"
+dest_files=["res://.godot/imported/World_human_population_density_map.png-5bd8866b2beeb0c79cbee43a7ca1b4aa.ctex"]
 
 [params]
 

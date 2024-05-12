@@ -10,9 +10,9 @@ var region_name : Label = Label.new()
 
 func _ready():
 	if is_capital:
-		texture_normal = preload("res://capital.png")
+		texture_normal = preload("res://Sprites/capital.png")
 	else:
-		texture_normal = preload("res://city.png")
+		texture_normal = preload("res://Sprites/city.png")
 	z_index = 20
 	var city_size : float = region.region_control.city_size
 	position = Vector2(-32 * city_size, -32 * city_size)
@@ -42,7 +42,7 @@ func _process(_delta):
 
 func make_particle(mobilize : bool):
 	var part : Sprite2D = Sprite2D.new()
-	part.texture = preload("res://circle.png")
+	part.texture = preload("res://Sprites/circle.png")
 	part.set_script(preload("res://CitySelectedParticle.gd"))
 	part.position = Vector2(32, 32)
 	part.modulate = self_modulate

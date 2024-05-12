@@ -75,7 +75,7 @@ polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 2368, -1024, 2368)
 script = ExtResource("1_hywy4")
 tag = "Challenge"
 complexity = "Simple"
-lore = "A follow-up on the previous tutorial, explains to you the remaining gameplay mechanics. CAN BE SKIPPED, I RECOMMEND YOU PLAY ONLY BEGINNER MAPS UNTIL YOU COMPLETE THIS."
+lore = "A follow-up on the previous tutorial, explains to you the remaining gameplay mechanics. CAN BE SKIPPED, BUT I RECOMMEND YOU PLAY ONLY BEGINNER MAPS UNTIL YOU COMPLETE THIS."
 align_amount = 4
 align_color = [Color(0.431373, 0.341176, 0.411765, 1), Color(0.101961, 0.564706, 0.368627, 1), Color(0.14902, 0.490196, 0.741176, 1), Color(0.670588, 0.141176, 0.2, 1)]
 allow_map_spec_change = false
@@ -128,7 +128,7 @@ of an optional feature you may enable while playing, called \"aliances\".
 Leaders with the same number are on a team and play together. This means
 that you have a friend in this tutorial! :D
 
-Allied leaders cannot attack each other, and win if they are the last ones left.
+Allied leaders cannot attack each other, and win together if they are the last ones left.
 You can also perform a special action with your allies; instead of attacking
 opposing regions or reinforcing your regions, you can reinforce an allies
 region. Here is a blue region where you can try it out:"
@@ -145,8 +145,8 @@ offset_left = -376.0
 offset_top = 640.0
 offset_right = 376.0
 offset_bottom = 832.0
-text = "The rest of the tutorial are just a few factoids that didn't mention up to this point,
-they are strewn around the edges of the map.
+text = "The rest of the tutorial contains just a few factoids that i didn't mention up to this point,
+if you are interested in them, they are strewn around the edges of the map.
 
 Cooperate with your blue ally and beat red to complete this tutorial!"
 horizontal_alignment = 1
@@ -164,28 +164,23 @@ darker connection, you need 1 more power than usual."
 horizontal_alignment = 1
 
 [node name="skip_turn" type="Label" parent="."]
-offset_left = -800.0
-offset_top = 944.0
-offset_right = -168.0
-offset_bottom = 1178.0
-text = "As you know, the bottom right button changes the turn phase.
-However, you don't need to press the button, because you can use
-the keyboard shortcut ctrl + space to advance the turn phase instead.
-
-If you press alt on top of that (so ctrl + alt + space), you will end
-your turn nomatter which phase you are currently in.
-
-If you still have some first actions left, and you advance the turn phase, the
-remaining first actions you have will be converted into bonus actions."
+offset_left = -720.0
+offset_top = 1064.0
+offset_right = -384.0
+offset_bottom = 1168.0
+text = "If you still have some first actions left,
+and you advance the turn phase, the
+remaining first actions you have will
+be converted into bonus actions."
 horizontal_alignment = 1
 
 [node name="speedrun" type="Label" parent="."]
-offset_left = 264.0
-offset_top = 1272.0
-offset_right = 568.0
-offset_bottom = 1336.0
-text = "Feel like the AI is going too slow?
-Speed it up with ctrl + alt + enter!"
+offset_left = 312.0
+offset_top = 1288.0
+offset_right = 616.0
+offset_bottom = 1352.0
+text = "You can use \",\" and \".\" to 
+zoom in or zoom out the camera."
 horizontal_alignment = 1
 
 [node name="forfeit" type="Label" parent="."]
@@ -199,12 +194,17 @@ your regions neutral."
 horizontal_alignment = 1
 
 [node name="hide" type="Label" parent="."]
-offset_left = 328.0
-offset_top = 1728.0
-offset_right = 744.0
-offset_bottom = 1872.0
-text = "If you want to look at just the regions on their
-own with no cities, press ctrl + H.
+offset_left = 312.0
+offset_top = 1608.0
+offset_right = 761.0
+offset_bottom = 1868.0
+text = "Even though this game is primarily mouse controled,
+it contains a few usefull keybinds that can speed up play,
+or provide some novelty. You can check these keybinds by
+clicking the gearbox icon under the play order.
+
+For example: If you want to look at just the regions
+on their own with no cities, press ctrl + H.
 
 There is something behind this city,
 try hiding cities so you can see it!"

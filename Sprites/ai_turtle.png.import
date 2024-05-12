@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b83fxlgeqmrwf"
-path="res://.godot/imported/turn_order_players.png-00d6ea635580193598b109da2ca59de6.ctex"
+uid="uid://b7ruo67blmrg"
+path="res://.godot/imported/ai_turtle.png-45dcdec268f12f7ddc7599ade9809928.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://turn_order_players.png"
-dest_files=["res://.godot/imported/turn_order_players.png-00d6ea635580193598b109da2ca59de6.ctex"]
+source_file="res://Sprites/ai_turtle.png"
+dest_files=["res://.godot/imported/ai_turtle.png-45dcdec268f12f7ddc7599ade9809928.ctex"]
 
 [params]
 

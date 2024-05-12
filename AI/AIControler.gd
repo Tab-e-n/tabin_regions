@@ -13,11 +13,11 @@ var thinking_timer : float = THINKING_TIMER_DEFAULT
 enum {CONTROLER_USER, CONTROLER_DEFAULT, CONTROLER_TURTLE, CONTROLER_NEURAL, CONTROLER_CHEATER, CONTROLER_DUMMY}
 const PACKED_CONTROLERS : Array = [
 	null, # CONTROLER_USER (can be just null)
-	preload("res://AINormal.gd"), # CONTROLER_DEFAULT
-	preload("res://AITurtle.gd"), # CONTROLER_TURTLE
-	preload("res://AINeural.gd"), # CONTROLER_NEURAL
-	preload("res://AINormal.gd"), # CONTROLER_CHEATER
-	preload("res://AIDummy.gd") # CONTROLER_DUMMY
+	preload("res://AI/AINormal.gd"), # CONTROLER_DEFAULT
+	preload("res://AI/AITurtle.gd"), # CONTROLER_TURTLE
+	preload("res://AI/AINeural.gd"), # CONTROLER_NEURAL
+	preload("res://AI/AINormal.gd"), # CONTROLER_CHEATER
+	preload("res://AI/AIDummy.gd") # CONTROLER_DUMMY
 ] 
 
 var current_alignment : int
@@ -67,8 +67,10 @@ func _process(delta):
 		speedrun_ai = not speedrun_ai
 		if speedrun_ai:
 			thinking_timer = THINKING_TIMER_SPEEDRUN
+			game_control.game_camera.CommandCallout.new_callout("Fast AI")
 		else:
 			thinking_timer = THINKING_TIMER_DEFAULT
+			game_control.game_camera.CommandCallout.new_callout("Slow AI")
 	
 #	print(timer)
 	if region_control.is_user_controled:
@@ -199,7 +201,7 @@ func get_alingment_amount() -> int:
 	return region_control.align_amount
 
 
-func get_capitol_amount() -> int:
+func get_capital_amount() -> int:
 	return region_control.capital_amount[current_alignment - 1]
 
 

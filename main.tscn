@@ -1,54 +1,105 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckbitpcqxs5ao"]
+[gd_scene load_steps=13 format=3 uid="uid://ckbitpcqxs5ao"]
 
 [ext_resource type="Script" path="res://GameControl.gd" id="1_2axsc"]
 [ext_resource type="Script" path="res://GameCamera.gd" id="1_we6ai"]
-[ext_resource type="Texture2D" uid="uid://deqhvnfw114vp" path="res://advance.png" id="5_4j0ci"]
-[ext_resource type="StyleBox" uid="uid://l8vkqqi4prkx" path="res://style_label_normal_box.tres" id="5_p3dil"]
-[ext_resource type="Texture2D" uid="uid://jb8ugdvfra1h" path="res://current_power.png" id="6_d8i8i"]
-[ext_resource type="Script" path="res://AIControler.gd" id="6_wysxp"]
+[ext_resource type="Script" path="res://AI/AIControler.gd" id="2_w08l3"]
+[ext_resource type="Texture2D" uid="uid://deqhvnfw114vp" path="res://Sprites/advance.png" id="5_1p0vp"]
+[ext_resource type="Texture2D" uid="uid://jb8ugdvfra1h" path="res://Sprites/current_power.png" id="6_duti3"]
+[ext_resource type="Texture2D" uid="uid://b5wmm400auwgm" path="res://Sprites/pause_button.png" id="7_6wsra"]
+[ext_resource type="StyleBox" uid="uid://l8vkqqi4prkx" path="res://Styles/style_label_normal_box.tres" id="7_r48wm"]
+[ext_resource type="PackedScene" uid="uid://dt0hijbeupo" path="res://command_callout.tscn" id="8_gv3dv"]
+[ext_resource type="Texture2D" uid="uid://b83fxlgeqmrwf" path="res://Sprites/turn_order_players.png" id="9_gke1b"]
+[ext_resource type="Texture2D" uid="uid://c2duva1ycjs8u" path="res://Sprites/city.png" id="10_5d75i"]
+[ext_resource type="Texture2D" uid="uid://66jp7txq175w" path="res://Sprites/capital.png" id="11_i48c4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lm2d1"]
+bg_color = Color(0.247059, 0.247059, 0.282353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="GameControler" type="Node2D"]
 script = ExtResource("1_2axsc")
 
 [node name="AIControler" type="Node" parent="."]
-script = ExtResource("6_wysxp")
+script = ExtResource("2_w08l3")
 
-[node name="GameCamera" type="Camera2D" parent="."]
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "AdvanceTurnButton", "PauseButton", "TurnOrder", "PowerSprite", "PowerAmount", "CurrentAction", "VictoryMessage", "LeaveMessage", "CommandCallout")]
 z_index = 30
 script = ExtResource("1_we6ai")
+UI = NodePath("UI")
+UIHideable = NodePath("UI/Hideable")
+PauseMenu = NodePath("UI/pause")
+PlayerInfo = NodePath("UI/player_info")
+AdvanceTurnButton = NodePath("UI/Hideable/AdvanceTurn")
+PauseButton = NodePath("UI/gearbox")
+TurnOrder = NodePath("UI/Hideable/turn_order")
+PowerSprite = NodePath("UI/Hideable/Power")
+PowerAmount = NodePath("UI/Hideable/Power/text")
+CurrentAction = NodePath("UI/Hideable/Action")
+VictoryMessage = NodePath("UI/win")
+LeaveMessage = NodePath("UI/leave")
+CommandCallout = NodePath("UI/command_callout")
 
-[node name="Panel" type="Panel" parent="GameCamera"]
-show_behind_parent = true
+[node name="UI" type="Control" parent="GameCamera"]
+layout_mode = 3
+anchors_preset = 0
 offset_left = -576.0
-offset_top = 192.0
+offset_top = -320.0
 offset_right = 576.0
 offset_bottom = 320.0
-theme_override_styles/panel = ExtResource("5_p3dil")
+pivot_offset = Vector2(576, 320)
+mouse_filter = 2
 
-[node name="AdvanceTurn" type="TextureButton" parent="GameCamera"]
-offset_left = 416.0
-offset_top = 192.0
-offset_right = 544.0
-offset_bottom = 320.0
-texture_normal = ExtResource("5_4j0ci")
+[node name="command_callout" parent="GameCamera/UI" instance=ExtResource("8_gv3dv")]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 64.0
+offset_bottom = 128.0
 
-[node name="Action" type="Label" parent="GameCamera"]
-offset_left = -416.0
-offset_top = 192.0
-offset_right = 416.0
-offset_bottom = 319.0
+[node name="Hideable" type="Control" parent="GameCamera/UI"]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 640.0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="GameCamera/UI/Hideable"]
+show_behind_parent = true
+layout_mode = 0
+offset_top = 504.0
+offset_right = 1152.0
+offset_bottom = 632.0
+theme_override_styles/panel = ExtResource("7_r48wm")
+
+[node name="AdvanceTurn" type="TextureButton" parent="GameCamera/UI/Hideable"]
+layout_mode = 0
+offset_left = 992.0
+offset_top = 504.0
+offset_right = 1120.0
+offset_bottom = 632.0
+texture_normal = ExtResource("5_1p0vp")
+
+[node name="Action" type="Label" parent="GameCamera/UI/Hideable"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 504.0
+offset_right = 992.0
+offset_bottom = 631.0
 theme_override_font_sizes/font_size = 64
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Power" type="TextureRect" parent="GameCamera"]
-offset_left = -544.0
-offset_top = 192.0
-offset_right = -416.0
-offset_bottom = 320.0
-texture = ExtResource("6_d8i8i")
+[node name="Power" type="TextureRect" parent="GameCamera/UI/Hideable"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 504.0
+offset_right = 160.0
+offset_bottom = 632.0
+texture = ExtResource("6_duti3")
 
-[node name="text" type="Label" parent="GameCamera/Power"]
+[node name="text" type="Label" parent="GameCamera/UI/Hideable/Power"]
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
@@ -56,31 +107,130 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="turn_order" type="Polygon2D" parent="GameCamera"]
-position = Vector2(-576, -280)
-color = Color(0.247059, 0.247059, 0.247059, 1)
-polygon = PackedVector2Array(0, -40, 0, 48, 64, 48, 64, -40)
+[node name="turn_order" type="Panel" parent="GameCamera/UI/Hideable"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 8.0
+offset_right = 128.0
+offset_bottom = 104.0
+pivot_offset = Vector2(0, 96)
+theme_override_styles/panel = ExtResource("7_r48wm")
 
-[node name="win" type="Label" parent="GameCamera"]
+[node name="gearbox" type="TextureButton" parent="GameCamera/UI"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 104.0
+offset_right = 128.0
+offset_bottom = 168.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("7_6wsra")
+
+[node name="player_info" type="Panel" parent="GameCamera/UI"]
 visible = false
-offset_left = -192.0
-offset_top = -64.0
+layout_mode = 0
+offset_left = 472.0
+offset_top = 112.0
+offset_right = 680.0
+offset_bottom = 232.0
+theme_override_styles/panel = ExtResource("7_r48wm")
+
+[node name="Player" type="Sprite2D" parent="GameCamera/UI/player_info"]
+position = Vector2(104, 48)
+texture = ExtResource("9_gke1b")
+hframes = 6
+
+[node name="City" type="Sprite2D" parent="GameCamera/UI/player_info"]
+position = Vector2(168, 48)
+texture = ExtResource("10_5d75i")
+
+[node name="Capital" type="Sprite2D" parent="GameCamera/UI/player_info"]
+position = Vector2(40, 48)
+texture = ExtResource("11_i48c4")
+
+[node name="CityAmount" type="Label" parent="GameCamera/UI/player_info"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 24.0
 offset_right = 192.0
-offset_bottom = 64.0
+offset_bottom = 72.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="CapitalAmount" type="Label" parent="GameCamera/UI/player_info"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 64.0
+offset_bottom = 72.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Name" type="Label" parent="GameCamera/UI/player_info"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 88.0
+offset_right = 200.0
+offset_bottom = 114.0
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="pause" type="Panel" parent="GameCamera/UI"]
+visible = false
+layout_mode = 0
+offset_left = 64.0
+offset_top = 136.0
+offset_right = 1088.0
+offset_bottom = 472.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lm2d1")
+
+[node name="Label" type="Label" parent="GameCamera/UI/pause"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 384.0
+offset_bottom = 328.0
+text = "Esc  -  Exit
+\",\"  -  Zoom out
+\".\"  -  Zoom in
+\"/\"  -  Reset zoom
+Arrow Keys  -  Secondary way to move camera
+Shift  -  Faster camera scroll
+Ctrl + Space  -  Advance turn
+Ctrl + Alt + Space  -  End turn
+Ctrl + Alt + \"-\"  -  Forfeit
+Ctrl + Alt + Enter  -  Fast computer thinking
+Ctrl + H  -  Hide capitals
+Ctrl + U  -  Hide UI
+"
+clip_text = true
+
+[node name="win" type="Label" parent="GameCamera/UI"]
+visible = false
+layout_mode = 0
+offset_left = 384.0
+offset_top = 256.0
+offset_right = 768.0
+offset_bottom = 384.0
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = ExtResource("5_p3dil")
+theme_override_styles/normal = ExtResource("7_r48wm")
 text = "VICTORY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="leave" type="Label" parent="GameCamera"]
+[node name="leave" type="Label" parent="GameCamera/UI"]
 visible = false
-offset_left = -144.0
-offset_top = -48.0
-offset_right = 144.0
-offset_bottom = 48.0
+layout_mode = 0
+offset_left = 432.0
+offset_top = 272.0
+offset_right = 720.0
+offset_bottom = 368.0
 theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("5_p3dil")
+theme_override_styles/normal = ExtResource("7_r48wm")
 text = "Press esc to
 confirm leaving..."
 horizontal_alignment = 1

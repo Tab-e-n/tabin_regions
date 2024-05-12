@@ -2,8 +2,32 @@ extends Camera2D
 class_name GameCamera
 
 
-const PLAY_ORDER_SPACING : int = 48
+const PLAY_ORDER_SCREEN_BORDER_GAP : float = 64
+const PLAY_ORDER_SPACING : float = 48
+const PLAY_ORDER_VERTICAL_OFFSET : float = 44
+const PLAY_ORDER_MAX_SIZE : float = 1024
 const PREVENT_CAMERA_MOVEMENT_START : float = 1
+
+
+const ZOOM_OUT_MAX : int = -10
+const ZOOM_START : int = 0
+const ZOOM_IN_MAX : int = 5
+const BASE_MOVE_SPEED : float = 8
+
+
+@export var UI : Control
+@export var UIHideable : Control
+@export var PauseMenu : Control
+@export var PlayerInfo : Control
+@export var AdvanceTurnButton : BaseButton
+@export var PauseButton : BaseButton
+@export var TurnOrder : Panel
+@export var PowerSprite : TextureRect
+@export var PowerAmount : Label
+@export var CurrentAction : Label
+@export var VictoryMessage : Control
+@export var LeaveMessage : Control
+@export var CommandCallout : CommandCallouts
 
 
 @onready var game_control : GameControl = get_parent()
@@ -19,17 +43,27 @@ var win_timer : float = -1
 
 var cam_movement_stop : float = PREVENT_CAMERA_MOVEMENT_START
 
+
+var zoom_level : int = 0
+
+var hovering_advance_turn : bool = false
+var hovering_turn_order : bool = false
+
+
 func _ready():
 	game_control.game_camera = self
 	call_deferred("_deffered_ready")
+	
+	zoom_level = ZOOM_START
+	zoom_change(0)
 
 
 func _input(event):
 	if event is InputEventKey:
 		if event.key_label != KEY_ESCAPE:
-			$leave.visible = false
+			LeaveMessage.visible = false
 	if event is InputEventMouseButton:
-		$leave.visible = false
+		LeaveMessage.visible = false
 
 
 func _deffered_ready():
@@ -81,7 +115,13 @@ func _deffered_ready():
 	if position.y < farthest_up:
 		position.y = farthest_up
 	
-	get_node("AdvanceTurn").pressed.connect(region_control.change_current_action)
+	AdvanceTurnButton.pressed.connect(region_control.change_current_action)
+	AdvanceTurnButton.mouse_entered.connect(_AdvanceTurnButton_cam_disable)
+	AdvanceTurnButton.mouse_exited.connect(_AdvanceTurnButton_cam_enable)
+	TurnOrder.mouse_entered.connect(_TurnOrder_cam_disable)
+	TurnOrder.mouse_exited.connect(_TurnOrder_cam_enable)
+	
+	PauseButton.pressed.connect(show_pause_menu)
 	
 	call_deferred("_ready_play_order")
 	
@@ -90,26 +130,26 @@ func _deffered_ready():
 
 func _ready_play_order():
 	var size : float = PLAY_ORDER_SPACING * (region_control.align_amount - 1)
-	$turn_order.polygon[2].x = size
-	$turn_order.polygon[3].x = size
-	var max_size : float = get_viewport_rect().size.x
-	print(size)
-	if size > max_size:
-		$turn_order.scale.x = max_size / size
-		$turn_order.scale.y = $turn_order.scale.x
+	TurnOrder.size.x = size
+	TurnOrder.size.x = size
+#	print(size)
+	if size > PLAY_ORDER_MAX_SIZE:
+		TurnOrder.scale.x = PLAY_ORDER_MAX_SIZE / size
+		TurnOrder.scale.y = TurnOrder.scale.x
 	
 	
 	var play_order : Array = region_control.player_order.duplicate()
 	for i in range(play_order.size()):
 		var spr : Sprite2D = Sprite2D.new()
 		spr.name = String.num(play_order[i])
-		spr.texture = preload("res://turn_order_players.png")
+		spr.texture = preload("res://Sprites/turn_order_players.png")
 		spr.hframes = AIControler.PACKED_CONTROLERS.size()
 		spr.frame = region_control.player_controlers[play_order[i] - 1]
 		@warning_ignore("integer_division")
 		spr.position.x = PLAY_ORDER_SPACING / 2 + PLAY_ORDER_SPACING * i
+		spr.position.y = PLAY_ORDER_VERTICAL_OFFSET
 		spr.self_modulate = region_control.align_color[play_order[i]]
-		$turn_order.add_child(spr)
+		TurnOrder.add_child(spr)
 		if region_control.aliances_active:
 			var label : Label = Label.new()
 			label.name = String.num(play_order[i]) + "_txt"
@@ -118,75 +158,182 @@ func _ready_play_order():
 			label.text = String.num_int64(region_control.alignment_aliances[play_order[i]])
 			label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			@warning_ignore("integer_division")
-			label.position.x = -PLAY_ORDER_SPACING / 2
+			label.position.x = -PLAY_ORDER_SPACING * 0.5
 			if spr.self_modulate.v > region_control.COLOR_TOO_BRIGHT:
 				label.self_modulate = Color(0, 0, 0)
 			else:
 				label.self_modulate = Color(1, 1, 1)
+			label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			spr.add_child(label)
 
 
 func _physics_process(delta):
+	var mouse_position = get_viewport().get_mouse_position()
+	var shift = Input.is_action_pressed("shift")
+	
 	if Input.is_action_just_pressed("escape"):
-		if $leave.visible:
+		if LeaveMessage.visible:
 			get_tree().change_scene_to_file("res://stats.tscn")
-		$leave.visible = true
+		LeaveMessage.visible = true
 	if win_timer > 0:
 		win_timer -= delta
 		if win_timer <= 0:
 			get_tree().change_scene_to_file("res://stats.tscn")
 			return
 	
+	if hovering_advance_turn or hovering_turn_order:
+		cam_movement_stop = 1
+	
 	if cam_movement_stop > 0:
 		cam_movement_stop -= 1
 	else:
-		var mouse_position = get_viewport().get_mouse_position()
-		if (mouse_position.x > window_size.x - 64 or Input.is_action_pressed("right")) and position.x < farthest_right:
-			position.x += 8
-		if (mouse_position.x < 64 or Input.is_action_pressed("left")) and position.x > farthest_left:
-			position.x -= 8
-		if (mouse_position.y > window_size.y - 64 or Input.is_action_pressed("down")) and position.y < farthest_down:
-			position.y += 8
-		if (mouse_position.y < 64 or Input.is_action_pressed("up")) and position.y > farthest_up:
-			position.y -= 8
+		var direction : Vector2 = Vector2(0, 0)
+		if Input.is_action_pressed("right"):
+			direction.x += 1
+		if Input.is_action_pressed("left"):
+			direction.x -= 1
+		if Input.is_action_pressed("down"):
+			direction.y += 1
+		if Input.is_action_pressed("up"):
+			direction.y -= 1
+		
+		if mouse_position.x > window_size.x - 64:
+			direction.x += 1
+		if mouse_position.x < 64:
+			direction.x -= 1
+		if mouse_position.y > window_size.y - 64:
+			direction.y += 1
+		if mouse_position.y < 64:
+			direction.y -= 1
+		
+		var move_speed = BASE_MOVE_SPEED * UI.scale.x
+		if shift:
+			move_speed *= 2.0
+		position += direction * Vector2(move_speed, move_speed)
+		
+		snapped(position, Vector2(1.0, 1.0))
+		if position.x > farthest_right:
+			position.x = farthest_right
+		if position.x < farthest_left:
+			position.x = farthest_left
+		if position.y < farthest_up:
+			position.y = farthest_up
+		if position.y > farthest_down:
+			position.y = farthest_down
 	
-	$AdvanceTurn.modulate = region_control.align_color[region_control.current_player]
-	$Power.self_modulate = region_control.align_color[region_control.current_player]
-	$AdvanceTurn.modulate.a = 1
-	$Power.self_modulate.a = 1
-	if $Power.self_modulate.v > 0.9:
-		$Power/text.self_modulate = Color(0, 0, 0)
+	if Input.is_action_just_pressed("zoom_out"):
+		zoom_change(-1)
+	if Input.is_action_just_pressed("zoom_in"):
+		zoom_change(1)
+	if Input.is_action_just_pressed("zoom_reset"):
+		zoom_level = ZOOM_START
+		zoom_change(0)
+		CommandCallout.new_callout("Reset zoom")
+	if Input.is_action_just_pressed("hide_ui"):
+		UIHideable.visible = not UIHideable.visible
+		CommandCallout.new_callout("Toggle hide UI")
+	
+	AdvanceTurnButton.modulate = region_control.align_color[region_control.current_player]
+	PowerSprite.self_modulate = region_control.align_color[region_control.current_player]
+	AdvanceTurnButton.modulate.a = 1
+	PowerSprite.self_modulate.a = 1
+	if PowerSprite.self_modulate.v > 0.9:
+		PowerAmount.self_modulate = Color(0, 0, 0)
 	else:
-		$Power/text.self_modulate = Color(1, 1, 1)
+		PowerAmount.self_modulate = Color(1, 1, 1)
 	can_translate_messages()
 	if region_control.current_action == 0:
-		$Action.text = "FIRST ACTION"
-		$Action.text = "FIRST ACTION"
-		$Power/text.text = String.num(region_control.action_amount)
+		CurrentAction.text = "FIRST ACTION"
+		CurrentAction.text = "FIRST ACTION"
+		PowerAmount.text = String.num(region_control.action_amount)
 	if region_control.current_action == 1:
-		$Action.text = "MOBILIZE"
-		$Power/text.text = String.num(region_control.bonus_action_amount)
+		CurrentAction.text = "MOBILIZE"
+		PowerAmount.text = String.num(region_control.bonus_action_amount)
 	if region_control.current_action == 2:
-		$Action.text = "BONUS ACTION"
-		$Power/text.text = String.num(region_control.bonus_action_amount)
+		CurrentAction.text = "BONUS ACTION"
+		PowerAmount.text = String.num(region_control.bonus_action_amount)
 	
-	$AdvanceTurn.visible = region_control.is_user_controled
+	AdvanceTurnButton.visible = region_control.is_user_controled
+	if not region_control.is_user_controled:
+		hovering_advance_turn = false
+	
+	PlayerInfo.visible = hovering_turn_order
+	if hovering_turn_order:
+		var hovered_player : int = (mouse_position.x - PLAY_ORDER_SCREEN_BORDER_GAP) / (PLAY_ORDER_SPACING * TurnOrder.scale.x)
+		if hovered_player >= region_control.align_amount - 1:
+			hovered_player = region_control.align_amount - 2
+		if hovered_player < 0:
+			hovered_player = 0
+		
+		var player_alignment : int = region_control.player_order[hovered_player]
+		var leader : Sprite2D = TurnOrder.get_node(String.num(player_alignment)) as Sprite2D
+		if leader.visible:
+			var info_leader : Sprite2D = PlayerInfo.get_node("Player") as Sprite2D
+			info_leader.self_modulate = leader.self_modulate
+			info_leader.frame = leader.frame
+			PlayerInfo.get_node("City").self_modulate = leader.self_modulate
+			PlayerInfo.get_node("Capital").self_modulate = leader.self_modulate
+			var city_amount : Label = PlayerInfo.get_node("CityAmount") as Label
+			var capital_amount : Label = PlayerInfo.get_node("CapitalAmount") as Label
+			if leader.self_modulate.v > region_control.COLOR_TOO_BRIGHT:
+				city_amount.self_modulate = Color(0, 0, 0)
+				capital_amount.self_modulate = Color(0, 0, 0)
+			else:
+				city_amount.self_modulate = Color(1, 1, 1)
+				capital_amount.self_modulate = Color(1, 1, 1)
+			city_amount.text = String.num(region_control.region_amount[player_alignment - 1])
+			capital_amount.text = String.num(region_control.capital_amount[player_alignment - 1])
+			PlayerInfo.get_node("Name").text = region_control.align_names[player_alignment]
+		else:
+			PlayerInfo.visible = false
+
+
+func zoom_change(amount : int):
+	zoom_level += amount
+	if zoom_level < ZOOM_OUT_MAX:
+		zoom_level = ZOOM_OUT_MAX
+	if zoom_level > ZOOM_IN_MAX:
+		zoom_level = ZOOM_IN_MAX
+	zoom.x = pow(1.25, zoom_level)
+	zoom.y = zoom.x
+	UI.scale.x = 1 / zoom.x
+	UI.scale.y = UI.scale.x
 
 
 func update_turn_order():
 	var play_order : Array = region_control.player_order.duplicate()
 	for i in range(region_control.align_amount - 1):
-		var leader = $turn_order.get_node(String.num(play_order[i]))
-		leader.visible = region_control.region_amount[play_order[i] - 1]
-		if $turn_order.has_node(String.num(play_order[i]) + "_txt"):
-			var aliance_text = $turn_order.get_node(String.num(play_order[i]) + "_txt")
-			var aliance = region_control.alignment_aliances[play_order[i]]
+		var alignment : int = play_order[i]
+		var leader = TurnOrder.get_node(String.num(alignment))
+		leader.visible = region_control.region_amount[alignment - 1]
+		if TurnOrder.has_node(String.num(alignment) + "_txt"):
+			var aliance_text = TurnOrder.get_node(String.num(alignment) + "_txt")
+			var aliance = region_control.alignment_aliances[alignment]
 			if aliance_text.text != String.num_int64(aliance):
 				aliance_text.text = String.num_int64(aliance)
 
 
 func win(align_victory : int):
-	$win.visible = true
-	$win.modulate = region_control.align_color[align_victory]
-	win_timer = 5
+	VictoryMessage.visible = true
+	VictoryMessage.modulate = region_control.align_color[align_victory]
+	win_timer = 5.0
+
+
+func _AdvanceTurnButton_cam_disable():
+	hovering_advance_turn = true
+
+
+func _AdvanceTurnButton_cam_enable():
+	hovering_advance_turn = false
+
+
+func _TurnOrder_cam_disable():
+	hovering_turn_order = true
+
+
+func _TurnOrder_cam_enable():
+	hovering_turn_order = false
+
+
+func show_pause_menu():
+	PauseMenu.visible = not PauseMenu.visible
