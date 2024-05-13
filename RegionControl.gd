@@ -15,11 +15,34 @@ const COLOR_TOO_BRIGHT : float = 0.9
 @onready var game_camera : GameCamera
 
 
+@export var align_amount : int = 3
+@export var connections : Array = []
+
+@export var allow_map_spec_change : bool = true
+
+@export_subgroup("Users")
+@export var user_amount : int = 1
+@export var random_player_align_range : int = 0
+@export var max_user_amount : int = -1
+@export var use_preset_alignments : bool = false
+@export var preset_user_alignments : PackedInt32Array = []
+
+@export_subgroup("AI")
+@export var use_custom_ai_setup : bool = false
+@export_enum("None", "Default", "Turtle", "Neural", "Cheater", "Dummy") var ai_controler : int = AIControler.CONTROLER_DEFAULT
+@export var custom_ai_setup : PackedInt32Array = []
+
+@export_subgroup("Aliances")
+@export var aliances_active : bool = false
+@export var alignment_aliances : PackedInt32Array = []
+@export var automatic_aliances : bool = false
+@export var autoaliance_divisions_amount : int = 2
+
+@export_subgroup("Cosmetics")
 @export_enum("Skirmish", "Challenge", "Bot Battle") var tag : String = "Skirmish"
 @export_enum("Unspecified", "Beginner", "Simple", "Medium", "Hard", "Extreme") var complexity : String = "Unspecified"
 @export_multiline var lore : String = """Insert lore here"""
 
-@export var align_amount : int = 3
 @export var align_color : Array[Color] = [
 		Color("625775"), # purplish gray
 		
@@ -60,28 +83,9 @@ const COLOR_TOO_BRIGHT : float = 0.9
 		Color("305d4d"), # dark green
 ]
 @export var align_names : Array[String] = []
-@export var connections : Array = []
+
 @export var city_size : float = 1
-
-@export var allow_map_spec_change : bool = true
-
-@export_subgroup("Users")
-@export var user_amount : int = 1
-@export var random_player_align_range : int = 0
-@export var max_user_amount : int = -1
-@export var use_preset_alignments : bool = false
-@export var preset_user_alignments : PackedInt32Array = []
-
-@export_subgroup("AI")
-@export var use_custom_ai_setup : bool = false
-@export_enum("None", "Default", "Turtle", "Neural", "Cheater", "Dummy") var ai_controler : int = AIControler.CONTROLER_DEFAULT
-@export var custom_ai_setup : PackedInt32Array = []
-
-@export_subgroup("Aliances")
-@export var aliances_active : bool = false
-@export var alignment_aliances : PackedInt32Array = []
-@export var automatic_aliances : bool = false
-@export var autoaliance_divisions_amount : int = 2
+@export var hide_turn_order : bool = false
 
 @export_subgroup("Editor")
 @export_enum("Disabled", "Alignment", "Power", "Max Power", "Capital") var render_mode : int = 0
@@ -225,6 +229,9 @@ func _ready():
 		GameStats.set_stat(align, "alignment name", align_names[align])
 	
 	reset()
+	
+	if hide_turn_order:
+		game_camera.toggle_turn_order_visibility()
 
 
 func _process(_delta):

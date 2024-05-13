@@ -25,7 +25,7 @@ script = ExtResource("1_2axsc")
 [node name="AIControler" type="Node" parent="."]
 script = ExtResource("2_w08l3")
 
-[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "AdvanceTurnButton", "PauseButton", "TurnOrder", "PowerSprite", "PowerAmount", "CurrentAction", "VictoryMessage", "LeaveMessage", "CommandCallout")]
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "AdvanceTurnButton", "PauseButton", "TurnOrder", "Attacks", "PowerSprite", "PowerAmount", "CurrentAction", "VictoryMessage", "LeaveMessage", "CommandCallout")]
 z_index = 30
 script = ExtResource("1_we6ai")
 UI = NodePath("UI")
@@ -35,6 +35,7 @@ PlayerInfo = NodePath("UI/player_info")
 AdvanceTurnButton = NodePath("UI/Hideable/AdvanceTurn")
 PauseButton = NodePath("UI/gearbox")
 TurnOrder = NodePath("UI/Hideable/turn_order")
+Attacks = NodePath("UI/Hideable/Attacks")
 PowerSprite = NodePath("UI/Hideable/Power")
 PowerAmount = NodePath("UI/Hideable/Power/text")
 CurrentAction = NodePath("UI/Hideable/Action")
@@ -54,10 +55,10 @@ mouse_filter = 2
 
 [node name="command_callout" parent="GameCamera/UI" instance=ExtResource("8_gv3dv")]
 layout_mode = 1
-offset_left = 64.0
-offset_top = 128.0
-offset_right = 64.0
-offset_bottom = 128.0
+offset_left = 800.0
+offset_top = 136.0
+offset_right = -32.0
+right = true
 
 [node name="Hideable" type="Control" parent="GameCamera/UI"]
 anchors_preset = 0
@@ -116,12 +117,26 @@ offset_bottom = 104.0
 pivot_offset = Vector2(0, 96)
 theme_override_styles/panel = ExtResource("7_r48wm")
 
-[node name="gearbox" type="TextureButton" parent="GameCamera/UI"]
+[node name="Attacks" type="RichTextLabel" parent="GameCamera/UI/Hideable"]
+visible = false
 layout_mode = 0
 offset_left = 64.0
 offset_top = 104.0
 offset_right = 128.0
-offset_bottom = 168.0
+offset_bottom = 136.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+scroll_active = false
+
+[node name="gearbox" type="TextureButton" parent="GameCamera/UI"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 136.0
+offset_right = 128.0
+offset_bottom = 200.0
 scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("7_6wsra")
 
@@ -182,31 +197,41 @@ clip_text = true
 [node name="pause" type="Panel" parent="GameCamera/UI"]
 visible = false
 layout_mode = 0
-offset_left = 64.0
+offset_left = 128.0
 offset_top = 136.0
-offset_right = 1088.0
+offset_right = 1024.0
 offset_bottom = 472.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lm2d1")
 
-[node name="Label" type="Label" parent="GameCamera/UI/pause"]
+[node name="keys1" type="Label" parent="GameCamera/UI/pause"]
 layout_mode = 0
-offset_left = 16.0
+offset_left = 40.0
 offset_top = 16.0
-offset_right = 384.0
-offset_bottom = 328.0
+offset_right = 408.0
+offset_bottom = 320.0
 text = "Esc  -  Exit
 \",\"  -  Zoom out
 \".\"  -  Zoom in
 \"/\"  -  Reset zoom
 Arrow Keys  -  Secondary way to move camera
 Shift  -  Faster camera scroll
-Ctrl + Space  -  Advance turn
+"
+clip_text = true
+
+[node name="keys2" type="Label" parent="GameCamera/UI/pause"]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 16.0
+offset_right = 856.0
+offset_bottom = 320.0
+text = "Ctrl + Space  -  Advance turn
 Ctrl + Alt + Space  -  End turn
 Ctrl + Alt + \"-\"  -  Forfeit
-Ctrl + Alt + Enter  -  Fast computer thinking
-Ctrl + H  -  Hide capitals
-Ctrl + U  -  Hide UI
-"
+Ctrl + Alt + Enter  -  Toggle fast AI
+Ctrl + H  -  Toggle capitals
+Ctrl + U  -  Toggle UI
+Ctrl + T  -  Toggle turn order
+Ctrl + Alt + M  -  Toggle mouse scroll"
 clip_text = true
 
 [node name="win" type="Label" parent="GameCamera/UI"]

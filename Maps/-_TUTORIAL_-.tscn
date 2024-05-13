@@ -102,15 +102,16 @@ func _physics_process(_delta):
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 3528, -1024, 3528)
 script = ExtResource("1_fhy2h")
-tag = "Challenge"
-complexity = "Beginner"
-lore = "An interactive tutorial, where you learn the mechanics of the game."
 allow_map_spec_change = false
 max_user_amount = 1
 use_preset_alignments = true
 preset_user_alignments = [1, 2]
 use_custom_ai_setup = true
 ai_controler = 2
+tag = "Challenge"
+complexity = "Beginner"
+lore = "An interactive tutorial, where you learn the mechanics of the game."
+hide_turn_order = true
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_ojoeb")

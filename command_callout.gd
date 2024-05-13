@@ -6,6 +6,9 @@ const CALLOUT_SIZE : int = 16
 const MAX_CALLOUTS : int = 8
 
 
+@export var right : bool = false
+
+
 var callouts : Array[Label] = []
 var callout_timestamp : Array[float] = []
 
@@ -42,8 +45,13 @@ func new_callout(text : String):
 	
 	var callout : Label = Label.new()
 	callout.add_theme_font_size_override("font_size", CALLOUT_SIZE)
+	callout.clip_text = true
+	callout.size.x = size.x
 	callout.text = text
 	callout.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	if right:
+		callout.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	
 	add_child(callout)
 	callouts.append(callout)

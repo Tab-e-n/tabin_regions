@@ -165,9 +165,11 @@ func mobilize(mobilize_align : int = alignment):
 func make_region_arrows():
 	var i : int = 0
 	for target in connections.keys():
-		if region_control.has_node(target):
+		if not region_control.has_node(target):
+			continue
+		var target_node : Node = region_control.get_node(target)
+		if target_node is Region:
 			var arrow : RegionArrow = RegionArrow.new()
-			var target_node = region_control.get_node(target)
 			arrow.from_position = position
 			arrow.to_position = target_node.position
 			arrow.from_color = region_control.align_color[alignment]
@@ -178,3 +180,17 @@ func make_region_arrows():
 				arrow.darken = true
 			region_control.add_child(arrow)
 			i += 1
+
+
+func get_adjanced_region_power() -> Array[int]:
+	var attacks : Array[int] = []
+	attacks.resize(region_control.align_amount)
+	
+	for i in connections.keys():
+		if not region_control.has_node(i):
+			continue
+		var target : Node = region_control.get_node(i)
+		if target is Region:
+			attacks[target.alignment] += target.power
+	
+	return attacks

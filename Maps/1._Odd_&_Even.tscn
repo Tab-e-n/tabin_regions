@@ -50,6 +50,7 @@ complexity = "Beginner"
 lore = "Odd or Even? Even or Odd? 
 Who will win this battle?"
 align_names = Array[String](["", "Odd", "Even"])
+hide_turn_order = true
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_jdhk0")

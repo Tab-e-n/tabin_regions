@@ -22,6 +22,7 @@ const BASE_MOVE_SPEED : float = 8
 @export var AdvanceTurnButton : BaseButton
 @export var PauseButton : BaseButton
 @export var TurnOrder : Panel
+@export var Attacks : RichTextLabel
 @export var PowerSprite : TextureRect
 @export var PowerAmount : Label
 @export var CurrentAction : Label
@@ -45,9 +46,12 @@ var cam_movement_stop : float = PREVENT_CAMERA_MOVEMENT_START
 
 
 var zoom_level : int = 0
+var mouse_scroll_active : bool = true
 
 var hovering_advance_turn : bool = false
 var hovering_turn_order : bool = false
+
+var hovered_player : int = -1
 
 
 func _ready():
@@ -131,11 +135,13 @@ func _deffered_ready():
 func _ready_play_order():
 	var size : float = PLAY_ORDER_SPACING * (region_control.align_amount - 1)
 	TurnOrder.size.x = size
-	TurnOrder.size.x = size
 #	print(size)
 	if size > PLAY_ORDER_MAX_SIZE:
 		TurnOrder.scale.x = PLAY_ORDER_MAX_SIZE / size
 		TurnOrder.scale.y = TurnOrder.scale.x
+		Attacks.size.x = PLAY_ORDER_MAX_SIZE
+	else:
+		Attacks.size.x = size
 	
 	
 	var play_order : Array = region_control.player_order.duplicate()
@@ -197,14 +203,15 @@ func _physics_process(delta):
 		if Input.is_action_pressed("up"):
 			direction.y -= 1
 		
-		if mouse_position.x > window_size.x - 64:
-			direction.x += 1
-		if mouse_position.x < 64:
-			direction.x -= 1
-		if mouse_position.y > window_size.y - 64:
-			direction.y += 1
-		if mouse_position.y < 64:
-			direction.y -= 1
+		if mouse_scroll_active:
+			if mouse_position.x > window_size.x - 64:
+				direction.x += 1
+			if mouse_position.x < 64:
+				direction.x -= 1
+			if mouse_position.y > window_size.y - 64:
+				direction.y += 1
+			if mouse_position.y < 64:
+				direction.y -= 1
 		
 		var move_speed = BASE_MOVE_SPEED * UI.scale.x
 		if shift:
@@ -229,9 +236,21 @@ func _physics_process(delta):
 		zoom_level = ZOOM_START
 		zoom_change(0)
 		CommandCallout.new_callout("Reset zoom")
+		
 	if Input.is_action_just_pressed("hide_ui"):
 		UIHideable.visible = not UIHideable.visible
 		CommandCallout.new_callout("Toggle hide UI")
+	
+	if Input.is_action_just_pressed("hide_turn_order"):
+		toggle_turn_order_visibility()
+		CommandCallout.new_callout("Toggle turn order")
+	
+	if Input.is_action_just_pressed("disable_mouse_scroll"):
+		mouse_scroll_active = not mouse_scroll_active
+		if mouse_scroll_active:
+			CommandCallout.new_callout("Mouse scrolling active")
+		else:
+			CommandCallout.new_callout("Mouse scrolling disabled")
 	
 	AdvanceTurnButton.modulate = region_control.align_color[region_control.current_player]
 	PowerSprite.self_modulate = region_control.align_color[region_control.current_player]
@@ -259,31 +278,39 @@ func _physics_process(delta):
 	
 	PlayerInfo.visible = hovering_turn_order
 	if hovering_turn_order:
-		var hovered_player : int = (mouse_position.x - PLAY_ORDER_SCREEN_BORDER_GAP) / (PLAY_ORDER_SPACING * TurnOrder.scale.x)
-		if hovered_player >= region_control.align_amount - 1:
-			hovered_player = region_control.align_amount - 2
-		if hovered_player < 0:
-			hovered_player = 0
+		var hovering_over_player : int = (mouse_position.x - PLAY_ORDER_SCREEN_BORDER_GAP) / (PLAY_ORDER_SPACING * TurnOrder.scale.x)
+		
+		if hovering_over_player >= region_control.align_amount - 1:
+			hovering_over_player = region_control.align_amount - 2
+		if hovering_over_player < 0:
+			hovering_over_player = 0
+		
+		var new_player : bool = false
+		if hovered_player != hovering_over_player:
+			hovered_player = hovering_over_player
+			new_player = true
 		
 		var player_alignment : int = region_control.player_order[hovered_player]
 		var leader : Sprite2D = TurnOrder.get_node(String.num(player_alignment)) as Sprite2D
 		if leader.visible:
-			var info_leader : Sprite2D = PlayerInfo.get_node("Player") as Sprite2D
-			info_leader.self_modulate = leader.self_modulate
-			info_leader.frame = leader.frame
-			PlayerInfo.get_node("City").self_modulate = leader.self_modulate
-			PlayerInfo.get_node("Capital").self_modulate = leader.self_modulate
 			var city_amount : Label = PlayerInfo.get_node("CityAmount") as Label
 			var capital_amount : Label = PlayerInfo.get_node("CapitalAmount") as Label
-			if leader.self_modulate.v > region_control.COLOR_TOO_BRIGHT:
-				city_amount.self_modulate = Color(0, 0, 0)
-				capital_amount.self_modulate = Color(0, 0, 0)
-			else:
-				city_amount.self_modulate = Color(1, 1, 1)
-				capital_amount.self_modulate = Color(1, 1, 1)
+			if new_player:
+				var info_leader : Sprite2D = PlayerInfo.get_node("Player") as Sprite2D
+				info_leader.self_modulate = leader.self_modulate
+				info_leader.frame = leader.frame
+				PlayerInfo.get_node("City").self_modulate = leader.self_modulate
+				PlayerInfo.get_node("Capital").self_modulate = leader.self_modulate
+				if leader.self_modulate.v > region_control.COLOR_TOO_BRIGHT:
+					city_amount.self_modulate = Color(0, 0, 0)
+					capital_amount.self_modulate = Color(0, 0, 0)
+				else:
+					city_amount.self_modulate = Color(1, 1, 1)
+					capital_amount.self_modulate = Color(1, 1, 1)
+				PlayerInfo.get_node("Name").text = region_control.align_names[player_alignment]
+			
 			city_amount.text = String.num(region_control.region_amount[player_alignment - 1])
 			capital_amount.text = String.num(region_control.capital_amount[player_alignment - 1])
-			PlayerInfo.get_node("Name").text = region_control.align_names[player_alignment]
 		else:
 			PlayerInfo.visible = false
 
@@ -306,11 +333,26 @@ func update_turn_order():
 		var alignment : int = play_order[i]
 		var leader = TurnOrder.get_node(String.num(alignment))
 		leader.visible = region_control.region_amount[alignment - 1]
+		if not leader.visible:
+			continue
+		
 		if TurnOrder.has_node(String.num(alignment) + "_txt"):
 			var aliance_text = TurnOrder.get_node(String.num(alignment) + "_txt")
 			var aliance = region_control.alignment_aliances[alignment]
 			if aliance_text.text != String.num_int64(aliance):
 				aliance_text.text = String.num_int64(aliance)
+		
+		if leader.has_node("sweat"):
+			if region_control.capital_amount[alignment - 1] > 0:
+				leader.get_node("sweat").queue_free()
+		else:
+			if region_control.capital_amount[alignment - 1] == 0:
+				var new_sweat : Sprite2D = Sprite2D.new()
+				new_sweat.texture = preload("res://Sprites/leader_sweat.png")
+				new_sweat.position = Vector2(-16, -16)
+				new_sweat.name = "sweat"
+				leader.add_child(new_sweat)
+			
 
 
 func win(align_victory : int):
@@ -337,3 +379,39 @@ func _TurnOrder_cam_enable():
 
 func show_pause_menu():
 	PauseMenu.visible = not PauseMenu.visible
+
+
+func toggle_turn_order_visibility():
+	TurnOrder.visible = not TurnOrder.visible
+
+
+func show_attacks(region : Region):
+	if not TurnOrder.visible:
+		return
+	
+	var adjanced : Array[int] = region.get_adjanced_region_power()
+	
+	var text : String = ""
+	var align_amount : int = region_control.align_amount
+	
+	for alignment in range(adjanced.size()):
+		if alignment == 0 or adjanced[alignment] == 0:
+			align_amount -= 1
+			continue
+		var color : Color = region_control.align_color[alignment]
+		var text_color : Color = Color(1, 1, 1)
+		if color.v > region_control.COLOR_TOO_BRIGHT:
+			text_color = Color(0, 0, 0)
+		text += "[cell][bgcolor=#" + color.to_html() + "][color=#" + text_color.to_html() + "] "
+		text += String.num(adjanced[alignment]) + " [/color][/bgcolor][/cell]"
+	
+	if align_amount > 0:
+		text = "[center][table=" + String.num(align_amount) + "]" + text + "[/table][/center]"
+		
+		Attacks.clear()
+		Attacks.append_text(text)
+		Attacks.visible = true
+
+
+func hide_attacks():
+	Attacks.visible = false

@@ -8,6 +8,8 @@ class_name City
 var text : Label = Label.new()
 var region_name : Label = Label.new()
 
+var was_hovered : bool = false
+
 func _ready():
 	if is_capital:
 		texture_normal = preload("res://Sprites/capital.png")
@@ -36,7 +38,13 @@ func _ready():
 func _process(_delta):
 	text.text = String.num(region.power)
 	if !region.region_control.dummy:
-		region_name.visible = is_hovered()
+		if was_hovered != is_hovered():
+			was_hovered = is_hovered()
+			if was_hovered:
+				show_attacks()
+			else:
+				hide_attacks()
+			region_name.visible = is_hovered()
 		visible = not region.region_control.game_control.cities_visible
 
 
@@ -59,3 +67,13 @@ func color_self(new_color : Color):
 		text.self_modulate = Color(1, 1, 1)
 		region_name.self_modulate = Color(1, 1, 1)
 		
+
+
+func show_attacks():
+	if !region.region_control.dummy:
+		region.region_control.game_camera.show_attacks(region)
+
+
+func hide_attacks():
+	if !region.region_control.dummy:
+		region.region_control.game_camera.hide_attacks()
