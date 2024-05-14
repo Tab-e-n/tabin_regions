@@ -389,7 +389,7 @@ func show_attacks(region : Region):
 	if not TurnOrder.visible:
 		return
 	
-	var adjanced : Array[int] = region.get_adjanced_region_power()
+	var adjanced : Array[int] = region.get_adjacent_attack_power()
 	
 	var text : String = ""
 	var align_amount : int = region_control.align_amount

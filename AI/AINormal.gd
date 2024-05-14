@@ -67,17 +67,21 @@ func think_normal(is_bonus : bool = false):
 	
 	if eligable_regions.size() > 0:
 		controler.selected_capital = eligable_regions[0].name
-		var highest_benefit = calculate_benefit_default(eligable_regions.pop_front(), is_bonus)
+		var highest_benefit : int = calculate_benefit_default(eligable_regions.pop_front(), is_bonus)
+		var lowest_distance : int
 		rng.randomize()
 		var results : Array = []
 		for region in eligable_regions:
-			var benefit = calculate_benefit_default(region, is_bonus)
-			if benefit > highest_benefit:
+			var benefit : int = calculate_benefit_default(region, is_bonus)
+			var distance = region.distance_from_capital
+			if benefit > highest_benefit or (benefit == highest_benefit and distance < lowest_distance):
 				results = [region.name]
 				highest_benefit = benefit
-			if benefit == highest_benefit:
+				lowest_distance = distance
+			elif benefit == highest_benefit:
 				results.append(region.name)
-				highest_benefit = benefit
+#				highest_benefit = benefit
+#				lowest_distance = distance
 		if results:
 			controler.selected_capital = results[rng.randi_range(0, results.size() - 1)]
 	else:
@@ -116,7 +120,7 @@ func calculate_benefit_default(region : Region, is_bonus : bool):
 		action_amount = controler.get_action_amount()
 	else:
 		action_amount = controler.get_bonus_action_amount()
-	var benefit = 0
+	var benefit : int = 0
 	if controler.alignment_friendly(current_alignment, region.alignment):
 		var threat : int = determine_attacks(region)
 		if threat < -action_amount:

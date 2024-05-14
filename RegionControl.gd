@@ -157,6 +157,8 @@ func _ready():
 	
 	count_up_regions()
 	
+	bake_capital_distance()
+	
 	if random_player_align_range < max_user_amount:
 		random_player_align_range = max_user_amount
 	
@@ -263,6 +265,33 @@ func count_up_regions():
 			capital_amount[region.alignment - 1] += 1
 	
 	last_turn_region_amount = region_amount.duplicate()
+
+
+func bake_capital_distance():
+	for capital in get_children():
+		if not capital is Region:
+			continue
+		if not capital.is_capital:
+			continue
+		capital.distance_from_capital = 0
+		var current_distance : int = 2
+		var regions : Array = capital.connections.keys()
+		while regions.size() > 0:
+			var next_regions : Array = []
+			for reg_name in regions:
+				var region : Region = get_node(reg_name) as Region
+				if region.is_capital:
+					region.distance_from_capital = 0
+				elif region.distance_from_capital > current_distance:
+					region.distance_from_capital = current_distance
+					next_regions.append_array(region.connections.keys())
+				elif region.distance_from_capital == current_distance:
+					region.distance_from_capital -= 1
+			current_distance += 2
+			regions.clear()
+			for reg_name in next_regions:
+				if not regions.has(reg_name):
+					regions.append(reg_name)
 
 
 func cross(capital_position : Vector2):

@@ -30,6 +30,7 @@ func _ready():
 	region_name.size = Vector2(256, 32)
 	region_name.position = Vector2(-96, -32)
 	region_name.text = region.name + " (" + String.num(region.max_power) + ")"
+#	region_name.text = region.name + " (" + String.num(region.distance_from_capital) + ")"
 	region_name.visible = false
 	region_name.z_index = 1
 	add_child(region_name)
@@ -71,7 +72,7 @@ func color_self(new_color : Color):
 
 func show_attacks():
 	if !region.region_control.dummy:
-		region.region_control.game_camera.show_attacks(region)
+		region.region_control.game_camera.call_deferred("show_attacks", region)
 
 
 func hide_attacks():

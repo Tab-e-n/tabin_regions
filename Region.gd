@@ -4,6 +4,7 @@ class_name Region
 
 
 const TEXTURE_SIZE : Vector2 = Vector2(1024, 1024)
+const DISTANCE_CAP : int = 0b1111_1111_1111_1111
 
 
 enum RENDER_MODE {DISABLED, ALIGNMENT, POWER, MAX_POWER, CAPITAL}
@@ -21,17 +22,21 @@ enum RENDER_MODE {DISABLED, ALIGNMENT, POWER, MAX_POWER, CAPITAL}
 
 @onready var region_control : RegionControl = get_parent() as RegionControl
 
-
 @onready var city : City
 
 
 var tool_render_mode : int = RENDER_MODE.ALIGNMENT
+var distance_from_capital : int = DISTANCE_CAP
 
 
 func _ready():
 	if Engine.is_editor_hint():
 		return
 	
+	call_deferred("_ready_deferred")
+
+
+func _ready_deferred():
 	city = City.new()
 	city.is_capital = is_capital
 	add_child(city)
@@ -40,6 +45,7 @@ func _ready():
 		city.mouse_entered.connect(make_region_arrows)
 	
 	color_self()
+
 
 func _process(_delta):
 	if Engine.is_editor_hint() and region_control:
@@ -92,7 +98,7 @@ func action_decided():
 			if reinforce(region_control.current_player):
 				region_control.action_done()
 				return
-		elif can_attack(region_control.current_player):
+		elif alignment_can_attack(region_control.current_player):
 			if incoming_attack(region_control.current_player):
 				region_control.action_done()
 				return
@@ -105,7 +111,7 @@ func action_decided():
 		region_control.cross(position)
 
 
-func can_attack(attack_align : int) -> bool:
+func alignment_can_attack(attack_align : int) -> bool:
 	for region in connections.keys():
 		if region_control.get_node(region).alignment == attack_align:
 			return true
@@ -115,7 +121,7 @@ func can_attack(attack_align : int) -> bool:
 func incoming_attack(attack_align : int, attack_power : int = 0, test_only : bool = false):
 	for region in connections.keys():
 		if region_control.get_node(region).alignment == attack_align:
-			attack_power += max(region_control.get_node(region).power - connections[region], 0)
+			attack_power += region_attack_power(region)
 	if attack_power > power:
 		if test_only:
 			return true
@@ -133,14 +139,6 @@ func incoming_attack(attack_align : int, attack_power : int = 0, test_only : boo
 		return true
 	else:
 		return false
-
-
-func attack_power_difference(attack_align : int):
-	var attack_power = 0
-	for region in connections.keys():
-		if region_control.get_node(region).alignment == attack_align:
-			attack_power += max(region_control.get_node(region).power - connections[region], 0)
-	return power - attack_power
 
 
 func reinforce(reinforce_align : int = alignment, addon_power : int = 1):
@@ -162,6 +160,30 @@ func mobilize(mobilize_align : int = alignment):
 	return true
 
 
+func region_attack_power(region) -> int:
+	return max(region_control.get_node(region).power - connections[region], 0)
+
+
+func get_adjacent_attack_power() -> Array[int]:
+	var attacks : Array[int] = []
+	attacks.resize(region_control.align_amount)
+	
+	for i in connections.keys():
+		var target : Node = region_control.get_node(i)
+		if target is Region:
+			attacks[target.alignment] += region_attack_power(i)
+	
+	return attacks
+
+
+func attack_power_difference(attack_align : int) -> int:
+	var attack_power = 0
+	for region in connections.keys():
+		if region_control.get_node(region).alignment == attack_align:
+			attack_power += region_attack_power(region)
+	return power - attack_power
+
+
 func make_region_arrows():
 	var i : int = 0
 	for target in connections.keys():
@@ -181,16 +203,3 @@ func make_region_arrows():
 			region_control.add_child(arrow)
 			i += 1
 
-
-func get_adjanced_region_power() -> Array[int]:
-	var attacks : Array[int] = []
-	attacks.resize(region_control.align_amount)
-	
-	for i in connections.keys():
-		if not region_control.has_node(i):
-			continue
-		var target : Node = region_control.get_node(i)
-		if target is Region:
-			attacks[target.alignment] += target.power
-	
-	return attacks

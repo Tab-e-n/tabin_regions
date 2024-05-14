@@ -54,6 +54,7 @@ var connections : Array = [
 	[\"Finland\", \"Estonia, Latvia, Lithuania\"],
 	[\"Finland\", \"Karelia, Murmansk\"],
 	[\"Ukraine\", \"Belarus\"],
+	[\"Ukraine\", \"Southern Russia\"],
 	[\"Poland\", \"Ukraine\"],
 	[\"Czechoslovakia\", \"Ukraine\"],
 	[\"Romania\", \"Ukraine\"],
@@ -76,6 +77,8 @@ var connections : Array = [
 	[\"Turkey\", \"Greece\"],
 	[\"Black Sea\", \"Turkey\"],
 	[\"Georgia, Armenia, Azerbaijan\", \"Turkey\"],
+	[\"Georgia, Armenia, Azerbaijan\", \"North Caucasian\"],
+	[\"Southern Russia\", \"North Caucasian\"],
 	[\"Black Sea\", \"Georgia, Armenia, Azerbaijan\"],
 	[\"Black Sea\", \"Mediterranean Sea\"],
 	[\"Mediterranean Sea\", \"Greece\"],
@@ -112,6 +115,7 @@ var connections : Array = [
 	[\"Iran\", \"United Arab Emirates, Quatar\"],
 	[\"Uzbekistan\", \"Turkmenistan\"],
 	[\"Uzbekistan\", \"Caspian Basin\"],
+	[\"Southern Russia\", \"Caspian Basin\"],
 	[\"Uzbekistan\", \"Central West Kazakhstan\"],
 	[\"Caspian Basin\", \"Turkmenistan\"],
 	[\"Caspian Basin\", \"Central West Kazakhstan\"],
@@ -1029,6 +1033,17 @@ is_capital = true
 [node name="Georgia, Armenia, Azerbaijan" type="Polygon2D" parent="."]
 position = Vector2(192, -992)
 polygon = PackedVector2Array(-56, -32, -24, -32, 0, -16, 40, -16, 72, 16, 88, 24, 104, 16, 136, 40, 120, 48, 120, 64, 112, 88, 96, 56, 80, 64, 72, 80, 32, 56, 16, 40, 16, 16, -24, 8, -24, -8)
+script = ExtResource("3_b6jsf")
+
+[node name="North Caucasian" type="Polygon2D" parent="."]
+position = Vector2(216, -1040)
+offset = Vector2(-24, 48)
+polygon = PackedVector2Array(64, -56, 64, -48, 72, -40, 72, -24, 104, 8, 104, 16, 88, 24, 72, 16, 40, -16, 0, -16, -24, -32, -56, -32, -48, -48, -48, -64, -56, -72, -40, -80, -16, -80, 32, -64)
+script = ExtResource("3_b6jsf")
+
+[node name="Southern Russia" type="Polygon2D" parent="."]
+position = Vector2(176, -1120)
+polygon = PackedVector2Array(-40, 96, -72, 80, -96, 64, -96, 56, -80, 40, -80, 32, -72, 24, -72, 16, -56, 0, -56, -24, -64, -40, -56, -40, -48, -48, -48, -64, -40, -72, 8, -72, 24, -64, 64, -56, 56, -48, 56, -8, 96, 16, 96, 32, 112, 40, 104, 48, 88, 56, 80, 72, 48, 64, 0, 48, -24, 48, -40, 56, -32, 64, -32, 80)
 script = ExtResource("3_b6jsf")
 
 [node name="Egypt" type="Polygon2D" parent="."]
