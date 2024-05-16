@@ -288,10 +288,16 @@ func bake_capital_distance():
 				elif region.distance_from_capital == current_distance:
 					region.distance_from_capital -= 1
 			current_distance += 2
+			
 			regions.clear()
 			for reg_name in next_regions:
 				if not regions.has(reg_name):
 					regions.append(reg_name)
+			
+#			while next_regions.size() > 0:
+#				var reg = next_regions.pop_back()
+#				regions.append(reg)
+#				next_regions.erase(reg) # remove all matching instead
 
 
 func cross(capital_position : Vector2):
