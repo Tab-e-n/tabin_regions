@@ -14,7 +14,7 @@ const CUTOFF_ARROW_LENGHT : float = 128.0
 @export var from_color : Color
 @export var to_color : Color
 
-@export var darken : bool = false
+@export var power_reduction : int = 0
 @export var to_name : String
 
 
@@ -37,19 +37,31 @@ func _ready():
 		
 		var label = Label.new()
 		label.text = to_name
+		if power_reduction > 0:
+			label.text += " (-" + str(power_reduction) + ")"
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		label.size = Vector2(256, 24)
 		label.position = to_position + Vector2(-128, -16)
 		label.z_index = 20
 		add_child(label)
+	elif power_reduction > 0:
+		var label = Label.new()
+		label.text = "(-" + str(power_reduction) + ")"
+		label.position = from_position + difference * Vector2(0.5, 0.5) + Vector2(-32, -16)
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.size = Vector2(64, 24)
+		label.z_index = 20
+		add_child(label)
 	
 	default_color = Color(0, 0, 0.2)
 	add_point(from_position)
 	add_point(to_position)
+	
 	gradient = Gradient.new()
 	var dark : Color = Color(0.6, 0.6, 0.6)
-	if darken:
+	if power_reduction > 0:
 		dark = Color(0.25, 0.25, 0.25)
 	gradient.set_color(0, from_color * dark)
 	gradient.set_color(1, to_color * dark)

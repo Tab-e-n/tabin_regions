@@ -47,6 +47,10 @@ func _process(_delta):
 				hide_attacks()
 			region_name.visible = is_hovered()
 		visible = not region.region_control.game_control.cities_visible
+		
+		if Input.is_action_just_pressed("show_extra"):
+			if region.power > 1 and region.region_control.current_player == region.alignment:
+				make_particle(true)
 
 
 func make_particle(mobilize : bool):

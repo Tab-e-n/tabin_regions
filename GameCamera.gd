@@ -311,6 +311,8 @@ func _physics_process(delta):
 			
 			city_amount.text = String.num(region_control.region_amount[player_alignment - 1])
 			capital_amount.text = String.num(region_control.capital_amount[player_alignment - 1])
+			if region_control.penalty_amount[player_alignment - 1] > 0:
+				capital_amount.text += "\n-" + String.num(region_control.penalty_amount[player_alignment - 1])
 		else:
 			PlayerInfo.visible = false
 

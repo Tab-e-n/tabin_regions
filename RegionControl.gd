@@ -20,6 +20,14 @@ const COLOR_TOO_BRIGHT : float = 0.9
 
 @export var allow_map_spec_change : bool = true
 
+@export_subgroup("Gameplay")
+# After a player reaches `key : int` capital amount, every subsequent capitol gains them `value: float`% less.
+@export var power_gain_penalties : Dictionary = {
+	3 : .325,
+	13 : .25,
+	21 : .125,
+} 
+
 @export_subgroup("Users")
 @export var user_amount : int = 1
 @export var random_player_align_range : int = 0
@@ -114,6 +122,8 @@ var bonus_action_amount : int = 0
 var current_turn : int = 1
 var current_placement : int = 0
 
+var penalty_amount : Array = []
+
 
 func _ready():
 	if dummy:
@@ -151,9 +161,11 @@ func _ready():
 	
 	region_amount.resize(align_amount - 1)
 	capital_amount.resize(align_amount - 1)
+	penalty_amount.resize(align_amount - 1)
 	for i in range(align_amount - 1):
 		region_amount[i] = 0
 		capital_amount[i] = 0
+		penalty_amount[i] = 0
 	
 	count_up_regions()
 	
@@ -280,7 +292,9 @@ func bake_capital_distance():
 			var next_regions : Array = []
 			for reg_name in regions:
 				var region : Region = get_node(reg_name) as Region
-				if region.is_capital:
+				if region.distance_from_capital < current_distance:
+					continue
+				elif region.is_capital:
 					region.distance_from_capital = 0
 				elif region.distance_from_capital > current_distance:
 					region.distance_from_capital = current_distance
@@ -290,14 +304,20 @@ func bake_capital_distance():
 			current_distance += 2
 			
 			regions.clear()
-			for reg_name in next_regions:
-				if not regions.has(reg_name):
-					regions.append(reg_name)
+#			for reg_name in next_regions:
+#				if not regions.has(reg_name):
+#					regions.append(reg_name)
 			
-#			while next_regions.size() > 0:
-#				var reg = next_regions.pop_back()
-#				regions.append(reg)
-#				next_regions.erase(reg) # remove all matching instead
+			while next_regions.size() > 0:
+				var reg = next_regions.pop_back()
+				if reg == "":
+					continue
+				regions.append(reg)
+				for i in range(next_regions.size()):
+					if next_regions[i] == reg:
+						next_regions[i] = ""
+			
+#			print(regions)
 
 
 func cross(capital_position : Vector2):
@@ -410,7 +430,8 @@ func reset():
 	if capital_amount[current_player - 1] > GameStats.get_stat(current_player, "most capitals owned"): #GameStats.stats[current_player]["most capitals owned"]
 		GameStats.set_stat(current_player, "most capitals owned", capital_amount[current_player - 1])
 #		GameStats.stats[current_player]["most capitals owned"] = capital_amount[current_player - 1]
-	action_amount = capital_amount[current_player - 1]
+	calculate_penalty(current_player)
+	action_amount = capital_amount[current_player - 1] - penalty_amount[current_player - 1]
 	bonus_action_amount = 1 if action_amount == 0 else 0
 	current_action = ACTION_MOBILIZE if action_amount == 0 else 0
 	
@@ -420,6 +441,22 @@ func reset():
 	
 	if !is_user_controled:
 		game_control.ai_control.start_turn(current_player, player_controlers[current_player - 1])
+
+
+func calculate_penalty(alignment : int):
+	var capitals : int = capital_amount[alignment - 1]
+	if power_gain_penalties.size() == 0:
+		return capitals
+	
+	var penalty : float = 0.0
+	for i in power_gain_penalties.keys():
+		if capitals <= i:
+			break
+		penalty += float(capitals - i) * power_gain_penalties[i]
+	var penalty_total = int(penalty)
+#	print(penalty_total)
+	
+	penalty_amount[alignment - 1] = penalty_total
 
 
 func forfeit():

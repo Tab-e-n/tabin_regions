@@ -73,12 +73,14 @@ func change_alignment(align : int):
 		region_control.region_amount[alignment - 1] -= 1
 		if is_capital:
 			region_control.capital_amount[alignment - 1] -= 1
+			region_control.calculate_penalty(alignment)
 	alignment = align
 	color_self()
 	if alignment > 0:
 		region_control.region_amount[alignment - 1] += 1
 		if is_capital:
 			region_control.capital_amount[alignment - 1] += 1
+			region_control.calculate_penalty(alignment)
 
 
 func color_self():
@@ -122,7 +124,7 @@ func incoming_attack(attack_align : int, attack_power : int = 0, test_only : boo
 	for region in connections.keys():
 		if region_control.get_node(region).alignment == attack_align:
 			attack_power += region_attack_power(region)
-	if attack_power > power:
+	if incoming_attack_captures(attack_power):
 		if test_only:
 			return true
 		GameStats.add_to_stat(attack_align, "enemy units removed", power)
@@ -176,6 +178,10 @@ func get_adjacent_attack_power() -> Array[int]:
 	return attacks
 
 
+func incoming_attack_captures(attack_power : int) -> bool:
+	return attack_power > power
+
+
 func attack_power_difference(attack_align : int) -> int:
 	var attack_power = 0
 	for region in connections.keys():
@@ -198,8 +204,7 @@ func make_region_arrows():
 			arrow.to_color = region_control.align_color[target_node.alignment]
 			arrow.to_name = target
 			arrow.num = i
-			if connections[target] > 0:
-				arrow.darken = true
+			arrow.power_reduction = connections[target]
 			region_control.add_child(arrow)
 			i += 1
 

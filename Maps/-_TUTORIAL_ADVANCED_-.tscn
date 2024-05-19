@@ -13,13 +13,13 @@ var connections : Array = [
 	[\"Bluh Bluh\", \"Midland\"],
 	[\"Midland\", \"Blue Beach\"],
 	[\"Bluh Bluh\", \"Mushroom Meadow\"],
-	[\"Greenopolis\", \"Green Grass Eat My\"],
+	[\"Greenopolis\", \"Green Grass\"],
 	[\"Greenopolis\", \"Frederic's Land\"],
-	[\"Frederic's Land\", \"Green Grass Eat My\"],
+	[\"Frederic's Land\", \"Green Grass\"],
 	[\"Frederic's Land\", \"Baffin Coast\"],
-	[\"Lake of Dess\", \"Green Grass Eat My\"],
+	[\"Lake of Dess\", \"Green Grass\"],
 	[\"Lake of Dess\", \"Mushroom Meadow\"],
-	[\"Mushroom Meadow\", \"Green Grass Eat My\"],
+	[\"Mushroom Meadow\", \"Green Grass\"],
 	[\"Lake of Dess\", \"Baffin Coast\"],
 	[\"Lake of Dess\", \"Lamanch Lowlands\"],
 	[\"Lake of Dess\", \"Lahama\"],
@@ -38,7 +38,7 @@ var connections : Array = [
 	[\"Crampus Country\", \"Red Camping\"],
 	[\"Lamanch Lowlands\", \"Baffin Coast\"],
 	[\"Frederic's Land\", \"Lake of Dess\"],
-	[\"Grunchy Grunch\", \"Green Grass Eat My\"],
+	[\"Grunchy Grunch\", \"Green Grass\"],
 	[\"Grunchy Grunch\", \"Bluh Bluh\"],
 	[\"Grunchy Grunch\", \"Mushroom Meadow\"],
 	[\"Southern Lamanch\", \"Northern Lamanch\", 1],
@@ -73,11 +73,7 @@ func _ready():
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 2368, -1024, 2368)
 script = ExtResource("1_hywy4")
-tag = "Challenge"
-complexity = "Simple"
-lore = "A follow-up on the previous tutorial, explains to you the remaining gameplay mechanics. CAN BE SKIPPED, BUT I RECOMMEND YOU PLAY ONLY BEGINNER MAPS UNTIL YOU COMPLETE THIS."
 align_amount = 4
-align_color = [Color(0.431373, 0.341176, 0.411765, 1), Color(0.101961, 0.564706, 0.368627, 1), Color(0.14902, 0.490196, 0.741176, 1), Color(0.670588, 0.141176, 0.2, 1)]
 allow_map_spec_change = false
 max_user_amount = 1
 use_preset_alignments = true
@@ -85,6 +81,11 @@ preset_user_alignments = [1, 2, 3]
 use_custom_ai_setup = true
 aliances_active = true
 alignment_aliances = [0, 1, 1, 2]
+tag = "Challenge"
+complexity = "Simple"
+lore = "A follow-up on the previous tutorial, explains to you the remaining gameplay mechanics. CAN BE SKIPPED, BUT I RECOMMEND YOU PLAY ONLY BEGINNER MAPS UNTIL YOU COMPLETE THIS."
+align_color = Array[Color]([Color(0.431373, 0.341176, 0.411765, 1), Color(0.101961, 0.564706, 0.368627, 1), Color(0.14902, 0.490196, 0.741176, 1), Color(0.670588, 0.141176, 0.2, 1)])
+align_names = Array[String](["Neutral", "You", "Friend", "Enemy"])
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_ojoeb")
@@ -118,10 +119,13 @@ ESC twice to exit back to the main menu.
 You will not know how to play the game without
 playing that one first.
 
-Let's start with an UI element you may have already noticed on your own,
-the rectangle with colorful figures in the top left corner. This represents
-the order in which the different leader play. Right now, green starts, then
-blue plays, and red is last. Players almost always start before computers.
+Let's start with the new UI element that was added, the rectangle with colorful
+figures in the top left corner. This represents the order in which the different
+leader play. Right now, green starts, then blue plays, and red is last. Players
+almost always start before computers.
+
+Hovering over any of the figures will show you the leaders captured capitals and
+captured regions, along with the leaders name if the mapmaker specified it.
 
 You may also notice that there are numbers on the figures. This is because
 of an optional feature you may enable while playing, called \"aliances\".
@@ -135,7 +139,7 @@ region. Here is a blue region where you can try it out:"
 horizontal_alignment = 1
 
 [node name="Examplia" type="Polygon2D" parent="."]
-position = Vector2(0, 480)
+position = Vector2(0, 520)
 polygon = PackedVector2Array(-136, -16, -72, -80, 48, -88, 120, -40, 128, 32, 56, 72, -40, 72, -112, 48)
 script = ExtResource("2_lql3s")
 alignment = 2
@@ -145,10 +149,9 @@ offset_left = -376.0
 offset_top = 640.0
 offset_right = 376.0
 offset_bottom = 832.0
-text = "The rest of the tutorial contains just a few factoids that i didn't mention up to this point,
-if you are interested in them, they are strewn around the edges of the map.
+text = "Cooperate with your blue ally and beat red to complete this tutorial!
 
-Cooperate with your blue ally and beat red to complete this tutorial!"
+V V V"
 horizontal_alignment = 1
 
 [node name="hills" type="Label" parent="."]
@@ -159,15 +162,14 @@ offset_bottom = 1888.0
 text = "Hover over a city from one of the two regions neighboring there -->
 You see how the connection between them is darker than other
 connections? That is because that connection reduces the power
-of an attack by 1. In order to capture a region connected by a
-darker connection, you need 1 more power than usual."
+of an attack by the number in the brackets."
 horizontal_alignment = 1
 
 [node name="skip_turn" type="Label" parent="."]
-offset_left = -720.0
-offset_top = 1064.0
-offset_right = -384.0
-offset_bottom = 1168.0
+offset_left = 328.0
+offset_top = 1248.0
+offset_right = 664.0
+offset_bottom = 1378.0
 text = "If you still have some first actions left,
 and you advance the turn phase, the
 remaining first actions you have will
@@ -175,32 +177,22 @@ be converted into bonus actions."
 horizontal_alignment = 1
 
 [node name="speedrun" type="Label" parent="."]
-offset_left = 312.0
-offset_top = 1288.0
-offset_right = 616.0
-offset_bottom = 1352.0
+offset_left = -712.0
+offset_top = 1064.0
+offset_right = -408.0
+offset_bottom = 1128.0
 text = "You can use \",\" and \".\" to 
 zoom in or zoom out the camera."
 horizontal_alignment = 1
 
-[node name="forfeit" type="Label" parent="."]
-offset_left = -272.0
-offset_top = 2088.0
-offset_right = 128.0
-offset_bottom = 2192.0
-text = "If you ever feel like it is impossible to win, you
-can press ctrl + alt + \"-\" to forfeit, turning all
-your regions neutral."
-horizontal_alignment = 1
-
 [node name="hide" type="Label" parent="."]
-offset_left = 312.0
-offset_top = 1608.0
-offset_right = 761.0
-offset_bottom = 1868.0
+offset_left = 384.0
+offset_top = 1760.0
+offset_right = 833.0
+offset_bottom = 2020.0
 text = "Even though this game is primarily mouse controled,
 it contains a few usefull keybinds that can speed up play,
-or provide some novelty. You can check these keybinds by
+or provide some QoL. You can check these keybinds by
 clicking the gearbox icon under the play order.
 
 For example: If you want to look at just the regions
@@ -236,7 +228,7 @@ position = Vector2(-24, 1936)
 polygon = PackedVector2Array(-112, 16, -104, 0, -88, -24, -72, -40, -32, -32, 40, -32, 96, -40, 96, 0, 120, 16, 72, 32, 48, 48, 24, 48, -8, 40, -32, 32, -64, 48, -80, 64, -120, 80, -160, 80, -144, 56, -120, 40)
 script = ExtResource("2_lql3s")
 
-[node name="Green Grass Eat My" type="Polygon2D" parent="."]
+[node name="Green Grass" type="Polygon2D" parent="."]
 position = Vector2(-280, 1328)
 polygon = PackedVector2Array(-112, -48, -112, -80, -32, -80, 16, -48, 64, -32, 104, -40, 152, -24, 208, 0, 208, 32, 184, 48, 160, 40, 120, 48, 88, 32, 56, 32, 24, 48, -8, 40, -48, 40, -48, -40)
 script = ExtResource("2_lql3s")
@@ -340,7 +332,7 @@ power = 0
 max_power = 4
 
 [node name="???" type="Polygon2D" parent="."]
-position = Vector2(536, 1920)
+position = Vector2(608, 2072)
 polygon = PackedVector2Array(0, -16, -8, -24, -16, -24, -24, -16, -24, -8, -16, 8, 0, 24, 16, 8, 24, -8, 24, -16, 16, -24, 8, -24)
 script = ExtResource("2_lql3s")
 

@@ -111,6 +111,7 @@ ai_controler = 2
 tag = "Challenge"
 complexity = "Beginner"
 lore = "An interactive tutorial, where you learn the mechanics of the game."
+align_names = Array[String](["Neutral", "You", "Enemy"])
 hide_turn_order = true
 
 [node name="Node" type="Node" parent="."]

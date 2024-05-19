@@ -141,7 +141,6 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("7_6wsra")
 
 [node name="player_info" type="Panel" parent="GameCamera/UI"]
-visible = false
 layout_mode = 0
 offset_left = 472.0
 offset_top = 112.0
@@ -176,12 +175,11 @@ clip_text = true
 [node name="CapitalAmount" type="Label" parent="GameCamera/UI/player_info"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 24.0
+offset_top = 36.0
 offset_right = 64.0
-offset_bottom = 72.0
+offset_bottom = 84.0
 text = "1"
 horizontal_alignment = 1
-vertical_alignment = 1
 clip_text = true
 
 [node name="Name" type="Label" parent="GameCamera/UI/player_info"]
