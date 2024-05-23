@@ -1,20 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl73eme14hwup"]
+[gd_scene load_steps=4 format=3 uid="uid://dl73eme14hwup"]
+
+[ext_resource type="StyleBox" uid="uid://l8vkqqi4prkx" path="res://Styles/style_label_normal_box.tres" id="1_8movm"]
+[ext_resource type="Texture2D" uid="uid://bht6umkfovrvf" path="res://Sprites/exit.png" id="2_y6cxs"]
 
 [sub_resource type="GDScript" id="GDScript_6r6wn"]
 script/source = "extends Node2D
 
-var controlers : Array = [\"User Controled\", \"Simple\", \"Turtle\", \"Neural\", \"Cheater\", \"No One\"]
 
 @onready var window_size : Vector2 = get_viewport_rect().size
 
+
 const farthest_left : int = 576
+
+
 var farthest_right : int = 576
 
 var input_processing_buffer : float = 1
 
+
 func _ready():
 	# bad code inbound
-	var pos : int = 0
+	var pos : int = 1
 	var size : int = GameStats.stats.size()
 	for placement in range(size + 1):
 		for stats in GameStats.stats:
@@ -70,7 +76,7 @@ func new_stats_panel(stats : Dictionary, pos : int):
 	columb.size = Vector2(192, 192)
 	columb.position.x = 192 * pos
 	var funny_spacing_value : String = \"                \"
-	columb.text = funny_spacing_value + stats[\"alignment name\"] + \"\\n\" + funny_spacing_value + controlers[stats[\"controler\"]]
+	columb.text = funny_spacing_value + stats[\"alignment name\"] + \"\\n\" + funny_spacing_value + AIControler.CONTROLER_NAMES[stats[\"controler\"]]
 	columb.text += \"\\nTurns lasted:\\n\" + String.num(stats[\"turns lasted\"])
 	columb.text += \"\\nFirst actions done:\\n\" + String.num(stats[\"first actions done\"])
 	columb.text += \"\\nBonus actions done:\\n\" + String.num(stats[\"bonus actions done\"])
@@ -86,14 +92,11 @@ func new_stats_panel(stats : Dictionary, pos : int):
 	$columbs.add_child(columb)
 
 
-func _input(event):
-	if event is InputEventMouseButton and input_processing_buffer <= 0:
-		if event.pressed:
-			get_tree().change_scene_to_file(\"res://setup_scene.tscn\")
-
 func _physics_process(delta):
 	if input_processing_buffer > 0:
 		input_processing_buffer -= delta
+	elif Input.is_action_just_pressed(\"escape\"):
+		leave()
 	
 	var mouse_position = get_viewport().get_mouse_position()
 	var move_speed = 8
@@ -108,6 +111,15 @@ func _physics_process(delta):
 		$cam.position.x -= move_speed
 		if $cam.position.x < farthest_left:
 			$cam.position.x = farthest_left
+
+
+func _on_csv_pressed():
+	var map_name : String = MapSetup.current_map_name.trim_suffix(\".tscn\")
+	GameStats.save_as_csv(map_name.replace(\"_\", \" \"))
+
+
+func leave():
+	get_tree().change_scene_to_file(\"res://setup_scene.tscn\")
 "
 
 [node name="Stats" type="Node2D"]
@@ -115,5 +127,48 @@ script = SubResource("GDScript_6r6wn")
 
 [node name="columbs" type="Node2D" parent="."]
 
+[node name="buttons" type="Panel" parent="."]
+offset_right = 192.0
+offset_bottom = 640.0
+theme_override_styles/panel = ExtResource("1_8movm")
+
+[node name="leave" type="TextureButton" parent="buttons"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 96.0
+texture_normal = ExtResource("2_y6cxs")
+
+[node name="csv" type="Button" parent="buttons"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 480.0
+offset_right = 160.0
+offset_bottom = 608.0
+text = "Store
+statistics
+as CSV"
+
+[node name="expo" type="Label" parent="buttons"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 176.0
+offset_bottom = 464.0
+text = "Hover your cursor
+over the edges of
+the screen to see
+other alignments.
+
+CSV Files are stored
+in your Appdata
+folder under
+/Roaming/TRegions."
+clip_text = true
+
 [node name="cam" type="Camera2D" parent="."]
 position = Vector2(576, 320)
+
+[connection signal="pressed" from="buttons/leave" to="." method="leave"]
+[connection signal="pressed" from="buttons/csv" to="." method="_on_csv_pressed"]

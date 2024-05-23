@@ -179,12 +179,12 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("escape"):
 		if LeaveMessage.visible:
-			get_tree().change_scene_to_file("res://stats.tscn")
+			leave()
 		LeaveMessage.visible = true
 	if win_timer > 0:
 		win_timer -= delta
 		if win_timer <= 0:
-			get_tree().change_scene_to_file("res://stats.tscn")
+			leave()
 			return
 	
 	if hovering_advance_turn or hovering_turn_order:
@@ -417,3 +417,7 @@ func show_attacks(region : Region):
 
 func hide_attacks():
 	Attacks.visible = false
+
+
+func leave():
+	get_tree().change_scene_to_file("res://stats.tscn")

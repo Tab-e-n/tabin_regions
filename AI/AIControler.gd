@@ -11,6 +11,7 @@ var speedrun_ai : bool = false
 var thinking_timer : float = THINKING_TIMER_DEFAULT
 
 enum {CONTROLER_USER, CONTROLER_DEFAULT, CONTROLER_TURTLE, CONTROLER_NEURAL, CONTROLER_CHEATER, CONTROLER_DUMMY}
+const CONTROLER_NAMES : Array = ["User Controled", "Simple", "Turtle", "Neural", "Cheater", "Dummy"]
 const PACKED_CONTROLERS : Array = [
 	null, # CONTROLER_USER (can be just null)
 	preload("res://AI/AINormal.gd"), # CONTROLER_DEFAULT
@@ -18,7 +19,8 @@ const PACKED_CONTROLERS : Array = [
 	preload("res://AI/AINeural.gd"), # CONTROLER_NEURAL
 	preload("res://AI/AINormal.gd"), # CONTROLER_CHEATER
 	preload("res://AI/AIDummy.gd") # CONTROLER_DUMMY
-] 
+]
+
 
 var current_alignment : int
 var current_controler : int

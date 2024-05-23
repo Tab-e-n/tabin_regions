@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ckbitpcqxs5ao"]
+[gd_scene load_steps=14 format=3 uid="uid://ckbitpcqxs5ao"]
 
 [ext_resource type="Script" path="res://GameControl.gd" id="1_2axsc"]
 [ext_resource type="Script" path="res://GameCamera.gd" id="1_we6ai"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b83fxlgeqmrwf" path="res://Sprites/turn_order_players.png" id="9_gke1b"]
 [ext_resource type="Texture2D" uid="uid://c2duva1ycjs8u" path="res://Sprites/city.png" id="10_5d75i"]
 [ext_resource type="Texture2D" uid="uid://66jp7txq175w" path="res://Sprites/capital.png" id="11_i48c4"]
+[ext_resource type="Texture2D" uid="uid://bht6umkfovrvf" path="res://Sprites/exit.png" id="12_st2cf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lm2d1"]
 bg_color = Color(0.247059, 0.247059, 0.282353, 1)
@@ -141,6 +142,7 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("7_6wsra")
 
 [node name="player_info" type="Panel" parent="GameCamera/UI"]
+visible = false
 layout_mode = 0
 offset_left = 472.0
 offset_top = 112.0
@@ -204,7 +206,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lm2d1")
 [node name="keys1" type="Label" parent="GameCamera/UI/pause"]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 16.0
+offset_top = 96.0
 offset_right = 408.0
 offset_bottom = 320.0
 text = "Esc  -  Exit
@@ -226,11 +228,20 @@ text = "Ctrl + Space  -  Advance turn
 Ctrl + Alt + Space  -  End turn
 Ctrl + Alt + \"-\"  -  Forfeit
 Ctrl + Alt + Enter  -  Toggle fast AI
+Ctrl + E  -  Highlight mobilizable cities
 Ctrl + H  -  Toggle capitals
 Ctrl + U  -  Toggle UI
 Ctrl + T  -  Toggle turn order
 Ctrl + Alt + M  -  Toggle mouse scroll"
 clip_text = true
+
+[node name="leave" type="TextureButton" parent="GameCamera/UI/pause"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 24.0
+offset_right = 80.0
+offset_bottom = 64.0
+texture_normal = ExtResource("12_st2cf")
 
 [node name="win" type="Label" parent="GameCamera/UI"]
 visible = false
@@ -264,3 +275,5 @@ visible = false
 z_index = 25
 color = Color(0.137255, 0.137255, 0.137255, 1)
 polygon = PackedVector2Array(-32, 64, 0, 32, 32, 64, 64, 32, 32, 0, 64, -32, 32, -64, 0, -32, -32, -64, -64, -32, -32, 0, -64, 32)
+
+[connection signal="pressed" from="GameCamera/UI/pause/leave" to="GameCamera" method="leave"]

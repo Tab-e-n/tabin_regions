@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Regions"
 run/main_scene="res://setup_scene.tscn"
+config/custom_user_dir_name="TRegions"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
