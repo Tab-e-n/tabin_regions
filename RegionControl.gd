@@ -85,10 +85,10 @@ const COLOR_TOO_BRIGHT : float = 0.9
 		Color("828387"), # gray
 		
 		Color("673a2b"), # brown
-		Color("4e543a"), # tank
+		Color("4e4c32"), # tank
 		Color("b6b7eb"), # silver
 		Color("eda75b"), # sandstorm
-		Color("305d4d"), # dark green
+		Color("4e4c32"), # dark green
 ]
 @export var align_names : Array[String] = []
 

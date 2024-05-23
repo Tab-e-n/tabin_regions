@@ -293,12 +293,16 @@ var connections : Array = [
 	[\"New Caledonia\", \"Solomon Islands\"],
 	[\"New Caledonia\", \"Fiji\"],
 	[\"Fiji\", \"Solomon Islands\"],
-	[\"Solomon Islands\", \"Hawaii\"],
+	[\"Fiji\", \"Vanuatu\"],
+	[\"Vanuatu\", \"Solomon Islands\"],
+	[\"Guam\", \"Hawaii\"],
+	[\"Solomon Islands\", \"Guam\"],
 	[\"Fiji\", \"Hawaii\"],
 	[\"Banda Arc\", \"Papua\"],
 	[\"Papua New Guinea\", \"Queensland\"],
 	[\"Malaysia\", \"Kalimantan\"],
 	[\"Malaysia\", \"Philippines\"],
+	[\"Guam\", \"Philippines\"],
 	[\"Sulawesi\", \"Kalimantan\"],
 	[\"Myanmar\", \"Bangladesh\"],
 	[\"Central India\", \"Bangladesh\"],
@@ -395,10 +399,12 @@ var connections : Array = [
 	[\"El Salvador\", \"Guatemala, Belize\"],
 	[\"Guatemala, Belize\", \"Honduras\"],
 	[\"Caribbean\", \"Dominican Republic\"],
+	[\"Windward Islands\", \"Dominican Republic\"],
 	[\"Haiti\", \"Dominican Republic\"],
 	[\"Caribbean\", \"Haiti\"],
 	[\"Cuba\", \"Haiti\"],
 	[\"Cuba\", \"Bahamas\"],
+	[\"Atlantis\", \"Bahamas\"],
 	[\"Caribbean\", \"Cuba\"],
 	[\"Caribbean\", \"Gulf Of Mexico\"],
 	[\"Florida\", \"Cuba\"],
@@ -541,6 +547,7 @@ var connections : Array = [
 	[\"Quebec\", \"What's Baffin\"],
 	[\"North-East Coast of USA\", \"Quebec\"],
 	[\"Bay of Fundy\", \"Quebec\"],
+	[\"Bay of Fundy\", \"Atlantis\"],
 	[\"North-East Coast of USA\", \"Bay of Fundy\"],
 	[\"Labrador\", \"Quebec\"],
 	[\"Labrador\", \"What's Baffin\"],
@@ -549,16 +556,20 @@ var connections : Array = [
 	[\"Acores\", \"Ireland\"],
 	[\"Newfoundland\", \"Ireland\"],
 	[\"Acores\", \"Canaries\"],
-	[\"Acores\", \"Cabo Verde\"],
+#	[\"Acores\", \"Cabo Verde\"],
 	[\"Northeast Brazil\", \"Cabo Verde\"],
-	[\"Acores\", \"Windward Islands\"],
+	[\"Acores\", \"Atlantis\"],
+	[\"Atlantis\", \"Windward Islands\"],
 	[\"Windward Islands\", \"Cabo Verde\"],
 	[\"Cabo Verde\", \"Canaries\"],
+	[\"Cabo Verde\", \"Atlantis\"],
+	[\"Atlantis\", \"Canaries\"],
 	[\"Bay of Fundy\", \"Newfoundland\"],
 	[\"Newfoundland\", \"Quebec\"],
 	[\"Ontario\", \"Quebec\"],
 	[\"Calorina\", \"Georgia\"],
 	[\"Japan\", \"Hawaii\"],
+	[\"Japan\", \"Guam\"],
 	[\"Japan\", \"Sakhalin\"],
 	[\"Japan\", \"Kuril Islands\"],
 	[\"Kamchatka\", \"Kuril Islands\"],
@@ -595,6 +606,7 @@ var connections : Array = [
 	[\"Papua\", \"Northern Australia\"],
 	[\"South Australia\", \"Queensland\"],
 	[\"New Caledonia\", \"Queensland\"],
+	[\"New Caledonia\", \"Vanuatu\"],
 	[\"Queensland\", \"Northern Australia\"],
 	[\"Northern Australia\", \"Western Australia\"],
 	[\"Northern Australia\", \"Timor-Leste\"],
@@ -608,12 +620,16 @@ var connections : Array = [
 	[\"Argentina Antarctic\", \"Chilean Antarctic\"],
 	[\"Argentina Antarctic\", \"Norway Antarctic\"],
 	[\"Argentina Antarctic\", \"Falklands\"],
+	[\"Argentina Antarctic\", \"Sandwich\"],
+	[\"Sandwich\", \"Falklands\"],
 	[\"Australia Antarctic\", \"Norway Antarctic\"],
+	[\"Sandwich\", \"Norway Antarctic\"],
 	[\"Australia Antarctic\", \"New Zealand Antarctic\"],
 	[\"Neutral Antarctic\", \"New Zealand Antarctic\"],
 	[\"New Zealand\", \"New Zealand Antarctic\"],
 	[\"New Zealand\", \"New Caledonia\"],
 	[\"South Africa, Lesotho, Eswatini\", \"Norway Antarctic\"],
+	[\"South Africa, Lesotho, Eswatini\", \"Sandwich\"],
 	[\"Madagascar\", \"Australia Antarctic\"],
 	[\"Kerguelen\", \"Australia Antarctic\"],
 	[\"Madagascar\", \"Kerguelen\"],
@@ -668,7 +684,8 @@ script = ExtResource("1_5aq8s")
 align_amount = 31
 complexity = "Medium"
 lore = "The classic. Except not at all. I took a lot of creative liberties. If you feel like something is wrong, it probably is. Have fun!"
-align_names = Array[String](["Other", "Com. China", "Ireland", "Nat. China", "Mongolia", "Turkey", "Japan", "Arctic", "USA", "Saudi Arabia", "Australia", "Canada", "India", "Botswana", "Balkan", "DACH", "Spaintugal", "Brazil", "Nordic States", "Venezuela", "Mauritania", "Confederacy", "Argentina", "Oceania", "Antarctic", "Russia", "Kenya", "Mexico", "Kazakhstan", "Libya", "Nigeria"])
+align_color = Array[Color]([Color(0.384314, 0.341176, 0.458824, 1), Color(0.654902, 0.168627, 0.215686, 1), Color(0.211765, 0.552941, 0.380392, 1), Color(0.168627, 0.490196, 0.729412, 1), Color(0.682353, 0.356863, 0.0823529, 1), Color(0.537255, 0.152941, 0.658824, 1), Color(0.929412, 0.521569, 0.552941, 1), Color(0.772549, 0.921569, 0.74902, 1), Color(0.129412, 0.215686, 0.458824, 1), Color(0.647059, 0.509804, 0.376471, 1), Color(0.866667, 0.309804, 0.588235, 1), Color(0.870588, 0.666667, 0.780392, 1), Color(0.427451, 0.65098, 0.239216, 1), Color(0.466667, 0.584314, 0.929412, 1), Color(0.815686, 0.623529, 0.0823529, 1), Color(0.694118, 0.466667, 0.788235, 1), Color(0.478431, 0.054902, 0.262745, 1), Color(0.235294, 0.368627, 0.141176, 1), Color(0.333333, 0.415686, 0.635294, 1), Color(0.843137, 0.878431, 0.419608, 1), Color(0.537255, 0.345098, 0.439216, 1), Color(0.247059, 0.0235294, 0.156863, 1), Color(0.490196, 0.929412, 0.572549, 1), Color(0.168627, 0.266667, 0.337255, 1), Color(0.843137, 0.792157, 0.752941, 1), Color(0.509804, 0.513726, 0.529412, 1), Color(0.403922, 0.227451, 0.168627, 1), Color(0.305882, 0.298039, 0.196078, 1), Color(0.713726, 0.717647, 0.921569, 1), Color(0.929412, 0.654902, 0.356863, 1), Color(0.180392, 0.34902, 0.286275, 1)])
+align_names = Array[String](["Other", "Com. China", "Ireland", "Nat. China", "Mongolia", "Turkey", "Japan", "Arctic", "USA", "Saudi Arabia", "Australia", "Canada", "India", "Botswana", "Balkan", "DACH", "Spaintugal", "Brazil", "Nordic States", "Venezuela", "Mauritania", "Confederacy", "Argentina", "Indonesia", "Antarctic", "Russia", "Kenya", "Mexico", "Kazakhstan", "Libya", "Nigeria"])
 city_size = 0.75
 render_mode = 1
 
@@ -682,10 +699,9 @@ texture = ExtResource("2_57qtc")
 
 [node name="Etopo1" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(1, 1, 1, 0.25098)
 z_index = 100
-position = Vector2(-640, -128)
-scale = Vector2(14, 14)
+position = Vector2(-3616, 264)
+scale = Vector2(4, 4)
 texture = ExtResource("3_7tbg5")
 
 [node name="Czechoslovakia" type="Polygon2D" parent="."]
@@ -843,6 +859,12 @@ polygon = PackedVector2Array(-80, -16, 64, 32, 40, 24, 56, 16, 56, 8, 40, 8, 40,
 script = ExtResource("3_b6jsf")
 alignment = 16
 
+[node name="Atlantis" type="Polygon2D" parent="."]
+position = Vector2(-1464, -648)
+polygon = PackedVector2Array(-8, -80, -32, -80, -64, -72, -80, -72, -96, -56, -96, -32, -104, -8, -88, 16, -64, 24, -40, 48, -32, 72, -8, 104, 0, 128, 48, 136, 64, 96, 72, 80, 64, 40, 56, 16, 64, -16, 56, -40)
+script = ExtResource("3_b6jsf")
+is_capital = true
+
 [node name="Britain" type="Polygon2D" parent="."]
 position = Vector2(-592, -1216)
 color = Color(0.211765, 0.552941, 0.380392, 1)
@@ -905,7 +927,7 @@ color = Color(0.815686, 0.623529, 0.0823529, 1)
 polygon = PackedVector2Array(-96, -40, -96, -16, -88, -16, -64, 24, -40, 32, -8, 48, 16, 72, 24, 112, 40, 88, 80, 72, 104, 72, 120, 80, 128, 80, 136, 72, 168, 56, 168, 24, 144, 8, 136, 16, 72, 24, 64, 0, 48, 0, 32, -32, 64, -72, 48, -80, 24, -80, 16, -72, -8, -72, -16, -64, -32, -72, -48, -40)
 script = ExtResource("3_b6jsf")
 alignment = 14
-power = 3
+power = 2
 
 [node name="Mediterranean Sea" type="Polygon2D" parent="."]
 position = Vector2(-232, -832)
@@ -940,6 +962,7 @@ position = Vector2(-8, -1024)
 color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-112, -96, -104, -104, -72, -104, -48, -80, -48, -72, -32, -56, 40, -56, 56, -40, 32, -16, 16, -32, 8, -56, -32, -56, -56, -24, -72, -40, -64, -56, -88, -88)
 script = ExtResource("3_b6jsf")
+power = 0
 
 [node name="Syria" type="Polygon2D" parent="."]
 position = Vector2(128, -840)
@@ -1186,6 +1209,7 @@ color = Color(0.478431, 0.054902, 0.262745, 1)
 polygon = PackedVector2Array(-32, -8, 64, -8, 48, 16, 40, 24, 32, 16, 40, 16, 48, 8, 48, -8, 8, -8, 8, 16, 24, 16, 8, 24, 8, 8, 0, 8, -16, 16, 0, 0, 8, 0, 8, -8, -24, -8, -24, 0)
 script = ExtResource("3_b6jsf")
 alignment = 16
+power = 0
 
 [node name="Niger" type="Polygon2D" parent="."]
 position = Vector2(-416, -448)
@@ -1246,6 +1270,7 @@ position = Vector2(-1072, -408)
 color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(0, 16, 8, 24, 16, 16, 32, 24, 32, 8, 24, 1, 40, 0, 48, -8, 48, -16, 40, -24, 40, -8, 39, 0, 24, 1, 24, -15, 16, -24, 12, -18, 4, -22, -8, -32, -8, -24, 0, -24, 16, -16, 24, -10, 24, 16)
 script = ExtResource("3_b6jsf")
+power = 0
 
 [node name="Guinea" type="Polygon2D" parent="."]
 position = Vector2(-800, -304)
@@ -1286,7 +1311,7 @@ script = ExtResource("3_b6jsf")
 
 [node name="Nigeria" type="Polygon2D" parent="."]
 position = Vector2(-432, -280)
-color = Color(0.188235, 0.364706, 0.301961, 1)
+color = Color(0.180392, 0.34902, 0.286275, 1)
 polygon = PackedVector2Array(-104, 80, -80, 80, -48, 96, -56, 112, -40, 128, -32, 120, 8, 120, 16, 88, 32, 72, 56, 72, 64, 80, 112, -32, 120, -32, 128, -48, 120, -72, 104, -80, 88, -72, 64, -72, 56, -80, 24, -64, 0, -72, -24, -72, -56, -88, -72, -80, -88, -48, -96, -48, -96, -32, -80, -24, -80, -8, -96, 0, -96, 16, -104, 16)
 script = ExtResource("3_b6jsf")
 alignment = 30
@@ -1387,6 +1412,7 @@ position = Vector2(-88, 264)
 color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-80, -32, -80, 32, -48, 64, -16, 64, -8, 72, 24, 72, 32, 56, 48, 48, 56, 32, 80, 24, 88, 8, 112, 0, 136, -16, 136, -32, 144, -40, 144, -80, 160, -96, 112, -128, 96, -136, 72, -144, 48, -128, 48, -64, 56, -56, 72, -56, 72, -48, 56, -40, 32, -64, 24, -64, 16, -56, -8, -72, -32, -80, -32, -72, -40, -56, -40, -32)
 script = ExtResource("3_b6jsf")
+power = 0
 
 [node name="Tanzania" type="Polygon2D" parent="."]
 position = Vector2(88, 72)
@@ -1426,6 +1452,7 @@ position = Vector2(624, 1032)
 color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-24, 8, -16, -16, 0, 0, 16, -8, 0, 16, -16, 8)
 script = ExtResource("3_b6jsf")
+power = 0
 
 [node name="New Zealand" type="Polygon2D" parent="."]
 position = Vector2(2488, 872)
@@ -1528,7 +1555,6 @@ color = Color(0.427451, 0.65098, 0.239216, 1)
 polygon = PackedVector2Array(-64, -8, -56, -32, -24, -48, -16, -56, -16, -96, -8, -136, 8, -144, 48, -152, 56, -128, 56, -104, 48, -88, 56, -72, 96, -88, 136, -104, 80, -48, 56, -32, 48, -16, 56, 8, 56, 32, 48, 80, 16, 136, 0, 136, -16, 104, -24, 72, -40, 48, -56, 8)
 script = ExtResource("3_b6jsf")
 alignment = 12
-power = 0
 
 [node name="West India" type="Polygon2D" parent="."]
 position = Vector2(848, -544)
@@ -1544,7 +1570,6 @@ color = Color(0.427451, 0.65098, 0.239216, 1)
 polygon = PackedVector2Array(0, -120, -24, -96, -64, -104, -56, -64, -24, -40, -80, 48, -104, 48, -112, 72, -80, 112, -48, 112, -24, 136, -16, 112, 0, 112, 0, 120, 16, 120, 32, 104, 16, 96, 24, 80, 32, 48, 24, 8, 80, 24, 80, 16, 88, 8, 88, 0, 56, -24, 40, -40, 32, -48, 48, -56, 48, -72, 32, -88, 48, -104, 48, -120, 32, -128, 16, -128)
 script = ExtResource("3_b6jsf")
 alignment = 12
-power = 0
 
 [node name="East India" type="Polygon2D" parent="."]
 position = Vector2(1216, -688)
@@ -1577,20 +1602,16 @@ script = ExtResource("3_b6jsf")
 
 [node name="Malaysia" type="Polygon2D" parent="."]
 position = Vector2(1504, -144)
-color = Color(0.168627, 0.266667, 0.337255, 1)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-144, -56, -136, -24, -112, 16, -72, 48, -64, 64, 96, 64, 104, 56, 144, 56, 152, 40, 152, 32, 160, 16, 160, 0, 176, -16, 200, -16, 208, -8, 224, -16, 232, -32, 224, -40, 208, -48, 192, -80, 152, -24, 128, -16, 112, 8, 88, 16, 80, 32, 80, 48, 64, 48, 48, 40, 48, 48, 72, 64, -48, 64, -56, 48, -64, 24, -72, 16, -72, -24, -80, -40, -96, -56, -112, -48, -128, -48)
 script = ExtResource("3_b6jsf")
-alignment = 23
-is_capital = true
 
 [node name="Philippines" type="Polygon2D" parent="."]
 position = Vector2(1792, -304)
-color = Color(0.168627, 0.266667, 0.337255, 1)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 offset = Vector2(-288, 160)
 polygon = PackedVector2Array(328, -64, 344, -48, 360, -48, 360, -56, 352, -72, 360, -80, 376, -64, 376, -80, 368, -104, 368, -120, 344, -152, 344, -168, 352, -184, 336, -192, 328, -192, 312, -224, 288, -232, 264, -232, 264, -248, 256, -256, 256, -264, 264, -272, 280, -296, 264, -312, 256, -320, 240, -328, 232, -320, 232, -280, 224, -264, 240, -240, 248, -216, 248, -200, 248, -184, 232, -176, 224, -144, 216, -128, 192, -112, 192, -96, 216, -112, 240, -144, 232, -152, 248, -176, 248, -192, 264, -184, 272, -192, 264, -208, 264, -224, 280, -224, 296, -200, 304, -184, 328, -176, 320, -160, 312, -152, 296, -176, 280, -176, 280, -160, 296, -144, 296, -120, 304, -120, 312, -128, 328, -128, 336, -136, 320, -144, 328, -152, 344, -144, 352, -120, 336, -104, 312, -104, 296, -96, 288, -80, 288, -64, 304, -80, 320, -88, 328, -80)
 script = ExtResource("3_b6jsf")
-alignment = 23
-power = 0
 
 [node name="Taiwan" type="Polygon2D" parent="."]
 position = Vector2(1720, -584)
@@ -1633,6 +1654,7 @@ color = Color(0.168627, 0.266667, 0.337255, 1)
 polygon = PackedVector2Array(-64, -32, -72, -8, -56, 0, -24, 8, 0, 8, 24, 16, 56, 24, 96, 24, 96, 8, 72, 8, 56, -8, 32, -24, 16, -16, -8, -16, -24, -24, -40, -32)
 script = ExtResource("3_b6jsf")
 alignment = 23
+is_capital = true
 
 [node name="Lesser Sunda Islands" type="Polygon2D" parent="."]
 position = Vector2(1752, 144)
@@ -1643,10 +1665,9 @@ alignment = 23
 
 [node name="Timor-Leste" type="Polygon2D" parent="."]
 position = Vector2(1864, 136)
-color = Color(0.168627, 0.266667, 0.337255, 1)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-24, 0, -16, 16, 8, 8, 32, -8, 8, -16)
 script = ExtResource("3_b6jsf")
-alignment = 23
 
 [node name="Papua" type="Polygon2D" parent="."]
 position = Vector2(2112, 24)
@@ -1664,33 +1685,41 @@ alignment = 23
 
 [node name="Papua New Guinea" type="Polygon2D" parent="."]
 position = Vector2(2216, 72)
-color = Color(0.168627, 0.266667, 0.337255, 1)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-48, 72, -16, 72, -8, 48, 8, 40, 24, 40, 48, 56, 56, 72, 80, 96, 104, 96, 120, 104, 128, 96, 104, 72, 88, 64, 80, 48, 64, 32, 64, 16, 80, 16, 80, 8, 64, 0, 48, -8, 40, -32, -24, -64, -48, -72)
 script = ExtResource("3_b6jsf")
-alignment = 23
 
 [node name="Solomon Islands" type="Polygon2D" parent="."]
 position = Vector2(2448, 88)
-color = Color(0.168627, 0.266667, 0.337255, 1)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-16, -24, 0, 8, 32, 48, 48, 48, 40, 32, 8, 8, 32, 16, 72, 40, 88, 56, 72, 56, 72, 64, 120, 96, 120, 80, 96, 72, 96, 64, 112, 64, 112, 56, 96, 40, 56, 16, 24, 0, 0, -8, -8, -32, -56, -32, -48, -48, -48, -56, -56, -72, -80, -88, -104, -88, -80, -80, -64, -72, -64, -64, -72, -56, -80, -48, -88, -32, -104, -24, -136, -24, -136, -16, -120, -8, -96, -8, -80, -16, -64, -32, -16, -32)
 script = ExtResource("3_b6jsf")
-alignment = 23
+power = 0
+
+[node name="Guam" type="Polygon2D" parent="."]
+position = Vector2(2272, -424)
+offset = Vector2(-32, 32)
+polygon = PackedVector2Array(-24, 32, -16, 40, -16, 32)
+script = ExtResource("3_b6jsf")
+power = 0
+max_power = 1
 
 [node name="New Caledonia" type="Polygon2D" parent="."]
 position = Vector2(2584, 416)
-color = Color(0.168627, 0.266667, 0.337255, 1)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-24, -32, -24, -24, -8, 8, 32, 32, 40, 24, 8, -16, -8, -32)
 script = ExtResource("3_b6jsf")
-alignment = 23
-power = 0
+
+[node name="Vanuatu" type="Polygon2D" parent="."]
+position = Vector2(2672, 264)
+polygon = PackedVector2Array(-40, 8, -24, 8, -16, 32, -8, 32, -16, 16, -8, 8, 0, 16, 0, 112, -8, 104, 0, 96, 0, 48, -16, 48, -24, 32, -40, 16)
+script = ExtResource("3_b6jsf")
 
 [node name="Fiji" type="Polygon2D" parent="."]
 position = Vector2(2840, 336)
-color = Color(0.168627, 0.266667, 0.337255, 1)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-8, 0, 0, 8, 16, 8, 24, 0, 8, -16, -8, -8)
 script = ExtResource("3_b6jsf")
-alignment = 23
-power = 0
 
 [node name="Cambodia" type="Polygon2D" parent="."]
 position = Vector2(1448, -344)
@@ -1729,12 +1758,14 @@ position = Vector2(2016, -1296)
 color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, -104, -72, -112, -80, -128, -80, -136, -88, -152, -64, -160, -24, -152, 0, -144, -8, -128, 16, -128, 24, -120, 40, -128, 80, -104, 96, -88, 88, -80, 80, -80, 64, -88, 40, -88, 32, -80, 24, -80, 16, -88, 16, -80, 0, -80, -16, -72, 0, -64, 0, -48, 8, -32, 24, -32, 40, -24, 56, -8, 56, 16, 80, 24, 80, 40, 64, 40, 64, 48, 80, 64, 64, 72, 80, 96, 64, 112, 56, 112, 40, 88, 8, 64, -48, 8, -56, -8, -64, -32, -48, -40, -48, -80, -40, -88, -32, -88, -32, -96, -48, -112, -48, -120, -40, -128, -64, -128, -56, -112)
 script = ExtResource("3_b6jsf")
+power = 0
 
 [node name="Chukotka" type="Polygon2D" parent="."]
 position = Vector2(2024, -1496)
 color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-264, -64, -280, -32, -320, -32, -328, -8, -320, 16, -288, 24, -224, 40, -144, 48, -96, 48, -72, 40, -32, 48, -8, 56, -16, 72, 8, 72, 16, 80, 32, 72, 72, 96, 88, 112, 88, 96, 104, 88, 128, 72, 160, 80, 152, 64, 120, 48, 88, 40, 72, 32, 104, 32, 104, 16, 96, 8, 80, 8, 88, -8, 112, 16, 152, 16, 184, 32, 232, 40, 240, 32, 208, 16, 224, 8, 224, 0, 192, -8, 168, -16, 152, -8, 120, -24, 88, -32, 64, -32, 40, -48, 8, -48, -24, -56, -64, -64, -104, -72, -120, -72, -160, -80, -168, -72, -152, -64, -128, -56, -136, -48, -168, -56, -184, -72, -208, -64)
 script = ExtResource("3_b6jsf")
+power = 0
 
 [node name="Sakhalin" type="Polygon2D" parent="."]
 position = Vector2(1856, -1176)
@@ -1818,7 +1849,6 @@ position = Vector2(-1624, -160)
 color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-32, 48, 0, 48, 8, 24, 32, 8, 0, -16, -24, -32, -24, -16, -32, -8, -32, 16, -16, 24, -32, 40)
 script = ExtResource("3_b6jsf")
-is_capital = true
 
 [node name="Suriname" type="Polygon2D" parent="."]
 position = Vector2(-1688, -152)
@@ -1878,28 +1908,28 @@ script = ExtResource("3_b6jsf")
 
 [node name="South Brazil" type="Polygon2D" parent="."]
 position = Vector2(-1560, 552)
-color = Color(0.223529, 0.337255, 0.129412, 1)
+color = Color(0.235294, 0.368627, 0.141176, 1)
 polygon = PackedVector2Array(-8, 136, 0, 120, 0, 112, 16, 96, 32, 72, 40, 40, 56, 24, 64, 8, 56, -16, 56, -40, 64, -56, 56, -64, 40, -64, 32, -96, 24, -104, 8, -104, -16, -112, -32, -112, -48, -104, -64, -80, -64, -40, -56, -40, -48, -32, -48, -8, -80, 16, -96, 40, -96, 48, -88, 56, -16, 112)
 script = ExtResource("3_b6jsf")
 alignment = 17
 
 [node name="Southeast Brazil" type="Polygon2D" parent="."]
 position = Vector2(-1464, 384)
-color = Color(0.223529, 0.337255, 0.129412, 1)
+color = Color(0.235294, 0.368627, 0.141176, 1)
 polygon = PackedVector2Array(-128, 56, -112, 32, -96, -16, -88, -32, -72, -32, -64, -40, -48, -32, -40, -40, -40, -72, -48, -80, -48, -88, -32, -96, -40, -112, -24, -112, -16, -104, 8, -128, 16, -128, 16, -120, 32, -120, 48, -112, 56, -112, 64, -96, 80, -96, 96, -88, 88, -72, 88, -56, 96, -40, 104, -40, 104, -8, 96, 16, 88, 32, 88, 48, 80, 48, 72, 56, 72, 64, 32, 64, 16, 80, 0, 88, -16, 96, -32, 112, -40, 104, -56, 104, -64, 72, -72, 64, -88, 64, -112, 56)
 script = ExtResource("3_b6jsf")
 alignment = 17
 
 [node name="Northeast Brazil" type="Polygon2D" parent="."]
 position = Vector2(-1416, 128)
-color = Color(0.223529, 0.337255, 0.129412, 1)
+color = Color(0.235294, 0.368627, 0.141176, 1)
 polygon = PackedVector2Array(-72, 144, -80, 104, -80, 80, -88, 64, -80, 40, -88, 40, -104, 16, -104, 0, -96, -8, -104, -8, -120, -24, -120, -64, -128, -72, -144, -72, -120, -96, -112, -136, -112, -168, -88, -160, -48, -144, -48, -136, -56, -120, -48, -112, -32, -128, -32, -136, -16, -136, 0, -128, 40, -128, 64, -112, 88, -88, 104, -72, 128, -72, 136, -56, 152, -24, 144, 0, 136, 24, 120, 40, 96, 56, 96, 80, 72, 104, 72, 168, 64, 208, 56, 216, 48, 216, 40, 200, 40, 184, 48, 168, 32, 160, 16, 160, 8, 144, 0, 144, -16, 136, -32, 136, -32, 128, -40, 128, -64, 152)
 script = ExtResource("3_b6jsf")
 alignment = 17
 
 [node name="Center-West Brazil" type="Polygon2D" parent="."]
 position = Vector2(-1632, 288)
-color = Color(0.223529, 0.337255, 0.129412, 1)
+color = Color(0.235294, 0.368627, 0.141176, 1)
 polygon = PackedVector2Array(-136, -40, -120, -72, -128, -88, -128, -96, -152, -104, -160, -136, -160, -152, -104, -152, -104, -176, -96, -184, -88, -152, -72, -144, -64, -136, 56, -128, 48, -96, 56, -64, 80, -56, 80, -64, 88, -64, 96, -56, 112, -56, 136, -64, 136, -56, 144, -16, 128, -16, 136, 0, 120, 8, 120, 16, 128, 24, 128, 56, 120, 64, 104, 56, 96, 64, 80, 64, 72, 80, 56, 128, 40, 152, 24, 160, 8, 184, -8, 184, -32, 144, -56, 144, -64, 136, -64, 112, -72, 104, -72, 88, -64, 56, -80, 40, -88, 16, -120, 16, -120, -24)
 script = ExtResource("3_b6jsf")
 alignment = 17
@@ -1907,14 +1937,14 @@ is_capital = true
 
 [node name="North Brazil" type="Polygon2D" parent="."]
 position = Vector2(-1640, 48)
-color = Color(0.223529, 0.337255, 0.129412, 1)
+color = Color(0.235294, 0.368627, 0.141176, 1)
 polygon = PackedVector2Array(-112, -136, -104, -80, -80, -64, -72, -56, -96, 40, -88, 56, -80, 88, -64, 96, -56, 104, 64, 112, 56, 144, 64, 176, 88, 184, 88, 176, 96, 176, 104, 184, 120, 184, 144, 176, 144, 160, 136, 144, 144, 120, 136, 120, 120, 96, 120, 80, 128, 72, 120, 72, 104, 56, 104, 16, 96, 8, 80, 8, 104, -16, 112, -56, 112, -88, 96, -104, 72, -104, 64, -112, 64, -128, 72, -144, 64, -152, 48, -168, 48, -200, 24, -184, 16, -160, -40, -160, -48, -152, -64, -152, -88, -144, -96, -136)
 script = ExtResource("3_b6jsf")
 alignment = 17
 
 [node name="Nortwest Brazil" type="Polygon2D" parent="."]
 position = Vector2(-1856, 40)
-color = Color(0.223529, 0.337255, 0.129412, 1)
+color = Color(0.235294, 0.368627, 0.141176, 1)
 polygon = PackedVector2Array(88, 208, 80, 200, 64, 200, 40, 176, 16, 176, -8, 144, -8, 120, -40, 120, -56, 136, -80, 152, -104, 144, -112, 112, -128, 120, -160, 104, -176, 64, -176, 56, -160, 40, -160, 16, -136, 0, -112, -8, -104, -8, -96, -24, -96, -48, -88, -72, -96, -88, -112, -104, -88, -120, -96, -120, -104, -136, -72, -144, -48, -136, -48, -128, -32, -120, -8, -120, 24, -152, 16, -152, 8, -184, 0, -192, 24, -192, 32, -184, 40, -192, 64, -200, 72, -200, 80, -208, 80, -216, 104, -192, 104, -176, 88, -168, 88, -144, 104, -144, 104, -128, 112, -72, 136, -56, 144, -48, 120, 48, 128, 64, 120, 72, 120, 96, 64, 96, 64, 112, 72, 144, 96, 152, 96, 160, 104, 176)
 script = ExtResource("3_b6jsf")
 alignment = 17
@@ -1955,6 +1985,11 @@ color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(16, 8, 24, 0, 16, -8, -8, -16, -16, -8, -24, 8, -24, 16, -8, 0, -8, 8, 0, 16, 8, 8)
 script = ExtResource("3_b6jsf")
 
+[node name="Sandwich" type="Polygon2D" parent="."]
+position = Vector2(-1160, 1136)
+polygon = PackedVector2Array(-32, -8, -24, 0, -16, 0, 8, 16, 16, 16, 16, 8, 8, 0, -8, -8)
+script = ExtResource("3_b6jsf")
+
 [node name="Tierra del Feugo" type="Polygon2D" parent="."]
 position = Vector2(-1696, 1136)
 color = Color(0.384314, 0.341176, 0.458824, 1)
@@ -1980,6 +2015,7 @@ position = Vector2(-1912, 448)
 color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-16, 112, -16, 64, -8, 48, -16, 40, -24, 16, -24, 8, -16, -8, -16, -32, -24, -48, -24, -64, -32, -88, -32, -96, -24, -112, -8, -112, 8, -80, 8, -48, 32, 0, 48, 16, 24, 40, 24, 96, 16, 104, 16, 112)
 script = ExtResource("3_b6jsf")
+is_capital = true
 
 [node name="Central Chile" type="Polygon2D" parent="."]
 position = Vector2(-1904, 736)
@@ -2169,7 +2205,6 @@ color = Color(0.129412, 0.215686, 0.458824, 1)
 polygon = PackedVector2Array(-56, 40, -56, 16, -40, -16, -8, -16, -8, -24, 0, -24, 48, -80, 56, -72, 72, -72, 64, -32, 72, -8, 48, 0, 32, 0, 16, 16, 0, 16, -16, 32, 0, 40, 0, 56, -8, 64, -32, 64, -72, 88, -88, 88, -88, 72)
 script = ExtResource("3_b6jsf")
 alignment = 8
-power = 0
 
 [node name="New York Jersey" type="Polygon2D" parent="."]
 position = Vector2(-1912, -1008)
@@ -2177,6 +2212,7 @@ color = Color(0.129412, 0.215686, 0.458824, 1)
 polygon = PackedVector2Array(-88, 24, -16, 24, 0, 32, 0, 40, -16, 56, -16, 72, -40, 80, -24, 88, -24, 104, -8, 104, 0, 72, 8, 56, 8, 40, 40, 8, 40, -16, 56, -48, 24, -48, -8, -32, -24, -16, -56, -16, -72, -8, -64, 0, -88, 16)
 script = ExtResource("3_b6jsf")
 alignment = 8
+power = 0
 is_capital = true
 
 [node name="Pennsylvania" type="Polygon2D" parent="."]
@@ -2185,7 +2221,6 @@ color = Color(0.129412, 0.215686, 0.458824, 1)
 polygon = PackedVector2Array(-64, 24, -40, -32, -32, -32, -32, -24, 40, -24, 56, -16, 56, -8, 40, 8, 40, 24, 16, 32, 0, 24, -56, 32)
 script = ExtResource("3_b6jsf")
 alignment = 8
-power = 0
 
 [node name="Ohio" type="Polygon2D" parent="."]
 position = Vector2(-2064, -952)
@@ -2371,7 +2406,7 @@ is_capital = true
 
 [node name="Baja California" type="Polygon2D" parent="."]
 position = Vector2(-2720, -632)
-color = Color(0.305882, 0.329412, 0.227451, 1)
+color = Color(0.305882, 0.298039, 0.196078, 1)
 offset = Vector2(-16, -40)
 polygon = PackedVector2Array(-24, -104, -24, -72, -16, -40, 0, -16, -8, -8, -24, 0, -8, 16, 8, 24, 24, 40, 16, 56, 16, 72, 32, 80, 48, 104, 56, 96, 56, 80, 40, 72, 40, 32, 32, 24, 32, 8, 24, 0, 16, -32, 0, -48, 0, -72, 8, -88, 8, -104)
 script = ExtResource("3_b6jsf")
@@ -2379,7 +2414,7 @@ alignment = 27
 
 [node name="North Mexico" type="Polygon2D" parent="."]
 position = Vector2(-2632, -704)
-color = Color(0.305882, 0.329412, 0.227451, 1)
+color = Color(0.305882, 0.298039, 0.196078, 1)
 offset = Vector2(32, 32)
 polygon = PackedVector2Array(128, -8, 104, 16, 96, 32, 104, 48, 96, 64, 80, 56, 64, 56, 64, 72, 40, 72, 24, 104, 8, 104, 0, 96, -8, 112, -48, 56, -64, 40, -64, 24, -80, -8, -88, -16, -96, -32, -104, -56, -104, -80, -128, -88, -128, -104, -112, -104, -56, -80, -8, -80, 0, -88, 40, -88, 40, -80, 56, -64, 56, -40, 72, -32, 96, -48, 120, -48)
 script = ExtResource("3_b6jsf")
@@ -2388,7 +2423,7 @@ power = 0
 
 [node name="Central Mexico" type="Polygon2D" parent="."]
 position = Vector2(-2528, -560)
-color = Color(0.305882, 0.329412, 0.227451, 1)
+color = Color(0.305882, 0.298039, 0.196078, 1)
 polygon = PackedVector2Array(-32, 104, -16, 88, 0, 96, 24, 56, 48, 32, 56, 32, 64, 16, 72, 16, 72, -24, 80, -56, 96, -80, 80, -80, 64, -88, 56, -120, 32, -96, 24, -80, 32, -64, 24, -48, 8, -56, -8, -56, -8, -40, -32, -40, -48, -8, -64, -8, -72, -16, -80, 0, -80, 24, -88, 48, -88, 64, -56, 96)
 script = ExtResource("3_b6jsf")
 alignment = 27
@@ -2397,21 +2432,21 @@ is_capital = true
 
 [node name="South Mexico" type="Polygon2D" parent="."]
 position = Vector2(-2472, -456)
-color = Color(0.305882, 0.329412, 0.227451, 1)
+color = Color(0.305882, 0.298039, 0.196078, 1)
 polygon = PackedVector2Array(-88, 0, -48, 24, -24, 32, 0, 48, 24, 48, 40, 40, 64, 40, 72, 16, 64, -8, 40, -16, 24, -40, 24, -56, 16, -72, 16, -88, 8, -88, 0, -72, -8, -72, -32, -48, -56, -8, -72, -16)
 script = ExtResource("3_b6jsf")
 alignment = 27
 
 [node name="East Mexico" type="Polygon2D" parent="."]
 position = Vector2(-2312, -488)
-color = Color(0.305882, 0.329412, 0.227451, 1)
+color = Color(0.305882, 0.298039, 0.196078, 1)
 polygon = PackedVector2Array(-96, 72, -88, 48, -96, 24, -56, 16, -32, 8, -16, -16, -8, -40, 8, -16, 24, -24, 40, -40, 40, -48, 48, -48, 56, -40, 56, -32, 40, -16, 32, 8, 24, 16, 0, 40, -16, 40, -24, 32, -40, 48, -32, 56, -24, 72, -48, 72, -64, 88, -64, 104)
 script = ExtResource("3_b6jsf")
 alignment = 27
 
 [node name="Gulf Of Mexico" type="Polygon2D" parent="."]
 position = Vector2(-2304, -624)
-color = Color(0.305882, 0.329412, 0.227451, 1)
+color = Color(0.305882, 0.298039, 0.196078, 1)
 polygon = PackedVector2Array(-16, 96, 0, 120, 16, 112, 32, 96, 32, 88, 16, 88, 0, 96)
 script = ExtResource("3_b6jsf")
 alignment = 27
@@ -2447,7 +2482,6 @@ color = Color(0.870588, 0.666667, 0.780392, 1)
 polygon = PackedVector2Array(-120, 0, -144, 88, -136, 112, -88, 128, -24, 128, -24, 120, -16, 120, 32, 64, 40, 72, 56, 72, 88, 56, 104, 64, 120, 64, 136, 48, 120, 32, 88, 40, 80, 48, 56, 48, 40, 56, 56, 40, 88, 32, 104, 16, 136, 16, 200, 24, 216, 16, 240, -8, 280, -8, 280, -24, 184, -32, 184, -48, 176, -32, 168, -32, 152, -48, 144, -72, 144, -88, 152, -96, 176, -88, 200, -88, 216, -80, 240, -192, 208, -160, 184, -152, 168, -152, 144, -168, 152, -184, 160, -200, 160, -208, 144, -216, 128, -240, 104, -232, 72, -240, 48, -216, 32, -200, 32, -176, 8, -168, 8, -152, 16, -136, 8, -112, -32, -88, -64, -80, -72, -40, -88, -8)
 script = ExtResource("3_b6jsf")
 alignment = 11
-power = 0
 
 [node name="Ontario" type="Polygon2D" parent="."]
 position = Vector2(-2032, -1184)
@@ -2571,7 +2605,6 @@ polygon = PackedVector2Array(232, 136, -248, 136, -296, 120, -360, 96, -392, 80,
 script = ExtResource("3_b6jsf")
 alignment = 24
 power = 4
-is_capital = true
 
 [node name="Chilean Antarctic" type="Polygon2D" parent="."]
 position = Vector2(-1568, 1584)
