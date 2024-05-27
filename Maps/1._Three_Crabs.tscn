@@ -18,7 +18,6 @@ var connections : Array = [
 	[\"Fishing Beach\", \"Searing Grove\"],
 	[\"Fisherland\", \"Searing Grove\"],
 	[\"Fisherland\", \"Fish Trail\"],
-	[\"Fisherland\", \"Rasmas\"],
 	[\"Rasmas\", \"Fish Trail\"],
 	[\"Trailside\", \"Fish Trail\"],
 	[\"Fisherland\", \"Rocky Coast\"],

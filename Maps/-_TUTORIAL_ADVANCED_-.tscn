@@ -181,7 +181,7 @@ offset_left = -712.0
 offset_top = 1064.0
 offset_right = -408.0
 offset_bottom = 1128.0
-text = "You can use \",\" and \".\" to 
+text = "You can use the mouse wheel to
 zoom in or zoom out the camera."
 horizontal_alignment = 1
 

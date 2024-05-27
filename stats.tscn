@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dl73eme14hwup"]
+[gd_scene load_steps=5 format=3 uid="uid://dl73eme14hwup"]
 
 [ext_resource type="StyleBox" uid="uid://l8vkqqi4prkx" path="res://Styles/style_label_normal_box.tres" id="1_8movm"]
 [ext_resource type="Texture2D" uid="uid://bht6umkfovrvf" path="res://Sprites/exit.png" id="2_y6cxs"]
+[ext_resource type="Texture2D" uid="uid://dubjrpib0fm5n" path="res://Sprites/save_csv.png" id="3_0g6er"]
 
 [sub_resource type="GDScript" id="GDScript_6r6wn"]
 script/source = "extends Node2D
@@ -34,7 +35,7 @@ func _ready():
 				new_stats_panel(stats, pos)
 				pos += 1
 	
-	var columb_amount : int = GameStats.stats.size()
+	var columb_amount : int = pos#GameStats.stats.size() + 1
 	
 	if columb_amount > 6:
 		farthest_right += (columb_amount - 6) * 192
@@ -103,11 +104,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed(\"shift\"):
 		move_speed *= 2.0
 	
-	if mouse_position.x > window_size.x - 64:
+	if mouse_position.x > window_size.x - 64 or Input.is_action_pressed(\"right\"):
 		$cam.position.x += move_speed
 		if $cam.position.x > farthest_right:
 			$cam.position.x = farthest_right
-	if mouse_position.x < 64:
+	if mouse_position.x < 64 or Input.is_action_pressed(\"left\"):
 		$cam.position.x -= move_speed
 		if $cam.position.x < farthest_left:
 			$cam.position.x = farthest_left
@@ -140,22 +141,20 @@ offset_right = 96.0
 offset_bottom = 96.0
 texture_normal = ExtResource("2_y6cxs")
 
-[node name="csv" type="Button" parent="buttons"]
+[node name="csv" type="TextureButton" parent="buttons"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 480.0
 offset_right = 160.0
 offset_bottom = 608.0
-text = "Store
-statistics
-as CSV"
+texture_normal = ExtResource("3_0g6er")
 
 [node name="expo" type="Label" parent="buttons"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 112.0
-offset_right = 176.0
-offset_bottom = 464.0
+offset_left = 24.0
+offset_top = 168.0
+offset_right = 184.0
+offset_bottom = 408.0
 text = "Hover your cursor
 over the edges of
 the screen to see

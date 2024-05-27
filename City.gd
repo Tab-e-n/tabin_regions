@@ -30,7 +30,8 @@ func _ready():
 	region_name.size = Vector2(256, 32)
 	region_name.position = Vector2(-96, -32)
 	region_name.text = region.name + " (" + String.num(region.max_power) + ")"
-#	region_name.text = region.name + " (" + String.num(region.distance_from_capital) + ")"
+	if OS.has_feature("editor"):
+		region_name.text += " (" + String.num(region.distance_from_capital) + ")"
 	region_name.visible = false
 	region_name.z_index = 1
 	add_child(region_name)

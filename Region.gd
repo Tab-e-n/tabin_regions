@@ -173,7 +173,8 @@ func get_adjacent_attack_power() -> Array[int]:
 	for i in connections.keys():
 		var target : Node = region_control.get_node(i)
 		if target is Region:
-			attacks[target.alignment] += region_attack_power(i)
+			if target.alignment < region_control.align_amount and target.alignment >= 0:
+				attacks[target.alignment] += region_attack_power(i)
 	
 	return attacks
 

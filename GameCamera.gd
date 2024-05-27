@@ -47,6 +47,7 @@ var cam_movement_stop : float = PREVENT_CAMERA_MOVEMENT_START
 
 var zoom_level : int = 0
 var mouse_scroll_active : bool = true
+var mouse_wheel_input : int = 0
 
 var hovering_advance_turn : bool = false
 var hovering_turn_order : bool = false
@@ -68,6 +69,11 @@ func _input(event):
 			LeaveMessage.visible = false
 	if event is InputEventMouseButton:
 		LeaveMessage.visible = false
+		if event.is_pressed():
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				mouse_wheel_input = 1
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				mouse_wheel_input = -1
 
 
 func _deffered_ready():
@@ -187,56 +193,57 @@ func _physics_process(delta):
 			leave()
 			return
 	
+	var direction : Vector2 = Vector2(0, 0)
+	if Input.is_action_pressed("right"):
+		direction.x += 1
+	if Input.is_action_pressed("left"):
+		direction.x -= 1
+	if Input.is_action_pressed("down"):
+		direction.y += 1
+	if Input.is_action_pressed("up"):
+		direction.y -= 1
+	
 	if hovering_advance_turn or hovering_turn_order:
 		cam_movement_stop = 1
 	
 	if cam_movement_stop > 0:
 		cam_movement_stop -= 1
-	else:
-		var direction : Vector2 = Vector2(0, 0)
-		if Input.is_action_pressed("right"):
+	elif mouse_scroll_active:
+		if mouse_position.x > window_size.x - 64:
 			direction.x += 1
-		if Input.is_action_pressed("left"):
+		if mouse_position.x < 64:
 			direction.x -= 1
-		if Input.is_action_pressed("down"):
+		if mouse_position.y > window_size.y - 64:
 			direction.y += 1
-		if Input.is_action_pressed("up"):
+		if mouse_position.y < 64:
 			direction.y -= 1
 		
-		if mouse_scroll_active:
-			if mouse_position.x > window_size.x - 64:
-				direction.x += 1
-			if mouse_position.x < 64:
-				direction.x -= 1
-			if mouse_position.y > window_size.y - 64:
-				direction.y += 1
-			if mouse_position.y < 64:
-				direction.y -= 1
-		
-		var move_speed = BASE_MOVE_SPEED * UI.scale.x
-		if shift:
-			move_speed *= 2.0
-		position += direction * Vector2(move_speed, move_speed)
-		
-		snapped(position, Vector2(1.0, 1.0))
-		if position.x > farthest_right:
-			position.x = farthest_right
-		if position.x < farthest_left:
-			position.x = farthest_left
-		if position.y < farthest_up:
-			position.y = farthest_up
-		if position.y > farthest_down:
-			position.y = farthest_down
+	var move_speed = BASE_MOVE_SPEED * UI.scale.x
+	if shift:
+		move_speed *= 2.0
+	position += direction * Vector2(move_speed, move_speed)
 	
-	if Input.is_action_just_pressed("zoom_out"):
+	snapped(position, Vector2(1.0, 1.0))
+	if position.x > farthest_right:
+		position.x = farthest_right
+	if position.x < farthest_left:
+		position.x = farthest_left
+	if position.y < farthest_up:
+		position.y = farthest_up
+	if position.y > farthest_down:
+		position.y = farthest_down
+	
+	if Input.is_action_just_pressed("zoom_out") or mouse_wheel_input < 0:
 		zoom_change(-1)
-	if Input.is_action_just_pressed("zoom_in"):
+	if Input.is_action_just_pressed("zoom_in") or mouse_wheel_input > 0:
 		zoom_change(1)
 	if Input.is_action_just_pressed("zoom_reset"):
 		zoom_level = ZOOM_START
 		zoom_change(0)
 		CommandCallout.new_callout("Reset zoom")
-		
+	
+	mouse_wheel_input = 0
+	
 	if Input.is_action_just_pressed("hide_ui"):
 		UIHideable.visible = not UIHideable.visible
 		CommandCallout.new_callout("Toggle hide UI")
