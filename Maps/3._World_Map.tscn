@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvs2arpbio3au"]
+[gd_scene load_steps=5 format=3 uid="uid://cvs2arpbio3au"]
 
 [ext_resource type="Script" path="res://RegionControl.gd" id="1_5aq8s"]
 [ext_resource type="Texture2D" uid="uid://bf6kmjypfxvps" path="res://A_large_blank_world_map_with_oceans_marked_in_blue.PNG" id="2_57qtc"]
@@ -41,7 +41,11 @@ var connections : Array = [
 	[\"Ellesmere, Axel Heiberg\", \"Greenland\"],
 	[\"Ellesmere, Axel Heiberg\", \"Remaining Inuit Islands\"],
 	[\"Svalbard\", \"Novaya Zemlya\"],
+	[\"Yamalia\", \"Novaya Zemlya\"],
+	[\"Yamalia\", \"Nenetsia\"],
+	[\"Nenetsia\", \"Novaya Zemlya\"],
 	[\"Commie Isles\", \"Novaya Zemlya\"],
+	[\"Commie Isles\", \"Krasnoyarsk\"],
 	[\"Svalbard\", \"Zemlya Georga\"],
 	[\"Zemlya Georga\", \"Novaya Zemlya\"],
 	[\"Commie Isles\", \"Zemlya Georga\"],
@@ -52,11 +56,27 @@ var connections : Array = [
 	[\"Chukotka\", \"Republic of Sakha\"],
 	[\"Poland\", \"Belarus\"],
 	[\"Estonia, Latvia, Lithuania\", \"Belarus\"],
+	[\"Estonia, Latvia, Lithuania\", \"Northwest Russia\"],
 	[\"Poland\", \"Estonia, Latvia, Lithuania\"],
 	[\"Finland\", \"Estonia, Latvia, Lithuania\"],
+	[\"Finland\", \"Northwest Russia\"],
 	[\"Finland\", \"Karelia, Murmansk\"],
+	[\"Nenetsia\", \"Karelia, Murmansk\"],
+	[\"Arkhangelsk\", \"Karelia, Murmansk\"],
+	[\"Arkhangelsk\", \"Northwest Russia\"],
+	[\"Northwest Russia\", \"Karelia, Murmansk\"],
+	[\"Nenetsia\", \"Arkhangelsk\"],
+	[\"Nenetsia\", \"Komi\"],
+	[\"Arkhangelsk\", \"Komi\"],
+	[\"Volga\", \"Komi\"],
 	[\"Ukraine\", \"Belarus\"],
+	[\"Northwest Russia\", \"Belarus\"],
+	[\"Central Russia\", \"Belarus\"],
 	[\"Ukraine\", \"Southern Russia\"],
+	[\"Central Russia\", \"Volga\"],
+	[\"Volga\", \"Southern Russia\"],
+	[\"Ukraine\", \"Central Russia\"],
+	[\"Central Russia\", \"Southern Russia\"],
 	[\"Poland\", \"Ukraine\"],
 	[\"Czechoslovakia\", \"Ukraine\"],
 	[\"Romania\", \"Ukraine\"],
@@ -117,8 +137,12 @@ var connections : Array = [
 	[\"Iran\", \"United Arab Emirates, Quatar\"],
 	[\"Uzbekistan\", \"Turkmenistan\"],
 	[\"Uzbekistan\", \"Caspian Basin\"],
+	[\"Volga\", \"Caspian Basin\"],
 	[\"Southern Russia\", \"Caspian Basin\"],
 	[\"Uzbekistan\", \"Central West Kazakhstan\"],
+	[\"Volga\", \"Central West Kazakhstan\"],
+	[\"Volga\", \"South Ural\"],
+	[\"South Ural\", \"Central West Kazakhstan\"],
 	[\"Caspian Basin\", \"Turkmenistan\"],
 	[\"Caspian Basin\", \"Central West Kazakhstan\"],
 	[\"Uzbekistan\", \"Tajikistan\"],
@@ -138,9 +162,24 @@ var connections : Array = [
 	[\"Central Kazakhstan\", \"Tuva Altai\"],
 	[\"Tuva Altai\", \"Altai\"],
 	[\"Tuva Altai\", \"Krasnoyarsk\"],
+	[\"Khanty-Mansi\", \"Krasnoyarsk\"],
+	[\"Khanty-Mansi\", \"South Ural\"],
+	[\"Khanty-Mansi\", \"Volga\"],
+	[\"Khanty-Mansi\", \"Yamalia\"],
+	[\"Khanty-Mansi\", \"Komi\"],
+	[\"Khanty-Mansi\", \"Novosibirsk's Surroundings\"],
+	[\"Novosibirsk's Surroundings\", \"South Ural\"],
+	[\"Central Russia\", \"Komi\"],
+	[\"Central Russia\", \"Northwest Russia\"],
+	[\"Komi\", \"Yamalia\"],
+	[\"Yamalia\", \"Krasnoyarsk\"],
+	[\"Novosibirsk's Surroundings\", \"Krasnoyarsk\"],
 	[\"Xinjiang\", \"Altai\"],
+	[\"Volga\", \"Kazakhstani North\"],
 	[\"Central Kazakhstan\", \"Kazakhstani North\"],
 	[\"Tuva Altai\", \"Kazakhstani North\"],
+	[\"Tuva Altai\", \"Novosibirsk's Surroundings\"],
+	[\"Novosibirsk's Surroundings\", \"Kazakhstani North\"],
 	[\"Central Kazakhstan\", \"Central West Kazakhstan\"],
 	[\"Central West Kazakhstan\", \"Kazakhstani North\"],
 	[\"Almaty Province\", \"Kyrgyzstan\"],
@@ -526,6 +565,7 @@ var connections : Array = [
 	[\"Arizona\", \"California\"],
 	[\"Arizona\", \"North Mexico\"],
 	[\"Baja California\", \"California\"],
+	[\"Baja California\", \"Central Mexico\"],
 	[\"Baja California\", \"Hawaii\"],
 	[\"Galapagos\", \"Hawaii\"],
 	[\"Baja California\", \"North Mexico\"],
@@ -733,9 +773,6 @@ func _ready():
 	queue_free()
 "
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4hr5r"]
-load_path = "res://.godot/imported/ru.svg-069ce89ba6576886d88f3bcf25ad0af3.ctex"
-
 [node name="RegionControl" type="Polygon2D"]
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-3200, -1848, 3200, -1848, 3200, 1848, -3200, 1848)
@@ -752,16 +789,10 @@ render_mode = 1
 script = SubResource("GDScript_omqxc")
 
 [node name="ALargeBlankWorldMapWithOceansMarkedInBlue" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.713726, 0.713726, 0.713726, 1)
 scale = Vector2(10, 10)
 texture = ExtResource("2_57qtc")
-
-[node name="Ru" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.305882)
-position = Vector2(960, -1584)
-scale = Vector2(2.62182, 1.73539)
-skew = -0.3735
-texture = SubResource("CompressedTexture2D_4hr5r")
 
 [node name="Czechoslovakia" type="Polygon2D" parent="."]
 position = Vector2(-320, -1160)
@@ -858,9 +889,11 @@ alignment = 18
 
 [node name="Karelia, Murmansk" type="Polygon2D" parent="."]
 position = Vector2(-48, -1488)
-color = Color(0.384314, 0.341176, 0.458824, 1)
+color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(-48, 88, -32, 96, -32, 88, -16, 80, 16, 112, 32, 104, 32, 96, 16, 80, 32, 72, 32, 64, 24, 56, 32, 48, 40, 56, 40, 72, 56, 88, 64, 80, 48, 64, 40, 48, 48, 32, 32, 32, 16, 16, 16, 0, 8, -8, -8, -8, -24, -24, -16, -24, 0, -16, 48, -8, 64, 0, 80, 0, 96, -8, 104, -16, 104, -32, 88, -40, 72, -40, 48, -56, 8, -64, -16, -64, -32, -72, -56, -72, -72, -64, -80, -48, -56, -32, -64, -16, -56, -8, -56, 16, -48, 24, -32, 48, -24, 64)
 script = ExtResource("3_b6jsf")
+alignment = 25
+power = 0
 
 [node name="Poland" type="Polygon2D" parent="."]
 position = Vector2(-240, -1216)
@@ -1231,11 +1264,32 @@ offset = Vector2(-24, 48)
 polygon = PackedVector2Array(64, -56, 64, -48, 72, -40, 72, -24, 104, 8, 104, 16, 88, 24, 72, 16, 40, -16, 0, -16, -24, -32, -56, -32, -48, -48, -48, -64, -56, -72, -40, -80, -16, -80, 32, -64)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="Southern Russia" type="Polygon2D" parent="."]
 position = Vector2(176, -1120)
 color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(-40, 96, -72, 80, -96, 64, -96, 56, -80, 40, -80, 32, -72, 24, -72, 16, -56, 0, -56, -24, -64, -40, -56, -40, -48, -48, -48, -64, -40, -72, 8, -72, 24, -64, 64, -56, 56, -48, 56, -8, 96, 16, 96, 32, 112, 40, 104, 48, 88, 56, 80, 72, 48, 64, 0, 48, -24, 48, -40, 56, -32, 64, -32, 80)
+script = ExtResource("3_b6jsf")
+alignment = 25
+power = 0
+
+[node name="Central Russia" type="Polygon2D" parent="."]
+position = Vector2(80, -1256)
+polygon = PackedVector2Array(64, 64, 72, 32, 56, 16, 56, -8, 40, -16, 56, -32, 56, -48, 64, -48, 88, -72, 112, -72, 128, -88, 120, -112, 104, -96, 40, -96, 24, -88, 24, -80, 8, -80, -8, -88, -24, -88, -32, -80, -48, -88, -64, -80, -72, -80, -80, -72, -96, -72, -104, -56, -144, -48, -128, -32, -136, -24, -120, 8, -104, 16, -120, 24, -120, 48, -80, 48, -64, 64, -32, 88, 0, 88, 8, 96, 40, 96, 48, 88, 48, 72, 56, 64)
+script = ExtResource("3_b6jsf")
+alignment = 25
+is_capital = true
+
+[node name="Northwest Russia" type="Polygon2D" parent="."]
+position = Vector2(-40, -1352)
+polygon = PackedVector2Array(-80, -8, -56, -16, -40, -16, -48, -24, -72, -24, -72, -40, -56, -48, -40, -40, -24, -16, 8, -24, 24, -32, 40, -32, 48, -48, 56, -40, 56, -32, 80, -16, 160, -16, 168, -24, 232, -24, 240, -16, 224, 0, 160, 0, 144, 8, 144, 16, 128, 16, 112, 8, 96, 8, 88, 16, 72, 8, 56, 16, 48, 16, 40, 24, 24, 24, 16, 40, -24, 48, -8, 64, -16, 72, -32, 64, -64, 64, -80, 32)
+script = ExtResource("3_b6jsf")
+alignment = 25
+
+[node name="Volga" type="Polygon2D" parent="."]
+position = Vector2(280, -1272)
+polygon = PackedVector2Array(160, 64, 152, 56, 152, 48, 128, 48, 128, 24, 144, 16, 144, 8, 112, 16, 96, 8, 96, 0, 120, 0, 136, -8, 128, -16, 96, -16, 96, -32, 104, -40, 104, -48, 120, -48, 120, -80, 104, -88, 128, -112, 104, -120, 96, -128, 88, -112, 48, -112, 24, -96, 8, -96, -8, -104, -24, -96, -16, -88, -24, -80, -48, -72, -48, -64, -72, -72, -88, -56, -112, -56, -136, -32, -144, -32, -144, -16, -160, 0, -144, 8, -144, 32, -128, 48, -136, 80, -96, 80, -80, 88, -40, 96, -24, 112, -16, 104, -16, 88, 8, 72, 32, 72, 72, 88, 96, 88, 112, 80, 144, 88, 168, 96, 192, 88, 192, 80)
 script = ExtResource("3_b6jsf")
 alignment = 25
 
@@ -1872,55 +1926,121 @@ power = 0
 
 [node name="Magadan" type="Polygon2D" parent="."]
 position = Vector2(1776, -1416)
+color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(176, 16, 168, 32, 160, 32, 136, 16, 136, 8, 104, 8, 88, 16, 88, 32, 96, 56, 112, 56, 80, 72, 64, 72, 56, 56, 24, 56, 0, 64, -16, 64, -32, 56, -64, 56, -64, 48, -72, 40, -96, 32, -88, 24, -88, 8, -104, 0, -128, 0, -120, -8, -136, -24, -136, -32, -120, -48, -96, -48, -104, -56, -80, -56, -72, -64, 24, -40, 104, -32, 152, -32, 160, -16, 160, -8, 168, 8)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="Khabarovsk" type="Polygon2D" parent="."]
 position = Vector2(1632, -1256)
+color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(16, -160, 16, -152, -24, -152, -48, -160, -56, -160, -64, -136, -80, -128, -64, -104, -56, -88, -40, -80, -48, -64, -40, -48, -16, -48, -16, -40, -40, -16, -32, -8, -8, 0, 8, 8, 0, 16, -24, 24, -24, 32, -32, 40, -16, 48, -16, 64, -24, 96, -8, 96, 24, 104, 64, 144, 80, 144, 104, 128, 120, 136, 120, 160, 128, 152, 144, 160, 160, 160, 168, 144, 160, 136, 168, 128, 176, 128, 192, 136, 184, 144, 192, 152, 200, 152, 200, 136, 208, 120, 200, 104, 176, 72, 168, 48, 144, 32, 120, 8, 104, 0, 88, 8, 80, 16, 64, 8, 56, -8, 32, -8, 16, -16, 32, -24, 40, -40, 40, -56, 48, -64, 48, -80, 56, -96, 80, -104, 80, -112, 72, -120, 48, -128, 56, -136, 56, -152, 40, -160)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="Amur" type="Polygon2D" parent="."]
 position = Vector2(1528, -1264)
+color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(-72, 24, -88, 0, -80, -16, -104, -24, -120, -24, -120, -32, -128, -40, -112, -48, -96, -48, -80, -40, -56, -40, -40, -32, 16, -32, 64, -40, 88, -40, 88, -32, 64, -8, 72, 0, 96, 8, 112, 16, 104, 24, 80, 32, 80, 40, 72, 48, 88, 56, 88, 72, 80, 104, 40, 64, 8, 48, -8, 32, -24, 32, -40, 24)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="Zabaykalsky" type="Polygon2D" parent="."]
 position = Vector2(1400, -1208)
+color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(-128, 48, -128, 32, -104, 24, -96, 24, -72, 8, -40, 0, -40, -8, -48, -16, -24, -32, -8, -40, -8, -48, -24, -56, -32, -80, -16, -80, 0, -88, 0, -96, 8, -88, 8, -80, 24, -80, 48, -72, 40, -56, 56, -32, 32, -16, 32, -8, 48, -8, 56, 0, 56, 40, 48, 48, 32, 48, 16, 40, 8, 48, -8, 40, -24, 40, -40, 56, -56, 56, -80, 64, -112, 56)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="Buryatia" type="Polygon2D" parent="."]
 position = Vector2(1304, -1232)
+color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(-136, 56, -152, 40, -216, 24, -208, 8, -184, 8, -152, 24, -144, 24, -128, 32, -120, 32, -112, 40, -96, 32, -80, 16, -64, 8, -56, -8, -64, -32, -72, -48, -80, -56, -88, -48, -80, -32, -96, -40, -104, -56, -120, -64, -104, -72, -80, -72, -64, -80, -32, -80, 0, -72, 32, -72, 56, -64, 72, -64, 64, -56, 72, -32, 88, -24, 88, -16, 72, -8, 48, 8, 56, 16, 56, 24, 24, 32, 0, 48, -8, 48, -32, 56, -32, 72, -56, 64, -88, 56, -104, 64, -112, 64)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="Irkutsk" type="Polygon2D" parent="."]
 position = Vector2(1152, -1272)
+color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(-96, 48, -112, 32, -96, 32, -88, 0, -80, -8, -88, -16, -80, -32, -56, -32, -48, -40, -40, -56, -40, -64, -32, -64, 0, -56, 0, -64, -8, -72, 0, -80, -16, -88, -24, -96, -24, -104, -8, -112, -8, -120, 0, -128, 0, -136, -16, -144, -8, -168, 16, -168, 24, -160, 56, -152, 72, -144, 104, -136, 112, -128, 112, -112, 128, -104, 104, -64, 120, -56, 128, -64, 144, -64, 160, -72, 160, -56, 176, -64, 176, -72, 200, -88, 224, -88, 240, -80, 240, -72, 264, -64, 272, -40, 264, -40, 248, -32, 248, -24, 232, -16, 216, -16, 224, -24, 208, -24, 184, -32, 152, -32, 120, -40, 88, -40, 72, -32, 48, -32, 32, -24, 48, -16, 56, 0, 72, 8, 80, 32, 56, 56, 32, 72, 24, 72, 8, 64, 0, 64, -32, 48)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="Tuva Altai" type="Polygon2D" parent="."]
 position = Vector2(912, -1184)
-polygon = PackedVector2Array(-168, -40, -152, -24, -128, 0, -120, -8, -104, 0, -64, 0, -32, 16, -24, 32, -8, 32, 8, 40, 16, 32, 24, 32, 48, 16, 64, 0, 88, 8, 112, 8, 120, 16, 136, 24, 144, 16, 168, 24, 184, 16, 168, 0, 168, -16, 176, -24, 184, -40, 120, -40, 96, -16, 72, -16, 48, -24, 48, -16, 40, -8, 16, -8, 8, -16, 16, -24, -8, -32, -8, -48, -40, -64, -64, -56, -72, -56, -80, -48, -112, -64, -128, -48, -152, -48)
+color = Color(0.509804, 0.513726, 0.529412, 1)
+polygon = PackedVector2Array(-168, -40, -152, -24, -128, 0, -120, -8, -104, 0, -64, 0, -32, 16, -24, 32, -8, 32, 8, 40, 16, 32, 24, 32, 48, 16, 64, 0, 88, 8, 112, 8, 120, 16, 136, 24, 144, 16, 168, 24, 184, 16, 168, 0, 168, -16, 176, -24, 184, -40, 120, -40, 96, -16, 72, -16, 48, -24, 64, -48, 40, -72, 0, -80, 0, -64, -8, -48, -40, -64, -64, -56, -72, -56, -80, -48, -112, -64, -128, -48, -152, -48)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
+
+[node name="Novosibirsk\'s Surroundings" type="Polygon2D" parent="."]
+position = Vector2(800, -1264)
+polygon = PackedVector2Array(-200, -72, -208, -72, -216, -64, -208, -48, -200, -48, -192, -40, -200, -32, -208, -16, -192, 8, -152, 8, -152, 16, -144, 16, -112, 0, -80, 24, -56, 40, -40, 32, -16, 32, 0, 16, 32, 32, 40, 24, 48, 24, 72, 16, 104, 32, 112, 16, 112, 0, 120, -8, 96, -32, 104, -48, 72, -56, 80, -72, 48, -88, 8, -88, 0, -104, -24, -112, -32, -96, -56, -104, -120, -104, -120, -80, -128, -80, -136, -64, -200, -64)
+script = ExtResource("3_b6jsf")
+alignment = 25
+power = 0
 
 [node name="Republic of Sakha" type="Polygon2D" parent="."]
 position = Vector2(1440, -1480)
+color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(-304, 32, -320, 32, -320, 16, -312, 8, -320, 0, -336, -24, -352, -32, -328, -40, -344, -80, -368, -104, -344, -104, -336, -112, -320, -112, -320, -128, -312, -136, -280, -152, -264, -152, -240, -144, -224, -144, -208, -128, -192, -128, -168, -104, -152, -96, -144, -112, -144, -120, -128, -112, -112, -112, -96, -120, -80, -120, -72, -112, -64, -112, -48, -120, -56, -128, -48, -136, 0, -136, 24, -128, 24, -120, 32, -120, 40, -128, 72, -128, 88, -120, 120, -112, 144, -96, 160, -96, 176, -104, 224, -104, 264, -96, 288, -80, 320, -80, 304, -48, 264, -48, 256, -24, 264, 0, 256, 8, 232, 8, 240, 16, 216, 16, 200, 32, 200, 40, 216, 56, 208, 64, 208, 72, 168, 72, 144, 64, 136, 64, 128, 88, 112, 96, 128, 120, 136, 136, 152, 144, 144, 160, 152, 176, 104, 184, 48, 184, 32, 176, 8, 176, -8, 168, -16, 168, -24, 144, -48, 136, -48, 128, -64, 120, -88, 120, -112, 136, -112, 144, -128, 152, -128, 136, -144, 144, -160, 144, -168, 152, -184, 144, -160, 104, -176, 96, -176, 80, -184, 72, -216, 64, -232, 56, -264, 48, -272, 40)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="Krasnoyarsk" type="Polygon2D" parent="."]
 position = Vector2(952, -1472)
+color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(8, 264, 24, 240, 0, 216, -40, 208, -32, 200, -56, 176, -48, 160, -80, 152, -72, 136, -104, 120, -144, 120, -152, 104, -128, 88, -160, 80, -160, 64, -152, 56, -168, 40, -160, 32, -168, 16, -192, 8, -192, 0, -216, -16, -232, -40, -248, -48, -264, -64, -256, -72, -256, -88, -264, -96, -280, -104, -304, -104, -320, -112, -328, -120, -312, -136, -312, -144, -320, -160, -320, -192, -296, -200, -272, -200, -248, -208, -224, -200, -208, -208, -184, -208, -168, -224, -136, -216, -104, -216, -96, -208, -88, -216, -32, -208, 8, -192, 8, -184, -24, -168, -56, -144, -24, -152, -8, -152, 8, -168, 24, -168, 40, -160, 56, -160, 72, -168, 112, -168, 136, -144, 168, -136, 168, -120, 152, -120, 144, -112, 120, -112, 144, -88, 160, -48, 136, -40, 152, -32, 168, -8, 176, 0, 168, 8, 168, 24, 184, 24, 216, 32, 192, 32, 184, 56, 200, 64, 200, 72, 192, 80, 192, 88, 176, 96, 176, 104, 184, 112, 200, 120, 192, 128, 200, 136, 200, 144, 168, 136, 160, 136, 160, 144, 152, 160, 144, 168, 120, 168, 112, 184, 120, 192, 112, 200, 104, 232, 88, 232, 104, 248, 80, 248, 56, 272, 32, 272)
+script = ExtResource("3_b6jsf")
+alignment = 25
+power = 0
+
+[node name="Khanty-Mansi" type="Polygon2D" parent="."]
+position = Vector2(512, -1392)
+polygon = PackedVector2Array(280, 0, 280, -8, 256, -16, 240, -16, 208, -24, 192, -16, 168, -16, 136, -24, 104, -24, 80, -32, 56, -32, 48, -40, 40, -40, 32, -48, 16, -56, 0, -56, -16, -48, -32, -56, -56, -64, -64, -56, -88, -56, -104, -64, -104, -72, -120, -88, -136, -72, -152, -72, -152, -56, -144, -48, -144, -24, -136, -8, -128, 0, -104, 8, -72, 16, -64, 32, -48, 40, -40, 56, -24, 56, 0, 64, 16, 64, 40, 56, 48, 40, 72, 40, 96, 48, 120, 64, 152, 64, 160, 48, 168, 48, 168, 24, 232, 24, 256, 32, 264, 16, 288, 24, 312, 8)
+script = ExtResource("3_b6jsf")
+alignment = 25
+power = 0
+
+[node name="South Ural" type="Polygon2D" parent="."]
+position = Vector2(496, -1304)
+polygon = PackedVector2Array(96, 24, 104, 8, 112, 0, 104, -8, 96, -8, 88, -24, 96, -32, 104, -32, 104, -24, 136, -24, 112, -40, 88, -48, 64, -48, 56, -32, 32, -24, 16, -24, -8, -32, -24, -32, -32, -48, -48, -56, -56, -72, -88, -80, -112, -56, -96, -48, -96, -16, -112, -16, -112, -8, -120, 0, -120, 16, -88, 16, -80, 24, -96, 32, -120, 32, -120, 40, -104, 48, -72, 40, -72, 48, -88, 56, -88, 80, -64, 80, -64, 88, -56, 96, -40, 88, -48, 72, -24, 72, -48, 56, -48, 48, -24, 48, 56, 32, 64, 24)
+script = ExtResource("3_b6jsf")
+alignment = 25
+power = 0
+
+[node name="Yamalia" type="Polygon2D" parent="."]
+position = Vector2(608, -1504)
+polygon = PackedVector2Array(-216, 24, -208, 16, -208, 0, -200, -16, -200, -24, -208, -32, -208, -48, -200, -40, -176, -32, -160, -32, -160, -40, -176, -48, -200, -56, -200, -64, -208, -72, -208, -88, -200, -96, -200, -112, -192, -120, -168, -120, -144, -112, -144, -88, -128, -80, -120, -64, -112, -40, -96, -40, -88, -24, -104, -8, -120, 0, -128, 0, -136, -8, -136, 8, -104, 8, -80, 0, -72, -16, -80, -40, -64, -40, -40, -24, -32, -16, -16, -16, -24, -24, -32, -40, -48, -48, -88, -48, -104, -56, -112, -80, -128, -88, -120, -104, -128, -120, -112, -128, -112, -112, -96, -88, -64, -80, -48, -72, -56, -88, -88, -96, -88, -104, -72, -112, -48, -104, -32, -96, -8, -96, -24, -112, -40, -112, -56, -120, -48, -128, -32, -128, -16, -136, 24, -136, 24, -128, 32, -112, 32, -104, 16, -88, 24, -80, 40, -72, 64, -72, 80, -64, 88, -56, 88, -40, 80, -32, 96, -16, 112, -8, 128, 16, 152, 32, 152, 40, 176, 48, 184, 64, 176, 72, 192, 88, 184, 96, 184, 104, 160, 96, 144, 96, 112, 88, 96, 96, 72, 96, 40, 88, 8, 88, -16, 80, -40, 80, -48, 72, -56, 72, -64, 64, -80, 56, -96, 56, -112, 64, -128, 56, -152, 48, -160, 56, -184, 56, -200, 48, -200, 40)
+script = ExtResource("3_b6jsf")
+alignment = 25
+power = 0
+
+[node name="Nenetsia" type="Polygon2D" parent="."]
+position = Vector2(256, -1528)
+polygon = PackedVector2Array(-168, -16, -160, 8, -144, 24, -152, 32, -152, 48, -112, 64, -104, 64, -104, 56, -88, 56, -48, 32, 112, 32, 128, 24, 128, 16, 144, 8, 144, -24, 120, -32, 72, -32, 48, -48, 32, -48, 24, -40, 48, -32, 56, -32, 72, -24, 64, -8, 56, -8, 48, -16, 32, -16, 16, -8, -8, -8, -16, 0, -24, -16, -40, -24, -72, -8, -96, 8, -96, -16, -88, -16, -80, -24, -104, -32, -112, -24, -104, -16, -96, -16, -96, 16, -112, 24, -128, 24, -136, 8, -120, 0, -136, -16)
+script = ExtResource("3_b6jsf")
+alignment = 25
+power = 0
+
+[node name="Arkhangelsk" type="Polygon2D" parent="."]
+position = Vector2(80, -1432)
+polygon = PackedVector2Array(-72, 32, -64, 40, -64, 48, -40, 64, 40, 64, 48, 56, 112, 56, 120, 64, 128, 48, 120, 40, 120, 32, 112, 16, 104, 24, 104, 32, 96, 32, 80, 24, 88, 16, 72, 0, 40, -8, 48, -16, 120, -16, 120, -24, 88, -40, 72, -40, 72, -32, 64, -32, 24, -48, 24, -64, -8, -64, -16, -56, -32, -56, -32, -48, -24, -32, -24, -24, -40, -32, -64, -40, -80, -40, -80, -32, -56, -24, -56, -16, -80, -24, -88, -8, -80, 8, -64, 24)
+script = ExtResource("3_b6jsf")
+alignment = 25
+power = 0
+
+[node name="Komi" type="Polygon2D" parent="."]
+position = Vector2(272, -1440)
+polygon = PackedVector2Array(-104, -32, -72, -16, -72, -8, -144, -8, -152, 0, -120, 8, -104, 24, -112, 32, -96, 40, -88, 40, -88, 32, -80, 24, -72, 40, -72, 48, -64, 56, -72, 72, -64, 96, -40, 104, -40, 96, -16, 88, -8, 80, -16, 72, 0, 64, 16, 72, 32, 72, 56, 56, 96, 56, 104, 40, 96, 24, 96, 0, 88, -8, 88, -24, 104, -24, 128, -48, 128, -64, 136, -80, 136, -88, 128, -96, 128, -80, 112, -72, 112, -64, 96, -56, -64, -56)
 script = ExtResource("3_b6jsf")
 alignment = 25
 
@@ -1930,6 +2050,7 @@ color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(-72, -56, -48, -32, -48, -24, -32, -16, 0, 24, 0, 32, 24, 56, 32, 80, 48, 104, 48, 88, 64, 88, 48, 80, 40, 64, 32, 48, 24, 32, 40, 32, 16, 0, -16, -24, -32, -48, -48, -64, -64, -80, -80, -80, -56, -72, -72, -64)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="East China Sea" type="Polygon2D" parent="."]
 position = Vector2(1776, -704)
@@ -1950,6 +2071,7 @@ color = Color(0.509804, 0.513726, 0.529412, 1)
 polygon = PackedVector2Array(-48, 72, -40, 64, -24, 64, -8, 72, 8, 64, 24, 40, 24, 24, 32, 8, 32, -32, 24, -32, 16, -40, 24, -48, 8, -56, 0, -56, -8, -48, 0, -40, -8, -24, -24, -24, -40, -32, -48, -24, -40, 0, -40, 16, -56, 16, -64, 24, -64, 32, -48, 48)
 script = ExtResource("3_b6jsf")
 alignment = 25
+power = 0
 
 [node name="North China" type="Polygon2D" parent="."]
 position = Vector2(1464, -960)

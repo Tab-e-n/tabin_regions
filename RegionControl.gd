@@ -435,7 +435,14 @@ func reset():
 	bonus_action_amount = 1 if action_amount == 0 else 0
 	current_action = ACTION_MOBILIZE if action_amount == 0 else 0
 	
-	color = bg_color + align_color[current_player] * Color(0.25, 0.25, 0.25)
+	var bg_color_tinted : Color = bg_color + align_color[current_player] * Color(0.25, 0.25, 0.25)
+	if game_control.ai_control.speedrun_ai:
+		if player_controlers[current_player - 1] == AIControler.CONTROLER_USER:
+			color = bg_color_tinted
+		else:
+			color = bg_color
+	else:
+		color = bg_color_tinted
 	
 	is_user_controled = player_controlers[current_player - 1] == AIControler.CONTROLER_USER
 	
