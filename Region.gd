@@ -7,7 +7,7 @@ const TEXTURE_SIZE : Vector2 = Vector2(1024, 1024)
 const DISTANCE_CAP : int = 0b1111_1111_1111_1111
 
 
-enum RENDER_MODE {DISABLED, ALIGNMENT, POWER, MAX_POWER, CAPITAL}
+enum RENDER_MODE {DISABLED, ALIGNMENT, POWER, MAX_POWER, CAPITAL, POSITION}
 
 
 @export var alignment : int = 0
@@ -56,16 +56,28 @@ func _process(_delta):
 			RENDER_MODE.ALIGNMENT:
 				color = region_control.align_color[alignment]
 			RENDER_MODE.POWER:
-				var c : float = 1.0 - clampf(power, 0, 20) * 0.05
-				color =  Color(c, c, c, 1)
+				power_color(power, false)
 			RENDER_MODE.MAX_POWER:
-				var c : float = 1.0 - clampf(max_power - 1, 0, 20) * 0.05
-				color =  Color(c, c, c, 1)
+				power_color(max_power, true)
 			RENDER_MODE.CAPITAL:
 				if is_capital:
 					color = Color(0.9, 1, 0.9, 1)
 				else:
 					color = Color(0.3, 0.1, 0.1, 1)
+			RENDER_MODE.POSITION:
+				var pos_range : float = region_control.render_range * 40
+				var col1 : float = 1.0 - clampf(abs(position.x) / pos_range, 0, 1)
+				var col2 : float = 1.0 - clampf(abs(position.y) / pos_range, 0, 1)
+				
+				color = Color(col1, col2, 0.5, 1)
+
+
+func power_color(power : int, no_zero : bool):
+	if power == 0 and no_zero:
+		color = Color("703d5d")
+		return
+	var c : float = 1.0 - clampf(power, 0, region_control.render_range) / region_control.render_range
+	color = Color(c, c, c, 1)
 
 
 func change_alignment(align : int):

@@ -7,7 +7,6 @@ class_name AIControler
 const THINKING_TIMER_DEFAULT : float = 0.5
 const THINKING_TIMER_SPEEDRUN : float = 0.05
 
-var speedrun_ai : bool = false
 var thinking_timer : float = THINKING_TIMER_DEFAULT
 
 enum {CONTROLER_USER, CONTROLER_DEFAULT, CONTROLER_TURTLE, CONTROLER_NEURAL, CONTROLER_CHEATER, CONTROLER_DUMMY}
@@ -41,6 +40,8 @@ var controlers : Array = []
 
 
 func _ready():
+	speedrun_ai_update(false)
+	
 	game_control.ai_control = self
 	
 	controlers.resize(PACKED_CONTROLERS.size())
@@ -53,10 +54,10 @@ func _ready():
 			controlers[i].controler_id = i
 			add_child(controlers[i])
 	
-	call_deferred("set_region_control")
+	call_deferred("_ready_deferred")
 
 
-func set_region_control():
+func _ready_deferred():
 	region_control = game_control.region_control
 
 
@@ -66,13 +67,8 @@ func _process(delta):
 		return
 	
 	if Input.is_action_just_pressed("ai_speedrun"):
-		speedrun_ai = not speedrun_ai
-		if speedrun_ai:
-			thinking_timer = THINKING_TIMER_SPEEDRUN
-			game_control.game_camera.CommandCallout.new_callout("Fast AI")
-		else:
-			thinking_timer = THINKING_TIMER_DEFAULT
-			game_control.game_camera.CommandCallout.new_callout("Slow AI")
+		MapSetup.speedrun_ai = not MapSetup.speedrun_ai
+		speedrun_ai_update()
 	
 #	print(timer)
 	if region_control.is_user_controled:
@@ -84,6 +80,17 @@ func _process(delta):
 	if timer < 0:
 		timer = 0
 		timer_ended()
+
+
+func speedrun_ai_update(callouts : bool = true):
+	if MapSetup.speedrun_ai:
+		thinking_timer = THINKING_TIMER_SPEEDRUN
+		if callouts:
+			game_control.game_camera.CommandCallout.new_callout("Fast AI")
+	else:
+		thinking_timer = THINKING_TIMER_DEFAULT
+		if callouts:
+			game_control.game_camera.CommandCallout.new_callout("Slow AI")
 
 
 func start_turn(align : int, control : int):

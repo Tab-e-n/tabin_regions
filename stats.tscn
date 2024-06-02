@@ -26,10 +26,10 @@ func _ready():
 	for placement in range(size + 1):
 		for stats in GameStats.stats:
 			var place_text : String
-			if placement == size:
+			if placement == 0:
 				place_text = \"N/A\"
 			else:
-				place_text = String.num(placement + 1)
+				place_text = String.num(placement)
 			if stats[\"placement\"] == place_text:
 #				print(stats)
 				new_stats_panel(stats, pos)
@@ -117,6 +117,8 @@ func _physics_process(delta):
 func _on_csv_pressed():
 	var map_name : String = MapSetup.current_map_name.trim_suffix(\".tscn\")
 	GameStats.save_as_csv(map_name.replace(\"_\", \" \"))
+	$buttons/save.text = \"Saved!\"
+	
 
 
 func leave():
@@ -151,9 +153,9 @@ texture_normal = ExtResource("3_0g6er")
 
 [node name="expo" type="Label" parent="buttons"]
 layout_mode = 0
-offset_left = 24.0
+offset_left = 16.0
 offset_top = 168.0
-offset_right = 184.0
+offset_right = 176.0
 offset_bottom = 408.0
 text = "Hover your cursor
 over the edges of
@@ -164,6 +166,16 @@ CSV Files are stored
 in your Appdata
 folder under
 /Roaming/TRegions."
+clip_text = true
+
+[node name="save" type="Label" parent="buttons"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 424.0
+offset_right = 176.0
+offset_bottom = 472.0
+horizontal_alignment = 1
+vertical_alignment = 2
 clip_text = true
 
 [node name="cam" type="Camera2D" parent="."]

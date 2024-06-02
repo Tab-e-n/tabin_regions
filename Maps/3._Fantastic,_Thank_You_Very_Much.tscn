@@ -109,9 +109,9 @@ func _physics_process(_delta):
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(0, 528, -216, 344, -512, 272, -512, 24, -632, -296, -272, -328, -8, -488, 384, -368, 496, -192, 520, 56, 360, 152, 272, 384)
 script = ExtResource("1_qwc4r")
+align_amount = 5
 complexity = "Medium"
 lore = "Long ago, the four elements of the magic hill lived in peace, that is until they all went coo coo crazy and started fighting each other. That is when this map takes place. Every so often, the magic hill gives each element more power to their capital."
-align_amount = 5
 align_names = Array[String](["", "Fire", "Wind", "Water", "Earth"])
 
 [node name="Node" type="Node" parent="."]

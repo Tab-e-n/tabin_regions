@@ -9,6 +9,8 @@ signal game_ended(winner)
 
 const COLOR_TOO_BRIGHT : float = 0.9
 
+enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
+
 
 @onready var bg_color : Color = color
 @onready var game_control : GameControl
@@ -22,6 +24,7 @@ const COLOR_TOO_BRIGHT : float = 0.9
 
 @export_subgroup("Gameplay")
 # After a player reaches `key : int` capital amount, every subsequent capitol gains them `value: float`% less.
+@export_enum ("Off", "Current Capital Amount", "Previous Capital Amount") var apply_penalties : int = APPLY_PENALTIES.OFF
 @export var power_gain_penalties : Dictionary = {
 	3 : .325,
 	13 : .25,
@@ -96,7 +99,8 @@ const COLOR_TOO_BRIGHT : float = 0.9
 @export var hide_turn_order : bool = false
 
 @export_subgroup("Editor")
-@export_enum("Disabled", "Alignment", "Power", "Max Power", "Capital") var render_mode : int = 0
+@export_enum("Disabled", "Alignment", "Power", "Max Power", "Capital", "Position") var render_mode : int = 0
+@export var render_range : float = 20
 
 var dummy : bool = false
 
@@ -358,6 +362,8 @@ func change_current_action():
 
 
 func turn_end():
+	calculate_penalty(current_player, true)
+	
 	if region_amount[current_player - 1] > 0:
 		GameStats.set_stat(current_player, "turns lasted", current_turn)
 #		GameStats.stats[current_player]["turns lasted"] = current_turn
@@ -436,7 +442,7 @@ func reset():
 	current_action = ACTION_MOBILIZE if action_amount == 0 else 0
 	
 	var bg_color_tinted : Color = bg_color + align_color[current_player] * Color(0.25, 0.25, 0.25)
-	if game_control.ai_control.speedrun_ai:
+	if MapSetup.speedrun_ai:
 		if player_controlers[current_player - 1] == AIControler.CONTROLER_USER:
 			color = bg_color_tinted
 		else:
@@ -450,10 +456,15 @@ func reset():
 		game_control.ai_control.start_turn(current_player, player_controlers[current_player - 1])
 
 
-func calculate_penalty(alignment : int):
-	var capitals : int = capital_amount[alignment - 1]
+func calculate_penalty(alignment : int, end_of_turn : bool = false):
+	if apply_penalties == APPLY_PENALTIES.OFF:
+		return
+	if apply_penalties == APPLY_PENALTIES.PREVIOUS_CAPITAL and not end_of_turn:
+		return
 	if power_gain_penalties.size() == 0:
-		return capitals
+		return
+	
+	var capitals : int = capital_amount[alignment - 1]
 	
 	var penalty : float = 0.0
 	for i in power_gain_penalties.keys():

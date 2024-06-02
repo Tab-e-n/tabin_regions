@@ -46,7 +46,6 @@ var cam_movement_stop : float = PREVENT_CAMERA_MOVEMENT_START
 
 
 var zoom_level : int = 0
-var mouse_scroll_active : bool = true
 var mouse_wheel_input : int = 0
 
 var hovering_advance_turn : bool = false
@@ -208,7 +207,7 @@ func _physics_process(delta):
 	
 	if cam_movement_stop > 0:
 		cam_movement_stop -= 1
-	elif mouse_scroll_active:
+	elif MapSetup.mouse_scroll_active:
 		if mouse_position.x > window_size.x - 64:
 			direction.x += 1
 		if mouse_position.x < 64:
@@ -253,8 +252,8 @@ func _physics_process(delta):
 		CommandCallout.new_callout("Toggle turn order")
 	
 	if Input.is_action_just_pressed("disable_mouse_scroll"):
-		mouse_scroll_active = not mouse_scroll_active
-		if mouse_scroll_active:
+		MapSetup.mouse_scroll_active = not MapSetup.mouse_scroll_active
+		if MapSetup.mouse_scroll_active:
 			CommandCallout.new_callout("Mouse scrolling active")
 		else:
 			CommandCallout.new_callout("Mouse scrolling disabled")

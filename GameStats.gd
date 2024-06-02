@@ -17,6 +17,8 @@ var DEFAULT_STATS : Dictionary = {
 	"regions captured" : 0,
 	"regions reinforced" : 0,
 	"capital regions captured" : 0,
+	
+#	"killer alignment" : "",
 }
 
 var stats : Array = []
