@@ -72,11 +72,11 @@ func _process(_delta):
 				color = Color(col1, col2, 0.5, 1)
 
 
-func power_color(power : int, no_zero : bool):
-	if power == 0 and no_zero:
+func power_color(amount : int, no_zero : bool):
+	if amount == 0 and no_zero:
 		color = Color("703d5d")
 		return
-	var c : float = 1.0 - clampf(power, 0, region_control.render_range) / region_control.render_range
+	var c : float = 1.0 - clampf(amount, 0, region_control.render_range) / region_control.render_range
 	color = Color(c, c, c, 1)
 
 
