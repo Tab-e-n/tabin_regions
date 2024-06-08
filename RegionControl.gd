@@ -36,16 +36,16 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @export var random_player_align_range : int = 0
 @export var max_user_amount : int = -1
 @export var use_preset_alignments : bool = false
-@export var preset_user_alignments : PackedInt32Array = []
+@export var preset_user_alignments : Array[int] = []
 
 @export_subgroup("AI")
 @export var use_custom_ai_setup : bool = false
 @export_enum("None", "Default", "Turtle", "Neural", "Cheater", "Dummy") var ai_controler : int = AIControler.CONTROLER_DEFAULT
-@export var custom_ai_setup : PackedInt32Array = []
+@export var custom_ai_setup : Array[int] = []
 
 @export_subgroup("Aliances")
 @export var aliances_active : bool = false
-@export var alignment_aliances : PackedInt32Array = []
+@export var alignment_aliances : Array[int] = []
 @export var automatic_aliances : bool = false
 @export var autoaliance_divisions_amount : int = 2
 
@@ -228,11 +228,13 @@ func _ready():
 	
 	current_placement = align_amount - 1
 	
+	if alignment_aliances.size() < align_amount:
+		alignment_aliances.resize(align_amount)
+	
 	if not aliances_active:
-		alignment_aliances = range(align_amount)
+		for i in range(align_amount):
+			alignment_aliances[i] = i
 	else:
-		if alignment_aliances.size() < align_amount:
-			alignment_aliances.resize(align_amount)
 		if automatic_aliances:
 			alignment_aliances[0] = 0
 			var current_aliance : int = 1
