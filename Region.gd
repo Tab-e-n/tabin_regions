@@ -10,6 +10,12 @@ const DISTANCE_CAP : int = 0b1111_1111_1111_1111
 enum RENDER_MODE {DISABLED, ALIGNMENT, POWER, MAX_POWER, CAPITAL, POSITION}
 
 
+signal captured()
+signal changed_alignment(alignment : int)
+signal reinforced(amount : int)
+signal mobilized()
+
+
 @export var alignment : int = 0
 
 @export var power : int = 1
@@ -93,6 +99,7 @@ func change_alignment(align : int):
 		if is_capital:
 			region_control.capital_amount[alignment - 1] += 1
 			region_control.calculate_penalty(alignment)
+	changed_alignment.emit(alignment)
 
 
 func color_self():
@@ -150,6 +157,7 @@ func incoming_attack(attack_align : int, attack_power : int = 0, test_only : boo
 		if is_capital:
 			GameStats.add_to_stat(attack_align, "capital regions captured", 1)
 #			GameStats.stats[alignment]["capital regions captured"] += 1
+		captured.emit()
 		return true
 	else:
 		return false
@@ -161,6 +169,7 @@ func reinforce(reinforce_align : int = alignment, addon_power : int = 1):
 	power += addon_power
 	GameStats.add_to_stat(reinforce_align, "regions reinforced", 1)
 #	GameStats.stats[reinforce_align]["regions reinforced"] += 1
+	reinforced.emit(addon_power)
 	return true
 
 
@@ -171,6 +180,7 @@ func mobilize(mobilize_align : int = alignment):
 #	GameStats.stats[mobilize_align]["units mobilized"] += 1
 	power -= 1
 	region_control.bonus_action_amount += 1
+	mobilized.emit()
 	return true
 
 

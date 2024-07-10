@@ -16,6 +16,7 @@ func _ready():
 	#print(maps)
 	
 	for i in range(maps.size()):
+		maps[i] = maps[i].trim_suffix(".remap")
 		var new_name : String = maps[i].trim_suffix(".tscn")
 		new_name = new_name.replace("_", " ")
 		$map_list.add_item(new_name)

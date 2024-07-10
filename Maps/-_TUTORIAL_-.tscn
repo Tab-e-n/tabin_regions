@@ -35,6 +35,7 @@ var connections : Array = [
 	[\"Greg\", \"Central Lake\"],
 	[\"Central Lake\", \"Tshenkovitse\"],
 	[\"Red Water\", \"Tshenkovitse\"],
+	[\"Forgotten Capital\", \"Tshenkovitse\"],
 	[\"Red Water\", \"Forgotten Capital\"],
 	[\"Greenland\", \"Green Hill\"],
 ]
@@ -105,7 +106,7 @@ script = ExtResource("1_fhy2h")
 allow_map_spec_change = false
 max_user_amount = 1
 use_preset_alignments = true
-preset_user_alignments = [1, 2]
+preset_user_alignments = Array[int]([1, 2])
 use_custom_ai_setup = true
 ai_controler = 2
 tag = "Challenge"
@@ -135,22 +136,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="intro" type="Label" parent="."]
-offset_left = -192.0
+offset_left = -200.0
 offset_top = -232.0
-offset_right = 192.0
-offset_bottom = 28.0
+offset_right = 200.0
+offset_bottom = 132.0
 text = "Welcome to Regions!
 
-This map will try to explain the basics of
-how to play the game in an interactive manner.
+This map will try to explain the basics of how to
+play the game in an somewhat interactive manner.
 
 You win the game by capturing all regions that
 are controled by opposing forces.
 
 Before we can start crushing our enemies,
 we need to learn how to control the game.
-To move the camera. You can do this by
-hovering the mouse by the edge of the window.
+To move the camera, hover your mouse near
+the edges of the window.
 
 \\/ \\/ \\/ The tutorial continues below \\/ \\/ \\/"
 horizontal_alignment = 1
@@ -198,16 +199,16 @@ This bar shows you two important things: How many actions you
 can currently do, and the current phase of the turn.
 
 Your turn starts with the phase \"first action\".
-In this phase, you can do either click on an enemy city to attempt to capture it
-and the surrounding region.
+In this phase, you can click on enemy cities to attempt to capture them
+and their respective region.
 
 You are eligible to capture a region if the combined power
 of your connected regions is bigger than the region's power.
 You can see a region's connections by hovering over the region's city.
-If the attack you want to do fails, a grey cross will show up.
-If this happens, your action will not be used up.
+If the attack fails, a grey cross will pop up over the region, and your
+action will not be used up.
 
-Try capturing by clicking on the regions below!
+Try capturing by clicking on the grey regions below!
 "
 horizontal_alignment = 1
 script = SubResource("GDScript_4jbmf")
@@ -342,18 +343,18 @@ script = ExtResource("2_bnykq")
 
 [node name="Tshenkovitse" type="Polygon2D" parent="."]
 position = Vector2(-224, 3032)
-polygon = PackedVector2Array(-208, -112, -104, -128, -24, -72, 96, -104, 152, -128, 232, -120, 240, -56, 192, -32, 112, -8, 64, 16, -24, 40, -88, 24, -160, -24, -208, -48, -272, -56, -320, -88, -344, -136, -328, -160, -296, -120, -240, -96)
+polygon = PackedVector2Array(-208, -112, -104, -128, -24, -72, 96, -104, 152, -128, 232, -120, 240, -56, 192, -32, 112, -8, 64, 16, -24, 40, -88, 32, -160, -24, -208, -48, -272, -56, -320, -88, -344, -136, -328, -160, -296, -120, -240, -96)
 script = ExtResource("2_bnykq")
 max_power = 7
 
 [node name="Red Water" type="Polygon2D" parent="."]
 position = Vector2(64, 3040)
-polygon = PackedVector2Array(-272, 48, -280, 88, -256, 128, -232, 184, -200, 216, -160, 200, -168, 168, -176, 120, -120, 88, -72, 48, 0, 32, 80, 32, 160, 32, 224, 8, 240, -16, 224, -64, 200, -72, 112, -48, 40, -48, -16, -48, -64, -32, -112, -16, -160, 8, -208, 32)
+polygon = PackedVector2Array(-272, 48, -280, 88, -256, 128, -264, 176, -216, 208, -160, 200, -168, 168, -176, 120, -120, 88, -72, 48, 0, 32, 80, 32, 160, 32, 224, 8, 240, -16, 224, -64, 200, -72, 112, -48, 40, -48, -16, -48, -64, -32, -112, -16, -160, 8, -208, 32)
 script = ExtResource("2_bnykq")
 max_power = 7
 
 [node name="Forgotten Capital" type="Polygon2D" parent="."]
-position = Vector2(-8, 3192)
+position = Vector2(-336, 3168)
 polygon = PackedVector2Array(-40, -48, -72, 0, -56, 56, 24, 96, 104, 80, 120, -8, 80, -72, 8, -80)
 script = ExtResource("2_bnykq")
 power = 2
