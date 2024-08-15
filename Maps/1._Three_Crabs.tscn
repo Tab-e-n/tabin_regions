@@ -98,7 +98,8 @@ polygon = PackedVector2Array(-456, -232, -224, -424, 88, -448, 296, -368, 520, -
 script = ExtResource("1_pkf2y")
 align_amount = 4
 complexity = "Beginner"
-lore = "A trio of clans at war."
+lore = "A trio of crab clans fight over control of Crab Island.
+Who will persist? Crab, crab or crab?"
 align_color = Array[Color]([Color(0.384314, 0.341176, 0.458824, 1), Color(0.929412, 0.521569, 0.552941, 1), Color(0.490196, 0.929412, 0.572549, 1), Color(0.466667, 0.584314, 0.929412, 1), Color(0.541176, 0.129412, 0.678431, 1)])
 align_names = Array[String](["", "Cramas", "Trias", "Rasmas"])
 city_size = 0.8

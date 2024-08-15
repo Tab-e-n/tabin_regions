@@ -771,7 +771,9 @@ script = ExtResource("1_5aq8s")
 align_amount = 31
 apply_penalties = 2
 complexity = "Medium"
-lore = "The classic. Except not at all. I took a lot of creative liberties. If you feel like something is wrong, it probably is. Have fun!"
+lore = "The classic. Except not at all. I took a lot of creative liberties.
+If you feel like something is wrong, it probably is.
+Have fun!"
 align_color = Array[Color]([Color(0.384314, 0.341176, 0.458824, 1), Color(0.654902, 0.168627, 0.215686, 1), Color(0.211765, 0.552941, 0.380392, 1), Color(0.168627, 0.490196, 0.729412, 1), Color(0.682353, 0.356863, 0.0823529, 1), Color(0.537255, 0.152941, 0.658824, 1), Color(0.929412, 0.521569, 0.552941, 1), Color(0.772549, 0.921569, 0.74902, 1), Color(0.129412, 0.215686, 0.458824, 1), Color(0.647059, 0.509804, 0.376471, 1), Color(0.866667, 0.309804, 0.588235, 1), Color(0.870588, 0.666667, 0.780392, 1), Color(0.427451, 0.65098, 0.239216, 1), Color(0.466667, 0.584314, 0.929412, 1), Color(0.815686, 0.623529, 0.0823529, 1), Color(0.694118, 0.466667, 0.788235, 1), Color(0.478431, 0.054902, 0.262745, 1), Color(0.235294, 0.368627, 0.141176, 1), Color(0.333333, 0.415686, 0.635294, 1), Color(0.843137, 0.878431, 0.419608, 1), Color(0.537255, 0.345098, 0.439216, 1), Color(0.247059, 0.0235294, 0.156863, 1), Color(0.490196, 0.929412, 0.572549, 1), Color(0.168627, 0.266667, 0.337255, 1), Color(0.843137, 0.792157, 0.752941, 1), Color(0.509804, 0.513726, 0.529412, 1), Color(0.403922, 0.227451, 0.168627, 1), Color(0.305882, 0.298039, 0.196078, 1), Color(0.713726, 0.717647, 0.921569, 1), Color(0.929412, 0.654902, 0.356863, 1), Color(0.180392, 0.34902, 0.286275, 1)])
 align_names = Array[String](["Other", "Com. China", "Ireland", "Nat. China", "Mongolia", "Turkey", "Japan", "Arctic", "USA", "Saudi Arabia", "Australia", "Canada", "India", "Botswana", "Balkan", "DACH", "Spaintugal", "Brazil", "Nordic States", "Venezuela", "Mauritania", "Confederacy", "Argentina", "Indonesia", "Antarctic", "Russia 1", "Kenya", "Mexico", "Kazakhstan", "Russia 2", "Nigeria"])
 city_size = 0.75

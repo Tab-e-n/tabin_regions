@@ -56,7 +56,8 @@ polygon = PackedVector2Array(512, -416, 512, -512, 416, -608, -96, -608, -352, -
 script = ExtResource("1_k072d")
 align_amount = 5
 complexity = "Beginner"
-lore = "Everythings comes back to cubes. Everything is cubes. Ignore that cities are still circles."
+lore = "Everythings comes back to cubes. Everything is cubes.
+Ignore that cities are still circles."
 hide_turn_order = true
 
 [node name="Node" type="Node" parent="."]

@@ -55,7 +55,8 @@ color = Color(0.615686, 0.52549, 0.6, 1)
 polygon = PackedVector2Array(448, 56, 424, -144, 328, -248, 176, -312, 32, -320, -72, -256, -112, -104, -264, -128, -440, -96, -480, 40, -424, 216, -256, 352, -24, 416, 224, 440, 384, 480, 408, 328)
 script = ExtResource("1_eipre")
 complexity = "Beginner"
-lore = "A map comprised of the first songs that came to my mind, or rather the first songs i saw in my playlist."
+lore = "A map comprised of the first songs that came to my mind,
+or rather the first songs i saw in my playlist."
 align_color = Array[Color]([Color(0.462745, 0.32549, 0.439216, 1), Color(0.866667, 0.309804, 0.588235, 1), Color(0.537255, 0.152941, 0.658824, 1)])
 hide_turn_order = true
 

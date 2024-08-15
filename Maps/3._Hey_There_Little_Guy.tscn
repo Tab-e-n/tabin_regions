@@ -303,7 +303,9 @@ aliances_active = true
 alignment_aliances = Array[int]([0, 1, 1, 1, 2])
 tag = "Challenge"
 complexity = "Medium"
-lore = "You are having fun playing make-believe war with your buddies, but suddenly this rich guy \"big guy\" joins in and starts ruining your fun, so you decide to conspire against him."
+lore = "You are having fun playing make-believe war with your buddies,
+but suddenly this rich guy \"big guy\" joins in and starts ruining
+your fun, so you decide to conspire against him."
 align_color = Array[Color]([Color(0.313726, 0.360784, 0.505882, 1), Color(0.909804, 0.741176, 0.619608, 1), Color(0.690196, 0.952941, 0.65098, 1), Color(0.909804, 0.682353, 0.866667, 1), Color(0.345098, 0.235294, 0.52549, 1)])
 align_names = Array[String](["", "Little Guy", "Tiny Gal", "Mini Guy", "Big Guy"])
 city_size = 0.85
