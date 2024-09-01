@@ -368,7 +368,7 @@ func cross(capital_position : Vector2):
 	game_control.cross.position = capital_position
 
 
-func action_done(region_name : String):
+func action_done(region_name : String, amount : int = 1):
 	game_control.cross.visible = false
 	if current_action == ACTION_NORMAL:
 		if action_amount > 0:
@@ -378,7 +378,8 @@ func action_done(region_name : String):
 		if action_amount <= 0:
 			current_action = ACTION_MOBILIZE
 	elif current_action == ACTION_MOBILIZE:
-		ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
+		for i in range(amount):
+			ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
 	elif current_action == ACTION_BONUS:
 		if bonus_action_amount > 0:
 			GameStats.add_to_stat(current_playing_align, "bonus actions done", 1)

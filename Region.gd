@@ -127,8 +127,9 @@ func action_decided():
 		region_control.cross(position)
 	else:
 		if region_control.current_playing_align == alignment:
-			if mobilize():
-				region_control.action_done(name)
+			var amount = mobilize()
+			if amount:
+				region_control.action_done(name, amount)
 				return
 		region_control.cross(position)
 
@@ -176,7 +177,7 @@ func reinforce(reinforce_align : int = alignment, addon_power : int = 1):
 
 func mobilize(mobilize_align : int = alignment):
 	if power <= 1:
-		return false
+		return 0
 	var mobilize_amount : int = 1
 	if Input.is_action_pressed("shift") and region_control.is_player_controled:
 		mobilize_amount = power - 1
@@ -185,7 +186,7 @@ func mobilize(mobilize_align : int = alignment):
 	power -= mobilize_amount
 	region_control.bonus_action_amount += mobilize_amount
 	mobilized.emit()
-	return true
+	return mobilize_amount
 
 
 func region_attack_power(region) -> int:

@@ -152,6 +152,9 @@ func think():
 
 func timer_ended():
 #	print("timer ended")
+	if ReplayControl.replay_active and replay_done_action:
+		think()
+		return
 	var should_think : bool = true
 	if CALL_nothing:
 		reset_CALL()
