@@ -108,26 +108,27 @@ func color_self():
 
 
 func _on_capital_pressed():
-	if region_control.is_user_controled and !region_control.dummy:
+	if region_control.is_player_controled and !region_control.dummy:
 		action_decided()
 
 
 func action_decided():
 	city.call_deferred("make_particle", region_control.current_action == region_control.ACTION_MOBILIZE)
 	if region_control.current_action != region_control.ACTION_MOBILIZE:
-		if region_control.alignment_friendly(region_control.current_player, alignment):
-			if reinforce(region_control.current_player):
-				region_control.action_done()
-				return
-		elif alignment_can_attack(region_control.current_player):
-			if incoming_attack(region_control.current_player):
-				region_control.action_done()
-				return
+		if region_control.has_enough_actions():
+			if region_control.alignment_friendly(region_control.current_playing_align, alignment):
+				if reinforce(region_control.current_playing_align):
+					region_control.action_done(name)
+					return
+			elif alignment_can_attack(region_control.current_playing_align):
+				if incoming_attack(region_control.current_playing_align):
+					region_control.action_done(name)
+					return
 		region_control.cross(position)
 	else:
-		if region_control.current_player == alignment:
+		if region_control.current_playing_align == alignment:
 			if mobilize():
-				region_control.action_done()
+				region_control.action_done(name)
 				return
 		region_control.cross(position)
 
@@ -176,10 +177,13 @@ func reinforce(reinforce_align : int = alignment, addon_power : int = 1):
 func mobilize(mobilize_align : int = alignment):
 	if power <= 1:
 		return false
-	GameStats.add_to_stat(mobilize_align, "units mobilized", 1)
+	var mobilize_amount : int = 1
+	if Input.is_action_pressed("shift") and region_control.is_player_controled:
+		mobilize_amount = power - 1
+	GameStats.add_to_stat(mobilize_align, "units mobilized", mobilize_amount)
 #	GameStats.stats[mobilize_align]["units mobilized"] += 1
-	power -= 1
-	region_control.bonus_action_amount += 1
+	power -= mobilize_amount
+	region_control.bonus_action_amount += mobilize_amount
 	mobilized.emit()
 	return true
 

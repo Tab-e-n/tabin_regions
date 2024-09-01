@@ -54,6 +54,7 @@ position = Vector2(0, 8)
 color = Color(0.615686, 0.52549, 0.6, 1)
 polygon = PackedVector2Array(448, 56, 424, -144, 328, -248, 176, -312, 32, -320, -72, -256, -112, -104, -264, -128, -440, -96, -480, 40, -424, 216, -256, 352, -24, 416, 224, 440, 384, 480, 408, 328)
 script = ExtResource("1_eipre")
+use_alignment_picker = false
 complexity = "Beginner"
 lore = "A map comprised of the first songs that came to my mind,
 or rather the first songs i saw in my playlist."
@@ -80,7 +81,8 @@ polygon = PackedVector2Array(0, 16, 16, 16, 72, -16, 48, 56, 40, 72, 32, 80, 16,
 script = ExtResource("2_nmcrs")
 
 [node name="Sand Canyon" type="Polygon2D" parent="."]
-position = Vector2(176, -16)
+position = Vector2(120, -24)
+offset = Vector2(56, 8)
 polygon = PackedVector2Array(-8, 64, -40, 56, -48, 24, -80, 16, -96, -8, -96, -24, -112, -32, -120, -48, -104, -64, -112, -80, -104, -88, -80, -96, -56, -80, -40, -48, -32, -32, -16, -24, 8, -24, 24, -8, 24, 24, 16, 40, 0, 48)
 script = ExtResource("2_nmcrs")
 power = 0
@@ -123,7 +125,8 @@ polygon = PackedVector2Array(-40, 24, -24, 32, 16, 32, 56, 24, 72, 0, 72, -16, 6
 script = ExtResource("2_nmcrs")
 
 [node name="Dark Beach" type="Polygon2D" parent="."]
-position = Vector2(-192, 80)
+position = Vector2(-240, 72)
+offset = Vector2(48, 8)
 polygon = PackedVector2Array(32, -16, 24, 8, -16, 16, -16, 40, -48, 48, -48, 24, -72, 24, -120, 0, -136, -24, -128, -56, -112, -56, -96, -56, -80, -40, -80, -64, -64, -72, -40, -64, -32, -56, -24, -40, -16, -64, 0, -64, 16, -56, 24, -56, 24, -72, 0, -80, -16, -80, -24, -72, -48, -88, -80, -88, -88, -64, -112, -72, -136, -64, -128, -48, -144, -64, -144, -80, -120, -96, -96, -88, -96, -104, -72, -120, -40, -112, -32, -96, -16, -104, 8, -104, 32, -88, 32, -64, 24, -56, 24, -48, 32, -40, 32, -40)
 script = ExtResource("2_nmcrs")
 alignment = 1
@@ -142,7 +145,8 @@ polygon = PackedVector2Array(24, -8, 80, 40, 64, 48, 24, 16, -8, 32, -32, 24, -4
 script = ExtResource("2_nmcrs")
 
 [node name="BBF" type="Polygon2D" parent="."]
-position = Vector2(280, -64)
+position = Vector2(312, -56)
+offset = Vector2(-32, -8)
 polygon = PackedVector2Array(-24, -16, 0, -24, 16, -48, 40, -56, 56, -32, 56, -16, 48, 0, 64, 8, 72, 24, 64, 48, 24, 64, 8, 48, -24, 32, 16, 24, 0, 16, -8, 8, 8, -8, 0, -8)
 script = ExtResource("2_nmcrs")
 

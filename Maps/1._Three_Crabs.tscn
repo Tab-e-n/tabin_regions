@@ -96,6 +96,7 @@ func _ready():
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-456, -232, -224, -424, 88, -448, 296, -368, 520, -176, 504, 128, 432, 328, 240, 456, -8, 480, -296, 400, -472, 304, -536, 96)
 script = ExtResource("1_pkf2y")
+use_alignment_picker = false
 align_amount = 4
 complexity = "Beginner"
 lore = "A trio of crab clans fight over control of Crab Island.

@@ -35,8 +35,11 @@ var selected_capital : String = ""
 var CALL_change_current_action : bool = false
 var CALL_turn_end : bool = false
 var CALL_forfeit : bool = false
+var CALL_nothing : bool = false
 
 var controlers : Array = []
+
+var replay_done_action : bool = true
 
 
 func _ready():
@@ -71,7 +74,7 @@ func _process(delta):
 		speedrun_ai_update()
 	
 #	print(timer)
-	if region_control.is_user_controled:
+	if region_control.is_player_controled:
 		timer = 0
 	if timer > 0:
 		timer -= delta
@@ -99,12 +102,13 @@ func start_turn(align : int, control : int):
 	current_alignment = align
 	current_controler = control
 	
-	if current_moves.has(current_alignment):
-		previous_moves = current_moves[current_alignment].duplicate()
-	current_moves[current_alignment] = []
-	
-	if controlers[current_controler].has_method("start_turn"):
-		controlers[current_controler].call("start_turn", align)
+	if not ReplayControl.replay_active:
+		if current_moves.has(current_alignment):
+			previous_moves = current_moves[current_alignment].duplicate()
+		current_moves[current_alignment] = []
+		
+		if controlers[current_controler].has_method("start_turn"):
+			controlers[current_controler].call("start_turn", align)
 	
 	call_deferred("think")
 
@@ -114,40 +118,63 @@ func think():
 	
 	timer = thinking_timer
 	
-	find_owned_regions()
-	
-	match region_control.current_action:
-		region_control.ACTION_NORMAL:
-			if controlers[current_controler].has_method("think_normal"):
-				controlers[current_controler].call("think_normal")
-		region_control.ACTION_MOBILIZE:
-			if controlers[current_controler].has_method("think_mobilize"):
-				controlers[current_controler].call("think_mobilize")
-		region_control.ACTION_BONUS:
-			if controlers[current_controler].has_method("think_bonus"):
-				controlers[current_controler].call("think_bonus")
+	if ReplayControl.replay_active:
+		if replay_done_action:
+			replay_done_action = false
+			var next_move = ReplayControl.get_next_move()
+#			print(current_alignment, " ", next_move)
+			if next_move[0] == ReplayControl.RECORD_TYPE_REGION:
+				selected_capital = next_move[1]
+			else:
+				match(next_move[1]):
+					"forfeit":
+						CALL_forfeit = true
+					"turn_end":
+						CALL_turn_end = true
+					"change_current_action":
+						CALL_change_current_action = true
+					"nothing":
+						CALL_nothing = true
+	else:
+		find_owned_regions()
+		
+		match region_control.current_action:
+			region_control.ACTION_NORMAL:
+				if controlers[current_controler].has_method("think_normal"):
+					controlers[current_controler].call("think_normal")
+			region_control.ACTION_MOBILIZE:
+				if controlers[current_controler].has_method("think_mobilize"):
+					controlers[current_controler].call("think_mobilize")
+			region_control.ACTION_BONUS:
+				if controlers[current_controler].has_method("think_bonus"):
+					controlers[current_controler].call("think_bonus")
 
 
 func timer_ended():
 #	print("timer ended")
 	var should_think : bool = true
-	if CALL_forfeit:
+	if CALL_nothing:
+		reset_CALL()
+	elif CALL_forfeit:
 		reset_CALL()
 		region_control.forfeit()
 		should_think = false
-#		current_moves[current_alignment].append(3)
 	elif CALL_turn_end:
 		reset_CALL()
-		region_control.turn_end()
+		region_control.turn_end(true)
 		should_think = false
-#		current_moves[current_alignment].append(2)
 	elif CALL_change_current_action:
 		reset_CALL()
 		region_control.change_current_action()
-#		current_moves[current_alignment].append(1)
+		should_think = region_control.current_action != region_control.ACTION_NORMAL
 	else:
+		reset_CALL()
+		var previous_action = region_control.current_action
 		region_control.get_node(selected_capital).action_decided()
-		current_moves[current_alignment].append(selected_capital)
+		if not ReplayControl.replay_active:
+			current_moves[current_alignment].append(selected_capital)
+		should_think = not (previous_action != region_control.ACTION_NORMAL and region_control.current_action == region_control.ACTION_NORMAL)
+	replay_done_action = true
 	if should_think:
 		think()
 #	print(current_moves)
@@ -157,6 +184,7 @@ func reset_CALL():
 	CALL_forfeit = false
 	CALL_turn_end = false
 	CALL_change_current_action = false
+	CALL_nothing = false
 
 
 func find_owned_regions(alignment : int = current_alignment):

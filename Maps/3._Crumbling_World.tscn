@@ -64,8 +64,8 @@ var connections : Array = [
 	[\"Jebroni\", \"Lakebeach\"],
 	[\"South Dambodill\", \"Kansas\"],
 	[\"South Dambodill\", \"Dambodill Highlands\"],
-	[\"South Dambodill\", \"Overhedge\"],
-	[\"Overhedge\", \"Dambodill Highlands\"],
+	[\"South Dambodill\", \"Overhedge\", 1],
+	[\"Overhedge\", \"Dambodill Highlands\", 1],
 	[\"Overhedge\", \"Bleche Bridge\"],
 	[\"Overhedge\", \"Grunchy Coast\"],
 	[\"South Dambodill\", \"Lake Dambodill\"],
@@ -144,7 +144,7 @@ func set_corruption_aliance():
 
 
 func _process(_delta):
-	if region_control.current_player == 4:
+	if region_control.current_playing_align == 4:
 		var align_left = 0
 		for i in region_control.region_amount.size():
 			if region_control.region_amount[i] > 0:
@@ -168,7 +168,6 @@ polygon = PackedVector2Array(-592, -688, 256, -800, 864, -440, 944, 88, 360, 800
 script = ExtResource("1_vngco")
 align_amount = 5
 random_player_align_range = 3
-max_user_amount = 3
 use_custom_ai_setup = true
 custom_ai_setup = Array[int]([1, 1, 1, 2])
 complexity = "Medium"
@@ -438,7 +437,7 @@ power = 0
 
 [node name="Campytopia" type="Polygon2D" parent="."]
 position = Vector2(112, -336)
-polygon = PackedVector2Array(-32, 8, 0, 16, 16, 8, 0, -16)
+polygon = PackedVector2Array(-48, -8, -32, 32, -24, 32, 24, 40, 64, 64, 56, 32, 40, 8, 56, -8, 64, -40, 16, -24, -32, -24)
 script = ExtResource("2_arjpy")
 
 [node name="Ero Plateau" type="Polygon2D" parent="."]

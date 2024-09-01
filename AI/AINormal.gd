@@ -35,7 +35,7 @@ func think_normal(is_bonus : bool = false):
 	
 	var friendly_regions : Array = controler.get_owned_regions()
 	
-	if controler.region_control.aliances_active:
+	if controler.region_control.use_aliances:
 		friendly_regions.append_array(controler.get_allied_regions())
 	
 #	print(current_alignment)

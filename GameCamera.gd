@@ -2,10 +2,6 @@ extends Camera2D
 class_name GameCamera
 
 
-const PLAY_ORDER_SCREEN_BORDER_GAP : float = 64
-const PLAY_ORDER_SPACING : float = 48
-const PLAY_ORDER_VERTICAL_OFFSET : float = 44
-const PLAY_ORDER_MAX_SIZE : float = 1024
 const PREVENT_CAMERA_MOVEMENT_START : float = 1
 
 
@@ -21,7 +17,7 @@ const BASE_MOVE_SPEED : float = 8
 @export var PlayerInfo : Control
 @export var AdvanceTurnButton : BaseButton
 @export var PauseButton : BaseButton
-@export var TurnOrder : Panel
+@export var TurnOrder : AlignmentList
 @export var Attacks : RichTextLabel
 @export var PowerSprite : TextureRect
 @export var PowerAmount : Label
@@ -115,6 +111,11 @@ func _deffered_ready():
 	farthest_up += window_size.y / 3
 #	print(farthest_right, " ",farthest_left, " ",farthest_down, " ",farthest_up,)
 	
+	farthest_right += region_control.offset.x
+	farthest_left += region_control.offset.x
+	farthest_down += region_control.offset.y
+	farthest_up += region_control.offset.y
+	
 	if position.x > farthest_right:
 		position.x = farthest_right
 	if position.x < farthest_left:
@@ -132,50 +133,18 @@ func _deffered_ready():
 	
 	PauseButton.pressed.connect(show_pause_menu)
 	
-	call_deferred("_ready_play_order")
+	call_deferred("_ready_turn_order")
 	
-	region_control.turn_ended.connect(update_turn_order)
+	region_control.turn_ended.connect(_update_turn_order)
 
 
-func _ready_play_order():
-	var size : float = PLAY_ORDER_SPACING * (region_control.align_amount - 1)
-	TurnOrder.size.x = size
-#	print(size)
-	if size > PLAY_ORDER_MAX_SIZE:
-		TurnOrder.scale.x = PLAY_ORDER_MAX_SIZE / size
-		TurnOrder.scale.y = TurnOrder.scale.x
-		Attacks.size.x = PLAY_ORDER_MAX_SIZE
+func _ready_turn_order():
+	TurnOrder._ready_list(region_control)
+	
+	if TurnOrder.size.x > AlignmentList.PLAY_ORDER_MAX_SIZE:
+		Attacks.size.x = AlignmentList.PLAY_ORDER_MAX_SIZE
 	else:
-		Attacks.size.x = size
-	
-	
-	var play_order : Array = region_control.player_order.duplicate()
-	for i in range(play_order.size()):
-		var spr : Sprite2D = Sprite2D.new()
-		spr.name = String.num(play_order[i])
-		spr.texture = preload("res://Sprites/turn_order_players.png")
-		spr.hframes = AIControler.PACKED_CONTROLERS.size()
-		spr.frame = region_control.player_controlers[play_order[i] - 1]
-		@warning_ignore("integer_division")
-		spr.position.x = PLAY_ORDER_SPACING / 2 + PLAY_ORDER_SPACING * i
-		spr.position.y = PLAY_ORDER_VERTICAL_OFFSET
-		spr.self_modulate = region_control.align_color[play_order[i]]
-		TurnOrder.add_child(spr)
-		if region_control.aliances_active:
-			var label : Label = Label.new()
-			label.name = String.num(play_order[i]) + "_txt"
-			label.size = Vector2(PLAY_ORDER_SPACING, 48)
-			label.clip_text = true
-			label.text = String.num_int64(region_control.alignment_aliances[play_order[i]])
-			label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			label.position.x = -PLAY_ORDER_SPACING * 0.5
-			if spr.self_modulate.v > region_control.COLOR_TOO_BRIGHT:
-				label.self_modulate = Color(0, 0, 0)
-			else:
-				label.self_modulate = Color(1, 1, 1)
-			label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			spr.add_child(label)
+		Attacks.size.x = TurnOrder.size.x
 
 
 func _physics_process(delta):
@@ -258,8 +227,8 @@ func _physics_process(delta):
 		else:
 			CommandCallout.new_callout("Mouse scrolling disabled")
 	
-	AdvanceTurnButton.modulate = region_control.align_color[region_control.current_player]
-	PowerSprite.self_modulate = region_control.align_color[region_control.current_player]
+	AdvanceTurnButton.modulate = region_control.align_color[region_control.current_playing_align]
+	PowerSprite.self_modulate = region_control.align_color[region_control.current_playing_align]
 	AdvanceTurnButton.modulate.a = 1
 	PowerSprite.self_modulate.a = 1
 	if PowerSprite.self_modulate.v > 0.9:
@@ -278,13 +247,13 @@ func _physics_process(delta):
 		CurrentAction.text = "BONUS ACTION"
 		PowerAmount.text = String.num(region_control.bonus_action_amount)
 	
-	AdvanceTurnButton.visible = region_control.is_user_controled
-	if not region_control.is_user_controled:
+	AdvanceTurnButton.visible = region_control.is_player_controled and not ReplayControl.replay_active
+	if not region_control.is_player_controled:
 		hovering_advance_turn = false
 	
 	PlayerInfo.visible = hovering_turn_order
 	if hovering_turn_order:
-		var hovering_over_player : int = (mouse_position.x - PLAY_ORDER_SCREEN_BORDER_GAP) / (PLAY_ORDER_SPACING * TurnOrder.scale.x)
+		var hovering_over_player : int = (mouse_position.x - AlignmentList.PLAY_ORDER_SCREEN_BORDER_GAP) / (AlignmentList.PLAY_ORDER_SPACING * TurnOrder.scale.x)
 		
 		if hovering_over_player >= region_control.align_amount - 1:
 			hovering_over_player = region_control.align_amount - 2
@@ -296,7 +265,7 @@ func _physics_process(delta):
 			hovered_player = hovering_over_player
 			new_player = true
 		
-		var player_alignment : int = region_control.player_order[hovered_player]
+		var player_alignment : int = region_control.align_play_order[hovered_player]
 		var leader : Sprite2D = TurnOrder.get_node(String.num(player_alignment)) as Sprite2D
 		if leader.visible:
 			var city_amount : Label = PlayerInfo.get_node("CityAmount") as Label
@@ -335,34 +304,6 @@ func zoom_change(amount : int):
 	UI.scale.y = UI.scale.x
 
 
-func update_turn_order():
-	var play_order : Array = region_control.player_order.duplicate()
-	for i in range(region_control.align_amount - 1):
-		var alignment : int = play_order[i]
-		var leader = TurnOrder.get_node(String.num(alignment))
-		leader.visible = region_control.region_amount[alignment - 1]
-		if not leader.visible:
-			continue
-		
-		if TurnOrder.has_node(String.num(alignment) + "_txt"):
-			var aliance_text = TurnOrder.get_node(String.num(alignment) + "_txt")
-			var aliance = region_control.alignment_aliances[alignment]
-			if aliance_text.text != String.num_int64(aliance):
-				aliance_text.text = String.num_int64(aliance)
-		
-		if leader.has_node("sweat"):
-			if region_control.capital_amount[alignment - 1] > 0:
-				leader.get_node("sweat").queue_free()
-		else:
-			if region_control.capital_amount[alignment - 1] == 0:
-				var new_sweat : Sprite2D = Sprite2D.new()
-				new_sweat.texture = preload("res://Sprites/leader_sweat.png")
-				new_sweat.position = Vector2(-16, -16)
-				new_sweat.name = "sweat"
-				leader.add_child(new_sweat)
-			
-
-
 func win(align_victory : int):
 	VictoryMessage.visible = true
 	VictoryMessage.modulate = region_control.align_color[align_victory]
@@ -383,6 +324,10 @@ func _TurnOrder_cam_disable():
 
 func _TurnOrder_cam_enable():
 	hovering_turn_order = false
+
+
+func _update_turn_order():
+	TurnOrder.update_list(region_control)
 
 
 func show_pause_menu():
@@ -427,3 +372,7 @@ func hide_attacks():
 
 func leave():
 	get_tree().change_scene_to_file("res://stats.tscn")
+
+
+func center_camera(pos : Vector2):
+	position = pos

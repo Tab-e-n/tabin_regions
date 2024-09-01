@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf6kmjypfxvps"
-path="res://.godot/imported/A_large_blank_world_map_with_oceans_marked_in_blue.PNG-152b4cd97d8ea6454008532aff2d4468.ctex"
+uid="uid://c23kwcfws5x1n"
+path="res://.godot/imported/save_replay.png-4181149a7b8112159dce707a26bc6ff8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://A_large_blank_world_map_with_oceans_marked_in_blue.PNG"
-dest_files=["res://.godot/imported/A_large_blank_world_map_with_oceans_marked_in_blue.PNG-152b4cd97d8ea6454008532aff2d4468.ctex"]
+source_file="res://Sprites/save_replay.png"
+dest_files=["res://.godot/imported/save_replay.png-4181149a7b8112159dce707a26bc6ff8.ctex"]
 
 [params]
 

@@ -6,9 +6,6 @@
 [sub_resource type="GDScript" id="GDScript_ah2jb"]
 script/source = "extends Node
 
-@export var align_color : Array = [
-]
-
 var connections : Array = [
 	[\"Pawter\", \"Berdia\"],
 	[\"Pawter\", \"Hook Hilltop\"],
@@ -52,7 +49,6 @@ var connections : Array = [
 
 func _ready():
 	get_parent().connections = connections.duplicate()
-#	get_parent().align_color = align_color.duplicate()
 	queue_free()
 "
 
@@ -60,17 +56,15 @@ func _ready():
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-640, -64, -568, 112, -408, 216, -360, 328, -128, 432, 80, 496, 288, 488, 416, 384, 392, 248, 408, 168, 576, 56, 592, -96, 520, -192, 336, -272, 176, -376, -56, -312, -240, -344, -392, -400, -528, -336, -640, -208)
 script = ExtResource("1_vx6je")
+max_player_amount = 1
+use_preset_alignments = true
+preset_alignments = Array[int]([1, 2])
+use_aliances = true
+use_autoaliances = true
 tag = "Challenge"
-complexity = "Hard"
+complexity = "Advanced"
 lore = "Can you beat your enemy when you are at a disadvantage?"
 align_names = Array[String](["", "Calm Denizens", "Conspirators"])
-max_user_amount = 1
-use_preset_alignments = true
-preset_user_alignments = [1, 2]
-use_custom_ai_setup = true
-custom_ai_setup = [0, 1, 1]
-aliances_active = true
-automatic_aliances = true
 render_mode = 1
 
 [node name="Node" type="Node" parent="."]

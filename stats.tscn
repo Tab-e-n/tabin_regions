@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl73eme14hwup"]
+[gd_scene load_steps=6 format=3 uid="uid://dl73eme14hwup"]
 
 [ext_resource type="StyleBox" uid="uid://l8vkqqi4prkx" path="res://Styles/style_label_normal_box.tres" id="1_8movm"]
 [ext_resource type="Texture2D" uid="uid://bht6umkfovrvf" path="res://Sprites/exit.png" id="2_y6cxs"]
 [ext_resource type="Texture2D" uid="uid://dubjrpib0fm5n" path="res://Sprites/save_csv.png" id="3_0g6er"]
+[ext_resource type="Texture2D" uid="uid://c23kwcfws5x1n" path="res://Sprites/save_replay.png" id="4_ur71k"]
 
 [sub_resource type="GDScript" id="GDScript_6r6wn"]
 script/source = "extends Node2D
@@ -117,12 +118,18 @@ func _physics_process(delta):
 func _on_csv_pressed():
 	var map_name : String = MapSetup.current_map_name.trim_suffix(\".tscn\")
 	GameStats.save_as_csv(map_name.replace(\"_\", \" \"))
-	$buttons/save.text = \"Saved!\"
-	
+	$buttons/save.text = \"Saved CSV!\"
+
+
+func _on_replay_pressed():
+	var map_name : String = MapSetup.current_map_name.trim_suffix(\".tscn\")
+	ReplayControl.save_replay(map_name.replace(\"_\", \" \"))
+	$buttons/save.text = \"Saved Replay!\"
 
 
 func leave():
 	get_tree().change_scene_to_file(\"res://setup_scene.tscn\")
+
 "
 
 [node name="Stats" type="Node2D"]
@@ -146,21 +153,28 @@ texture_normal = ExtResource("2_y6cxs")
 [node name="csv" type="TextureButton" parent="buttons"]
 layout_mode = 0
 offset_left = 32.0
+offset_top = 352.0
+offset_right = 160.0
+offset_bottom = 480.0
+texture_normal = ExtResource("3_0g6er")
+
+[node name="replay" type="TextureButton" parent="buttons"]
+layout_mode = 0
+offset_left = 32.0
 offset_top = 480.0
 offset_right = 160.0
 offset_bottom = 608.0
-texture_normal = ExtResource("3_0g6er")
+texture_normal = ExtResource("4_ur71k")
 
 [node name="expo" type="Label" parent="buttons"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 168.0
+offset_top = 104.0
 offset_right = 176.0
-offset_bottom = 408.0
+offset_bottom = 344.0
 text = "Hover your cursor
 over the edges of
-the screen to see
-other alignments.
+the screen to move.
 
 CSV Files are stored
 in your Appdata
@@ -171,9 +185,9 @@ clip_text = true
 [node name="save" type="Label" parent="buttons"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 424.0
+offset_top = 296.0
 offset_right = 176.0
-offset_bottom = 472.0
+offset_bottom = 344.0
 horizontal_alignment = 1
 vertical_alignment = 2
 clip_text = true
@@ -183,3 +197,4 @@ position = Vector2(576, 320)
 
 [connection signal="pressed" from="buttons/leave" to="." method="leave"]
 [connection signal="pressed" from="buttons/csv" to="." method="_on_csv_pressed"]
+[connection signal="pressed" from="buttons/replay" to="." method="_on_replay_pressed"]

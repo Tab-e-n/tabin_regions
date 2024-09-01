@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvs2arpbio3au"]
+[gd_scene load_steps=4 format=3 uid="uid://cvs2arpbio3au"]
 
 [ext_resource type="Script" path="res://RegionControl.gd" id="1_5aq8s"]
-[ext_resource type="Texture2D" uid="uid://bf6kmjypfxvps" path="res://A_large_blank_world_map_with_oceans_marked_in_blue.PNG" id="2_57qtc"]
 [ext_resource type="Script" path="res://Region.gd" id="3_b6jsf"]
 
 [sub_resource type="GDScript" id="GDScript_omqxc"]
@@ -344,6 +343,7 @@ var connections : Array = [
 	[\"Sri Lanka\", \"Nicobar\"],
 	[\"Nicobar\", \"Sumatra\"],
 	[\"Kalimantan\", \"Sumatra\"],
+	[\"Kalimantan\", \"Philippines\"],
 	[\"Java\", \"Sumatra\"],
 	[\"Kalimantan\", \"Java\"],
 	[\"Lesser Sunda Islands\", \"Java\"],
@@ -768,8 +768,8 @@ func _ready():
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-3200, -1848, 3200, -1848, 3200, 1848, -3200, 1848)
 script = ExtResource("1_5aq8s")
-align_amount = 31
 apply_penalties = 2
+align_amount = 31
 complexity = "Medium"
 lore = "The classic. Except not at all. I took a lot of creative liberties.
 If you feel like something is wrong, it probably is.
@@ -781,12 +781,6 @@ render_mode = 1
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_omqxc")
-
-[node name="ALargeBlankWorldMapWithOceansMarkedInBlue" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.713726, 0.713726, 0.713726, 1)
-scale = Vector2(10, 10)
-texture = ExtResource("2_57qtc")
 
 [node name="Czechoslovakia" type="Polygon2D" parent="."]
 position = Vector2(-320, -1160)

@@ -73,19 +73,20 @@ func _ready():
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 2368, -1024, 2368)
 script = ExtResource("1_hywy4")
-align_amount = 4
 allow_map_spec_change = false
-max_user_amount = 1
+use_alignment_picker = false
+align_amount = 4
 use_preset_alignments = true
-preset_user_alignments = [1, 2, 3]
+preset_alignments = Array[int]([1, 2, 3])
 use_custom_ai_setup = true
-aliances_active = true
-alignment_aliances = [0, 1, 1, 2]
+use_aliances = true
+alignment_aliances = Array[int]([0, 1, 1, 2])
 tag = "Challenge"
 complexity = "Simple"
 lore = "A follow-up on the previous tutorial, explains to you the remaining gameplay mechanics. CAN BE SKIPPED, BUT I RECOMMEND YOU PLAY ONLY BEGINNER MAPS UNTIL YOU COMPLETE THIS."
 align_color = Array[Color]([Color(0.431373, 0.341176, 0.411765, 1), Color(0.101961, 0.564706, 0.368627, 1), Color(0.14902, 0.490196, 0.741176, 1), Color(0.670588, 0.141176, 0.2, 1)])
 align_names = Array[String](["Neutral", "You", "Friend", "Enemy"])
+snap_camera_to_first_align_capital = false
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_ojoeb")

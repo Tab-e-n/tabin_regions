@@ -17,10 +17,8 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @onready var game_camera : GameCamera
 
 
-@export var align_amount : int = 3
-@export var connections : Array = []
-
 @export var allow_map_spec_change : bool = true
+@export var use_alignment_picker : bool = true
 
 @export_subgroup("Gameplay")
 # After a player reaches `key : int` capital amount, every subsequent capitol gains them `value: float`% less.
@@ -31,27 +29,28 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 	21 : .125,
 } 
 
-@export_subgroup("Users")
-@export var user_amount : int = 1
+@export_subgroup("Alignments & Players")
+@export var align_amount : int = 3
+@export var player_amount : int = 1
 @export var random_player_align_range : int = 0
-@export var max_user_amount : int = -1
+@export var max_player_amount : int = -1
 @export var use_preset_alignments : bool = false
-@export var preset_user_alignments : Array[int] = []
+@export var preset_alignments : Array[int] = []
 
 @export_subgroup("AI")
+@export_enum("None", "Default", "Turtle", "Neural", "Cheater", "Dummy") var default_ai_controler : int = AIControler.CONTROLER_DEFAULT
 @export var use_custom_ai_setup : bool = false
-@export_enum("None", "Default", "Turtle", "Neural", "Cheater", "Dummy") var ai_controler : int = AIControler.CONTROLER_DEFAULT
 @export var custom_ai_setup : Array[int] = []
 
 @export_subgroup("Aliances")
-@export var aliances_active : bool = false
+@export var use_aliances : bool = false
 @export var alignment_aliances : Array[int] = []
-@export var automatic_aliances : bool = false
-@export var autoaliance_divisions_amount : int = 2
+@export var use_autoaliances : bool = false
+@export var autoaliances_divisions_amount : int = 2
 
 @export_subgroup("Cosmetics")
 @export_enum("Skirmish", "Challenge", "Bot Battle") var tag : String = "Skirmish"
-@export_enum("Unspecified", "Beginner", "Simple", "Medium", "Hard", "Extreme") var complexity : String = "Unspecified"
+@export_enum("Unspecified", "Beginner", "Simple", "Intermediate", "Advanced", "Extreme") var complexity : String = "Unspecified"
 @export_multiline var lore : String = """Insert lore here"""
 
 @export var align_color : Array[Color] = [
@@ -91,26 +90,28 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 		Color("4e4c32"), # tank
 		Color("b6b7eb"), # silver
 		Color("eda75b"), # sandstorm
-		Color("4e4c32"), # dark green
+		Color("2e5949"), # dark green
 ]
 @export var align_names : Array[String] = []
 
 @export var city_size : float = 1
+@export var snap_camera_to_first_align_capital : bool = true
 @export var hide_turn_order : bool = false
 
 @export_subgroup("Editor")
+@export var connections : Array = []
 @export_enum("Disabled", "Alignment", "Power", "Max Power", "Capital", "Position") var render_mode : int = 0
 @export var render_range : float = 20
 
 var dummy : bool = false
 
-var current_player : int = 1
-var player_order : Array = []
-var player_in_play_order : int = 0
+var current_playing_align : int = 1
+var align_play_order : Array = []
+var play_order_i : int = 0
 
 
-var player_controlers : Array = []
-var is_user_controled : bool
+var align_controlers : Array = []
+var is_player_controled : bool
 
 var region_amount : Array = []
 var last_turn_region_amount : Array = []
@@ -137,13 +138,22 @@ func _ready():
 	game_control.region_control = self
 	game_camera = game_control.game_camera
 	
-	user_amount = MapSetup.user_amount
-	if not use_custom_ai_setup:
-		ai_controler = MapSetup.ai_controler
-	if not aliances_active and MapSetup.aliances_amount > 1:
-		aliances_active = true
-		automatic_aliances = true
-		autoaliance_divisions_amount = MapSetup.aliances_amount
+	if ReplayControl.replay_active:
+		align_play_order = ReplayControl.replay_play_order
+		alignment_aliances = ReplayControl.replay_aliances
+		align_controlers = ReplayControl.replay_controlers
+		use_aliances = ReplayControl.replay_uses_aliances
+	else:
+		player_amount = MapSetup.player_amount
+		if not use_custom_ai_setup:
+			default_ai_controler = MapSetup.default_ai_controler
+		if not use_aliances and MapSetup.aliances_amount > 1:
+			use_aliances = true
+			use_autoaliances = true
+			autoaliances_divisions_amount = MapSetup.aliances_amount
+		if not use_preset_alignments and use_alignment_picker:
+			preset_alignments = MapSetup.preset_alignments.duplicate()
+			use_preset_alignments = true
 	
 	for link in connections:
 		var link_diff = 0
@@ -175,43 +185,50 @@ func _ready():
 	
 	bake_capital_distance()
 	
-	if random_player_align_range < max_user_amount:
-		random_player_align_range = max_user_amount
+	if not ReplayControl.replay_active:
+		if random_player_align_range < max_player_amount:
+			random_player_align_range = max_player_amount
+		
+		align_play_order.resize(align_amount - 1)
+		var players : Array = range(align_amount)
+		players.pop_front()
+		
+		var preset_aligments_amount = preset_alignments.size()
+		if use_preset_alignments and preset_aligments_amount > 0:
+			for i in range(preset_alignments.size()):
+				if preset_alignments[i] != 0:
+					align_play_order[i] = preset_alignments[i]
+					players.pop_at(players.find(preset_alignments[i]))
+		
+	#	print(align_play_order)
+		
+		var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+		rng.randomize()
+		var order : int = -1
+		for i in range(align_amount - 1):
+			if align_play_order[i]:
+				continue
+			var pos : int = 0
+			if random_player_align_range > 0 and i < random_player_align_range and not use_preset_alignments:
+				pos = rng.randi_range(0, random_player_align_range - i - 1)
+			else:
+				pos = rng.randi_range(0, players.size() - 1)
+			align_play_order[i] = players.pop_at(pos)
 	
-	player_order.resize(align_amount - 1)
-	var players : Array = range(align_amount)
-	players.pop_front()
+#	print(align_play_order)
+#	print(players)
 	
-	if use_preset_alignments and user_amount > 0:
-		for i in range(preset_user_alignments.size()):
-			player_order[i] = preset_user_alignments[i]
-			players.pop_at(players.find(preset_user_alignments[i]))
+	current_playing_align = align_play_order[0]
 	
-#	print(player_order)
-	
-	var rng : RandomNumberGenerator = RandomNumberGenerator.new()
-	rng.randomize()
-	for i in range(players.size()):
-		var pos : int = rng.randi_range(0, players.size() - 1)
-		if random_player_align_range > 0 and i < random_player_align_range and not use_preset_alignments:
-			pos = rng.randi_range(0, random_player_align_range - i - 1)
-		var order : int = i
-		if use_preset_alignments and user_amount > 0:
-			order += user_amount
-		player_order[order] = players.pop_at(pos)
-	
-#	print(player_order)
-	
-	current_player = player_order[0]
-	
-	player_controlers.resize(align_amount - 1)
-	for i in range(align_amount - 1):
-		if i < custom_ai_setup.size():
-			player_controlers[i] = custom_ai_setup[i]
-		else:
-			player_controlers[i] = ai_controler
-	for i in range(user_amount):
-		player_controlers[player_order[i] - 1] = AIControler.CONTROLER_USER
+	if not ReplayControl.replay_active:
+		align_controlers.resize(align_amount - 1)
+		for i in range(align_amount - 1):
+			if i < custom_ai_setup.size():
+				align_controlers[i] = custom_ai_setup[i]
+			else:
+				align_controlers[i] = default_ai_controler
+		for i in range(player_amount):
+			align_controlers[align_play_order[i] - 1] = AIControler.CONTROLER_USER
 	
 	
 	GameStats.reset_statistics(align_amount)
@@ -220,29 +237,30 @@ func _ready():
 		GameStats.set_stat(align, "align color", align_color[align])
 #		GameStats.stats[align]["align color"] = align_color[align]
 		if align != 0:
-			GameStats.set_stat(align, "controler", player_controlers[align - 1])
-#			GameStats.stats[align]["controler"] = player_controlers[align - 1]
+			GameStats.set_stat(align, "controler", align_controlers[align - 1])
+#			GameStats.stats[align]["controler"] = align_controlers[align - 1]
 		else:
 			GameStats.set_stat(align, "controler", AIControler.CONTROLER_DUMMY)
 #			GameStats.stats[align]["controler"] = AIControler.CONTROLER_DUMMY
 	
 	current_placement = align_amount - 1
 	
-	if alignment_aliances.size() < align_amount:
-		alignment_aliances.resize(align_amount)
-	
-	if not aliances_active:
-		for i in range(align_amount):
-			alignment_aliances[i] = i
-	else:
-		if automatic_aliances:
-			alignment_aliances[0] = 0
-			var current_aliance : int = 1
-			for i in range(align_amount - 1):
-				alignment_aliances[player_order[i]] = current_aliance
-				current_aliance += 1
-				if current_aliance > autoaliance_divisions_amount:
-					current_aliance = 1
+	if not ReplayControl.replay_active:
+		if alignment_aliances.size() < align_amount:
+			alignment_aliances.resize(align_amount)
+		
+		if not use_aliances:
+			for i in range(align_amount):
+				alignment_aliances[i] = i
+		else:
+			if use_autoaliances:
+				alignment_aliances[0] = 0
+				var current_aliance : int = 1
+				for i in range(align_amount - 1):
+					alignment_aliances[align_play_order[i]] = current_aliance
+					current_aliance += 1
+					if current_aliance > autoaliances_divisions_amount:
+						current_aliance = 1
 	
 	align_names.resize(align_amount)
 	for align in range(align_amount):
@@ -252,18 +270,37 @@ func _ready():
 	
 	if hide_turn_order:
 		game_camera.toggle_turn_order_visibility()
+	
+	if snap_camera_to_first_align_capital:
+		var center_camera : Vector2 = Vector2(0, 0)
+		for region in get_children():
+			if region is Region:
+				if region.alignment == current_playing_align:
+					center_camera = region.position
+					if region.is_capital:
+						break
+		game_camera.center_camera(center_camera)
+	
+	if not ReplayControl.replay_active:
+		ReplayControl.clear_replay()
+		
+		ReplayControl.replay_play_order = align_play_order.duplicate()
+		ReplayControl.replay_aliances = alignment_aliances.duplicate()
+		ReplayControl.replay_controlers = align_controlers.duplicate()
+		
+		ReplayControl.replay_uses_aliances = use_aliances
 
 
 func _process(_delta):
 	if dummy:
 		return
 	
-	if is_user_controled:
+	if is_player_controled:
 		if Input.is_action_just_pressed("forfeit"):
 			forfeit()
 			game_camera.CommandCallout.new_callout("Forfeit")
 		elif Input.is_action_just_pressed("plus_foward"):
-			turn_end()
+			turn_end(true)
 			game_camera.CommandCallout.new_callout("End turn")
 		elif Input.is_action_just_pressed("plus_turn"):
 			change_current_action()
@@ -331,23 +368,35 @@ func cross(capital_position : Vector2):
 	game_control.cross.position = capital_position
 
 
-func action_done():
+func action_done(region_name : String):
 	game_control.cross.visible = false
 	if current_action == ACTION_NORMAL:
-		GameStats.add_to_stat(current_player, "first actions done", 1)
-#		GameStats.stats[current_player]["first actions done"] += 1
-		action_amount -= 1
-		if action_amount == 0:
+		if action_amount > 0:
+			GameStats.add_to_stat(current_playing_align, "first actions done", 1)
+			action_amount -= 1
+			ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
+		if action_amount <= 0:
 			current_action = ACTION_MOBILIZE
 	elif current_action == ACTION_MOBILIZE:
-		pass
+		ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
 	elif current_action == ACTION_BONUS:
-		GameStats.add_to_stat(current_player, "bonus actions done", 1)
-#		GameStats.stats[current_player]["bonus actions done"] += 1
-		bonus_action_amount -= 1
-		if bonus_action_amount == 0:
+		if bonus_action_amount > 0:
+			GameStats.add_to_stat(current_playing_align, "bonus actions done", 1)
+			bonus_action_amount -= 1
+			ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
+		if bonus_action_amount <= 0:
 			current_action = ACTION_NORMAL
-			turn_end()
+			turn_end(false)
+
+
+func has_enough_actions() -> bool:
+	if current_action == ACTION_NORMAL:
+		return action_amount > 0
+	elif current_action == ACTION_BONUS:
+		return bonus_action_amount > 0
+	else:
+		return true
+	
 
 
 func change_current_action():
@@ -360,26 +409,28 @@ func change_current_action():
 	
 	if current_action == ACTION_MODES_AMOUNT:
 		current_action = ACTION_NORMAL
-		turn_end()
-
-
-func turn_end():
-	calculate_penalty(current_player, true)
+		turn_end(false)
 	
-	if region_amount[current_player - 1] > 0:
-		GameStats.set_stat(current_player, "turns lasted", current_turn)
-#		GameStats.stats[current_player]["turns lasted"] = current_turn
+	ReplayControl.record_move(ReplayControl.RECORD_TYPE_FUNCTION, "change_current_action")
+
+
+func turn_end(record : bool):
+	calculate_penalty(current_playing_align, true)
+	
+	if region_amount[current_playing_align - 1] > 0:
+		GameStats.set_stat(current_playing_align, "turns lasted", current_turn)
+#		GameStats.stats[current_playing_align]["turns lasted"] = current_turn
 	var first_loop = true
-	var starting_player = player_in_play_order
-	while region_amount[current_player - 1] == 0 or first_loop:
-		player_in_play_order += 1
-		if player_in_play_order == align_amount - 1:
-			player_in_play_order = 0
+	var starting_player = play_order_i
+	while region_amount[current_playing_align - 1] == 0 or first_loop:
+		play_order_i += 1
+		if play_order_i == align_amount - 1:
+			play_order_i = 0
 			current_turn += 1
-		current_player = player_order[player_in_play_order]
+		current_playing_align = align_play_order[play_order_i]
 		first_loop = false
-		if player_in_play_order == starting_player:
-#			victory(current_player)
+		if play_order_i == starting_player:
+#			victory(current_playing_align)
 			break
 	check_victory()
 	
@@ -396,6 +447,10 @@ func turn_end():
 	reset()
 	
 	turn_ended.emit()
+	
+	if record:
+		ReplayControl.call_deferred("record_move", ReplayControl.RECORD_TYPE_FUNCTION, "turn_end")
+#		ReplayControl.record_move(ReplayControl.RECORD_TYPE_FUNCTION, "turn_end")
 
 
 func check_victory():
@@ -406,7 +461,7 @@ func check_victory():
 				aliance = alignment_aliances[i + 1]
 			elif aliance != alignment_aliances[i + 1]:
 				return
-	victory(current_player)
+	victory(current_playing_align)
 
 
 func victory(align_victory : int):
@@ -414,7 +469,7 @@ func victory(align_victory : int):
 	game_camera.win(align_victory)
 	GameStats.set_stat(align_victory, "placement", "1")
 #	GameStats.stats[align_victory]["placement"] = "1"
-	if aliances_active:
+	if use_aliances:
 		for i in range(align_amount - 1):
 			if alignment_aliances[i + 1] == alignment_aliances[align_victory]:
 				GameStats.set_stat(i + 1, "placement", "1")
@@ -432,30 +487,33 @@ func victory(align_victory : int):
 
 func reset():
 	
-	if region_amount[current_player - 1] > GameStats.get_stat(current_player, "most regions owned"): #GameStats.stats[current_player]["most regions owned"]
-		GameStats.set_stat(current_player, "most regions owned", region_amount[current_player - 1])
-#		GameStats.stats[current_player]["most regions owned"] = region_amount[current_player - 1]
-	if capital_amount[current_player - 1] > GameStats.get_stat(current_player, "most capitals owned"): #GameStats.stats[current_player]["most capitals owned"]
-		GameStats.set_stat(current_player, "most capitals owned", capital_amount[current_player - 1])
-#		GameStats.stats[current_player]["most capitals owned"] = capital_amount[current_player - 1]
-	calculate_penalty(current_player)
-	action_amount = capital_amount[current_player - 1] - penalty_amount[current_player - 1]
+	if region_amount[current_playing_align - 1] > GameStats.get_stat(current_playing_align, "most regions owned"): #GameStats.stats[current_playing_align]["most regions owned"]
+		GameStats.set_stat(current_playing_align, "most regions owned", region_amount[current_playing_align - 1])
+#		GameStats.stats[current_playing_align]["most regions owned"] = region_amount[current_playing_align - 1]
+	if capital_amount[current_playing_align - 1] > GameStats.get_stat(current_playing_align, "most capitals owned"): #GameStats.stats[current_playing_align]["most capitals owned"]
+		GameStats.set_stat(current_playing_align, "most capitals owned", capital_amount[current_playing_align - 1])
+#		GameStats.stats[current_playing_align]["most capitals owned"] = capital_amount[current_playing_align - 1]
+	calculate_penalty(current_playing_align)
+	action_amount = capital_amount[current_playing_align - 1] - penalty_amount[current_playing_align - 1]
 	bonus_action_amount = 1 if action_amount == 0 else 0
-	current_action = ACTION_MOBILIZE if action_amount == 0 else 0
+	current_action = ACTION_MOBILIZE if action_amount == 0 else ACTION_NORMAL
 	
-	var bg_color_tinted : Color = bg_color + align_color[current_player] * Color(0.25, 0.25, 0.25)
+	var bg_color_tinted : Color = bg_color + align_color[current_playing_align] * Color(0.25, 0.25, 0.25)
 	if MapSetup.speedrun_ai:
-		if player_controlers[current_player - 1] == AIControler.CONTROLER_USER:
+		if align_controlers[current_playing_align - 1] == AIControler.CONTROLER_USER:
 			color = bg_color_tinted
 		else:
 			color = bg_color
 	else:
 		color = bg_color_tinted
 	
-	is_user_controled = player_controlers[current_player - 1] == AIControler.CONTROLER_USER
+	if ReplayControl.replay_active:
+		is_player_controled = false
+	else:
+		is_player_controled = align_controlers[current_playing_align - 1] == AIControler.CONTROLER_USER
 	
-	if !is_user_controled:
-		game_control.ai_control.start_turn(current_player, player_controlers[current_player - 1])
+	if !is_player_controled:
+		game_control.ai_control.start_turn(current_playing_align, align_controlers[current_playing_align - 1])
 
 
 func calculate_penalty(alignment : int, end_of_turn : bool = false):
@@ -480,9 +538,11 @@ func calculate_penalty(alignment : int, end_of_turn : bool = false):
 
 
 func forfeit():
-	convert_alignment(current_player, 0)
+	convert_alignment(current_playing_align, 0)
 	
-	turn_end()
+	turn_end(false)
+	
+	ReplayControl.record_move(ReplayControl.RECORD_TYPE_FUNCTION, "forfeit")
 
 
 func convert_alignment(align_old : int, align_new : int):

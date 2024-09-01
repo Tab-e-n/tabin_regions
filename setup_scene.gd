@@ -29,10 +29,14 @@ func _ready():
 	else:
 		$map_list.select(map)
 		_on_map_list_item_selected(map)
-		$def/players.value = MapSetup.user_amount
+		$def/players.value = MapSetup.player_amount
 		$def/aliances.value = MapSetup.aliances_amount
 	
+	MapSetup.preset_alignments.clear()
+	
 	ai_selected_pos()
+	
+	ReplayControl.clear_replay()
 
 
 func _process(_delta):
@@ -65,13 +69,13 @@ func _on_map_list_item_selected(index):
 	map_data_text()
 	
 	$def/players.visible = current_map.allow_map_spec_change
-	if current_map.max_user_amount >= 0:
-		$def/players.max_value = current_map.max_user_amount
+	if current_map.max_player_amount >= 0:
+		$def/players.max_value = current_map.max_player_amount
 	else:
 		$def/players.max_value = current_map.align_amount - 1
-	$def/players.value = current_map.user_amount
+	$def/players.value = current_map.player_amount
 	
-	$def/aliances.visible = not current_map.aliances_active and current_map.allow_map_spec_change
+	$def/aliances.visible = not current_map.use_aliances and current_map.allow_map_spec_change
 	$def/aliances.max_value = current_map.align_amount - 1
 	$def/aliances.value = 1
 	
@@ -87,7 +91,7 @@ func map_data_text():
 			("PRESET ORDER" if current_map.use_preset_alignments else "RANDOM ORDER") +
 			"\nLEADERS: " + String.num(current_map.align_amount - 1) +
 			"\nPLAYERS: " + String.num($def/players.value) + 
-			("\nALIANCES: " + (String.num($def/aliances.value) if $def/aliances.value > 1 else "X") if not current_map.aliances_active else "\nHAS ALIANCES")
+			("\nALIANCES: " + (String.num($def/aliances.value) if $def/aliances.value > 1 else "X") if not current_map.use_aliances else "\nHAS ALIANCES")
 		)
 	else:
 		$def/map_data.text = "CANNOT EDIT :("
@@ -101,9 +105,12 @@ func _on_play_pressed():
 
 func start_playing(index):
 	MapSetup.current_map_name = maps[index]
-	MapSetup.user_amount = $def/players.value
+	MapSetup.player_amount = $def/players.value
 	MapSetup.aliances_amount = $def/aliances.value
-	get_tree().change_scene_to_file("res://main.tscn")
+	if current_map.use_alignment_picker and not current_map.use_preset_alignments and MapSetup.player_amount > 0:
+		get_tree().change_scene_to_file("res://alignment_picker.tscn")
+	else:
+		get_tree().change_scene_to_file("res://main.tscn")
 
 
 func _on_next_menu_pressed():
@@ -117,7 +124,7 @@ func _on_next_menu_pressed():
 
 
 func ai_selected_pos():
-	match(MapSetup.ai_controler):
+	match(MapSetup.default_ai_controler):
 		AIControler.CONTROLER_TURTLE:
 			$diff/AiSelected.position.x = 624
 		AIControler.CONTROLER_DEFAULT:
@@ -129,17 +136,25 @@ func ai_selected_pos():
 
 
 func _on_ai_turtle_pressed():
-	MapSetup.ai_controler = AIControler.CONTROLER_TURTLE
+	MapSetup.default_ai_controler = AIControler.CONTROLER_TURTLE
 	ai_selected_pos()
 
 
 func _on_ai_default_pressed():
-	MapSetup.ai_controler = AIControler.CONTROLER_DEFAULT
+	MapSetup.default_ai_controler = AIControler.CONTROLER_DEFAULT
 	ai_selected_pos()
 
 
 func _on_ai_cheater_pressed():
-	MapSetup.ai_controler = AIControler.CONTROLER_CHEATER
+	MapSetup.default_ai_controler = AIControler.CONTROLER_CHEATER
 	ai_selected_pos()
 
 
+func _on_replay_pressed():
+	$replay_window.popup_centered(Vector2(480, 480))
+
+
+func _on_replay_window_file_selected(path):
+	ReplayControl.load_replay(path)
+	get_tree().change_scene_to_file("res://main.tscn")
+#	print(path)

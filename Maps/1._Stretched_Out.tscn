@@ -192,9 +192,11 @@ func _ready():
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-576, -768, -768, -768, -768, -576, -528, -504, -256, -360, -144, -160, -272, 32, -304, 360, -264, 464, -24, 624, 200, 736, 488, 784, 768, 776, 768, 576, 440, 496, 168, 376, 152, 184, 256, -88, 304, -344, -56, -696, -264, -736)
 script = ExtResource("1_dvj8c")
-complexity = "Simple"
+use_alignment_picker = false
+complexity = "Beginner"
 lore = "Are we there yet?"
 align_names = Array[String](["", "BOT", "TOPPOM"])
+hide_turn_order = true
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_ykiaq")

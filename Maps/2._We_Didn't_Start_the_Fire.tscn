@@ -57,11 +57,13 @@ var connections : Array = [
 	[\"Berlin\", \"Essen\"],
 	[\"Essen\", \"Amsterdam\"],
 	[\"Frankfurt\", \"Essen\"],
+	[\"Danzig\", \"Essen\"],
 	[\"Berlin\", \"Frankfurt\"],
 	[\"Paris\", \"Frankfurt\"],
 	[\"Bruxelles\", \"Frankfurt\"],
 	[\"Munchen\", \"Frankfurt\"],
 	[\"Munchen\", \"Venezia\"],
+	[\"Munchen\", \"Berlin\"],
 ]
 
 func _ready():
