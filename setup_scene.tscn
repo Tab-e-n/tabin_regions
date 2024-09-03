@@ -174,9 +174,9 @@ texture_normal = ExtResource("5_x6iy8")
 
 [node name="replay_window" type="FileDialog" parent="."]
 initial_position = 1
-title = "Open a Replay"
+title = "Open a File"
 size = Vector2i(480, 480)
-ok_button_text = "Start Replay"
+ok_button_text = "Open"
 file_mode = 0
 access = 1
 filters = PackedStringArray("*.json")

@@ -204,7 +204,6 @@ func _ready():
 		
 		var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 		rng.randomize()
-		var order : int = -1
 		for i in range(align_amount - 1):
 			if align_play_order[i]:
 				continue

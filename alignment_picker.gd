@@ -34,7 +34,7 @@ func _ready():
 	player_alignments.resize(MapSetup.player_amount)
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("escape"):
 		get_tree().change_scene_to_file("res://setup_scene.tscn")
 	
