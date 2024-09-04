@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://RegionControl.gd" id="1_0s651"]
 [ext_resource type="Script" path="res://Region.gd" id="2_38p5v"]
-[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://bg.tscn" id="2_s3qok"]
+[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_s3qok"]
 
 [sub_resource type="GDScript" id="GDScript_y0ddu"]
 script/source = "extends Node

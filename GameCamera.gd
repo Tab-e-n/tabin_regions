@@ -21,6 +21,7 @@ const BASE_MOVE_SPEED : float = 8
 @export var Attacks : RichTextLabel
 @export var PowerSprite : TextureRect
 @export var PowerAmount : Label
+@export var CurrentTurn : Label
 @export var CurrentAction : Label
 @export var VictoryMessage : Control
 @export var LeaveMessage : Control
@@ -139,7 +140,9 @@ func _deffered_ready():
 	
 	call_deferred("_ready_turn_order")
 	
-	region_control.turn_ended.connect(_update_turn_order)
+	region_control.turn_ended.connect(_turn_ended)
+	
+	update_current_turn()
 
 
 func _ready_turn_order():
@@ -330,8 +333,14 @@ func _TurnOrder_cam_enable():
 	hovering_turn_order = false
 
 
-func _update_turn_order():
+func _turn_ended():
 	TurnOrder.update_list(region_control)
+	
+	update_current_turn()
+
+
+func update_current_turn():
+	CurrentTurn.text = "TURN " + str(region_control.current_turn)
 
 
 func show_pause_menu():

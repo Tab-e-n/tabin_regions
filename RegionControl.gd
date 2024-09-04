@@ -1,4 +1,5 @@
 extends Polygon2D
+## RegionControl is a class that represents a map.
 class_name RegionControl
 
 
@@ -7,6 +8,7 @@ signal turn_phase_changed(phase)
 signal game_ended(winner)
 
 
+## When coloring text on an alignments color, the text will turn black if the brightness of the color is higher than this constant.
 const COLOR_TOO_BRIGHT : float = 0.9
 
 enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
@@ -17,7 +19,9 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @onready var game_camera : GameCamera
 
 
+## When set to true, players will no be able to change aspects of the map in the setup scene.
 @export var allow_map_spec_change : bool = true
+## When set to true, before starting the map players will be able to pick which alignment they want to play as.
 @export var use_alignment_picker : bool = true
 
 @export_subgroup("Gameplay")

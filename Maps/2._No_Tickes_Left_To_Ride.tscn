@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cse41lvvvirpp"]
 
 [ext_resource type="Script" path="res://RegionControl.gd" id="1_ogcds"]
-[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://bg.tscn" id="2_aqi3b"]
+[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_aqi3b"]
 [ext_resource type="Script" path="res://Region.gd" id="3_14aoh"]
 
 [sub_resource type="GDScript" id="GDScript_hihxe"]
@@ -79,7 +79,7 @@ var connections : Array = [
 	[\"RIGA\", \"WILNO\"],
 	[\"RIGA\", \"PETROGRAD\"],
 	[\"PETROGRAD\", \"WILNO\"],
-	[\"PETROGRAD\", \"STOCKHOLM\"],
+	[\"PETROGRAD\", \"STOCKHOLM\", 1],
 	[\"MOSKVA\", \"PETROGRAD\"],
 	[\"MOSKVA\", \"KHARKOV\"],
 	[\"MOSKVA\", \"SMOLENSK\"],

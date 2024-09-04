@@ -27,7 +27,7 @@ script = ExtResource("1_2axsc")
 [node name="AIControler" type="Node" parent="."]
 script = ExtResource("2_w08l3")
 
-[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "AdvanceTurnButton", "PauseButton", "TurnOrder", "Attacks", "PowerSprite", "PowerAmount", "CurrentAction", "VictoryMessage", "LeaveMessage", "CommandCallout")]
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "AdvanceTurnButton", "PauseButton", "TurnOrder", "Attacks", "PowerSprite", "PowerAmount", "CurrentTurn", "CurrentAction", "VictoryMessage", "LeaveMessage", "CommandCallout")]
 z_index = 30
 script = ExtResource("1_we6ai")
 UI = NodePath("UI")
@@ -40,6 +40,7 @@ TurnOrder = NodePath("UI/Hideable/turn_order")
 Attacks = NodePath("UI/Hideable/Attacks")
 PowerSprite = NodePath("UI/Hideable/Power")
 PowerAmount = NodePath("UI/Hideable/Power/text")
+CurrentTurn = NodePath("UI/Hideable/Turn")
 CurrentAction = NodePath("UI/Hideable/Action")
 VictoryMessage = NodePath("UI/win")
 LeaveMessage = NodePath("UI/leave")
@@ -84,13 +85,26 @@ offset_right = 1120.0
 offset_bottom = 632.0
 texture_normal = ExtResource("5_1p0vp")
 
+[node name="Turn" type="Label" parent="GameCamera/UI/Hideable"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 520.0
+offset_right = 992.0
+offset_bottom = 560.0
+theme_override_font_sizes/font_size = 24
+text = "TURN
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Action" type="Label" parent="GameCamera/UI/Hideable"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 504.0
+offset_top = 536.0
 offset_right = 992.0
-offset_bottom = 631.0
+offset_bottom = 627.0
 theme_override_font_sizes/font_size = 64
+text = "ACTION"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -207,25 +221,30 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lm2d1")
 
 [node name="keys1" type="Label" parent="GameCamera/UI/pause"]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 96.0
-offset_right = 408.0
-offset_bottom = 320.0
-text = "Esc  -  Exit
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 424.0
+offset_bottom = 312.0
+text = "
+
+
+Esc  -  Exit
 \",\"  -  Zoom out
 \".\"  -  Zoom in
 \"/\"  -  Reset zoom
 Arrow Keys  -  Secondary way to move camera
+WASD  -  Tertiary way to move camera
 Shift  -  Faster camera scroll
+
 "
 clip_text = true
 
 [node name="keys2" type="Label" parent="GameCamera/UI/pause"]
 layout_mode = 0
-offset_left = 488.0
-offset_top = 16.0
-offset_right = 856.0
-offset_bottom = 320.0
+offset_left = 472.0
+offset_top = 24.0
+offset_right = 872.0
+offset_bottom = 312.0
 text = "Ctrl + Space  -  Advance turn
 Ctrl + Alt + Space  -  End turn
 Ctrl + Alt + \"-\"  -  Forfeit
@@ -234,15 +253,16 @@ Ctrl + E  -  Highlight mobilizable cities
 Ctrl + H  -  Toggle capitals
 Ctrl + U  -  Toggle UI
 Ctrl + T  -  Toggle turn order
-Ctrl + Alt + M  -  Toggle mouse scroll"
+Ctrl + Alt + M  -  Toggle mouse scroll
+Hold Shift when mobilizing to grab all extra units"
 clip_text = true
 
 [node name="leave" type="TextureButton" parent="GameCamera/UI/pause"]
 layout_mode = 0
-offset_left = 40.0
+offset_left = 24.0
 offset_top = 24.0
-offset_right = 80.0
-offset_bottom = 64.0
+offset_right = 88.0
+offset_bottom = 88.0
 texture_normal = ExtResource("12_st2cf")
 
 [node name="win" type="Label" parent="GameCamera/UI"]

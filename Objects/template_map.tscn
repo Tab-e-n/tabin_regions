@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dktvwaulmmgha"]
+
+[ext_resource type="Script" path="res://RegionControl.gd" id="1_vjgqo"]
+[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_b7xpv"]
+
+[sub_resource type="GDScript" id="GDScript_fsydj"]
+script/source = "extends Node
+
+var connections : Array = [
+#	Basic Connections are defined as such:
+#	[\"Region 1\", \"Region 2\"],
+#	Connections that are harder to traverse are defined as such:
+#	[\"Hilly Region 1\", \"Hilly Region 2\", 1],
+]
+
+
+func _ready():
+	get_parent().connections = connections.duplicate()
+	queue_free()
+
+"
+
+[node name="template" type="Polygon2D"]
+script = ExtResource("1_vjgqo")
+
+[node name="connection_setter" type="Node" parent="."]
+script = SubResource("GDScript_fsydj")
+
+[node name="bg" parent="." instance=ExtResource("2_b7xpv")]

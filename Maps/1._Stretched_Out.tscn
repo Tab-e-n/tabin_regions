@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://0g4urrneakd7"]
 
 [ext_resource type="Script" path="res://RegionControl.gd" id="1_dvj8c"]
-[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://bg.tscn" id="2_nxpt1"]
+[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_nxpt1"]
 [ext_resource type="Script" path="res://Region.gd" id="3_d0fh2"]
 
 [sub_resource type="GDScript" id="GDScript_ykiaq"]

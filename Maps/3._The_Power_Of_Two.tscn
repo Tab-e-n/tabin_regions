@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bnhsptx5od5fj"]
 
 [ext_resource type="Script" path="res://RegionControl.gd" id="1_k6mpi"]
-[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://bg.tscn" id="2_4ouwy"]
+[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_4ouwy"]
 [ext_resource type="Script" path="res://Region.gd" id="2_nqpph"]
 
 [sub_resource type="GDScript" id="GDScript_gpgxs"]
@@ -81,7 +81,7 @@ complexity = "Intermediate"
 lore = "Two plus two is four, so is two times two.
 This is why all players have two capitals. It makes sence i promise."
 align_color = Array[Color]([Color(0.247059, 0.341176, 0.356863, 1), Color(0.870588, 0.666667, 0.780392, 1), Color(0.772549, 0.921569, 0.74902, 1), Color(0.713726, 0.717647, 0.921569, 1), Color(0.843137, 0.792157, 0.752941, 1)])
-align_names = Array[String](["Neutral Four", "Four Dollars", "Flour", "Foura Donna", "Fourth Guy"])
+align_names = Array[String](["Neutral Four", "Four Dollars", "Flour", "Foura Donna", "Fourth Guys"])
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_gpgxs")

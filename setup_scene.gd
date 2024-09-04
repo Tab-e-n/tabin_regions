@@ -12,8 +12,8 @@ var current_menu : int = 0
 func _ready():
 	maps = DirAccess.get_files_at("res://Maps")
 	
-	#maps.sort()
-	#print(maps)
+#	maps.sort()
+	print(maps)
 	
 	for i in range(maps.size()):
 		maps[i] = maps[i].trim_suffix(".remap")
