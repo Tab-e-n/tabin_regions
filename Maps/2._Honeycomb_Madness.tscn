@@ -104,6 +104,7 @@ func _ready():
 color = Color(0.894118, 0.811765, 0.615686, 1)
 polygon = PackedVector2Array(-320, 640, 320, 640, 704, 0, 320, -640, -320, -640, -704, 0)
 script = ExtResource("1_o4us8")
+lock_align_amount = false
 align_amount = 7
 complexity = "Simple"
 lore = "Somewhere in the harsh desert, a secret battleground is located,

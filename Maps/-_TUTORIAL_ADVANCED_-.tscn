@@ -73,8 +73,9 @@ func _ready():
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 2368, -1024, 2368)
 script = ExtResource("1_hywy4")
-allow_map_spec_change = false
 use_alignment_picker = false
+lock_player_amount = true
+lock_aliances = true
 align_amount = 4
 use_preset_alignments = true
 preset_alignments = Array[int]([1, 2, 3])

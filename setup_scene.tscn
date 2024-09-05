@@ -71,6 +71,16 @@ theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 2
 
+[node name="leaders" type="HSlider" parent="def"]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 120.0
+offset_right = 1112.0
+offset_bottom = 152.0
+min_value = 2.0
+max_value = 2.0
+value = 2.0
+
 [node name="players" type="HSlider" parent="def"]
 layout_mode = 0
 offset_left = 720.0
@@ -183,8 +193,9 @@ filters = PackedStringArray("*.json")
 
 [connection signal="item_activated" from="map_list" to="." method="_on_map_list_item_activated"]
 [connection signal="item_selected" from="map_list" to="." method="_on_map_list_item_selected"]
-[connection signal="value_changed" from="def/players" to="." method="_on_players_value_changed"]
-[connection signal="value_changed" from="def/aliances" to="." method="_on_players_value_changed"]
+[connection signal="value_changed" from="def/leaders" to="." method="_on_def_slider_value_changed"]
+[connection signal="value_changed" from="def/players" to="." method="_on_def_slider_value_changed"]
+[connection signal="value_changed" from="def/aliances" to="." method="_on_def_slider_value_changed"]
 [connection signal="pressed" from="diff/ai_turtle" to="." method="_on_ai_turtle_pressed"]
 [connection signal="pressed" from="diff/ai_default" to="." method="_on_ai_default_pressed"]
 [connection signal="pressed" from="diff/ai_neuron" to="." method="_on_ai_default_pressed"]

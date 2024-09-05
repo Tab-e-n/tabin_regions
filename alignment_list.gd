@@ -84,7 +84,7 @@ func set_align_list_size(i : int):
 
 
 func _ready_list(region_control : RegionControl):
-	set_align_list_size(region_control.align_amount - 1)
+	set_align_list_size(region_control.align_play_order.size())
 	
 	var play_order : Array = region_control.align_play_order.duplicate()
 	for i in range(play_order.size()):
@@ -103,7 +103,7 @@ func clear_list():
 
 func update_list(region_control : RegionControl):
 	var play_order : Array = region_control.align_play_order.duplicate()
-	for i in range(region_control.align_amount - 1):
+	for i in range(region_control.align_play_order.size()):
 		var alignment : int = play_order[i]
 		var leader = get_node(String.num(alignment))
 		leader.visible = region_control.region_amount[alignment - 1]

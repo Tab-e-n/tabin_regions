@@ -62,6 +62,7 @@ func _process(_delta):
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(592, -248, 312, 504, -312, 504, -520, 216, -504, -72, -264, -528, 304, -520)
 script = ExtResource("1_pi7kk")
+lock_align_amount = false
 align_amount = 6
 complexity = "Simple"
 lore = "This is the first digital map made.

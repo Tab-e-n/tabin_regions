@@ -76,6 +76,7 @@ func _ready():
 color = Color(0.384314, 0.486275, 0.466667, 1)
 polygon = PackedVector2Array(-592, -208, -464, 24, -16, 112, 16, 352, 392, 536, 472, 456, 432, 120, 840, 80, 848, -120, 592, -280, 440, -264, 440, -472, 208, -752, -16, -704, -160, -464, -368, -360, -544, -304)
 script = ExtResource("1_k6mpi")
+lock_align_amount = false
 align_amount = 5
 complexity = "Intermediate"
 lore = "Two plus two is four, so is two times two.

@@ -19,14 +19,18 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @onready var game_camera : GameCamera
 
 
-## When set to true, players will no be able to change aspects of the map in the setup scene.
-@export var allow_map_spec_change : bool = true
+@export_subgroup("Setup Scene")
 ## When set to true, before starting the map players will be able to pick which alignment they want to play as.
 @export var use_alignment_picker : bool = true
+@export var lock_align_amount : bool = true
+@export var lock_player_amount : bool = false
+@export var lock_aliances : bool = false
 
 @export_subgroup("Gameplay")
-# After a player reaches `key : int` capital amount, every subsequent capitol gains them `value: float`% less.
 @export_enum ("Off", "Current Capital Amount", "Previous Capital Amount") var apply_penalties : int = APPLY_PENALTIES.OFF
+## Sets penalties to slow down players who get ahead, so they don't snowball too hard.
+## After a player reaches a certain capital amount, specified by the dictionary's keys, every subsequent capital the player gains will give them less power, specified by the dictionary's value.
+## The keys should be intigers, values should be floats representing percentages.
 @export var power_gain_penalties : Dictionary = {
 	3 : .325,
 	13 : .25,
@@ -34,11 +38,18 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 } 
 
 @export_subgroup("Alignments & Players")
+## The number of alignments the map uses. It equals the number of all active alignments + the neutral alignment.
 @export var align_amount : int = 3
+@export var used_alignments : int = 0
+@export var remove_capitals_with_alignments : bool = true
+## The intended amount of players the map should have. Can be overwritten in the setup scene unless allow_map_spec_change is set to false.
 @export var player_amount : int = 1
 @export var random_player_align_range : int = 0
+## The maximum amount of players the map allows to be played. There can be more alignments than players. When set to -1, the max amount of players is equal to the number of active alignments.
 @export var max_player_amount : int = -1
+## Toggles the use of preset_alignments.
 @export var use_preset_alignments : bool = false
+## Specifies an unchanging turn order.
 @export var preset_alignments : Array[int] = []
 
 @export_subgroup("AI")
@@ -158,6 +169,7 @@ func _ready():
 		if not use_preset_alignments and use_alignment_picker:
 			preset_alignments = MapSetup.preset_alignments.duplicate()
 			use_preset_alignments = true
+		used_alignments = MapSetup.used_aligments
 	
 	for link in connections:
 		var link_diff = 0
@@ -189,26 +201,47 @@ func _ready():
 	
 	bake_capital_distance()
 	
+	var removed_alignments : Array = []
+	
 	if not ReplayControl.replay_active:
-		if random_player_align_range < max_player_amount:
-			random_player_align_range = max_player_amount
-		
-		align_play_order.resize(align_amount - 1)
+		var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+		rng.randomize()
 		var players : Array = range(align_amount)
 		players.pop_front()
 		
-		var preset_aligments_amount = preset_alignments.size()
-		if use_preset_alignments and preset_aligments_amount > 0:
+		var preset_alignments_amount = preset_alignments.size()
+		if used_alignments < preset_alignments_amount:
+			used_alignments = preset_alignments_amount
+		for i in preset_alignments:
+			players.erase(i)
+		
+		if used_alignments >= 2 and used_alignments < align_amount - 1:
+			var removed_align_count : int = align_amount - used_alignments - 1
+			if removed_align_count > players.size():
+				removed_align_count = players.size()
+			for i in range(removed_align_count):
+				var pos : int = rng.randi_range(0, players.size() - 1)
+				var alignment : int = players.pop_at(pos)
+				remove_alignment(alignment, remove_capitals_with_alignments)
+				removed_alignments.append(alignment)
+		
+		if random_player_align_range < max_player_amount:
+			random_player_align_range = max_player_amount
+		if random_player_align_range > players.size():
+			random_player_align_range = players.size()
+		
+		align_play_order.resize(used_alignments)
+		
+		if use_preset_alignments and preset_alignments_amount > 0:
 			for i in range(preset_alignments.size()):
+				if align_play_order.size() <= i:
+					break
 				if preset_alignments[i] != 0:
 					align_play_order[i] = preset_alignments[i]
-					players.pop_at(players.find(preset_alignments[i]))
 		
 	#	print(align_play_order)
 		
-		var rng : RandomNumberGenerator = RandomNumberGenerator.new()
-		rng.randomize()
-		for i in range(align_amount - 1):
+		for i in range(align_play_order.size()):
 			if align_play_order[i]:
 				continue
 			var pos : int = 0
@@ -217,6 +250,10 @@ func _ready():
 			else:
 				pos = rng.randi_range(0, players.size() - 1)
 			align_play_order[i] = players.pop_at(pos)
+	else:
+		removed_alignments = ReplayControl.replay_removed_alignments.duplicate()
+		for alignment in removed_alignments:
+			remove_alignment(alignment, remove_capitals_with_alignments)
 	
 #	print(align_play_order)
 #	print(players)
@@ -233,6 +270,7 @@ func _ready():
 		for i in range(player_amount):
 			align_controlers[align_play_order[i] - 1] = AIControler.CONTROLER_USER
 	
+	last_turn_region_amount = region_amount.duplicate()
 	
 	GameStats.reset_statistics(align_amount)
 	
@@ -246,7 +284,7 @@ func _ready():
 			GameStats.set_stat(align, "controler", AIControler.CONTROLER_DUMMY)
 #			GameStats.stats[align]["controler"] = AIControler.CONTROLER_DUMMY
 	
-	current_placement = align_amount - 1
+	current_placement = align_play_order.size()
 	
 	if not ReplayControl.replay_active:
 		if alignment_aliances.size() < align_amount:
@@ -259,7 +297,7 @@ func _ready():
 			if use_autoaliances:
 				alignment_aliances[0] = 0
 				var current_aliance : int = 1
-				for i in range(align_amount - 1):
+				for i in range(align_play_order.size()):
 					alignment_aliances[align_play_order[i]] = current_aliance
 					current_aliance += 1
 					if current_aliance > autoaliances_divisions_amount:
@@ -268,6 +306,8 @@ func _ready():
 	align_names.resize(align_amount)
 	for align in range(align_amount):
 		GameStats.set_stat(align, "alignment name", align_names[align])
+	for align in removed_alignments:
+		GameStats.set_stat(align, "placement", "X")
 	
 	reset()
 	
@@ -292,6 +332,8 @@ func _ready():
 		ReplayControl.replay_controlers = align_controlers.duplicate()
 		
 		ReplayControl.replay_uses_aliances = use_aliances
+		
+		ReplayControl.replay_removed_alignments = removed_alignments
 
 
 func _process(_delta):
@@ -321,8 +363,6 @@ func count_up_regions():
 		region_amount[region.alignment - 1] += 1
 		if region.is_capital:
 			capital_amount[region.alignment - 1] += 1
-	
-	last_turn_region_amount = region_amount.duplicate()
 
 
 func bake_capital_distance():
@@ -364,6 +404,16 @@ func bake_capital_distance():
 						next_regions[i] = ""
 			
 #			print(regions)
+
+
+func remove_alignment(align : int, remove_capitals : bool):
+	for region in get_children():
+		if not region is Region:
+			continue
+		if region.alignment == align:
+			region.change_alignment(0, false)
+			if remove_capitals and region.is_capital:
+				region.is_capital = false
 
 
 func cross(capital_position : Vector2):
@@ -428,7 +478,7 @@ func turn_end(record : bool):
 	var starting_player = play_order_i
 	while region_amount[current_playing_align - 1] == 0 or first_loop:
 		play_order_i += 1
-		if play_order_i == align_amount - 1:
+		if play_order_i == align_play_order.size():
 			play_order_i = 0
 			current_turn += 1
 		current_playing_align = align_play_order[play_order_i]

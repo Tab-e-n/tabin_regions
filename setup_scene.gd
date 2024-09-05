@@ -13,7 +13,7 @@ func _ready():
 	maps = DirAccess.get_files_at("res://Maps")
 	
 #	maps.sort()
-	print(maps)
+#	print(maps)
 	
 	for i in range(maps.size()):
 		maps[i] = maps[i].trim_suffix(".remap")
@@ -29,8 +29,6 @@ func _ready():
 	else:
 		$map_list.select(map)
 		_on_map_list_item_selected(map)
-		$def/players.value = MapSetup.player_amount
-		$def/aliances.value = MapSetup.aliances_amount
 	
 	MapSetup.preset_alignments.clear()
 	
@@ -43,7 +41,7 @@ func _process(_delta):
 	pass
 
 
-func _on_players_value_changed(_value):
+func _on_def_slider_value_changed(value):
 	map_data_text()
 
 
@@ -68,33 +66,42 @@ func _on_map_list_item_selected(index):
 	
 	map_data_text()
 	
-	$def/players.visible = current_map.allow_map_spec_change
+	$def/leaders.visible = not current_map.lock_align_amount
+	$def/leaders.max_value = current_map.align_amount - 1
+	
+	$def/players.visible = not current_map.lock_player_amount
 	if current_map.max_player_amount >= 0:
 		$def/players.max_value = current_map.max_player_amount
 	else:
 		$def/players.max_value = current_map.align_amount - 1
-	$def/players.value = current_map.player_amount
 	
-	$def/aliances.visible = not current_map.use_aliances and current_map.allow_map_spec_change
+	$def/aliances.visible = not current_map.lock_aliances
 	$def/aliances.max_value = current_map.align_amount - 1
-	$def/aliances.value = 1
 	
-	$diff/preset.visible = current_map.use_custom_ai_setup or not current_map.allow_map_spec_change
-	$diff/AiSelected.visible = !current_map.use_custom_ai_setup and current_map.allow_map_spec_change
+	$diff/preset.visible = current_map.use_custom_ai_setup
+	$diff/AiSelected.visible = !current_map.use_custom_ai_setup
 	
 	$lore.text = current_map.tag + ", " + current_map.complexity + "\n" + current_map.lore
+	
+	if MapSetup.current_map_name != maps[index]:
+		if current_map.used_alignments >= 2:
+			$def/leaders.value = current_map.used_alignments
+		else:
+			$def/leaders.value = current_map.align_amount - 1
+		$def/players.value = current_map.player_amount
+		$def/aliances.value = 1
+		MapSetup.current_map_name = maps[index]
+	else:
+		$def/players.value = MapSetup.player_amount
+		$def/aliances.value = MapSetup.aliances_amount
+		$def/leaders.value = MapSetup.used_aligments
 
 
 func map_data_text():
-	if current_map.allow_map_spec_change:
-		$def/map_data.text = (
-			("PRESET ORDER" if current_map.use_preset_alignments else "RANDOM ORDER") +
-			"\nLEADERS: " + String.num(current_map.align_amount - 1) +
-			"\nPLAYERS: " + String.num($def/players.value) + 
-			("\nALIANCES: " + (String.num($def/aliances.value) if $def/aliances.value > 1 else "X") if not current_map.use_aliances else "\nHAS ALIANCES")
-		)
-	else:
-		$def/map_data.text = "CANNOT EDIT :("
+	$def/map_data.text = ("PRESET ORDER" if current_map.use_preset_alignments else "RANDOM ORDER")
+	$def/map_data.text += "\nLEADERS: " + String.num($def/leaders.value)
+	$def/map_data.text += "\nPLAYERS: " + (String.num($def/players.value) if $def/players.value > 0 else "X")
+	$def/map_data.text += "\nALIANCES: " + (String.num($def/aliances.value) if $def/aliances.value > 1 else "X")
 
 
 func _on_play_pressed():
@@ -107,6 +114,7 @@ func start_playing(index):
 	MapSetup.current_map_name = maps[index]
 	MapSetup.player_amount = $def/players.value
 	MapSetup.aliances_amount = $def/aliances.value
+	MapSetup.used_aligments = $def/leaders.value
 	if current_map.use_alignment_picker and not current_map.use_preset_alignments and MapSetup.player_amount > 0:
 		get_tree().change_scene_to_file("res://alignment_picker.tscn")
 	else:
@@ -158,3 +166,4 @@ func _on_replay_window_file_selected(path):
 	ReplayControl.load_replay(path)
 	get_tree().change_scene_to_file("res://main.tscn")
 #	print(path)
+

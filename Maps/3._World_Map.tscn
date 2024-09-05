@@ -768,6 +768,7 @@ func _ready():
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-3200, -1848, 3200, -1848, 3200, 1848, -3200, 1848)
 script = ExtResource("1_5aq8s")
+lock_align_amount = false
 apply_penalties = 2
 align_amount = 31
 complexity = "Medium"

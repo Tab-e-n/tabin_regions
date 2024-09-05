@@ -294,6 +294,9 @@ func _on_captured():
 color = Color(0.368627, 0.423529, 0.607843, 1)
 polygon = PackedVector2Array(56, -240, -160, -264, -328, -216, -488, -136, -648, 128, -616, 304, -504, 424, -544, 552, -544, 656, -440, 768, -248, 768, -264, 928, -224, 1032, -72, 1136, 80, 1144, 280, 1152, 528, 1184, 688, 1248, 856, 1176, 968, 1072, 1048, 864, 1064, 672, 920, 496, 792, 440, 656, 288, 680, 184, 744, 72, 728, 16, 520, -88, 440, -120, 256, -192)
 script = ExtResource("1_mn54j")
+use_alignment_picker = false
+lock_player_amount = true
+lock_aliances = true
 align_amount = 5
 use_preset_alignments = true
 preset_alignments = Array[int]([1, 2, 3, 4])

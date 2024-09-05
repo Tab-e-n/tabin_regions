@@ -103,8 +103,9 @@ func _physics_process(_delta):
 color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-1024, -448, 1024, -448, 1024, 3528, -1024, 3528)
 script = ExtResource("1_fhy2h")
-allow_map_spec_change = false
 use_alignment_picker = false
+lock_player_amount = true
+lock_aliances = true
 use_preset_alignments = true
 preset_alignments = Array[int]([1, 2])
 default_ai_controler = 2

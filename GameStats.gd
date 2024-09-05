@@ -83,9 +83,9 @@ func stats_as_strings(align : int) -> PackedStringArray:
 func save_as_csv(file_name : String):
 	if FileAccess.file_exists("user://" + file_name + ".csv"):
 		var i : int = 1
-		while FileAccess.file_exists("user://" + file_name + str(i) + ".csv"):
+		while FileAccess.file_exists("user://" + file_name + " " + str(i) + ".csv"):
 			i += 1
-		file_name += str(i)
+		file_name += " " + str(i)
 	
 	var file = FileAccess.open("user://" + file_name + ".csv", FileAccess.WRITE)
 	

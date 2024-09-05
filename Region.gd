@@ -86,14 +86,15 @@ func power_color(amount : int, no_zero : bool):
 	color = Color(c, c, c, 1)
 
 
-func change_alignment(align : int):
+func change_alignment(align : int, recolor_self : bool = true):
 	if alignment > 0:
 		region_control.region_amount[alignment - 1] -= 1
 		if is_capital:
 			region_control.capital_amount[alignment - 1] -= 1
 			region_control.calculate_penalty(alignment)
 	alignment = align
-	color_self()
+	if recolor_self:
+		color_self()
 	if alignment > 0:
 		region_control.region_amount[alignment - 1] += 1
 		if is_capital:

@@ -15,6 +15,8 @@ var replay_controlers : Array = []
 var replay_uses_aliances : bool = false
 var replay_aliances : Array[int] = []
 
+var replay_removed_alignments : Array = []
+
 
 func clear_replay():
 	replay.clear()
@@ -51,6 +53,7 @@ func save_replay(replay_name : String):
 		"replay_controlers" : replay_controlers,
 		"replay" : replay,
 		"replay_uses_aliances" : replay_uses_aliances,
+		"replay_removed_alignments" : replay_removed_alignments,
 	}
 	
 	
@@ -82,6 +85,7 @@ func load_replay(replay_name : String):
 		replay_controlers = replay_save["replay_controlers"]
 		replay = replay_save["replay"]
 		replay_uses_aliances = replay_save["replay_uses_aliances"]
+		replay_removed_alignments = replay_save["replay_removed_alignments"]
 		
 		var ra_size = replay_save["replay_aliances"].size()
 		replay_aliances.resize(ra_size)
