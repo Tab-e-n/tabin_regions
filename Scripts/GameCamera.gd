@@ -30,7 +30,7 @@ const BASE_MOVE_SPEED : float = 8
 
 @onready var game_control : GameControl = get_parent()
 @onready var region_control : RegionControl
-@onready var window_size : Vector2 = get_viewport_rect().size
+@onready var window_size : Vector2
 
 var farthest_left : int = 0
 var farthest_right : int = 0
@@ -52,6 +52,9 @@ var hovered_player : int = -1
 
 
 func _ready():
+	window_size.x = ProjectSettings.get_setting("display/window/size/viewport_width")
+	window_size.y = ProjectSettings.get_setting("display/window/size/viewport_height")
+	
 	game_control.game_camera = self
 	call_deferred("_deffered_ready")
 	

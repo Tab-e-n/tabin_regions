@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cgmohjjwt8w2w"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_pi7kk"]
-[ext_resource type="Script" path="res://Region.gd" id="2_l2jc4"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_pi7kk"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="2_l2jc4"]
 
 [sub_resource type="GDScript" id="GDScript_65m20"]
 script/source = "extends Node
@@ -67,12 +67,15 @@ align_amount = 6
 complexity = "Simple"
 lore = "This is the first digital map made.
 It was being built while core features were being programed."
+color_bg_according_to_alignment = true
+render_mode = 1
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_65m20")
 
 [node name="Astoska" type="Polygon2D" parent="."]
 position = Vector2(-296, -12)
+color = Color(0.654902, 0.168627, 0.215686, 1)
 polygon = PackedVector2Array(-104, -32, 8, -88, 120, -56, 64, 64, -64, 120, -64, 64)
 script = ExtResource("2_l2jc4")
 alignment = 1
@@ -80,12 +83,14 @@ is_capital = true
 
 [node name="Fajfka" type="Polygon2D" parent="."]
 position = Vector2(-120, 100)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, 64, -96, -56, -72, -104, 24, -48, 104, -104, 200, -88, 48, 32)
 script = ExtResource("2_l2jc4")
 power = 0
 
 [node name="Doggerland" type="Polygon2D" parent="."]
 position = Vector2(-48, -108)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-48, 144, -136, 96, -88, -40, 32, -80, 104, -16, 128, 104, 32, 88)
 script = ExtResource("2_l2jc4")
 power = 3
@@ -94,12 +99,14 @@ is_capital = true
 
 [node name="Zland" type="Polygon2D" parent="."]
 position = Vector2(-240, 188)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(16, -120, 48, -8, 152, -40, 176, 48, 8, 72, -48, -56, -160, 0, -168, -120, -128, -128, -128, -64)
 script = ExtResource("2_l2jc4")
 power = 0
 
 [node name="Reg" type="Polygon2D" parent="."]
 position = Vector2(128, 12)
+color = Color(0.211765, 0.552941, 0.380392, 1)
 polygon = PackedVector2Array(-104, 56, -32, 0, -56, -96, 48, -48, 80, 32, 16, 104, 24, 160)
 script = ExtResource("2_l2jc4")
 alignment = 2
@@ -107,6 +114,7 @@ is_capital = true
 
 [node name="Jrug" type="Polygon2D" parent="."]
 position = Vector2(224, 132)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, -8, -56, 96, -168, 144, -24, 200, 32, 112, 56, -48, 8, -96)
 script = ExtResource("2_l2jc4")
 power = 2
@@ -114,18 +122,21 @@ max_power = 6
 
 [node name="Krag" type="Polygon2D" parent="."]
 position = Vector2(272, -28)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-56, 64, -40, 48, 16, 104, 8, 152, 64, 104, 40, 32, 72, 0, 64, -48, -96, -72, -120, -32, -88, -16)
 script = ExtResource("2_l2jc4")
 power = 0
 
 [node name="Cottaile" type="Polygon2D" parent="."]
 position = Vector2(24, 356)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(32, -72, 104, -40, 64, 40, -56, 40, -152, -96, -88, -104, -48, -56)
 script = ExtResource("2_l2jc4")
 power = 0
 
 [node name="Cot\'Lang" type="Polygon2D" parent="."]
 position = Vector2(-176, 348)
+color = Color(0.168627, 0.490196, 0.729412, 1)
 polygon = PackedVector2Array(-48, -72, 40, -88, 112, 24, 48, 32, -8, 16, -72, 64, -104, 16)
 script = ExtResource("2_l2jc4")
 alignment = 3
@@ -133,6 +144,7 @@ is_capital = true
 
 [node name="Jcot Penninsula" type="Polygon2D" parent="."]
 position = Vector2(152, 356)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-8, -40, 48, -16, 88, 40, 56, 64, 8, 32, -48, 40)
 script = ExtResource("2_l2jc4")
 power = 0
@@ -140,6 +152,7 @@ max_power = 3
 
 [node name="Nikaragua" type="Polygon2D" parent="."]
 position = Vector2(168, -244)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-184, 48, -240, 64, -232, -8, -184, -40, 32, -48, 104, -8, 64, 48, -128, 8)
 script = ExtResource("2_l2jc4")
 power = 0
@@ -147,11 +160,13 @@ max_power = 6
 
 [node name="Costa Roca" type="Polygon2D" parent="."]
 position = Vector2(400, -188)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-120, 96, -64, 104, -72, 56, 48, 24, 64, -32, -16, -32, -120, -56, -160, 0, -128, 40)
 script = ExtResource("2_l2jc4")
 
 [node name="Racaloo" type="Polygon2D" parent="."]
 position = Vector2(120, -340)
+color = Color(0.682353, 0.356863, 0.0823529, 1)
 polygon = PackedVector2Array(-24, 40, -40, -32, 72, -56, 152, -24, 128, 16, 152, 80, 88, 40)
 script = ExtResource("2_l2jc4")
 alignment = 4
@@ -159,6 +174,7 @@ is_capital = true
 
 [node name="Hotr" type="Polygon2D" parent="."]
 position = Vector2(40, -188)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(16, 56, -48, -8, 0, -40, 128, -16, 48, 8)
 script = ExtResource("2_l2jc4")
 power = 0
@@ -166,17 +182,20 @@ max_power = 3
 
 [node name="Trutka" type="Polygon2D" parent="."]
 position = Vector2(16, -364)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(72, 64, -32, 72, -80, 16, -88, -64, -32, -56, 8, -16, 56, -8)
 script = ExtResource("2_l2jc4")
 power = 0
 
 [node name="Trutfr" type="Polygon2D" parent="."]
 position = Vector2(-168, -372)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(96, 24, 48, 40, 24, 80, -40, 96, -48, 16, 0, -48, 88, -56)
 script = ExtResource("2_l2jc4")
 
 [node name="Trutti" type="Polygon2D" parent="."]
 position = Vector2(-144, -204)
+color = Color(0.537255, 0.152941, 0.658824, 1)
 polygon = PackedVector2Array(8, -80, 64, -40, 64, 24, 0, 48, -8, 80, -48, 72, -48, 32, -80, -16, -64, -64)
 script = ExtResource("2_l2jc4")
 alignment = 5
@@ -184,6 +203,7 @@ is_capital = true
 
 [node name="Shuneshka" type="Polygon2D" parent="."]
 position = Vector2(-240, -148)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(8, 56, 8, 24, 40, 16, 40, -24, 8, -64, -24, -40, -56, -32, -40, 8, -56, 40)
 script = ExtResource("2_l2jc4")
 power = 0

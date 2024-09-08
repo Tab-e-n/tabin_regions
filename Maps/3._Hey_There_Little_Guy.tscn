@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c867tjlpvvn3q"]
+[gd_scene load_steps=8 format=3 uid="uid://c867tjlpvvn3q"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_mn54j"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_mn54j"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_r36m6"]
-[ext_resource type="Script" path="res://Region.gd" id="3_17g78"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="3_17g78"]
+[ext_resource type="PackedScene" uid="uid://dcd50lc8r7cxq" path="res://Objects/cloud_spawner.tscn" id="4_m3so1"]
 
 [sub_resource type="GDScript" id="GDScript_6hb3u"]
 script/source = "extends Node
@@ -187,8 +188,8 @@ var connections : Array = [
 	[\"Triangle Shore\", \"Finland\"],
 	[\"Triangle Shore\", \"Wow\"],
 	[\"Oklahoma\", \"Wow\"],
-	[\"Oklahoma\", \"Boat Spot\"],
-	[\"Boat Spot\", \"Wow\"],
+	[\"Oklahoma\", \"Boat Spot\", 1],
+	[\"Boat Spot\", \"Wow\", 1],
 	[\"Fallen Tree\", \"Pothole\"],
 	[\"Uproot\", \"Pothole\"],
 	[\"Fallen Tree\", \"Uproot\"],
@@ -968,5 +969,8 @@ default_color = Color(0.219608, 0.235294, 0.356863, 1)
 position = Vector2(238, 1046)
 points = PackedVector2Array(-24, 64, 0, 0, -16, -64, 0, -128, 32, -144, 80, -144, 72, -168, 24, -160, -8, -184, -16, -200)
 default_color = Color(0.219608, 0.235294, 0.356863, 1)
+
+[node name="CloudSpawner" parent="." instance=ExtResource("4_m3so1")]
+color = Color(0.682353, 0.717647, 0.823529, 1)
 
 [connection signal="captured" from="???" to="???/secret" method="_on_captured"]

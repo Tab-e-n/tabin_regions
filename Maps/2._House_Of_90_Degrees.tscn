@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://d1ij46n6lo885"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_litvx"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_litvx"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_edqbv"]
-[ext_resource type="Script" path="res://Region.gd" id="3_s1qeq"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="3_s1qeq"]
 
 [sub_resource type="GDScript" id="GDScript_o7ofk"]
 script/source = "extends Node
@@ -44,6 +44,7 @@ func _ready():
 color = Color(0.407843, 0.470588, 0.47451, 1)
 polygon = PackedVector2Array(-440, -312, 280, -312, 280, 312, -440, 312)
 script = ExtResource("1_litvx")
+lock_aliances = true
 complexity = "Simple"
 lore = "House moment. There is only one capital.
 This game's terminology doesn't support this map's theming."

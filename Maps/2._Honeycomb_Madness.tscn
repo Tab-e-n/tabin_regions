@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://03dtr6sjdp7c"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_o4us8"]
-[ext_resource type="Script" path="res://Region.gd" id="2_bj333"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_o4us8"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="2_bj333"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_w34l4"]
 
 [sub_resource type="GDScript" id="GDScript_ajqca"]
@@ -111,6 +111,7 @@ lore = "Somewhere in the harsh desert, a secret battleground is located,
 where only the best bug themed armies compete to see who is the greatest amongst them."
 align_color = Array[Color]([Color(0.85098, 0.737255, 0.486275, 1), Color(0.647059, 0.509804, 0.376471, 1), Color(0.815686, 0.623529, 0.0823529, 1), Color(0.843137, 0.878431, 0.419608, 1), Color(0.682353, 0.356863, 0.0823529, 1), Color(0.403922, 0.227451, 0.168627, 1), Color(0.929412, 0.654902, 0.356863, 1)])
 align_names = Array[String](["Honeycomb", "Merry Maggots", "Wasps of Wrath", "Stinkbugs", "Terminates", "AstronAnts", "Baddest Beetles"])
+color_bg_according_to_alignment = true
 render_mode = 1
 
 [node name="Node" type="Node" parent="."]

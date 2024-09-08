@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://02bnffpw4xmq"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_hywy4"]
-[ext_resource type="Script" path="res://Region.gd" id="2_lql3s"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_hywy4"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="2_lql3s"]
 
 [sub_resource type="GDScript" id="GDScript_ojoeb"]
 script/source = "extends Node
@@ -87,6 +87,7 @@ complexity = "Simple"
 lore = "A follow-up on the previous tutorial, explains to you the remaining gameplay mechanics. CAN BE SKIPPED, BUT I RECOMMEND YOU PLAY ONLY BEGINNER MAPS UNTIL YOU COMPLETE THIS."
 align_color = Array[Color]([Color(0.431373, 0.341176, 0.411765, 1), Color(0.101961, 0.564706, 0.368627, 1), Color(0.14902, 0.490196, 0.741176, 1), Color(0.670588, 0.141176, 0.2, 1)])
 align_names = Array[String](["Neutral", "You", "Friend", "Enemy"])
+color_bg_according_to_alignment = true
 snap_camera_to_first_align_capital = false
 
 [node name="Node" type="Node" parent="."]

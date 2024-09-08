@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctbrxkbv3kxgh"]
+
+[ext_resource type="Script" path="res://Scripts/cloud.gd" id="2_6ixo7"]
+
+[sub_resource type="Animation" id="Animation_tohj0"]
+resource_name = "Cloud"
+length = 64.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 62, 64),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nmhgv"]
+_data = {
+"Cloud": SubResource("Animation_tohj0")
+}
+
+[node name="Cloud" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+script = ExtResource("2_6ixo7")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nmhgv")
+}
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(0.12549, 0.12549, 0.12549, 0.501961)
+show_behind_parent = true
+z_index = -5
+position = Vector2(64, 32)
+
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

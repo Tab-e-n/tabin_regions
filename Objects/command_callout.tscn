@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dt0hijbeupo"]
 
-[ext_resource type="Script" path="res://command_callout.gd" id="1_c21tn"]
+[ext_resource type="Script" path="res://Scripts/command_callout.gd" id="1_c21tn"]
 
 [node name="command_callout" type="Control"]
 clip_contents = true

@@ -17,8 +17,6 @@ const farthest_left : int = 576
 
 var farthest_right : int = 576
 
-var input_processing_buffer : float = 1
-
 
 func _ready():
 	# bad code inbound
@@ -95,9 +93,7 @@ func new_stats_panel(stats : Dictionary, pos : int):
 
 
 func _physics_process(delta):
-	if input_processing_buffer > 0:
-		input_processing_buffer -= delta
-	elif Input.is_action_just_pressed(\"escape\"):
+	if Input.is_action_just_pressed(\"escape\"):
 		leave()
 	
 	var mouse_position = get_viewport().get_mouse_position()

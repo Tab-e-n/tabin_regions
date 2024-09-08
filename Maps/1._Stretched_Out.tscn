@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://0g4urrneakd7"]
+[gd_scene load_steps=6 format=3 uid="uid://0g4urrneakd7"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_dvj8c"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_dvj8c"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_nxpt1"]
-[ext_resource type="Script" path="res://Region.gd" id="3_d0fh2"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="3_d0fh2"]
+[ext_resource type="PackedScene" uid="uid://dcd50lc8r7cxq" path="res://Objects/cloud_spawner.tscn" id="4_5y4qr"]
 
 [sub_resource type="GDScript" id="GDScript_ykiaq"]
 script/source = "extends Node
@@ -193,10 +194,13 @@ color = Color(0.521569, 0.521569, 0.603922, 1)
 polygon = PackedVector2Array(-576, -768, -768, -768, -768, -576, -528, -504, -256, -360, -144, -160, -272, 32, -304, 360, -264, 464, -24, 624, 200, 736, 488, 784, 768, 776, 768, 576, 440, 496, 168, 376, 152, 184, 256, -88, 304, -344, -56, -696, -264, -736)
 script = ExtResource("1_dvj8c")
 use_alignment_picker = false
+lock_aliances = true
 complexity = "Beginner"
 lore = "Are we there yet?"
 align_names = Array[String](["", "BOT", "TOPPOM"])
+color_bg_according_to_alignment = true
 hide_turn_order = true
+render_mode = 1
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_ykiaq")
@@ -206,210 +210,252 @@ position = Vector2(8, 0)
 
 [node name="Laughter Curve" type="Polygon2D" parent="."]
 position = Vector2(224, -320)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-40, -88, 0, -56, 32, -16, 32, 32, 16, 88, -16, 104, -16, 56, -16, 16, -24, -24, -48, -48, -80, -88)
 script = ExtResource("3_d0fh2")
 
 [node name="Chomper" type="Polygon2D" parent="."]
 position = Vector2(104, -424)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(48, 40, 16, 48, 0, 64, -24, 32, -40, -8, -72, -48, -24, -48, 40, -40, 56, -16, 80, 8, 24, 8)
 script = ExtResource("3_d0fh2")
 
 [node name="Eyeles" type="Polygon2D" parent="."]
 position = Vector2(16, -512)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-96, -24, -72, -16, -48, 16, -24, 32, 64, 32, 104, 40, 72, 16, 56, -8, 24, -32, -32, -32, -56, -24)
 script = ExtResource("3_d0fh2")
 
 [node name="Ajar" type="Polygon2D" parent="."]
 position = Vector2(-80, -592)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-8, 56, -8, 48, 40, 48, 40, -32, 16, -48, 16, -64, -16, -64, -16, -48, -40, -32, -40, 56)
 script = ExtResource("3_d0fh2")
 
 [node name="Desert Riverside" type="Polygon2D" parent="."]
 position = Vector2(0, -392)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(0, 56, -16, 40, -32, 40, -64, -8, -64, -48, -16, -56, 0, -80, 24, -80, 56, -40, 72, 0, 96, 32, 96, 40, 88, 48, 48, 56)
 script = ExtResource("3_d0fh2")
 
 [node name="Riverstart" type="Polygon2D" parent="."]
 position = Vector2(-112, -472)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(24, 72, 16, 24, 24, 8, 40, 8, 48, 24, 96, 16, 104, 0, 80, -16, 56, -48, 32, -56, -8, -56, -16, -16, -40, 0, -24, 32, -32, 56, -8, 88)
 script = ExtResource("3_d0fh2")
 
 [node name="Carter Age" type="Polygon2D" parent="."]
 position = Vector2(-184, -416)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-16, 72, 56, 32, 32, 0, 40, -24, 24, -56, -80, 0, -64, 24, -40, 32)
 script = ExtResource("3_d0fh2")
 
 [node name="Halfway There" type="Polygon2D" parent="."]
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(40, -56, -16, -80, -72, -40, -88, 16, -40, 64, 40, 72, 72, 40, 64, -24)
 script = ExtResource("3_d0fh2")
 
 [node name="Brum" type="Polygon2D" parent="."]
 position = Vector2(136, -16)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-56, -16, -64, 8, -24, 8, -64, 16, -56, 48, -16, 32, -48, 56, -16, 88, 8, 40, -8, 96, 8, 96, 32, 40, 72, -96, 40, -120, 24, -72, -16, -48, -24, -32)
 script = ExtResource("3_d0fh2")
 
 [node name="Tri" type="Polygon2D" parent="."]
 position = Vector2(208, -176)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(16, 64, -64, 0, 32, -48)
 script = ExtResource("3_d0fh2")
 
 [node name="Dummies Dream" type="Polygon2D" parent="."]
 position = Vector2(144, -240)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-80, 0, -40, 48, -32, 56, -16, 56, -16, 40, 8, 24, 32, 40, 56, 24, 56, -56, 48, -80, 24, -80, 8, -48, 8, -16, -24, -8, -56, -48, -88, -40)
 script = ExtResource("3_d0fh2")
 
 [node name="T Bone" type="Polygon2D" parent="."]
 position = Vector2(120, -328)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, 40, -72, 0, -32, -8, 8, -40, 40, -48, 72, -16, 72, 0, 48, 0, 24, 32, 24, 64, 0, 72, -32, 32)
 script = ExtResource("3_d0fh2")
 
 [node name="Vowels" type="Polygon2D" parent="."]
 position = Vector2(8, -264)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-40, 24, -8, 40, 16, 32, 48, 32, 40, -16, 32, -64, -8, -64, 0, -16, -16, 0, -40, -64, -72, -56)
 script = ExtResource("3_d0fh2")
 
 [node name="Filler" type="Polygon2D" parent="."]
 position = Vector2(136, -160)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(16, 64, 8, 40, 8, 8, -40, 32, -48, 16, -32, 0, -56, -24, -40, -32, -24, -16, -8, -16, 0, -40, 16, -48, 32, -40, 24, -32, 0, -16, 40, 16)
 script = ExtResource("3_d0fh2")
 
 [node name="Nuckle" type="Polygon2D" parent="."]
 position = Vector2(40, -184)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-40, -32, -32, 8, -32, 32, 8, 56, 48, 56, 40, 40, 56, 24, 32, 0, 48, -16, 32, -40, -16, -40)
 script = ExtResource("3_d0fh2")
 
 [node name="Bean Burrito" type="Polygon2D" parent="."]
 position = Vector2(-56, -136)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-40, 64, -8, 72, 24, 56, 56, 0, 56, -40, 48, -80, 24, -96, -8, -88, -16, -64, -8, -32, -16, 0, -40, 24, -48, 48)
 script = ExtResource("3_d0fh2")
 
 [node name="Biobox" type="Polygon2D" parent="."]
 position = Vector2(-88, -264)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(8, 64, -8, 72, -32, 64, -64, 8, -56, -16, 16, -48, 48, 24, 16, 32)
 script = ExtResource("3_d0fh2")
 
 [node name="Cubuisness" type="Polygon2D" parent="."]
 position = Vector2(-112, -344)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-32, 56, -72, 0, 24, -48, 64, 8)
 script = ExtResource("3_d0fh2")
 
 [node name="Vreomvreom" type="Polygon2D" parent="."]
 position = Vector2(56, -96)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-48, -48, -48, -24, -64, 8, -16, 32, 16, 64, 48, 32, 96, 8, 80, -24, 80, -48, 40, -24, -8, -24)
 script = ExtResource("3_d0fh2")
 
 [node name="Pan Left" type="Polygon2D" parent="."]
 position = Vector2(-120, -24)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(40, -32, 24, 40, -24, 64, -40, 120, -72, 120, -64, 56, -96, 40, -32, -56, 8, -56, 16, -40)
 script = ExtResource("3_d0fh2")
 
 [node name="Sponge" type="Polygon2D" parent="."]
 position = Vector2(-168, 144)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-24, -40, -40, -24, -32, 24, 0, 32, 16, 64, 56, 72, 72, 40, 72, 8, 24, 0, 8, -40)
 script = ExtResource("3_d0fh2")
 
 [node name="Cronket" type="Polygon2D" parent="."]
 position = Vector2(-56, 208)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-32, -56, 0, -24, 40, 16, -24, 32, -80, 48, -48, 8, -32, -24)
 script = ExtResource("3_d0fh2")
 
 [node name="Walls" type="Polygon2D" parent="."]
 position = Vector2(-48, 272)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-104, 16, -88, -8, 40, -40, 88, 0, 56, 24, -72, 32)
 script = ExtResource("3_d0fh2")
 
 [node name="Danger Noodle" type="Polygon2D" parent="."]
 position = Vector2(-232, 128)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-24, 96, 8, 96, 24, 40, 16, -8, 32, -32, 40, -88, 16, -104, 8, -48, -16, -16, -8, 40)
 script = ExtResource("3_d0fh2")
 
 [node name="Smonk" type="Polygon2D" parent="."]
 position = Vector2(-184, 240)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-32, 56, -32, 24, -40, -8, -16, -64, 8, -56, 24, -24, 64, -16, 40, 16, 24, 48, 56, 64, 24, 72, -8, 72)
 script = ExtResource("3_d0fh2")
 
 [node name="Get Fish" type="Polygon2D" parent="."]
 position = Vector2(-152, 344)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, -40, -56, 0, -56, 40, -16, 24, 32, 40, 72, 0, 64, -24, 40, -32, 16, -32, -24, -16)
 script = ExtResource("3_d0fh2")
 
 [node name="Goru" type="Polygon2D" parent="."]
 position = Vector2(-48, 384)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-80, 8, -72, 40, -24, 32, 8, 48, 64, 48, 48, 0, 64, -24, 32, -48, 32, -64, 24, -80, -48, -72, -32, -64, -24, -40, -64, 8)
 script = ExtResource("3_d0fh2")
 
 [node name="Mike Muted" type="Polygon2D" parent="."]
 position = Vector2(-104, 448)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-32, 8, -16, -16, 32, -24, 56, -8, 120, -8, 128, 16, 120, 40, 56, 48, 40, 64, -8, 64, -32, 40)
 script = ExtResource("3_d0fh2")
 
 [node name="Nothing" type="Polygon2D" parent="."]
 position = Vector2(8, 528)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-96, -8, -56, 32, -16, 40, 16, 80, 16, 32, 32, 8, 32, -24, 16, -40, 8, -32, -48, -24, -64, -8)
 script = ExtResource("3_d0fh2")
 
 [node name="Gum" type="Polygon2D" parent="."]
 position = Vector2(72, 576)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-40, 32, -16, 40, -8, 56, 16, 64, 40, 40, 32, 8, 48, -16, 48, -24, 40, -32, 8, -40, -8, -80, -24, -72, -24, -32, -40, -16)
 script = ExtResource("3_d0fh2")
 
 [node name="Beacon" type="Polygon2D" parent="."]
 position = Vector2(-192, 424)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-56, -16, -24, 24, 16, 40, 48, 32, 64, 0, 56, -40, 24, -48, -16, -32, -16, -16)
 script = ExtResource("3_d0fh2")
 
 [node name="Metal Cap" type="Polygon2D" parent="."]
 position = Vector2(-248, 328)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-24, 8, 0, 72, 32, 72, 32, 16, 24, -56, 16, -96, -8, -96, 0, -40)
 script = ExtResource("3_d0fh2")
 
 [node name="Desert Bus" type="Polygon2D" parent="."]
 position = Vector2(32, 144)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-80, 40, -16, 88, 96, -56, 48, -104)
 script = ExtResource("3_d0fh2")
 
 [node name="Shosh" type="Polygon2D" parent="."]
 position = Vector2(80, 224)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, 16, -32.8064, 39.3952, 0, 24, 16, 40, 32, 88, 40, 24, 24, -32, 8, -40, 24, -88, 8, -72)
 script = ExtResource("3_d0fh2")
 
 [node name="Amalgam" type="Polygon2D" parent="."]
 position = Vector2(56, 312)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(24, -56, -8, -40, -40, -8, -72, -8, -64, 8, -64, 24, -40, 40, -32, 24, -16, 16, 0, 32, 16, 32, 32, 48, 56, 48, 72, 24, 72, 8, 48, 8, 32, -48)
 script = ExtResource("3_d0fh2")
 
 [node name="Ahya" type="Polygon2D" parent="."]
 position = Vector2(152, 432)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, -48, -56, -64, -40, -64, -16, -48, 0, -24, 32, -8, 56, -8, 80, 0, 104, 16, 88, 24, 8, 24, -16, 48, -32, 56, -56, 56, -56, 32, -32, 24, -32, -16)
 script = ExtResource("3_d0fh2")
 
 [node name="Preston" type="Polygon2D" parent="."]
 position = Vector2(144, 512)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-72, -16, -56, 16, -32, 24, 8, 56, 24, 24, 40, 24, 48, 16, 24, -8, 16, -32, 32, -48, 16, -48, -8, -24, -24, -16)
 script = ExtResource("3_d0fh2")
 
 [node name="Honour Land" type="Polygon2D" parent="."]
 position = Vector2(152, 640)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-24, -80, -40, -56, -32, -24, -56, 0, -32, 16, 0, 16, 24, 56, 40, 64, 72, 0, 40, 8, 40, -16, 32, -24, 8, -24, 16, -48, 0, -64)
 script = ExtResource("3_d0fh2")
 
 [node name="Boot" type="Polygon2D" parent="."]
 position = Vector2(248, 488)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-80, -8, -72, 16, -48, 32, -16, 32, 64, 24, 72, 16, 80, -8, 96, -16, 16, -48, 16, -40, 0, -24, -64, -24)
 script = ExtResource("3_d0fh2")
 
 [node name="Moai" type="Polygon2D" parent="."]
 position = Vector2(56, 400)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-24, 64, -48, -16, -32, -40, -32, -56, -16, -64, 0, -48, 16, -48, 32, -32, 24, -16, 56, 24, 56, 48, 32, 56, 32, 88, -16, 96, -32, 80)
 script = ExtResource("3_d0fh2")
 
 [node name="Cracked" type="Polygon2D" parent="."]
 position = Vector2(-88, 96)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(0, -72, -24, -64, -8, -48, 16, -48, 32, -24, 0, -16, -24, -24, -32, 0, -8, 16, 16, 8, 40, 16, 56, 16, 48, 0, 64, -16, 104, 0, 80, 16, 72, 8, 88, 0, 64, -8, 56, 0, 64, 24, 40, 24, 24, 16, -8, 24, -40, 8, -32, -32, 0, -24, 16, -32, 8, -40, -16, -40, -32, -56, -48, -48, -64, 8, -48, 40, 0, 48, 32, 80, 128, -16, 48, -24)
 script = ExtResource("3_d0fh2")
 
 [node name="Endville" type="Polygon2D" parent="."]
 position = Vector2(-720, -672)
+color = Color(0.211765, 0.552941, 0.380392, 1)
 polygon = PackedVector2Array(-24, -80, -32, 0, -24, 88, 8, 96, 24, 40, 16, -8, 24, -56, 8, -80)
 script = ExtResource("3_d0fh2")
 alignment = 2
@@ -417,6 +463,7 @@ is_capital = true
 
 [node name="Wow West" type="Polygon2D" parent="."]
 position = Vector2(-592, -656)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 offset = Vector2(-48, 8)
 polygon = PackedVector2Array(-56, -32, -48, 8, -8, -16, 24, -24, 8, 0, 24, 16, 64, 16, 88, -8, 88, -16, 72, -16, 56, 0, 40, 8, 32, 0, 40, -16, 56, -24, 72, -16, 88, -16, 88, -32, 56, -48, 0, -48)
 script = ExtResource("3_d0fh2")
@@ -424,80 +471,95 @@ power = 0
 
 [node name="Guygo" type="Polygon2D" parent="."]
 position = Vector2(-512, -672)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-40, 32, -16, 48, -8, 80, 8, 24, 64, 0, 8, -16, -16, -64, -16, -24, -64, -24, -32, -8, -32, 16)
 script = ExtResource("3_d0fh2")
 
 [node name="Bowl" type="Polygon2D" parent="."]
 position = Vector2(-456, -704)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, -32, -40, 8, 24, 32, 72, 32, 112, 0, 96, -8, 56, 0, -16, -16, -40, -32)
 script = ExtResource("3_d0fh2")
 
 [node name="Note" type="Polygon2D" parent="."]
 position = Vector2(-344, -592)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-48, 8, -16, 24, 24, 32, 40, 8, 72, -48, 112, -16, 128, -40, 64, -64, 48, -40, 24, -16, 16, -32, -8, -40, -32, -40, -48, -16)
 script = ExtResource("3_d0fh2")
 
 [node name="Butcher" type="Polygon2D" parent="."]
 position = Vector2(-264, -576)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 offset = Vector2(8, 32)
 polygon = PackedVector2Array(-32, 48, -24, 24, -32, 8, -56, -8, -56, -16, -40, -40, -16, -88, 24, -56, 32, -64, 48, -56, 40, -40, 24, -8, 8, 16, 0, 48, -16, 40)
 script = ExtResource("3_d0fh2")
 
 [node name="Koppa" type="Polygon2D" parent="."]
 position = Vector2(-192, -504)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-32, -40, -48, -24, -56, 16, -40, 24, 8, 32, 32, 24, 56, 16, 56, 0, 24, 0, 0, -40, 8, -72, -16, -80)
 script = ExtResource("3_d0fh2")
 
 [node name="Bomba" type="Polygon2D" parent="."]
 position = Vector2(-152, -568)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-16, 56, 16, 56, 24, 48, 24, -56, 48, -80, 48, -88, -24, -112, -32, -96, 0, -80, -24, -56, 0, -40, -24, -16, -32, 24)
 script = ExtResource("3_d0fh2")
 
 [node name="Glug" type="Polygon2D" parent="."]
 position = Vector2(-336, -664)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-40, 24, -16, 24, 8, 32, 40, 24, 56, 0, 80, 8, 96, -8, 88, -32, 56, -40, 24, -32, 0, -40, -40, -8)
 script = ExtResource("3_d0fh2")
 
 [node name="Northern Steps" type="Polygon2D" parent="."]
 position = Vector2(-208, -648)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 offset = Vector2(16, -8)
 polygon = PackedVector2Array(8, 72, -16, 64, -8, 56, -32, 40, -16, 24, -56, 8, -56, 0, -40, -16, -48, -40, -40, -48, 8, -32, 0, -8, 32, 8, 8, 32, 32, 48)
 script = ExtResource("3_d0fh2")
 
 [node name="Train" type="Polygon2D" parent="."]
 position = Vector2(-448, -640)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 offset = Vector2(40, 16)
 polygon = PackedVector2Array(-96, 0, -24, 16, -24, 32, 8, 40, 8, 16, 24, -8, 24, -40, -32, -40, -88, -16)
 script = ExtResource("3_d0fh2")
 
 [node name="Capper" type="Polygon2D" parent="."]
 position = Vector2(-456, -520)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-112, -24, -88, -32, -32, -16, -8, -32, 24, -32, 56, -16, 72, 16, 64, 40, 48, 56, 24, 48, 0, 24, -56, 0)
 script = ExtResource("3_d0fh2")
 
 [node name="Imma Ues Gun" type="Polygon2D" parent="."]
 position = Vector2(-488, -584)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-48, 24, 0, 40, 16, 24, 56, 24, 88, 40, 96, 40, 112, 24, 120, 16, 48, -8, 48, -16, -16, -32, -24, 0, -40, 0)
 script = ExtResource("3_d0fh2")
 
 [node name="Clam" type="Polygon2D" parent="."]
 position = Vector2(-352, -480)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-48, 16, 8, 48, 8, 24, 24, -8, 56, -16, 64, -40, 56, -56, 32, -72, 0, -80, -24, -72, -40, -56, -24, -24, -32, 0)
 script = ExtResource("3_d0fh2")
 
 [node name="Devious Eat" type="Polygon2D" parent="."]
 position = Vector2(-288, -456)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-48, 24, -32, 40, 0, 48, 32, 64, 16, 40, 24, 32, 96, -8, 48, -16, 16, -40, -8, -32, -32, -24, -48, 0)
 script = ExtResource("3_d0fh2")
 
 [node name="Scicle" type="Polygon2D" parent="."]
 position = Vector2(-568, -576)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 offset = Vector2(0, -32)
 polygon = PackedVector2Array(-72, -32, -80, -24, -80, -8, -72, 0, -32, -8, -16, 24, -24, 40, -40, 56, -8, 64, 24, 48, 40, 16, 32, -16, 8, -32, 0, -16, -56, -16)
 script = ExtResource("3_d0fh2")
 
 [node name="Gustav" type="Polygon2D" parent="."]
 position = Vector2(-648, -592)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 offset = Vector2(8, -56)
 polygon = PackedVector2Array(8, -16, -8, -8, -48, 16, -56, 56, -32, 80, 24, 96, 40, 80, 48, 64, 32, 40, 0, 48, -16, 32, -16, 16)
 script = ExtResource("3_d0fh2")
@@ -505,12 +567,14 @@ power = 0
 
 [node name="Yap" type="Polygon2D" parent="."]
 position = Vector2(-640, -728)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, -24, -48, 0, -56, 40, 0, 24, 104, 24, 104, -8, 0, -16)
 script = ExtResource("3_d0fh2")
 power = 0
 
 [node name="Cap Town" type="Polygon2D" parent="."]
 position = Vector2(736, 672)
+color = Color(0.654902, 0.168627, 0.215686, 1)
 polygon = PackedVector2Array(16, -80, 16, 0, 8, 80, -32, 80, -56, 64, -40, 0, -40, -80, -24, -88)
 script = ExtResource("3_d0fh2")
 alignment = 1
@@ -518,68 +582,85 @@ is_capital = true
 
 [node name="Third Finger" type="Polygon2D" parent="."]
 position = Vector2(632, 592)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(56, 40, 32, 40, -72, 8, -80, 0, -72, -24, -48, -32, 56, -8)
 script = ExtResource("3_d0fh2")
 power = 0
 
 [node name="Hammer" type="Polygon2D" parent="."]
 position = Vector2(520, 600)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(88, 24, 72, 24, 16, 16, 16, 48, 8, 64, -40, 48, -40, 32, -24, 8, -16, -16, -16, -40, -8, -56, 32, -48, 32, -32, 24, -8, 40, 8)
 script = ExtResource("3_d0fh2")
 
 [node name="Candy" type="Polygon2D" parent="."]
 position = Vector2(440, 544)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(56, 40, 56, 16, 64, 0, 24, 0, 8, -16, -8, -24, -24, -16, -56, -48, -64, -24, -80, 0, -32, 8, -24, 24, 0, 32, 16, 24)
 script = ExtResource("3_d0fh2")
 
 [node name="Hahnze" type="Polygon2D" parent="."]
 position = Vector2(416, 600)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-80, -40, -64, -40, -48, -16, -72, 8, -56, 24, -24, 0, 0, 16, -8, 32, 56, 48, 56, 24, 80, -8, 40, -24, 24, -16, -8, -24, -16, -40, -56, -48, -64, -48)
 script = ExtResource("3_d0fh2")
 
 [node name="K" type="Polygon2D" parent="."]
 position = Vector2(376, 656)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(96, 8, 96, 0, 24, -16, 32, -40, 16, -48, -16, -24, -56, -8, -40, 16, -8, 8, -16, 40, 16, 40, 24, 8)
 script = ExtResource("3_d0fh2")
 
 [node name="Shak" type="Polygon2D" parent="."]
 position = Vector2(288, 616)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-56, 16, -24, 16, 0, 24, 24, 32, 32, 24, 64, 8, 40, 0, 16, -16, 0, -56, -16, -64, -24, -24, -48, -24, -80, -40, -72, -8, -88, 24)
 script = ExtResource("3_d0fh2")
 
 [node name="Muhaha" type="Polygon2D" parent="."]
 position = Vector2(232, 544)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-24, 24, 8, 40, 24, 40, 32, 0, 40, 0, 48, -24, 8, -16, -32, -16, -40, 0, -56, 0, -72, 24, -56, 48, -64, 64, -48, 64, -32, 80, -24, 64, -32, 24)
 script = ExtResource("3_d0fh2")
 
 [node name="Harmonic" type="Polygon2D" parent="."]
 position = Vector2(280, 672)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(64, 72, 80, 0, 56, 8, 40, -16, 16, 0, 8, -24, -16, -8, -16, -32, -40, -16, -48, -32, -80, 32, -56, 24, -48, 48, -24, 32, -16, 56, 8, 40, 24, 64, 48, 48)
 script = ExtResource("3_d0fh2")
 
 [node name="Tenta" type="Polygon2D" parent="."]
 position = Vector2(344, 512)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(32, -16, 24, 8, 8, 32, -8, 40, -24, 32, -16, 40, -8, 56, 8, 56, 16, 72, -8, 96, -32, 80, -48, 48, -64, 32, -56, 8, -32, 8, -16, 0, -8, -24, 0, -32)
 script = ExtResource("3_d0fh2")
 
 [node name="The Fog" type="Polygon2D" parent="."]
 position = Vector2(640, 664)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-64, 16, -32, 8, -8, 24, 24, 24, 40, 32, 48, 8, 48, -24, 24, -24, -16, -40, -48, -32, -96, -40, -96, -16, -104, 0)
 script = ExtResource("3_d0fh2")
 power = 0
 
 [node name="Pointer" type="Polygon2D" parent="."]
 position = Vector2(496, 704)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(64, 48, 8, 40, -24, 24, -32, -8, -80, -32, -16, -32, -16, -48, 64, -24, 32, 16)
 script = ExtResource("3_d0fh2")
 
 [node name="Taxir" type="Polygon2D" parent="."]
 position = Vector2(416, 712)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(-56, -8, -64, 16, -24, 32, 8, 24, 40, 40, 72, 40, 80, 32, 48, 16, 40, -16, -8, -40, -16, -8)
 script = ExtResource("3_d0fh2")
 
 [node name="Triest" type="Polygon2D" parent="."]
 position = Vector2(640, 720)
+color = Color(0.384314, 0.341176, 0.458824, 1)
 polygon = PackedVector2Array(32, 8, 16, 40, -40, 32, -72, 32, -104, 0, -80, -32, -32, -32, 40, -16)
 script = ExtResource("3_d0fh2")
 power = 0
+
+[node name="CloudSpawner" parent="." instance=ExtResource("4_5y4qr")]
+time_range_bottom = 6.0
+time_range_top = 20.0

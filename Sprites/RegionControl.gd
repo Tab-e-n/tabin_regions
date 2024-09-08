@@ -109,6 +109,7 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 ]
 @export var align_names : Array[String] = []
 
+@export var color_bg_according_to_alignment : bool = true
 @export var city_size : float = 1
 @export var snap_camera_to_first_align_capital : bool = true
 @export var hide_turn_order : bool = false
@@ -209,7 +210,10 @@ func _ready():
 		var players : Array = range(align_amount)
 		players.pop_front()
 		
-		var preset_alignments_amount = preset_alignments.size()
+		var preset_alignments_amount : int = 0
+		for i in preset_alignments:
+			if i != 0:
+				preset_alignments_amount += 1
 		if used_alignments < preset_alignments_amount:
 			used_alignments = preset_alignments_amount
 		for i in preset_alignments:
@@ -552,14 +556,15 @@ func reset():
 	bonus_action_amount = 1 if action_amount == 0 else 0
 	current_action = ACTION_MOBILIZE if action_amount == 0 else ACTION_NORMAL
 	
-	var bg_color_tinted : Color = bg_color + align_color[current_playing_align] * Color(0.25, 0.25, 0.25)
-	if MapSetup.speedrun_ai:
-		if align_controlers[current_playing_align - 1] == AIControler.CONTROLER_USER:
-			color = bg_color_tinted
+	if color_bg_according_to_alignment:
+		var bg_color_tinted : Color = bg_color + align_color[current_playing_align] * Color(0.25, 0.25, 0.25)
+		if MapSetup.speedrun_ai:
+			if align_controlers[current_playing_align - 1] == AIControler.CONTROLER_USER:
+				color = bg_color_tinted
+			else:
+				color = bg_color
 		else:
-			color = bg_color
-	else:
-		color = bg_color_tinted
+			color = bg_color_tinted
 	
 	if ReplayControl.replay_active:
 		is_player_controled = false

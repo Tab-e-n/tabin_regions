@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvs2arpbio3au"]
+[gd_scene load_steps=5 format=3 uid="uid://cvs2arpbio3au"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_5aq8s"]
-[ext_resource type="Script" path="res://Region.gd" id="3_b6jsf"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_5aq8s"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="3_b6jsf"]
+[ext_resource type="PackedScene" uid="uid://dcd50lc8r7cxq" path="res://Objects/cloud_spawner.tscn" id="3_qgnk2"]
 
 [sub_resource type="GDScript" id="GDScript_omqxc"]
 script/source = "extends Node
@@ -3235,3 +3236,7 @@ default_color = Color(0.247059, 0.247059, 0.247059, 1)
 position = Vector2(800, -792)
 points = PackedVector2Array(-96, -32, -72, -48, -32, -24, -8, -8, 16, -8, 56, 24, 80, 48, 96, 80, 112, 104, 152, 104, 192, 112, 216, 136, 240, 136, 264, 136, 304, 128, 344, 144, 352, 128, 376, 104, 392, 104, 432, 128, 440, 168, 464, 192, 504, 208, 536, 208, 568, 224, 584, 216, 584, 184, 592, 152, 584, 128, 600, 112, 608, 88, 616, 56, 616, 32, 632, 8, 624, -16, 624, -48, 600, -72, 568, -80, 544, -88, 520, -104, 496, -104, 456, -120, 448, -144, 416, -144, 384, -152, 360, -168, 336, -192, 328, -224, 344, -232, 376, -240, 376, -264, 392, -296, 408, -280, 416, -256, 448, -264, 456, -296, 496, -320, 504, -360, 480, -384, 424, -392, 368, -392, 312, -408, 296, -432, 256, -424, 200, -456, 176, -472, 152, -456, 128, -440, 104, -440, 64, -432, 32, -408, 48, -376, 48, -352, 8, -320, 0, -288, -16, -288, -40, -272, -32, -248, -48, -240, -88, -224, -96, -192, -128, -160, -168, -128, -160, -96, -184, -72, -216, -64, -256, -40, -280, -64, -304, -80, -344, -80, -376, -104)
 default_color = Color(0.247059, 0.247059, 0.247059, 1)
+
+[node name="CloudSpawner" parent="." instance=ExtResource("3_qgnk2")]
+time_range_bottom = 4.0
+time_range_top = 8.0

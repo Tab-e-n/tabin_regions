@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dneybbcxl420n"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_fhy2h"]
-[ext_resource type="Script" path="res://Region.gd" id="2_bnykq"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_fhy2h"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="2_bnykq"]
 
 [sub_resource type="GDScript" id="GDScript_ojoeb"]
 script/source = "extends Node
@@ -114,6 +114,7 @@ tag = "Challenge"
 complexity = "Beginner"
 lore = "An interactive tutorial, where you learn the mechanics of the game."
 align_names = Array[String](["Neutral", "You", "Enemy"])
+color_bg_according_to_alignment = true
 snap_camera_to_first_align_capital = false
 hide_turn_order = true
 

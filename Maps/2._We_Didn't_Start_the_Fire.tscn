@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://o6yvmjiqoc22"]
+[gd_scene load_steps=6 format=3 uid="uid://o6yvmjiqoc22"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_0s651"]
-[ext_resource type="Script" path="res://Region.gd" id="2_38p5v"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_0s651"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="2_38p5v"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_s3qok"]
+[ext_resource type="PackedScene" uid="uid://dcd50lc8r7cxq" path="res://Objects/cloud_spawner.tscn" id="4_s807r"]
 
 [sub_resource type="GDScript" id="GDScript_y0ddu"]
 script/source = "extends Node
@@ -295,3 +296,6 @@ position = Vector2(328, 160)
 color = Color(0.243137, 0.211765, 0.298039, 1)
 polygon = PackedVector2Array(-144, -56, -136, -80, -120, -80, -112, -96, -96, -104, -80, -104, -80, -96, -56, -88, -48, -80, -48, -72, -56, -64, -48, -56, -24, -56, -16, -48, -8, -56, 32, -48, 40, -48, 40, -56, 56, -64, 56, 88, 40, 80, 40, 96, 56, 112, 56, 152, 48, 152, 56, 160, 48, 176, 48, 192, 40, 184, 32, 192, 24, 184, 16, 192, 16, 168, 8, 152, 0, 160, 0, 144, -8, 144, -8, 136, -16, 104, -24, 112, -24, 96, -32, 80, -32, 32, -56, 16, -72, 0, -80, -16, -96, -16, -128, -32, -128, -48, -136, -56)
 script = ExtResource("2_38p5v")
+
+[node name="CloudSpawner" parent="." instance=ExtResource("4_s807r")]
+color = Color(0.921569, 0.909804, 0.913725, 1)

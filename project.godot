@@ -18,9 +18,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-MapSetup="*res://MapSetupData.gd"
-GameStats="*res://GameStats.gd"
-ReplayControl="*res://ReplayControler.gd"
+MapSetup="*res://Scripts/MapSetupData.gd"
+GameStats="*res://Scripts/GameStats.gd"
+ReplayControl="*res://Scripts/ReplayControler.gd"
 
 [display]
 

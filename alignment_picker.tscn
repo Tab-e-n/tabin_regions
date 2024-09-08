@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://tstsvc6l2xdm"]
 
-[ext_resource type="Script" path="res://alignment_picker.gd" id="1_8gumh"]
-[ext_resource type="Script" path="res://alignment_list.gd" id="1_qo2tf"]
+[ext_resource type="Script" path="res://Scripts/alignment_picker.gd" id="1_8gumh"]
+[ext_resource type="Script" path="res://Scripts/alignment_list.gd" id="1_qo2tf"]
 [ext_resource type="Texture2D" uid="uid://deqhvnfw114vp" path="res://Sprites/advance.png" id="3_hsa52"]
 [ext_resource type="StyleBox" uid="uid://crwlkegnfaves" path="res://Styles/style_label_align_picker.tres" id="4_1r6yf"]
 

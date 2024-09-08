@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqebjllyfg8lj"]
+[gd_scene load_steps=6 format=3 uid="uid://dqebjllyfg8lj"]
 
-[ext_resource type="Script" path="res://RegionControl.gd" id="1_eipre"]
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_eipre"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_ispv8"]
-[ext_resource type="Script" path="res://Region.gd" id="2_nmcrs"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="2_nmcrs"]
+[ext_resource type="PackedScene" uid="uid://dcd50lc8r7cxq" path="res://Objects/cloud_spawner.tscn" id="4_4cclr"]
 
 [sub_resource type="GDScript" id="GDScript_iphdy"]
 script/source = "extends Node
@@ -50,15 +51,16 @@ func _ready():
 "
 
 [node name="cumbersome" type="Polygon2D"]
-position = Vector2(0, 8)
 color = Color(0.615686, 0.52549, 0.6, 1)
 polygon = PackedVector2Array(448, 56, 424, -144, 328, -248, 176, -312, 32, -320, -72, -256, -112, -104, -264, -128, -440, -96, -480, 40, -424, 216, -256, 352, -24, 416, 224, 440, 384, 480, 408, 328)
 script = ExtResource("1_eipre")
 use_alignment_picker = false
+lock_aliances = true
 complexity = "Beginner"
 lore = "A map comprised of the first songs that came to my mind,
 or rather the first songs i saw in my playlist."
 align_color = Array[Color]([Color(0.462745, 0.32549, 0.439216, 1), Color(0.866667, 0.309804, 0.588235, 1), Color(0.537255, 0.152941, 0.658824, 1)])
+color_bg_according_to_alignment = true
 hide_turn_order = true
 
 [node name="setter" type="Node" parent="."]
@@ -177,3 +179,6 @@ power = 0
 position = Vector2(-104, 256)
 polygon = PackedVector2Array(-32, -88, -8, -88, 8, -64, 24, -56, 16, -40, 16, -16, 32, 8, 64, 16, 80, 16, 72, 32, 48, 32, 8, 24, -16, 8, -24, -16, -16, -40)
 script = ExtResource("2_nmcrs")
+
+[node name="CloudSpawner" parent="." instance=ExtResource("4_4cclr")]
+color = Color(0.913725, 0.839216, 0.894118, 1)

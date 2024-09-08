@@ -41,7 +41,19 @@ func _process(_delta):
 	pass
 
 
-func _on_def_slider_value_changed(value):
+func _on_leaders_value_changed(value):
+	if $def/players.value > value:
+		$def/players.value = value
+	_on_def_slider_value_changed(value)
+
+
+func _on_players_value_changed(value):
+	if $def/leaders.value < value:
+		$def/leaders.value = value
+	_on_def_slider_value_changed(value)
+
+
+func _on_def_slider_value_changed(_value):
 	map_data_text()
 
 
@@ -115,7 +127,7 @@ func start_playing(index):
 	MapSetup.player_amount = $def/players.value
 	MapSetup.aliances_amount = $def/aliances.value
 	MapSetup.used_aligments = $def/leaders.value
-	if current_map.use_alignment_picker and not current_map.use_preset_alignments and MapSetup.player_amount > 0:
+	if current_map.use_alignment_picker and MapSetup.player_amount > 0:
 		get_tree().change_scene_to_file("res://alignment_picker.tscn")
 	else:
 		get_tree().change_scene_to_file("res://main.tscn")
