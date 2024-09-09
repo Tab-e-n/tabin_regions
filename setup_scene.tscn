@@ -24,7 +24,9 @@ position = Vector2(576, 320)
 [node name="map" type="Node2D" parent="."]
 z_index = -100
 
-[node name="map_list" type="ItemList" parent="."]
+[node name="tintable_ui" type="Node2D" parent="."]
+
+[node name="map_list" type="ItemList" parent="tintable_ui"]
 z_index = 100
 offset_left = 32.0
 offset_top = 32.0
@@ -33,14 +35,14 @@ offset_bottom = 608.0
 focus_mode = 0
 theme_override_styles/panel = ExtResource("2_b0y7v")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="tintable_ui"]
 offset_left = 512.0
 offset_top = 32.0
 offset_right = 1120.0
 offset_bottom = 216.0
 theme_override_styles/panel = ExtResource("2_vsmum")
 
-[node name="map_name" type="Label" parent="."]
+[node name="map_name" type="Label" parent="tintable_ui"]
 z_index = 100
 offset_left = 512.0
 offset_top = 32.0
@@ -49,7 +51,7 @@ offset_bottom = 80.0
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 
-[node name="lore" type="Label" parent="."]
+[node name="lore" type="Label" parent="tintable_ui"]
 offset_left = 512.0
 offset_top = 80.0
 offset_right = 1120.0
@@ -58,7 +60,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 clip_text = true
 
-[node name="def" type="Control" parent="."]
+[node name="def" type="Control" parent="tintable_ui"]
 visible = false
 z_index = 100
 layout_mode = 3
@@ -66,7 +68,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="map_data" type="Label" parent="def"]
+[node name="map_data" type="Label" parent="tintable_ui/def"]
 layout_mode = 0
 offset_left = 512.0
 offset_top = 80.0
@@ -76,7 +78,7 @@ theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 2
 
-[node name="leaders" type="HSlider" parent="def"]
+[node name="leaders" type="HSlider" parent="tintable_ui/def"]
 layout_mode = 0
 offset_left = 720.0
 offset_top = 120.0
@@ -86,7 +88,7 @@ min_value = 2.0
 max_value = 2.0
 value = 2.0
 
-[node name="players" type="HSlider" parent="def"]
+[node name="players" type="HSlider" parent="tintable_ui/def"]
 layout_mode = 0
 offset_left = 720.0
 offset_top = 152.0
@@ -94,7 +96,7 @@ offset_right = 1112.0
 offset_bottom = 184.0
 max_value = 0.0
 
-[node name="aliances" type="HSlider" parent="def"]
+[node name="aliances" type="HSlider" parent="tintable_ui/def"]
 layout_mode = 0
 offset_left = 720.0
 offset_top = 184.0
@@ -104,7 +106,7 @@ min_value = 1.0
 max_value = 1.0
 value = 1.0
 
-[node name="diff" type="Control" parent="."]
+[node name="diff" type="Control" parent="tintable_ui"]
 visible = false
 z_index = 100
 layout_mode = 3
@@ -112,11 +114,11 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="AiSelected" type="Sprite2D" parent="diff"]
+[node name="AiSelected" type="Sprite2D" parent="tintable_ui/diff"]
 position = Vector2(624, 144)
 texture = ExtResource("2_1q3y1")
 
-[node name="ai_turtle" type="TextureButton" parent="diff"]
+[node name="ai_turtle" type="TextureButton" parent="tintable_ui/diff"]
 layout_mode = 0
 offset_left = 576.0
 offset_top = 96.0
@@ -124,7 +126,7 @@ offset_right = 672.0
 offset_bottom = 192.0
 texture_normal = ExtResource("2_wi0e8")
 
-[node name="ai_default" type="TextureButton" parent="diff"]
+[node name="ai_default" type="TextureButton" parent="tintable_ui/diff"]
 layout_mode = 0
 offset_left = 704.0
 offset_top = 96.0
@@ -132,7 +134,7 @@ offset_right = 800.0
 offset_bottom = 192.0
 texture_normal = ExtResource("2_qggyn")
 
-[node name="ai_neuron" type="TextureButton" parent="diff"]
+[node name="ai_neuron" type="TextureButton" parent="tintable_ui/diff"]
 modulate = Color(0.447059, 0.447059, 0.447059, 1)
 layout_mode = 0
 offset_left = 832.0
@@ -142,7 +144,7 @@ offset_bottom = 192.0
 disabled = true
 texture_normal = ExtResource("3_g3ljl")
 
-[node name="ai_cheater" type="TextureButton" parent="diff"]
+[node name="ai_cheater" type="TextureButton" parent="tintable_ui/diff"]
 layout_mode = 0
 offset_left = 960.0
 offset_top = 96.0
@@ -150,7 +152,7 @@ offset_right = 1056.0
 offset_bottom = 192.0
 texture_normal = ExtResource("5_qe1ei")
 
-[node name="preset" type="Label" parent="diff"]
+[node name="preset" type="Label" parent="tintable_ui/diff"]
 visible = false
 layout_mode = 0
 offset_left = 560.0
@@ -163,7 +165,7 @@ text = "MAP USES CUSTOM AI SETUP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="next_menu" type="TextureButton" parent="."]
+[node name="next_menu" type="TextureButton" parent="tintable_ui"]
 z_index = 100
 offset_left = 1056.0
 offset_top = 216.0
@@ -171,7 +173,7 @@ offset_right = 1120.0
 offset_bottom = 280.0
 texture_normal = ExtResource("2_q4ghs")
 
-[node name="replay" type="TextureButton" parent="."]
+[node name="replay" type="TextureButton" parent="tintable_ui"]
 z_index = 100
 offset_left = 848.0
 offset_top = 480.0
@@ -179,7 +181,7 @@ offset_right = 976.0
 offset_bottom = 608.0
 texture_normal = ExtResource("8_jp1fi")
 
-[node name="play" type="TextureButton" parent="."]
+[node name="play" type="TextureButton" parent="tintable_ui"]
 z_index = 100
 offset_left = 992.0
 offset_top = 480.0
@@ -191,21 +193,22 @@ texture_normal = ExtResource("5_x6iy8")
 initial_position = 1
 title = "Open a File"
 size = Vector2i(480, 480)
+popup_window = true
 ok_button_text = "Open"
 file_mode = 0
 access = 1
 filters = PackedStringArray("*.json")
 
-[connection signal="item_activated" from="map_list" to="." method="_on_map_list_item_activated"]
-[connection signal="item_selected" from="map_list" to="." method="_on_map_list_item_selected"]
-[connection signal="value_changed" from="def/leaders" to="." method="_on_leaders_value_changed"]
-[connection signal="value_changed" from="def/players" to="." method="_on_players_value_changed"]
-[connection signal="value_changed" from="def/aliances" to="." method="_on_def_slider_value_changed"]
-[connection signal="pressed" from="diff/ai_turtle" to="." method="_on_ai_turtle_pressed"]
-[connection signal="pressed" from="diff/ai_default" to="." method="_on_ai_default_pressed"]
-[connection signal="pressed" from="diff/ai_neuron" to="." method="_on_ai_default_pressed"]
-[connection signal="pressed" from="diff/ai_cheater" to="." method="_on_ai_cheater_pressed"]
-[connection signal="pressed" from="next_menu" to="." method="_on_next_menu_pressed"]
-[connection signal="pressed" from="replay" to="." method="_on_replay_pressed"]
-[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="item_activated" from="tintable_ui/map_list" to="." method="_on_map_list_item_activated"]
+[connection signal="item_selected" from="tintable_ui/map_list" to="." method="_on_map_list_item_selected"]
+[connection signal="value_changed" from="tintable_ui/def/leaders" to="." method="_on_leaders_value_changed"]
+[connection signal="value_changed" from="tintable_ui/def/players" to="." method="_on_players_value_changed"]
+[connection signal="value_changed" from="tintable_ui/def/aliances" to="." method="_on_def_slider_value_changed"]
+[connection signal="pressed" from="tintable_ui/diff/ai_turtle" to="." method="_on_ai_turtle_pressed"]
+[connection signal="pressed" from="tintable_ui/diff/ai_default" to="." method="_on_ai_default_pressed"]
+[connection signal="pressed" from="tintable_ui/diff/ai_neuron" to="." method="_on_ai_default_pressed"]
+[connection signal="pressed" from="tintable_ui/diff/ai_cheater" to="." method="_on_ai_cheater_pressed"]
+[connection signal="pressed" from="tintable_ui/next_menu" to="." method="_on_next_menu_pressed"]
+[connection signal="pressed" from="tintable_ui/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="tintable_ui/play" to="." method="_on_play_pressed"]
 [connection signal="file_selected" from="replay_window" to="." method="_on_replay_window_file_selected"]

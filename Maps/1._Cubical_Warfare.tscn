@@ -60,7 +60,6 @@ align_amount = 5
 complexity = "Beginner"
 lore = "Everythings comes back to cubes. Everything is cubes.
 Ignore that cities are still circles."
-color_bg_according_to_alignment = true
 hide_turn_order = true
 render_mode = 1
 

@@ -9,6 +9,24 @@ enum {MENU_LORE, MENU_ALIGNMENTS, MENU_DIFFICULTY}
 var current_menu : int = 0
 
 
+@onready var tintable_ui : Node2D = $tintable_ui
+
+@onready var map_list : ItemList = $tintable_ui/map_list
+@onready var map_options : Control = $tintable_ui/def
+@onready var map_ai : Control = $tintable_ui/diff
+
+@onready var map_name : Label = $tintable_ui/map_name
+@onready var map_lore : Label = $tintable_ui/lore
+
+@onready var options_label : Label = $tintable_ui/def/map_data
+@onready var slider_player : HSlider = $tintable_ui/def/players
+@onready var slider_leader : HSlider = $tintable_ui/def/leaders
+@onready var slider_aliances : HSlider = $tintable_ui/def/aliances
+
+@onready var ai_preset : Label = $tintable_ui/diff/preset
+@onready var ai_cursor : Sprite2D = $tintable_ui/diff/AiSelected
+
+
 func _ready():
 	maps = DirAccess.get_files_at("res://Maps")
 	
@@ -19,15 +37,15 @@ func _ready():
 		maps[i] = maps[i].trim_suffix(".remap")
 		var new_name : String = maps[i].trim_suffix(".tscn")
 		new_name = new_name.replace("_", " ")
-		$map_list.add_item(new_name)
+		map_list.add_item(new_name)
 	
 	var map = maps.find(MapSetup.current_map_name)
 	
 	if map == -1:
-		$map_list.select(0)
+		map_list.select(0)
 		_on_map_list_item_selected(0)
 	else:
-		$map_list.select(map)
+		map_list.select(map)
 		_on_map_list_item_selected(map)
 	
 	MapSetup.preset_alignments.clear()
@@ -42,14 +60,14 @@ func _process(_delta):
 
 
 func _on_leaders_value_changed(value):
-	if $def/players.value > value:
-		$def/players.value = value
+	if slider_player.value > value:
+		slider_player.value = value
 	_on_def_slider_value_changed(value)
 
 
 func _on_players_value_changed(value):
-	if $def/leaders.value < value:
-		$def/leaders.value = value
+	if slider_leader.value < value:
+		slider_leader.value = value
 	_on_def_slider_value_changed(value)
 
 
@@ -61,72 +79,88 @@ func _on_map_list_item_activated(index):
 	start_playing(index)
 
 
+func flip_color(c : Color) -> Color:
+	c.r = 1 - c.r
+	c.g = 1 - c.g
+	c.b = 1 - c.b
+	return c
+
+
 func _on_map_list_item_selected(index):
 	if current_map != null:
 		current_map.queue_free()
 	var packed_map : PackedScene = load("res://Maps/" + maps[index])
-	current_map = packed_map.instantiate()
+	current_map = packed_map.instantiate() as RegionControl
 	
 	current_map.dummy = true
 	
 	current_map.position = Vector2(768, 384)
 	current_map.scale = Vector2(0.5, 0.5)
 	
+	var temp_color : Color = current_map.color
+	
+	temp_color = flip_color(temp_color)
+	temp_color *= 0.5
+	temp_color = flip_color(temp_color)
+	temp_color.a = 1.0
+	
+	tintable_ui.modulate = temp_color
+	
 	$map.add_child(current_map)
 	
-	$map_name.text = $map_list.get_item_text(index)
+	map_name.text = map_list.get_item_text(index)
 	
 	map_data_text()
 	
-	$def/leaders.visible = not current_map.lock_align_amount
-	$def/leaders.max_value = current_map.align_amount - 1
+	slider_leader.visible = not current_map.lock_align_amount
+	slider_leader.max_value = current_map.align_amount - 1
 	
-	$def/players.visible = not current_map.lock_player_amount
+	slider_player.visible = not current_map.lock_player_amount
 	if current_map.max_player_amount >= 0:
-		$def/players.max_value = current_map.max_player_amount
+		slider_player.max_value = current_map.max_player_amount
 	else:
-		$def/players.max_value = current_map.align_amount - 1
+		slider_player.max_value = current_map.align_amount - 1
 	
-	$def/aliances.visible = not current_map.lock_aliances
-	$def/aliances.max_value = current_map.align_amount - 1
+	slider_aliances.visible = not current_map.lock_aliances
+	slider_aliances.max_value = current_map.align_amount - 1
 	
-	$diff/preset.visible = current_map.use_custom_ai_setup
-	$diff/AiSelected.visible = !current_map.use_custom_ai_setup
+	ai_preset.visible = current_map.use_custom_ai_setup
+	ai_cursor.visible = !current_map.use_custom_ai_setup
 	
-	$lore.text = current_map.tag + ", " + current_map.complexity + "\n" + current_map.lore
+	map_lore.text = current_map.tag + ", " + current_map.complexity + "\n" + current_map.lore
 	
 	if MapSetup.current_map_name != maps[index]:
 		if current_map.used_alignments >= 2:
-			$def/leaders.value = current_map.used_alignments
+			slider_leader.value = current_map.used_alignments
 		else:
-			$def/leaders.value = current_map.align_amount - 1
-		$def/players.value = current_map.player_amount
-		$def/aliances.value = 1
+			slider_leader.value = current_map.align_amount - 1
+		slider_player.value = current_map.player_amount
+		slider_aliances.value = 1
 		MapSetup.current_map_name = maps[index]
 	else:
-		$def/players.value = MapSetup.player_amount
-		$def/aliances.value = MapSetup.aliances_amount
-		$def/leaders.value = MapSetup.used_aligments
+		slider_player.value = MapSetup.player_amount
+		slider_aliances.value = MapSetup.aliances_amount
+		slider_leader.value = MapSetup.used_aligments
 
 
 func map_data_text():
-	$def/map_data.text = ("PRESET ORDER" if current_map.use_preset_alignments else "RANDOM ORDER")
-	$def/map_data.text += "\nLEADERS: " + String.num($def/leaders.value)
-	$def/map_data.text += "\nPLAYERS: " + (String.num($def/players.value) if $def/players.value > 0 else "X")
-	$def/map_data.text += "\nALIANCES: " + (String.num($def/aliances.value) if $def/aliances.value > 1 else "X")
+	options_label.text = ("PRESET ORDER" if current_map.use_preset_alignments else "RANDOM ORDER")
+	options_label.text += "\nLEADERS: " + String.num(slider_leader.value)
+	options_label.text += "\nPLAYERS: " + (String.num(slider_player.value) if slider_player.value > 0 else "X")
+	options_label.text += "\nALIANCES: " + (String.num(slider_aliances.value) if slider_aliances.value > 1 else "X")
 
 
 func _on_play_pressed():
-	#print($map_list.is_anything_selected())
-	if $map_list.is_anything_selected():
-		start_playing($map_list.get_selected_items()[0])
+	#print(map_list.is_anything_selected())
+	if map_list.is_anything_selected():
+		start_playing(map_list.get_selected_items()[0])
 
 
 func start_playing(index):
 	MapSetup.current_map_name = maps[index]
-	MapSetup.player_amount = $def/players.value
-	MapSetup.aliances_amount = $def/aliances.value
-	MapSetup.used_aligments = $def/leaders.value
+	MapSetup.player_amount = slider_player.value
+	MapSetup.aliances_amount = slider_aliances.value
+	MapSetup.used_aligments = slider_leader.value
 	if current_map.use_alignment_picker and MapSetup.player_amount > 0:
 		get_tree().change_scene_to_file("res://alignment_picker.tscn")
 	else:
@@ -138,21 +172,21 @@ func _on_next_menu_pressed():
 	if current_menu > 2:
 		current_menu = 0
 	
-	$lore.visible = current_menu == MENU_LORE
-	$def.visible = current_menu == MENU_ALIGNMENTS
-	$diff.visible = current_menu == MENU_DIFFICULTY
+	map_lore.visible = current_menu == MENU_LORE
+	map_options.visible = current_menu == MENU_ALIGNMENTS
+	map_ai.visible = current_menu == MENU_DIFFICULTY
 
 
 func ai_selected_pos():
 	match(MapSetup.default_ai_controler):
 		AIControler.CONTROLER_TURTLE:
-			$diff/AiSelected.position.x = 624
+			ai_cursor.position.x = 624
 		AIControler.CONTROLER_DEFAULT:
-			$diff/AiSelected.position.x = 752
+			ai_cursor.position.x = 752
 		AIControler.CONTROLER_NEURAL:
-			$diff/AiSelected.position.x = 880
+			ai_cursor.position.x = 880
 		AIControler.CONTROLER_CHEATER:
-			$diff/AiSelected.position.x = 1008
+			ai_cursor.position.x = 1008
 
 
 func _on_ai_turtle_pressed():

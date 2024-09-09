@@ -57,7 +57,7 @@ func _process(_delta):
 func make_particle(mobilize : bool):
 	var part : Sprite2D = Sprite2D.new()
 	part.texture = preload("res://Sprites/circle.png")
-	part.set_script(preload("res://CitySelectedParticle.gd"))
+	part.set_script(preload("res://Scripts/CitySelectedParticle.gd"))
 	part.position = Vector2(32, 32)
 	part.modulate = self_modulate
 	part.mobilize = mobilize
