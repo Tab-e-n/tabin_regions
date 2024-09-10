@@ -114,7 +114,6 @@ tag = "Challenge"
 complexity = "Beginner"
 lore = "An interactive tutorial, where you learn the mechanics of the game."
 align_names = Array[String](["Neutral", "You", "Enemy"])
-color_bg_according_to_alignment = true
 snap_camera_to_first_align_capital = false
 hide_turn_order = true
 
@@ -228,8 +227,8 @@ When you run out of first actions, you enter the second
 phase of your turn \"mobilization\".
 
 Here you can click on your cities with excess power to turn that
-power into bonus actions. If a city has only 1 power, you cannot
-turn that power into bonus actions.
+power into bonus actions. A city can be mobilized from if it has
+2 or more power.
 
 Once you are done mobilizing, click the button in the bottom right
 corner to advance to the last phase."

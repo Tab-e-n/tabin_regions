@@ -100,7 +100,7 @@ func _on_map_list_item_selected(index):
 	var temp_color : Color = current_map.color
 	
 	temp_color = flip_color(temp_color)
-	temp_color *= 0.5
+	temp_color *= 0.333
 	temp_color = flip_color(temp_color)
 	temp_color.a = 1.0
 	
@@ -158,9 +158,9 @@ func _on_play_pressed():
 
 func start_playing(index):
 	MapSetup.current_map_name = maps[index]
-	MapSetup.player_amount = slider_player.value
-	MapSetup.aliances_amount = slider_aliances.value
-	MapSetup.used_aligments = slider_leader.value
+	MapSetup.player_amount = int(slider_player.value)
+	MapSetup.aliances_amount = int(slider_aliances.value)
+	MapSetup.used_aligments = int(slider_leader.value)
 	if current_map.use_alignment_picker and MapSetup.player_amount > 0:
 		get_tree().change_scene_to_file("res://alignment_picker.tscn")
 	else:

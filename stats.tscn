@@ -38,6 +38,7 @@ func _ready():
 	
 	if columb_amount > 6:
 		farthest_right += (columb_amount - 6) * 192
+		$buttons/expo1.visible = true
 
 
 func new_stats_panel(stats : Dictionary, pos : int):
@@ -165,17 +166,25 @@ offset_right = 160.0
 offset_bottom = 608.0
 texture_normal = ExtResource("4_ur71k")
 
-[node name="expo" type="Label" parent="buttons"]
+[node name="expo1" type="Label" parent="buttons"]
+visible = false
 layout_mode = 0
 offset_left = 16.0
 offset_top = 104.0
 offset_right = 176.0
-offset_bottom = 344.0
+offset_bottom = 192.0
 text = "Hover your cursor
 over the edges of
-the screen to move.
+the screen to move."
+clip_text = true
 
-CSV Files are stored
+[node name="expo2" type="Label" parent="buttons"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 200.0
+offset_right = 176.0
+offset_bottom = 344.0
+text = "CSV Files are stored
 in your Appdata
 folder under
 /Roaming/TRegions."

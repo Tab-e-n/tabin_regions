@@ -3238,5 +3238,5 @@ points = PackedVector2Array(-96, -32, -72, -48, -32, -24, -8, -8, 16, -8, 56, 24
 default_color = Color(0.247059, 0.247059, 0.247059, 1)
 
 [node name="CloudSpawner" parent="." instance=ExtResource("3_qgnk2")]
-time_range_bottom = 4.0
+time_range_bottom = 1.0
 time_range_top = 8.0

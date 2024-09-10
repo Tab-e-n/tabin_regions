@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://02bnffpw4xmq"]
+[gd_scene load_steps=6 format=3 uid="uid://02bnffpw4xmq"]
 
 [ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_hywy4"]
 [ext_resource type="Script" path="res://Scripts/Region.gd" id="2_lql3s"]
+[ext_resource type="PackedScene" uid="uid://dikxdeaxwl51g" path="res://Objects/text_box.tscn" id="3_thjdb"]
 
 [sub_resource type="GDScript" id="GDScript_ojoeb"]
 script/source = "extends Node
@@ -87,7 +88,6 @@ complexity = "Simple"
 lore = "A follow-up on the previous tutorial, explains to you the remaining gameplay mechanics. CAN BE SKIPPED, BUT I RECOMMEND YOU PLAY ONLY BEGINNER MAPS UNTIL YOU COMPLETE THIS."
 align_color = Array[Color]([Color(0.431373, 0.341176, 0.411765, 1), Color(0.101961, 0.564706, 0.368627, 1), Color(0.14902, 0.490196, 0.741176, 1), Color(0.670588, 0.141176, 0.2, 1)])
 align_names = Array[String](["Neutral", "You", "Friend", "Enemy"])
-color_bg_according_to_alignment = true
 snap_camera_to_first_align_capital = false
 
 [node name="Node" type="Node" parent="."]
@@ -124,11 +124,11 @@ playing that one first.
 
 Let's start with the new UI element that was added, the rectangle with colorful
 figures in the top left corner. This represents the order in which the different
-leader play. Right now, green starts, then blue plays, and red is last. Players
-almost always start before computers.
+leaders play. Right now, green starts, then blue has their turn, and red is last.
+Players always start before computers on standard maps.
 
-Hovering over any of the figures will show you the leaders captured capitals and
-captured regions, along with the leaders name if the mapmaker specified it.
+Hovering over any of the figures will show you the leader's captured capitals and
+captured regions, along with the leader's name, if the mapmaker specified it.
 
 You may also notice that there are numbers on the figures. This is because
 of an optional feature you may enable while playing, called \"aliances\".
@@ -152,47 +152,50 @@ offset_left = -376.0
 offset_top = 640.0
 offset_right = 376.0
 offset_bottom = 832.0
-text = "Cooperate with your blue ally and beat red to complete this tutorial!
+text = "And that is it! You now know all major aspects of the game!
+There are still a few other things that are covered in this tutorial,
+you can find out more about them by clicking the rounded icons
+with an \"i\" that are spread around the outskirts of the map below.
+
+Cooperate with your blue ally and beat red to complete this tutorial!
 
 V V V"
 horizontal_alignment = 1
 
-[node name="hills" type="Label" parent="."]
-offset_left = -808.0
-offset_top = 1736.0
-offset_right = -232.0
-offset_bottom = 1888.0
+[node name="speedrun" parent="." instance=ExtResource("3_thjdb")]
+offset_left = -720.0
+offset_top = 1040.0
+offset_right = -688.0
+offset_bottom = 1072.0
+text = "You can use the mouse wheel to
+zoom in or zoom out the camera."
+
+[node name="hills" parent="." instance=ExtResource("3_thjdb")]
+offset_left = -816.0
+offset_top = 1704.0
+offset_right = -784.0
+offset_bottom = 1736.0
 text = "Hover over a city from one of the two regions neighboring there -->
 You see how the connection between them is darker than other
 connections? That is because that connection reduces the power
-of an attack by the number in the brackets."
-horizontal_alignment = 1
+of an attack by the number in the brackets.
+"
 
-[node name="skip_turn" type="Label" parent="."]
-offset_left = 328.0
+[node name="skip_turn" parent="." instance=ExtResource("3_thjdb")]
+offset_left = 432.0
 offset_top = 1248.0
-offset_right = 664.0
-offset_bottom = 1378.0
+offset_right = 464.0
+offset_bottom = 1280.0
 text = "If you still have some first actions left,
 and you advance the turn phase, the
 remaining first actions you have will
 be converted into bonus actions."
-horizontal_alignment = 1
 
-[node name="speedrun" type="Label" parent="."]
-offset_left = -712.0
-offset_top = 1064.0
-offset_right = -408.0
-offset_bottom = 1128.0
-text = "You can use the mouse wheel to
-zoom in or zoom out the camera."
-horizontal_alignment = 1
-
-[node name="hide" type="Label" parent="."]
-offset_left = 384.0
-offset_top = 1760.0
-offset_right = 833.0
-offset_bottom = 2020.0
+[node name="hide" parent="." instance=ExtResource("3_thjdb")]
+offset_left = 352.0
+offset_top = 1720.0
+offset_right = 384.0
+offset_bottom = 1752.0
 text = "Even though this game is primarily mouse controled,
 it contains a few usefull keybinds that can speed up play,
 or provide some QoL. You can check these keybinds by
@@ -203,7 +206,6 @@ on their own with no cities, press ctrl + H.
 
 There is something behind this city,
 try hiding cities so you can see it!"
-horizontal_alignment = 1
 
 [node name="Blupital" type="Polygon2D" parent="."]
 position = Vector2(224, 1032)

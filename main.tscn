@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://ckbitpcqxs5ao"]
+[gd_scene load_steps=16 format=3 uid="uid://ckbitpcqxs5ao"]
 
 [ext_resource type="Script" path="res://Scripts/GameControl.gd" id="1_2axsc"]
 [ext_resource type="Script" path="res://Scripts/GameCamera.gd" id="1_we6ai"]
 [ext_resource type="Script" path="res://AI/AIControler.gd" id="2_w08l3"]
 [ext_resource type="Texture2D" uid="uid://deqhvnfw114vp" path="res://Sprites/advance.png" id="5_1p0vp"]
+[ext_resource type="StyleBox" uid="uid://crwlkegnfaves" path="res://Styles/style_label_align_picker.tres" id="5_mbtgw"]
 [ext_resource type="Texture2D" uid="uid://jb8ugdvfra1h" path="res://Sprites/current_power.png" id="6_duti3"]
 [ext_resource type="Texture2D" uid="uid://b5wmm400auwgm" path="res://Sprites/pause_button.png" id="7_6wsra"]
 [ext_resource type="StyleBox" uid="uid://l8vkqqi4prkx" path="res://Styles/style_label_normal_box.tres" id="7_r48wm"]
@@ -75,7 +76,7 @@ layout_mode = 0
 offset_top = 504.0
 offset_right = 1152.0
 offset_bottom = 632.0
-theme_override_styles/panel = ExtResource("7_r48wm")
+theme_override_styles/panel = ExtResource("5_mbtgw")
 
 [node name="AdvanceTurn" type="TextureButton" parent="GameCamera/UI/Hideable"]
 layout_mode = 0
@@ -131,7 +132,7 @@ offset_top = 8.0
 offset_right = 128.0
 offset_bottom = 104.0
 pivot_offset = Vector2(0, 96)
-theme_override_styles/panel = ExtResource("7_r48wm")
+theme_override_styles/panel = ExtResource("5_mbtgw")
 script = ExtResource("8_y476x")
 
 [node name="Attacks" type="RichTextLabel" parent="GameCamera/UI/Hideable"]

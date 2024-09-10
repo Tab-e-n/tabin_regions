@@ -196,9 +196,9 @@ script = ExtResource("1_dvj8c")
 use_alignment_picker = false
 lock_aliances = true
 complexity = "Beginner"
-lore = "Are we there yet?"
+lore = "Are we there yet?
+Patience is required for victory."
 align_names = Array[String](["", "BOT", "TOPPOM"])
-color_bg_according_to_alignment = true
 hide_turn_order = true
 render_mode = 1
 

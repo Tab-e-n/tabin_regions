@@ -101,7 +101,7 @@ func _ready():
 "
 
 [node name="HoneycombMadness" type="Polygon2D"]
-color = Color(0.894118, 0.811765, 0.615686, 1)
+color = Color(0.878431, 0.772549, 0.537255, 1)
 polygon = PackedVector2Array(-320, 640, 320, 640, 704, 0, 320, -640, -320, -640, -704, 0)
 script = ExtResource("1_o4us8")
 lock_align_amount = false
@@ -109,19 +109,18 @@ align_amount = 7
 complexity = "Simple"
 lore = "Somewhere in the harsh desert, a secret battleground is located,
 where only the best bug themed armies compete to see who is the greatest amongst them."
-align_color = Array[Color]([Color(0.85098, 0.737255, 0.486275, 1), Color(0.647059, 0.509804, 0.376471, 1), Color(0.815686, 0.623529, 0.0823529, 1), Color(0.843137, 0.878431, 0.419608, 1), Color(0.682353, 0.356863, 0.0823529, 1), Color(0.403922, 0.227451, 0.168627, 1), Color(0.929412, 0.654902, 0.356863, 1)])
+align_color = Array[Color]([Color(0.733333, 0.631373, 0.454902, 1), Color(0.647059, 0.509804, 0.376471, 1), Color(0.815686, 0.623529, 0.0823529, 1), Color(0.843137, 0.878431, 0.419608, 1), Color(0.682353, 0.356863, 0.0823529, 1), Color(0.403922, 0.227451, 0.168627, 1), Color(0.929412, 0.654902, 0.356863, 1)])
 align_names = Array[String](["Honeycomb", "Merry Maggots", "Wasps of Wrath", "Stinkbugs", "Terminates", "AstronAnts", "Baddest Beetles"])
-color_bg_according_to_alignment = true
 render_mode = 1
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_ajqca")
 
 [node name="bg" parent="." instance=ExtResource("2_w34l4")]
-color = Color(0.823529, 0.705882, 0.447059, 1)
+color = Color(0.729412, 0.611765, 0.403922, 1)
 
 [node name="Heart Of The Honeycom" type="Polygon2D" parent="."]
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 3
@@ -129,19 +128,19 @@ is_capital = true
 
 [node name="Center Left Comb" type="Polygon2D" parent="."]
 position = Vector2(-136, -88)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Center Right Comb" type="Polygon2D" parent="."]
 position = Vector2(136, -88)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Center Bottom Comb" type="Polygon2D" parent="."]
 position = Vector2(0, 176)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
@@ -195,192 +194,192 @@ is_capital = true
 
 [node name="Maggot Left" type="Polygon2D" parent="."]
 position = Vector2(272, -352)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Maggot Right" type="Polygon2D" parent="."]
 position = Vector2(136, -440)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Wasp Left" type="Polygon2D" parent="."]
 position = Vector2(408, 88)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Wasp Right" type="Polygon2D" parent="."]
 position = Vector2(408, -88)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Stinkbug Left" type="Polygon2D" parent="."]
 position = Vector2(136, 440)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Stinkbug Right" type="Polygon2D" parent="."]
 position = Vector2(272, 352)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Termite Left" type="Polygon2D" parent="."]
 position = Vector2(-272, 352)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Termite Right" type="Polygon2D" parent="."]
 position = Vector2(-136, 440)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Ant Left" type="Polygon2D" parent="."]
 position = Vector2(-408, -88)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Ant Right" type="Polygon2D" parent="."]
 position = Vector2(-408, 88)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Beetle Left" type="Polygon2D" parent="."]
 position = Vector2(-136, -440)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Beetle Right" type="Polygon2D" parent="."]
 position = Vector2(-272, -352)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 power = 0
 
 [node name="Beetle Maggots" type="Polygon2D" parent="."]
 position = Vector2(0, -528)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Maggot Wasps" type="Polygon2D" parent="."]
 position = Vector2(408, -264)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Wasp Stinkbugs" type="Polygon2D" parent="."]
 position = Vector2(408, 264)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Stinkbug Termites" type="Polygon2D" parent="."]
 position = Vector2(0, 528)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Termite Ants" type="Polygon2D" parent="."]
 position = Vector2(-408, 264)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Ant Beetles" type="Polygon2D" parent="."]
 position = Vector2(-408, -264)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Top Wall" type="Polygon2D" parent="."]
 position = Vector2(0, -352)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Right Wall" type="Polygon2D" parent="."]
 position = Vector2(272, 176)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Left Wall" type="Polygon2D" parent="."]
 position = Vector2(-272, 176)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Right Line" type="Polygon2D" parent="."]
 position = Vector2(272, -176)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Bottom Line" type="Polygon2D" parent="."]
 position = Vector2(0, 352)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Left Line" type="Polygon2D" parent="."]
 position = Vector2(-272, -176)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Center Maggots" type="Polygon2D" parent="."]
 position = Vector2(136, -264)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Center Wasps" type="Polygon2D" parent="."]
 position = Vector2(272, 0)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Center Stinkbugs" type="Polygon2D" parent="."]
 position = Vector2(136, 264)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Center Termites" type="Polygon2D" parent="."]
 position = Vector2(-136, 264)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Center Ants" type="Polygon2D" parent="."]
 position = Vector2(-272, 0)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
 
 [node name="Center Beetles" type="Polygon2D" parent="."]
 position = Vector2(-136, -264)
-color = Color(0.85098, 0.737255, 0.486275, 1)
+color = Color(0.733333, 0.631373, 0.454902, 1)
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 script = ExtResource("2_bj333")
