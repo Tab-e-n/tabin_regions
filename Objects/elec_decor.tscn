@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd4trbis6awh6"]
+
+[ext_resource type="Script" path="res://Scripts/elec_decor.gd" id="1_mukh7"]
+[ext_resource type="Texture2D" uid="uid://d1cnwfpjs4eq2" path="res://Sprites/circle.png" id="2_x2ymp"]
+
+[sub_resource type="Animation" id="Animation_6kek7"]
+resource_name = "disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bolt:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.501961), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_chuvi"]
+_data = {
+"disappear": SubResource("Animation_6kek7")
+}
+
+[node name="ElectricityDecor" type="Node2D"]
+script = ExtResource("1_mukh7")
+
+[node name="bolt" type="Line2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+
+[node name="Circle" type="Sprite2D" parent="bolt"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_x2ymp")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_chuvi")
+}
+
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

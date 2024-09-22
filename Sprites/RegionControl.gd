@@ -40,7 +40,10 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @export_subgroup("Alignments & Players")
 ## The number of alignments the map uses. It equals the number of all active alignments + the neutral alignment.
 @export var align_amount : int = 3
+## Will specify the amount of alignments that are used. When the map has more alignments than the amount specified with this property, random alignments not picked by players will have their regions converted to neutral.
 @export var used_alignments : int = 0
+## Determines if the capitals of alignments that were removed by 'used_alignments' should be removed as well.
+## When set to true, all the alignments capitals will be converted to basic cities.
 @export var remove_capitals_with_alignments : bool = true
 ## The intended amount of players the map should have. Can be overwritten in the setup scene unless allow_map_spec_change is set to false.
 @export var player_amount : int = 1
@@ -53,7 +56,9 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @export var preset_alignments : Array[int] = []
 
 @export_subgroup("AI")
+## The default AI that computer players will use. Uses the 'CONTROLER_' enums from 'AIControler'. Default, Turtle, Neural and Cheater are all accessible in the setup scene. The Dummy AI does nothing, expecting to be controled by the map.
 @export_enum("None", "Default", "Turtle", "Neural", "Cheater", "Dummy") var default_ai_controler : int = AIControler.CONTROLER_DEFAULT
+## Enables the use of 'custom_ai_setup'. Will also prevent the user from changing the AI of the computer players.
 @export var use_custom_ai_setup : bool = false
 @export var custom_ai_setup : Array[int] = []
 
@@ -64,10 +69,13 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @export var autoaliances_divisions_amount : int = 2
 
 @export_subgroup("Cosmetics")
+## Tells the player what type of map this map is. Skirmishes are basic maps with not much special. Challenges are curated experiences that are meant to challenge the player in some way. Bot battles are maps with no human players. 
 @export_enum("Skirmish", "Challenge", "Bot Battle") var tag : String = "Skirmish"
-@export_enum("Unspecified", "Beginner", "Simple", "Intermediate", "Advanced", "Extreme") var complexity : String = "Unspecified"
+## Tells the player how experienced with the game they should be to play this map.
+@export_enum("Unspecified", "Beginner", "Simple", "Intermediate", "Advanced", "Difficult", "Extreme") var complexity : String = "Unspecified"
+## Text explaing the context of the map. Show up in the setup scene.
 @export_multiline var lore : String = """Insert lore here"""
-
+## Colors used by the maps alignments. The first color is used for neutral regions.
 @export var align_color : Array[Color] = [
 		Color("625775"), # purplish gray
 		
@@ -107,15 +115,25 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 		Color("eda75b"), # sandstorm
 		Color("2e5949"), # dark green
 ]
+## Names of alignments. Includes the neutral alignment.
 @export var align_names : Array[String] = []
-
+## When set to true, the RegionControl will color itself based on which alignment is currently playing.
 @export var color_bg_according_to_alignment : bool = true
+## Controls the scale of cities. Smaller cities will make the map feel larger, without it taking up more space.
 @export var city_size : float = 1
+## When starting the map, the camera will snap to a capital of the starting alignment.
 @export var snap_camera_to_first_align_capital : bool = true
+## When set to true, the turn order will start invisible.
 @export var hide_turn_order : bool = false
 
 @export_subgroup("Editor")
+## Holds the connections of all regions. When the map is readying, RegionControl will attempt to make every connection in this array. I recommend to not using the inspector to edit this property, use a built-in script like in the template map instead.
 @export var connections : Array = []
+## Only has an effect in the editor. When not set to Disabled, will color the regions depending on certain criteria.
+## Alignment will color regions based on their alignment.
+## Power and Max Power will color regions based on the regions current power and max possible power respectively. Darker regions have more power.
+## Capital will color regions based on if they are a capital or not. Green means it is a capital, red means it is not.
+## Position colors the regions based on their position.
 @export_enum("Disabled", "Alignment", "Power", "Max Power", "Capital", "Position") var render_mode : int = 0
 @export var render_range : float = 20
 

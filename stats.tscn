@@ -93,7 +93,7 @@ func new_stats_panel(stats : Dictionary, pos : int):
 	$columbs.add_child(columb)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed(\"escape\"):
 		leave()
 	
