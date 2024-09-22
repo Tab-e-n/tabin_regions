@@ -64,8 +64,8 @@ func _ready():
 		uv.resize(polygon.size())
 		
 		for i in range(uv.size()):
-			uv[i].x = 128 * (polygon[i].x - far_left) / width
-			uv[i].y = 128 * (polygon[i].y - far_up) / height
+			uv[i].x = TEXTURE_SIZE.x * (polygon[i].x - far_left) / width
+			uv[i].y = TEXTURE_SIZE.y * (polygon[i].y - far_up) / height
 	
 	if Engine.is_editor_hint():
 		return
