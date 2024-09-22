@@ -1,0 +1,236 @@
+[gd_scene load_steps=7 format=3 uid="uid://by2ve3ngu12oa"]
+
+[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_casom"]
+[ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_fu633"]
+[ext_resource type="Script" path="res://Scripts/Region.gd" id="3_fv22h"]
+[ext_resource type="PackedScene" uid="uid://dikxdeaxwl51g" path="res://Objects/text_box.tscn" id="4_48ifu"]
+[ext_resource type="PackedScene" uid="uid://dcd50lc8r7cxq" path="res://Objects/cloud_spawner.tscn" id="5_ax01n"]
+
+[sub_resource type="GDScript" id="GDScript_fsydj"]
+script/source = "extends Node
+
+var connections : Array = [
+	[\"Orchards\", \"Goodie Town\"],
+	[\"Orchards\", \"Free Field\"],
+	[\"Orchards\", \"A Place On Top\"],
+	[\"A Place On Top\", \"Free Field\"],
+	[\"Horned Cap\", \"Broken Man Path\"],
+	[\"Horned Cap\", \"Eye\"],
+	[\"Eye\", \"Broken Man Path\"],
+	[\"Rock Trail\", \"Broken Man Path\"],
+	[\"Orchards\", \"Road Less Traveled\"],
+	[\"Road Less Traveled\", \"Goodie Town\"],
+	[\"Orchards\", \"Haunted Woods\"],
+	[\"Free Field\", \"Haunted Woods\"],
+	[\"Road Less Traveled\", \"Haunted Woods\"],
+	[\"Road Less Traveled\", \"Lake Path\"],
+	[\"Road Less Traveled\", \"Island's Leg\"],
+	[\"Island's Leg\", \"Lake Path\"],
+	[\"Lake Path\", \"Haunted Woods\"],
+	[\"Gray Shore\", \"Gray Arma\"],
+	[\"Eye\", \"Gray Arma\"],
+	[\"Rock Trail\", \"Gray Arma\"],
+	[\"Rock Trail\", \"Down Servant\"],
+	[\"Rock Trail\", \"Eye\"],
+	[\"All Piece\", \"Eye\"],
+	[\"Macita\", \"Gray Arma\"],
+	[\"Macita\", \"All Piece\"],
+	[\"All Piece\", \"Gray Arma\"],
+	[\"Macita\", \"Wheat Field\"],
+	[\"Macita\", \"Free Field\"],
+	[\"A Place On Top\", \"Wheat Field\"],
+	[\"Free Field\", \"Wheat Field\"],
+	[\"Gray Shore\", \"Rock Trail\"],
+	[\"Gray Shore\", \"Purity Lake Cliffside\"],
+	[\"Rock Trail\", \"Purity Lake Cliffside\"],
+	[\"Down Servant\", \"Purity Lake Cliffside\"],
+	[\"Gray Shore\", \"Purity Lake Shore\"],
+	[\"Free Field\", \"Purity Lake Shore\"],
+	[\"Gray Shore\", \"Macita\"],
+	[\"Macita\", \"Purity Lake Shore\"],
+	[\"Haunted Woods\", \"Purity Lake Shore\"],
+	[\"Quartz Rocks\", \"Purity Lake Shore\", 1],
+	[\"Quartz Rocks\", \"Lake Path\", 1],
+	[\"Quartz Rocks\", \"Island's Leg\", 1],
+	[\"Lake Path\", \"Purity Lake Shore\"],
+	[\"Quartz Rocks\", \"Purity Lake Cliffside\", 1],
+]
+
+
+func _ready():
+	get_parent().connections = connections.duplicate()
+	queue_free()
+
+"
+
+[node name="template" type="Polygon2D"]
+color = Color(0.419608, 0.537255, 0.564706, 1)
+polygon = PackedVector2Array(-576, -328, -424, -408, -208, -440, 240, -424, 464, -368, 608, -208, 600, 16, 488, 232, 224, 328, -128, 336, -424, 216, -616, 48, -664, -128)
+script = ExtResource("1_casom")
+use_alignment_picker = false
+lock_player_amount = true
+lock_aliances = true
+max_player_amount = 1
+use_preset_alignments = true
+preset_alignments = Array[int]([1, 2])
+default_ai_controler = 4
+use_custom_ai_setup = true
+tag = "Challenge"
+complexity = "Simple"
+lore = "An introduction to the cheater AI option.
+It's the one with the horns."
+align_color = Array[Color]([Color(0.309804, 0.356863, 0.372549, 1), Color(0.929412, 0.654902, 0.356863, 1), Color(0.537255, 0.152941, 0.658824, 1)])
+align_names = Array[String](["Neutral", "Honest", "Cheater"])
+render_mode = 1
+
+[node name="connection_setter" type="Node" parent="."]
+script = SubResource("GDScript_fsydj")
+
+[node name="bg" parent="." instance=ExtResource("2_fu633")]
+color = Color(0.294118, 0.392157, 0.415686, 1)
+
+[node name="Goodie Town" type="Polygon2D" parent="."]
+position = Vector2(-456, -88)
+color = Color(0.929412, 0.654902, 0.356863, 1)
+polygon = PackedVector2Array(-72, -16, -64, 24, -24, 48, 16, 56, 56, 40, 64, 8, 72, -24, 56, -64, 40, -80, 80, -104, 96, -136, 88, -152, 72, -152, 40, -152, 16, -136, -32, -112, -88, -88, -136, -48, -144, -16, -120, -8, -88, -16, -88, -32, -112, -32, -104, -48, -80, -64, -48, -88, 0, -104, 32, -128, 64, -136, 64, -120, 40, -104, 8, -80, -40, -48, -72, -40)
+script = ExtResource("3_fv22h")
+alignment = 1
+is_capital = true
+
+[node name="Road Less Traveled" type="Polygon2D" parent="."]
+position = Vector2(-328, -40)
+offset = Vector2(-32, 0)
+polygon = PackedVector2Array(-80, 16, -64, 32, -40, 40, -8, 40, 24, 48, 48, 64, 80, 72, 96, 40, 80, 32, 72, 16, 80, 0, 80, -8, 72, -24, 72, -48, 64, -64, 56, -64, 16, -48, -24, -40, -32, 0)
+script = ExtResource("3_fv22h")
+power = 0
+
+[node name="Island\'s Leg" type="Polygon2D" parent="."]
+position = Vector2(-296, 104)
+offset = Vector2(24, 0)
+polygon = PackedVector2Array(-40, -72, -32, -40, -48, -24, -56, 0, -48, 40, -40, 96, -16, 104, 8, 120, 48, 128, 64, 104, 24, 96, 32, 80, 24, 56, 8, 40, 16, 0, 32, -16, 40, -24, 32, -40, 24, -40, 0, -64, -16, -64)
+script = ExtResource("3_fv22h")
+
+[node name="Orchards" type="Polygon2D" parent="."]
+position = Vector2(-312, -160)
+offset = Vector2(48, 0)
+polygon = PackedVector2Array(-128, 8, -112, 48, -120, 72, -80, 64, -40, 48, -24, 24, -8, 16, 24, 16, 48, 16, 56, -8, 56, -32, 48, -56, 24, -64, -8, -56, -24, -40, -40, -32, -56, -40, -80, -40, -80, -16, -88, 0, -104, 8)
+script = ExtResource("3_fv22h")
+
+[node name="Haunted Woods" type="Polygon2D" parent="."]
+position = Vector2(-208, -88)
+polygon = PackedVector2Array(-88, -24, -80, -40, -64, -48, -8, -48, 0, -32, 24, -24, 48, -32, 72, -40, 88, -24, 96, -8, 112, 0, 120, 8, 104, 24, 80, 40, 48, 48, 40, 56, 24, 56, 0, 48, -32, 48, -64, 40, -72, 24, -72, 0, -80, -16)
+script = ExtResource("3_fv22h")
+power = 2
+
+[node name="Lake Path" type="Polygon2D" parent="."]
+position = Vector2(-224, 0)
+polygon = PackedVector2Array(-48, 32, -24, 56, -16, 56, -16, 40, 40, 24, 48, 48, 64, 24, 64, 8, 48, 0, 56, -24, 32, -24, 16, -32, -16, -32, -48, -40, -56, -24, -48, -8, -32, 0)
+script = ExtResource("3_fv22h")
+
+[node name="Quartz Rocks" type="Polygon2D" parent="."]
+position = Vector2(-144, 136)
+offset = Vector2(-48, -8)
+polygon = PackedVector2Array(24, -56, 40, -48, 48, -40, 40, -32, 48, -16, 64, -8, 80, -8, 88, 0, 120, -8, 136, 16, 120, 32, 120, 56, 96, 64, 88, 64, 80, 40, 64, 48, 40, 56, 24, 40, 8, 40, 8, 24, 24, 8, 8, -16, -16, -24, -24, -32, -8, -48, -16, -64, -16, -72, 0, -72, 8, -56)
+script = ExtResource("3_fv22h")
+power = 3
+is_capital = true
+
+[node name="Gray Shore" type="Polygon2D" parent="."]
+position = Vector2(72, 8)
+polygon = PackedVector2Array(-8, -56, -48, -56, -72, -32, -56, -24, -48, 8, -32, 24, 8, 32, 24, 32, 48, 40, 72, 56, 96, 48, 104, 32, 120, 16, 104, 8, 72, 16, 40, -8, 8, -8, 8, -32, -8, -40)
+script = ExtResource("3_fv22h")
+
+[node name="Purity Lake Shore" type="Polygon2D" parent="."]
+position = Vector2(-88, -32)
+offset = Vector2(-24, 0)
+polygon = PackedVector2Array(-40, 88, -24, 72, 0, 64, 16, 48, 32, 24, 64, 0, 104, 8, 128, -24, 120, -40, 88, -56, 56, -56, 32, -48, 8, -24, -16, -8, -48, 0, -56, 24, -40, 40, -40, 56, -56, 80)
+script = ExtResource("3_fv22h")
+
+[node name="Horned Cap" type="Polygon2D" parent="."]
+position = Vector2(440, -96)
+color = Color(0.537255, 0.152941, 0.658824, 1)
+polygon = PackedVector2Array(40, -24, 16, -40, -16, -32, -48, -48, -40, -88, -72, -80, -88, -56, -80, -32, -64, -8, -40, 0, -56, 16, -32, 48, -24, 48, 16, 40, 32, 16, 48, 16, 64, 8, 88, 0, 104, -32, 104, -56, 80, -80, 80, -56, 72, -24)
+script = ExtResource("3_fv22h")
+alignment = 2
+is_capital = true
+
+[node name="Eye" type="Polygon2D" parent="."]
+position = Vector2(360, -16)
+offset = Vector2(-8, -16)
+polygon = PackedVector2Array(-16, 48, -16, 56, 16, 80, 48, 80, 72, 64, 72, 32, 56, -8, 32, -40, 8, -48, -32, -40, -48, -24, -48, 16, -40, 32, -24, 24, -24, 8, -8, -16, 8, -16, 24, -8, 0, 8, -8, 32, 24, 24, 32, 0, 48, 24, 48, 48, 24, 56, 0, 48, -8, 40)
+script = ExtResource("3_fv22h")
+
+[node name="Broken Man Path" type="Polygon2D" parent="."]
+position = Vector2(448, 72)
+offset = Vector2(0, -96)
+polygon = PackedVector2Array(-32, -16, -16, 24, -16, 56, -48, 80, -72, 80, -120, 56, -128, 88, -112, 96, -96, 120, -64, 136, -32, 144, -8, 136, 24, 120, 40, 104, 40, 80, 32, 64, 48, 40, 56, 24, 56, -8, 40, -24, 24, -40, 8, -24)
+script = ExtResource("3_fv22h")
+power = 0
+
+[node name="Gray Arma" type="Polygon2D" parent="."]
+position = Vector2(168, -24)
+polygon = PackedVector2Array(-80, 16, -56, 16, -24, 40, 8, 32, 48, 56, 88, 48, 112, 40, 128, 16, 128, -32, 120, -48, 104, -40, 96, -48, 72, -64, 64, -48, 48, -56, 40, -72, 24, -72, 16, -64, 8, -72, 0, -88, -16, -80, -24, -72, -32, -80, -48, -88, -56, -80, -64, -56, -80, -64, -88, -56, -88, -40, -88, -24, -96, -24, -96, -8, -80, 0)
+script = ExtResource("3_fv22h")
+power = 3
+
+[node name="All Piece" type="Polygon2D" parent="."]
+position = Vector2(224, -136)
+offset = Vector2(-32, -24)
+polygon = PackedVector2Array(-88, 8, -64, 32, -72, 40, -56, 48, -48, 56, -40, 48, -24, 40, -8, 64, 0, 56, 16, 56, 24, 72, 40, 80, 48, 64, 72, 80, 80, 88, 96, 80, 112, 96, 128, 80, 144, 80, 136, 56, 120, 40, 96, 32, 80, 40, 72, 16, 72, -8, 40, -40, 8, -56, 24, -32, 24, -16, 8, 0, -8, 8, -16, -16, -32, -24, -64, -16)
+script = ExtResource("3_fv22h")
+
+[node name="Macita" type="Polygon2D" parent="."]
+position = Vector2(48, -112)
+polygon = PackedVector2Array(-24, 56, -32, 32, -72, 16, -104, 16, -104, -8, -80, -8, -56, -24, -56, -48, -24, -48, 8, -64, 8, -88, -8, -112, 8, -120, 32, -96, 64, -80, 72, -64, 48, -40, 72, -16, 56, 8, 56, 24, 40, 16, 24, 32, 24, 56)
+script = ExtResource("3_fv22h")
+
+[node name="Wheat Field" type="Polygon2D" parent="."]
+position = Vector2(-40, -176)
+polygon = PackedVector2Array(-16, 48, -32, 32, -40, 16, -40, 0, -24, -16, -16, -40, -8, -56, 8, -64, 32, -64, 48, -56, 64, -48, 72, -48, 88, -24, 88, 0, 64, 8, 32, 8, 24, 16, 24, 40, 8, 48)
+script = ExtResource("3_fv22h")
+
+[node name="Free Field" type="Polygon2D" parent="."]
+position = Vector2(-136, -152)
+offset = Vector2(-16, -24)
+polygon = PackedVector2Array(-32, -16, -8, -24, 8, -16, 24, 0, 40, 8, 64, 0, 64, 16, 72, 32, 88, 56, 88, 80, 72, 88, 64, 88, 56, 80, 40, 72, 32, 56, 16, 40, -32, 56, -48, 48, -56, 40, -56, 32, -48, 8, -48, -16)
+script = ExtResource("3_fv22h")
+power = 0
+
+[node name="A Place On Top" type="Polygon2D" parent="."]
+position = Vector2(-112, -232)
+polygon = PackedVector2Array(-88, 16, -80, 8, -56, 0, -32, 0, -16, 8, -8, 0, 16, -8, 40, -8, 48, 0, 56, 0, 40, 40, 24, 48, 0, 56, -16, 48, -32, 32, -48, 24, -72, 32, -88, 32, -96, 16)
+script = ExtResource("3_fv22h")
+
+[node name="Rock Trail" type="Polygon2D" parent="."]
+position = Vector2(248, 56)
+polygon = PackedVector2Array(-72, 0, -24, 24, -32, 48, 0, 64, 8, 48, 24, 48, 16, 24, 32, 24, 40, 8, 56, 0, 64, 8, 72, -24, 80, -40, 88, -48, 80, -56, 64, -48, 56, -64, 32, -32, 8, -24, -32, -16, -48, -24, -64, -16)
+script = ExtResource("3_fv22h")
+
+[node name="Down Servant" type="Polygon2D" parent="."]
+position = Vector2(248, 152)
+polygon = PackedVector2Array(-32, -40, 0, -24, 8, -40, 24, -40, 40, -8, 32, 40, 16, 64, -8, 64, -16, 88, -32, 104, -48, 112, -24, 136, -48, 144, -80, 120, -96, 88, -96, 64, -64, 40, -32, 24, -24, 0, -32, -16)
+script = ExtResource("3_fv22h")
+
+[node name="Purity Lake Cliffside" type="Polygon2D" parent="."]
+position = Vector2(32, 136)
+color = Color(0.309804, 0.356863, 0.372549, 1)
+polygon = PackedVector2Array(-48, -24, -40, 8, -56, 32, -64, 64, -40, 64, -16, 32, 24, 48, 72, 56, 96, 56, 112, 32, 136, 16, 160, 16, 176, 0, 176, -24, 184, -48, 136, -72, 112, -64, 112, -56, 104, -40, 88, -24, 40, -24, 8, -32, -16, -40, -40, -56, -56, -56, -56, -40)
+script = ExtResource("3_fv22h")
+
+[node name="Rocks" type="Line2D" parent="."]
+points = PackedVector2Array(-152, 72, -160, 64, -176, 64, -192, 40, -224, 48, -224, 64, -216, 80, -232, 96, -216, 112, -192, 120, -184, 136, -200, 152, -200, 176, -176, 184, -152, 200, -120, 184, -120, 208, -96, 208, -64, 192, -56, 160, -40, 144, -56, 120)
+default_color = Color(0.227451, 0.254902, 0.25098, 1)
+
+[node name="Cheater Hint" parent="." instance=ExtResource("4_48ifu")]
+self_modulate = Color(0.788235, 0.858824, 0.878431, 1)
+offset_left = -320.0
+offset_top = -400.0
+offset_right = -288.0
+offset_bottom = -368.0
+text = "The cheater AI behaves the same as the default AI, with one difference:
+Every 6th turn, it cheats, giving itself more actions, and sometimes fudging
+some numbers in it's favor. Beware!"
+
+[node name="CloudSpawner" parent="." instance=ExtResource("5_ax01n")]
+time_range_bottom = 10.0
+time_range_top = 20.0

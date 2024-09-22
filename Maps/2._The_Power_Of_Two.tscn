@@ -78,7 +78,7 @@ polygon = PackedVector2Array(-592, -208, -464, 24, -16, 112, 16, 352, 392, 536, 
 script = ExtResource("1_k6mpi")
 lock_align_amount = false
 align_amount = 5
-complexity = "Intermediate"
+complexity = "Simple"
 lore = "Two plus two is four, so is two times two.
 This is why all players have two capitals. It makes sence i promise."
 align_color = Array[Color]([Color(0.247059, 0.341176, 0.356863, 1), Color(0.870588, 0.666667, 0.780392, 1), Color(0.772549, 0.921569, 0.74902, 1), Color(0.713726, 0.717647, 0.921569, 1), Color(0.843137, 0.792157, 0.752941, 1)])

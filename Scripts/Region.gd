@@ -3,7 +3,7 @@ extends Polygon2D
 class_name Region
 
 
-const TEXTURE_SIZE : Vector2 = Vector2(1024, 1024)
+const TEXTURE_SIZE : Vector2 = Vector2(128, 128)
 const DISTANCE_CAP : int = 0b1111_1111_1111_1111
 
 
@@ -34,8 +34,39 @@ signal mobilized()
 var tool_render_mode : int = RENDER_MODE.ALIGNMENT
 var distance_from_capital : int = DISTANCE_CAP
 
+var color_change_time : float = 1.0
+
 
 func _ready():
+	texture = preload("res://Sprites/region.png")
+	material = ShaderMaterial.new()
+	material.shader = preload("res://Scripts/region_shader.gdshader")
+	
+	if polygon.size() > 0:
+		var far_left : float = polygon[0].x
+		var far_right : float = polygon[0].x
+		var far_up : float = polygon[0].y
+		var far_down : float = polygon[0].y
+		
+		for i in polygon:
+			if i.x < far_left:
+				far_left = i.x
+			if i.x > far_right:
+				far_right = i.x
+			if i.y < far_up:
+				far_up = i.y
+			if i.y > far_down:
+				far_down = i.y
+		
+		var width : float = far_right - far_left
+		var height : float = far_down - far_up
+		
+		uv.resize(polygon.size())
+		
+		for i in range(uv.size()):
+			uv[i].x = 128 * (polygon[i].x - far_left) / width
+			uv[i].y = 128 * (polygon[i].y - far_up) / height
+	
 	if Engine.is_editor_hint():
 		return
 	
@@ -50,10 +81,10 @@ func _ready_deferred():
 		city.pressed.connect(_on_capital_pressed)
 		city.mouse_entered.connect(make_region_arrows)
 	
-	color_self()
+	color_self(false)
 
 
-func _process(_delta):
+func _process(delta):
 	if Engine.is_editor_hint() and region_control:
 		tool_render_mode = region_control.render_mode
 		match(tool_render_mode):
@@ -76,6 +107,13 @@ func _process(_delta):
 				var col2 : float = 1.0 - clampf(abs(position.y) / pos_range, 0, 1)
 				
 				color = Color(col1, col2, 0.5, 1)
+	if not Engine.is_editor_hint():
+		if color_change_time < 1.0:
+			color_change_time += delta * 2
+			if color_change_time < 1.0:
+				material.set_shader_parameter("n", color_change_time)
+			else:
+				material.set_shader_parameter("changing_color", false)
 
 
 func power_color(amount : int, no_zero : bool):
@@ -103,7 +141,12 @@ func change_alignment(align : int, recolor_self : bool = true):
 	changed_alignment.emit(alignment)
 
 
-func color_self():
+func color_self(animate : bool = true):
+	if(animate):
+		material.set_shader_parameter("changing_color", true)
+		material.set_shader_parameter("n", 0)
+		material.set_shader_parameter("previous_color", color)
+		color_change_time = 0
 	color = region_control.align_color[alignment]
 	city.color_self(region_control.align_color[alignment])
 

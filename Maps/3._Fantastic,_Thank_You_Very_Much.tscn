@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://xlu4wp5m8phb"]
+[gd_scene load_steps=7 format=3 uid="uid://xlu4wp5m8phb"]
 
 [ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_qwc4r"]
 [ext_resource type="Script" path="res://Scripts/Region.gd" id="2_iirrf"]
 [ext_resource type="PackedScene" uid="uid://dcd50lc8r7cxq" path="res://Objects/cloud_spawner.tscn" id="3_t7voh"]
+[ext_resource type="PackedScene" uid="uid://blowvq5h3r2t5" path="res://Objects/star_spawner.tscn" id="4_7praj"]
 
 [sub_resource type="GDScript" id="GDScript_hq4v5"]
 script/source = "extends Node
@@ -116,7 +117,6 @@ complexity = "Medium"
 lore = "Long ago, the four elements of the magic hill lived in peace, that is until they all went coo coo crazy and started fighting each other.
 Every so often, the magic hill gives each element more power to their capital."
 align_names = Array[String](["", "Fire", "Wind", "Water", "Earth"])
-color_bg_according_to_alignment = true
 render_mode = 1
 
 [node name="Node" type="Node" parent="."]
@@ -326,3 +326,8 @@ power = 0
 [node name="CloudSpawner" parent="." instance=ExtResource("3_t7voh")]
 time_range_bottom = 16.0
 time_range_top = 32.0
+
+[node name="StarSpawner" parent="." instance=ExtResource("4_7praj")]
+time_range_bottom = 4.0
+time_range_top = 8.0
+star_scale_top = 1.0

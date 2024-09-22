@@ -23,6 +23,7 @@ func _ready():
 	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	text.size = Vector2(64, 64)
+	text.z_index = 1
 	add_child(text)
 	
 	region_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -33,7 +34,7 @@ func _ready():
 	if OS.has_feature("editor"):
 		region_name.text += " (" + String.num(region.distance_from_capital) + ")"
 	region_name.visible = false
-	region_name.z_index = 1
+	region_name.z_index = 2
 	add_child(region_name)
 
 

@@ -235,7 +235,8 @@ Esc  -  Exit
 \"/\"  -  Reset zoom
 Arrow Keys  -  Secondary way to move camera
 WASD  -  Tertiary way to move camera
-Shift  -  Faster camera scroll
+Hold shift to move the camera faster
+Hold ctrl to move the camera slower
 
 "
 clip_text = true

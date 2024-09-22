@@ -160,6 +160,7 @@ func _ready_turn_order():
 func _physics_process(delta):
 	var mouse_position = get_viewport().get_mouse_position()
 	var shift = Input.is_action_pressed("shift")
+	var ctrl = Input.is_action_pressed("ctrl")
 	
 	if Input.is_action_just_pressed("escape"):
 		if LeaveMessage.visible:
@@ -199,6 +200,8 @@ func _physics_process(delta):
 	var move_speed = BASE_MOVE_SPEED * UI.scale.x
 	if shift:
 		move_speed *= 2.0
+	if ctrl:
+		move_speed *= 0.3
 	position += direction * Vector2(move_speed, move_speed)
 	
 	snapped(position, Vector2(1.0, 1.0))
