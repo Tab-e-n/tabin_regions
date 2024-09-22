@@ -10,7 +10,6 @@ class_name GameControl
 @onready var ai_control : AIControler
 
 var hide_cross : float = 0
-var cities_visible : bool = false
 
 
 func _ready():
@@ -27,7 +26,3 @@ func _process(delta):
 	hide_cross -= delta
 	if hide_cross < 0:
 		cross.visible = false
-	
-	if Input.is_action_just_pressed("hide_capitals"):
-		cities_visible = not cities_visible
-		game_camera.CommandCallout.new_callout("Toggle hide capitols")

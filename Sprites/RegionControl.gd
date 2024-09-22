@@ -127,8 +127,6 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @export var hide_turn_order : bool = false
 
 @export_subgroup("Editor")
-## Holds the connections of all regions. When the map is readying, RegionControl will attempt to make every connection in this array. I recommend to not using the inspector to edit this property, use a built-in script like in the template map instead.
-@export var connections : Array = []
 ## Only has an effect in the editor. When not set to Disabled, will color the regions depending on certain criteria.
 ## Alignment will color regions based on their alignment.
 ## Power and Max Power will color regions based on the regions current power and max possible power respectively. Darker regions have more power.
@@ -136,8 +134,10 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 ## Position colors the regions based on their position.
 @export_enum("Disabled", "Alignment", "Power", "Max Power", "Capital", "Position") var render_mode : int = 0
 @export var render_range : float = 20
-
-var dummy : bool = false
+@export var dummy : bool = false
+@export var cities_visible : bool = true
+## Holds the connections of all regions. When the map is readying, RegionControl will attempt to make every connection in this array. I recommend to not using the inspector to edit this property, use a built-in script like in the template map instead.
+@export var connections : Array = []
 
 var current_playing_align : int = 1
 var align_play_order : Array = []
@@ -362,6 +362,10 @@ func _process(_delta):
 	if dummy:
 		return
 	
+	if Input.is_action_just_pressed("hide_capitals"):
+		cities_visible = not cities_visible
+		game_camera.CommandCallout.new_callout("Toggle hide capitols")
+	
 	if is_player_controled:
 		if Input.is_action_just_pressed("forfeit"):
 			forfeit()
@@ -441,6 +445,14 @@ func remove_alignment(align : int, remove_capitals : bool):
 func cross(capital_position : Vector2):
 	game_control.cross.visible = true
 	game_control.cross.position = capital_position
+
+
+func change_region_amount(amount : int, alignment : int, is_capital : bool):
+	if alignment > 0 and alignment < align_amount and region_amount.size() > 0:
+		region_amount[alignment - 1] += amount
+		if is_capital:
+			capital_amount[alignment - 1] += amount
+			calculate_penalty(alignment)
 
 
 func action_done(region_name : String, amount : int = 1):
@@ -576,7 +588,7 @@ func reset():
 	
 	if color_bg_according_to_alignment:
 		var bg_color_tinted : Color = bg_color + align_color[current_playing_align] * Color(0.25, 0.25, 0.25)
-		if MapSetup.speedrun_ai:
+		if Options.speedrun_ai:
 			if align_controlers[current_playing_align - 1] == AIControler.CONTROLER_USER:
 				color = bg_color_tinted
 			else:

@@ -187,7 +187,7 @@ func _physics_process(delta):
 	
 	if cam_movement_stop > 0:
 		cam_movement_stop -= 1
-	elif MapSetup.mouse_scroll_active:
+	elif Options.mouse_scroll_active:
 		if mouse_position.x > window_size.x - 64:
 			direction.x += 1
 		if mouse_position.x < 64:
@@ -234,8 +234,8 @@ func _physics_process(delta):
 		CommandCallout.new_callout("Toggle turn order")
 	
 	if Input.is_action_just_pressed("disable_mouse_scroll"):
-		MapSetup.mouse_scroll_active = not MapSetup.mouse_scroll_active
-		if MapSetup.mouse_scroll_active:
+		Options.mouse_scroll_active = not Options.mouse_scroll_active
+		if Options.mouse_scroll_active:
 			CommandCallout.new_callout("Mouse scrolling active")
 		else:
 			CommandCallout.new_callout("Mouse scrolling disabled")

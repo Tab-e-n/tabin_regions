@@ -8,7 +8,6 @@ var aliances_amount : int = 0
 
 var used_aligments : int = 0
 
-var speedrun_ai : bool = false
-var mouse_scroll_active : bool = true
-
 var preset_alignments : Array[int] = []
+
+

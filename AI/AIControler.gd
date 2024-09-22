@@ -70,7 +70,7 @@ func _process(delta):
 		return
 	
 	if Input.is_action_just_pressed("ai_speedrun"):
-		MapSetup.speedrun_ai = not MapSetup.speedrun_ai
+		Options.speedrun_ai = not Options.speedrun_ai
 		speedrun_ai_update()
 	
 #	print(timer)
@@ -86,7 +86,7 @@ func _process(delta):
 
 
 func speedrun_ai_update(callouts : bool = true):
-	if MapSetup.speedrun_ai:
+	if Options.speedrun_ai:
 		thinking_timer = THINKING_TIMER_SPEEDRUN
 		if callouts:
 			game_control.game_camera.CommandCallout.new_callout("Fast AI")

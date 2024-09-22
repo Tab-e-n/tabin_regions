@@ -28,6 +28,8 @@ var current_menu : int = 0
 
 
 func _ready():
+	Options.save_options()
+	
 	maps = DirAccess.get_files_at("res://Maps")
 	
 #	maps.sort()

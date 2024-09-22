@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://t2528ie7ag6n"]
+
+[ext_resource type="PackedScene" uid="uid://cnxb64453xeqg" path="res://Maps/1._Title_Map.tscn" id="1_dr8vy"]
+[ext_resource type="Script" path="res://Scripts/title.gd" id="1_wam5a"]
+
+[node name="title" type="Node2D"]
+script = ExtResource("1_wam5a")
+
+[node name="title" parent="." instance=ExtResource("1_dr8vy")]
+position = Vector2(528, 312)
+dummy = true
+cities_visible = false
+
+[node name="press" type="Label" parent="."]
+offset_left = 256.0
+offset_top = 528.0
+offset_right = 896.0
+offset_bottom = 624.0
+theme_override_colors/font_color = Color(0.898039, 0.898039, 0.917647, 1)
+theme_override_font_sizes/font_size = 64
+text = "Click to continue"
+horizontal_alignment = 1
+vertical_alignment = 1

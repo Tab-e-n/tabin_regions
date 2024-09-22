@@ -109,7 +109,7 @@ func _process(delta):
 				color = Color(col1, col2, 0.5, 1)
 	if not Engine.is_editor_hint():
 		if color_change_time < 1.0:
-			color_change_time += delta * 2
+			color_change_time += delta * 2.0
 			if color_change_time < 1.0:
 				material.set_shader_parameter("n", color_change_time)
 			else:
@@ -125,19 +125,11 @@ func power_color(amount : int, no_zero : bool):
 
 
 func change_alignment(align : int, recolor_self : bool = true):
-	if alignment > 0:
-		region_control.region_amount[alignment - 1] -= 1
-		if is_capital:
-			region_control.capital_amount[alignment - 1] -= 1
-			region_control.calculate_penalty(alignment)
+	region_control.change_region_amount(-1, alignment, is_capital)
 	alignment = align
 	if recolor_self:
 		color_self()
-	if alignment > 0:
-		region_control.region_amount[alignment - 1] += 1
-		if is_capital:
-			region_control.capital_amount[alignment - 1] += 1
-			region_control.calculate_penalty(alignment)
+	region_control.change_region_amount(1, alignment, is_capital)
 	changed_alignment.emit(alignment)
 
 

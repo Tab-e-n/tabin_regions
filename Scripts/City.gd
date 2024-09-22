@@ -40,6 +40,7 @@ func _ready():
 
 func _process(_delta):
 	text.text = String.num(region.power)
+	visible = region.region_control.cities_visible
 	if !region.region_control.dummy:
 		if was_hovered != is_hovered():
 			was_hovered = is_hovered()
@@ -48,7 +49,6 @@ func _process(_delta):
 			else:
 				hide_attacks()
 			region_name.visible = is_hovered()
-		visible = not region.region_control.game_control.cities_visible
 		
 		if Input.is_action_just_pressed("show_extra"):
 			if region.power > 1 and region.region_control.current_playing_align == region.alignment:

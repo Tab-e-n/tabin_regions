@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnxb64453xeqg"]
+[gd_scene load_steps=19 format=3 uid="uid://cnxb64453xeqg"]
 
 [ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_utrxi"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_7855c"]
+[ext_resource type="Shader" path="res://Scripts/region_shader.gdshader" id="3_brfcj"]
 [ext_resource type="Script" path="res://Scripts/Region.gd" id="3_kce7p"]
+[ext_resource type="Texture2D" uid="uid://bvrj84vn7prqo" path="res://Sprites/region.png" id="4_qh411"]
 
 [sub_resource type="GDScript" id="GDScript_fsydj"]
 script/source = "extends Node
@@ -42,14 +44,86 @@ func _ready():
 
 "
 
-[node name="template" type="Polygon2D"]
-color = Color(0.521569, 0.521569, 0.603922, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kca1p"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5pt56"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cylgb"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmeig"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qgf2g"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v22gv"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_76w7t"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k2xab"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yodij"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cftqy"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsibb"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lrffb"]
+shader = ExtResource("3_brfcj")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
+
+[node name="title" type="Polygon2D"]
+color = Color(0.623529, 0.623529, 0.698039, 1)
 polygon = PackedVector2Array(-424, 80, -288, 136, -144, 120, 176, 152, 312, 216, 456, 176, 520, 40, 488, -96, 400, -160, 224, -152, 8, -200, -120, -288, -240, -288, -392, -208, -424, -104)
 script = ExtResource("1_utrxi")
+use_alignment_picker = false
 lock_aliances = true
 complexity = "Beginner"
 lore = "Woa! That's the title of the game!"
-align_color = Array[Color]([Color(0.231373, 0.203922, 0.282353, 1), Color(0.478431, 0.054902, 0.262745, 1), Color(0.180392, 0.34902, 0.286275, 1)])
 city_size = 0.75
 hide_turn_order = true
 render_mode = 1
@@ -58,86 +132,111 @@ render_mode = 1
 script = SubResource("GDScript_fsydj")
 
 [node name="bg" parent="." instance=ExtResource("2_7855c")]
-
-[node name="Estro" type="Polygon2D" parent="."]
-position = Vector2(-176, 0)
-color = Color(0.231373, 0.203922, 0.282353, 1)
-polygon = PackedVector2Array(24, 8, 32, 24, 8, 40, -16, 40, -48, 32, -64, 16, -72, -8, -72, -24, -64, -48, -32, -64, -8, -64, 24, -48, 32, -24, 24, 0, 0, 8, -16, 8, -16, -8, 0, -16, 0, -32, -8, -40, -32, -40, -40, -32, -40, -16, -16, -8, -16, 8, -48, 0, -40, 16, -24, 24, 0, 24)
-script = ExtResource("3_kce7p")
-
-[node name="Gigas" type="Polygon2D" parent="."]
-position = Vector2(-80, -16)
-color = Color(0.231373, 0.203922, 0.282353, 1)
-polygon = PackedVector2Array(56, -16, 48, -40, 24, -48, 0, -48, -32, -40, -48, -16, -48, 8, -32, 32, 0, 40, 0, 8, -16, 0, -16, -16, 0, -24, 16, -24, 32, -16, 32, 0, 24, 8, 0, 8, 0, 40, 32, 32, 24, 56, 0, 64, -40, 56, -48, 48, -72, 80, -32, 88, 8, 88, 32, 80, 48, 56, 56, 16)
-script = ExtResource("3_kce7p")
-
-[node name="Line" type="Polygon2D" parent="."]
-position = Vector2(0, 24)
-color = Color(0.231373, 0.203922, 0.282353, 1)
-polygon = PackedVector2Array(-16, 48, -8, 0, 0, -48, 0, -80, 24, -80, 24, -56, 16, 0, 16, 48)
-script = ExtResource("3_kce7p")
-
-[node name="Oh" type="Polygon2D" parent="."]
-position = Vector2(88, -32)
-color = Color(0.231373, 0.203922, 0.282353, 1)
-polygon = PackedVector2Array(8, -8, -16, 0, -24, 24, -8, 40, 16, 40, 32, 32, 32, 8, 8, -8, 8, -40, 40, -24, 64, 8, 56, 40, 32, 64, 8, 72, -32, 56, -48, 32, -48, 0, -32, -24, 8, -40)
-script = ExtResource("3_kce7p")
-
-[node name="Dot" type="Polygon2D" parent="."]
-position = Vector2(8, -96)
-color = Color(0.231373, 0.203922, 0.282353, 1)
-polygon = PackedVector2Array(0, 32, -16, 24, -24, 8, -24, 0, -16, -16, 0, -24, 8, -24, 24, -16, 32, 0, 32, 8, 24, 24, 8, 32)
-script = ExtResource("3_kce7p")
-
-[node name="Arch" type="Polygon2D" parent="."]
-position = Vector2(224, -24)
-color = Color(0.231373, 0.203922, 0.282353, 1)
-offset = Vector2(-32, -16)
-polygon = PackedVector2Array(-32, -8, -24, 8, -24, 56, -32, 80, 0, 88, 8, 16, 24, -8, 56, -8, 64, 16, 56, 96, 80, 96, 96, 16, 80, -24, 48, -32, 8, -32, -8, -8, -16, -32, -40, -24)
-script = ExtResource("3_kce7p")
+color = Color(0.435294, 0.435294, 0.517647, 1)
 
 [node name="Snake" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_kca1p")
 position = Vector2(352, -32)
-color = Color(0.180392, 0.34902, 0.286275, 1)
+color = Color(0.211765, 0.552941, 0.380392, 1)
+texture = ExtResource("4_qh411")
 polygon = PackedVector2Array(-64, 72, -56, 40, -8, 48, 32, 48, 48, 32, 48, 16, 40, 8, 8, 8, -32, 0, -48, -24, -40, -56, -8, -64, 40, -56, 24, -32, -8, -40, -24, -32, -16, -16, 16, -8, 40, -16, 72, 8, 72, 32, 48, 72, 0, 80)
 script = ExtResource("3_kce7p")
 alignment = 2
 
-[node name="Underline" type="Polygon2D" parent="."]
-position = Vector2(136, 72)
-color = Color(0.180392, 0.34902, 0.286275, 1)
-offset = Vector2(64, 8)
-polygon = PackedVector2Array(-160, -24, -96, -32, -32, -24, 32, -8, 24, 24, -40, 8, -96, 0, -160, 8)
-script = ExtResource("3_kce7p")
-alignment = 2
-
 [node name="Spiral" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_5pt56")
 position = Vector2(304, 112)
-color = Color(0.180392, 0.34902, 0.286275, 1)
+color = Color(0.211765, 0.552941, 0.380392, 1)
+texture = ExtResource("4_qh411")
 polygon = PackedVector2Array(-64, -40, -72, -8, -24, 0, 0, 24, 48, 40, 88, 24, 104, -8, 96, -40, 64, -56, 40, -48, 24, -32, 40, -8, 56, -8, 48, -16, 48, -32, 64, -32, 80, -24, 80, 0, 64, 8, 32, 8, 8, -8, -24, -32)
 script = ExtResource("3_kce7p")
 alignment = 2
 is_capital = true
 
-[node name="Flywrench" type="Polygon2D" parent="."]
-position = Vector2(-312, 16)
-color = Color(0.478431, 0.054902, 0.262745, 1)
-offset = Vector2(-24, -24)
-polygon = PackedVector2Array(-8, -24, 32, -24, 56, 8, 112, 64, 64, 64, 48, 32, 16, 0, 16, 32, 24, 64, -16, 64, -8, 24)
+[node name="Underline" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_cylgb")
+position = Vector2(136, 72)
+color = Color(0.211765, 0.552941, 0.380392, 1)
+offset = Vector2(64, 8)
+texture = ExtResource("4_qh411")
+polygon = PackedVector2Array(-160, -24, -96, -32, -32, -24, 32, -8, 24, 24, -40, 8, -96, 0, -160, 8)
+script = ExtResource("3_kce7p")
+alignment = 2
+
+[node name="Arch" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_kmeig")
+position = Vector2(224, -24)
+color = Color(0.384314, 0.341176, 0.458824, 1)
+offset = Vector2(-32, -16)
+texture = ExtResource("4_qh411")
+polygon = PackedVector2Array(-32, -8, -24, 8, -24, 56, -32, 80, 0, 88, 8, 16, 24, -8, 56, -8, 64, 16, 56, 96, 80, 96, 96, 16, 80, -24, 48, -32, 8, -32, -8, -8, -16, -32, -40, -24)
+script = ExtResource("3_kce7p")
+
+[node name="Oh" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_qgf2g")
+position = Vector2(88, -32)
+color = Color(0.384314, 0.341176, 0.458824, 1)
+texture = ExtResource("4_qh411")
+polygon = PackedVector2Array(8, -8, -16, 0, -24, 24, -8, 40, 16, 40, 32, 32, 32, 8, 8, -8, 8, -40, 40, -24, 64, 8, 56, 40, 32, 64, 8, 72, -32, 56, -48, 32, -48, 0, -32, -24, 8, -40)
+script = ExtResource("3_kce7p")
+
+[node name="Line" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_v22gv")
+position = Vector2(0, 24)
+color = Color(0.384314, 0.341176, 0.458824, 1)
+texture = ExtResource("4_qh411")
+polygon = PackedVector2Array(-16, 48, -8, 0, 0, -48, 0, -80, 24, -80, 24, -56, 16, 0, 16, 48)
+script = ExtResource("3_kce7p")
+
+[node name="Dot" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_76w7t")
+position = Vector2(8, -96)
+color = Color(0.384314, 0.341176, 0.458824, 1)
+texture = ExtResource("4_qh411")
+polygon = PackedVector2Array(0, 32, -16, 24, -24, 8, -24, 0, -16, -16, 0, -24, 8, -24, 24, -16, 32, 0, 32, 8, 24, 24, 8, 32)
+script = ExtResource("3_kce7p")
+
+[node name="Gigas" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_k2xab")
+position = Vector2(-80, -16)
+color = Color(0.384314, 0.341176, 0.458824, 1)
+texture = ExtResource("4_qh411")
+polygon = PackedVector2Array(56, -16, 48, -40, 24, -48, 0, -48, -32, -40, -48, -16, -48, 8, -32, 32, 0, 40, 0, 8, -16, 0, -16, -16, 0, -24, 16, -24, 32, -16, 32, 0, 24, 8, 0, 8, 0, 40, 32, 32, 24, 56, 0, 64, -40, 56, -48, 48, -72, 80, -32, 88, 8, 88, 32, 80, 48, 56, 56, 16)
+script = ExtResource("3_kce7p")
+
+[node name="Estro" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_yodij")
+position = Vector2(-176, 0)
+color = Color(0.384314, 0.341176, 0.458824, 1)
+texture = ExtResource("4_qh411")
+polygon = PackedVector2Array(24, 8, 32, 24, 8, 40, -16, 40, -48, 32, -64, 16, -72, -8, -72, -24, -64, -48, -32, -64, -8, -64, 24, -48, 32, -24, 24, 0, 0, 8, -16, 8, -16, -8, 0, -16, 0, -32, -8, -40, -32, -40, -40, -32, -40, -16, -16, -8, -16, 8, -48, 0, -40, 16, -24, 24, 0, 24)
+script = ExtResource("3_kce7p")
+
+[node name="Swordsman" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_cftqy")
+position = Vector2(-168, -144)
+color = Color(0.654902, 0.168627, 0.215686, 1)
+texture = ExtResource("4_qh411")
+polygon = PackedVector2Array(-56, 64, 32, 64, 32, 32, 8, 16, -8, 32, -24, 16, -16, 0, -8, -8, 0, -8, -8, 0, -16, 16, -8, 24, 8, 8, 88, 56, 136, 56, 136, 24, 24, -16, 40, -32, 32, -40, 16, -24, 8, -16, 8, -24, 16, -32, 8, -40, 24, -48, 32, -72, 24, -96, 8, -112, -8, -112, -32, -104, -48, -88, -48, -64, -40, -48, -24, -40, -32, -32, -40, -40, -56, -40, -64, -48, -72, -16, -64, 32, -56, 8, -40, -16, -56, 32)
 script = ExtResource("3_kce7p")
 alignment = 1
 
 [node name="D" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_dsibb")
 position = Vector2(-328, -96)
-color = Color(0.478431, 0.054902, 0.262745, 1)
+color = Color(0.654902, 0.168627, 0.215686, 1)
+texture = ExtResource("4_qh411")
 polygon = PackedVector2Array(-16, 56, 24, 56, 56, 40, 80, 16, 80, -16, 64, -32, 32, -48, -24, -48, -16, 0, 8, 0, 8, -24, 32, -24, 48, -8, 48, 8, 32, 24, 8, 32, 8, 0, -16, 0)
 script = ExtResource("3_kce7p")
 alignment = 1
 is_capital = true
 
-[node name="Swordsman" type="Polygon2D" parent="."]
-position = Vector2(-168, -144)
-color = Color(0.478431, 0.054902, 0.262745, 1)
-polygon = PackedVector2Array(-56, 64, 32, 64, 32, 32, 8, 16, -8, 32, -24, 16, -16, 0, -8, -8, 0, -8, -8, 0, -16, 16, -8, 24, 8, 8, 88, 56, 136, 56, 136, 24, 24, -16, 40, -32, 32, -40, 16, -24, 8, -16, 8, -24, 16, -32, 8, -40, 24, -48, 32, -72, 24, -96, 8, -112, -8, -112, -32, -104, -48, -88, -48, -64, -40, -48, -24, -40, -32, -32, -40, -40, -56, -40, -64, -48, -72, -16, -64, 32, -56, 8, -40, -16, -56, 32)
+[node name="Flywrench" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_lrffb")
+position = Vector2(-312, 16)
+color = Color(0.654902, 0.168627, 0.215686, 1)
+offset = Vector2(-24, -24)
+texture = ExtResource("4_qh411")
+polygon = PackedVector2Array(-8, -24, 32, -24, 56, 8, 112, 64, 64, 64, 48, 32, 16, 0, 16, 32, 24, 64, -16, 64, -8, 24)
 script = ExtResource("3_kce7p")
 alignment = 1
