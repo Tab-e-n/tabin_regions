@@ -1,6 +1,6 @@
 [gd_scene load_steps=306 format=3 uid="uid://cvs2arpbio3au"]
 
-[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_5aq8s"]
+[ext_resource type="Script" path="res://Scripts/RegionControl.gd" id="1_5aq8s"]
 [ext_resource type="Shader" path="res://Scripts/region_shader.gdshader" id="2_xpt7n"]
 [ext_resource type="Texture2D" uid="uid://bvrj84vn7prqo" path="res://Sprites/region.png" id="3_31u5u"]
 [ext_resource type="Script" path="res://Scripts/Region.gd" id="3_b6jsf"]

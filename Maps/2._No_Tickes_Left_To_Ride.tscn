@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cse41lvvvirpp"]
 
-[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_ogcds"]
+[ext_resource type="Script" path="res://Scripts/RegionControl.gd" id="1_ogcds"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_aqi3b"]
 [ext_resource type="Script" path="res://Scripts/Region.gd" id="3_14aoh"]
 [ext_resource type="PackedScene" uid="uid://dcd50lc8r7cxq" path="res://Objects/cloud_spawner.tscn" id="4_n4q45"]

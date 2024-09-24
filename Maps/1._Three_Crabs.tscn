@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://bfay4pr4yf2os"]
 
-[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_pkf2y"]
+[ext_resource type="Script" path="res://Scripts/RegionControl.gd" id="1_pkf2y"]
 [ext_resource type="Shader" path="res://Scripts/region_shader.gdshader" id="2_227at"]
 [ext_resource type="Script" path="res://Scripts/Region.gd" id="3_0snln"]
 [ext_resource type="Texture2D" uid="uid://bvrj84vn7prqo" path="res://Sprites/region.png" id="3_1pq1w"]

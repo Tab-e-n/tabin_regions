@@ -15,7 +15,10 @@ const BASE_MOVE_SPEED : float = 8
 @export var UIHideable : Control
 @export var PauseMenu : Control
 @export var PlayerInfo : Control
+@export var PlayerActions : Control
 @export var AdvanceTurnButton : BaseButton
+@export var EndTurnButton : BaseButton
+@export var ForfeitButton : BaseButton
 @export var PauseButton : BaseButton
 @export var TurnOrder : AlignmentList
 @export var Attacks : RichTextLabel
@@ -25,8 +28,8 @@ const BASE_MOVE_SPEED : float = 8
 @export var CurrentAction : Label
 @export var VictoryMessage : Control
 @export var LeaveMessage : Control
+@export var ForfeitMessage : Control
 @export var CommandCallout : CommandCallouts
-
 
 @onready var game_control : GameControl = get_parent()
 @onready var region_control : RegionControl
@@ -63,11 +66,11 @@ func _ready():
 
 
 func _input(event):
-	if event is InputEventKey:
-		if event.key_label != KEY_ESCAPE:
-			LeaveMessage.visible = false
+#	if event is InputEventKey:
+#		if event.key_label != KEY_ESCAPE:
+#			LeaveMessage.visible = false
 	if event is InputEventMouseButton:
-		LeaveMessage.visible = false
+#		LeaveMessage.visible = false
 		if event.is_pressed():
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				mouse_wheel_input = 1
@@ -76,7 +79,7 @@ func _input(event):
 
 
 func _deffered_ready():
-	region_control = game_control.region_control
+	region_control = game_control.region_control as RegionControl
 	
 	for i in region_control.polygon:
 		if i.x > farthest_right:
@@ -133,9 +136,15 @@ func _deffered_ready():
 	if position.y < farthest_up:
 		position.y = farthest_up
 	
-	AdvanceTurnButton.pressed.connect(region_control.change_current_action)
-	AdvanceTurnButton.mouse_entered.connect(_AdvanceTurnButton_cam_disable)
-	AdvanceTurnButton.mouse_exited.connect(_AdvanceTurnButton_cam_enable)
+	AdvanceTurnButton.pressed.connect(_advance_turn)
+	EndTurnButton.pressed.connect(_end_turn)
+	ForfeitButton.pressed.connect(_forfeit_show)
+	AdvanceTurnButton.mouse_entered.connect(_button_cam_disable)
+	AdvanceTurnButton.mouse_exited.connect(_button_cam_enable)
+	EndTurnButton.mouse_entered.connect(_button_cam_disable)
+	EndTurnButton.mouse_exited.connect(_button_cam_enable)
+	ForfeitButton.mouse_entered.connect(_button_cam_disable)
+	ForfeitButton.mouse_exited.connect(_button_cam_enable)
 	TurnOrder.mouse_entered.connect(_TurnOrder_cam_disable)
 	TurnOrder.mouse_exited.connect(_TurnOrder_cam_enable)
 	
@@ -240,9 +249,9 @@ func _physics_process(delta):
 		else:
 			CommandCallout.new_callout("Mouse scrolling disabled")
 	
-	AdvanceTurnButton.modulate = region_control.align_color[region_control.current_playing_align]
+	PlayerActions.modulate = region_control.align_color[region_control.current_playing_align]
 	PowerSprite.self_modulate = region_control.align_color[region_control.current_playing_align]
-	AdvanceTurnButton.modulate.a = 1
+	PlayerActions.modulate.a = 1
 	PowerSprite.self_modulate.a = 1
 	if PowerSprite.self_modulate.v > 0.9:
 		PowerAmount.self_modulate = Color(0, 0, 0)
@@ -260,7 +269,7 @@ func _physics_process(delta):
 		CurrentAction.text = "BONUS ACTION"
 		PowerAmount.text = String.num(region_control.bonus_action_amount)
 	
-	AdvanceTurnButton.visible = region_control.is_player_controled and not ReplayControl.replay_active
+	PlayerActions.visible = region_control.is_player_controled and not ReplayControl.replay_active
 	if not region_control.is_player_controled:
 		hovering_advance_turn = false
 	
@@ -323,11 +332,32 @@ func win(align_victory : int):
 	win_timer = 5.0
 
 
-func _AdvanceTurnButton_cam_disable():
+func _advance_turn():
+	region_control.change_current_action()
+
+
+func _end_turn():
+	region_control.turn_end(true)
+
+
+func _forfeit_show():
+	ForfeitMessage.visible = true
+
+
+func _forfeit_hide():
+	ForfeitMessage.visible = false
+
+
+func _forfeit():
+	_forfeit_hide()
+	region_control.forfeit()
+
+
+func _button_cam_disable():
 	hovering_advance_turn = true
 
 
-func _AdvanceTurnButton_cam_enable():
+func _button_cam_enable():
 	hovering_advance_turn = false
 
 
@@ -387,6 +417,14 @@ func show_attacks(region : Region):
 
 func hide_attacks():
 	Attacks.visible = false
+
+
+func _leaving():
+	LeaveMessage.visible = true
+
+
+func _not_leaving():
+	LeaveMessage.visible = false
 
 
 func leave():

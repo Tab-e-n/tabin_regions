@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dktvwaulmmgha"]
 
-[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_vjgqo"]
+[ext_resource type="Script" path="res://Scripts/RegionControl.gd" id="1_vjgqo"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_b7xpv"]
 
 [sub_resource type="GDScript" id="GDScript_fsydj"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=36 format=3 uid="uid://bnhsptx5od5fj"]
 
-[ext_resource type="Script" path="res://Sprites/RegionControl.gd" id="1_k6mpi"]
+[ext_resource type="Script" path="res://Scripts/RegionControl.gd" id="1_k6mpi"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_4ouwy"]
 [ext_resource type="Script" path="res://Scripts/Region.gd" id="2_nqpph"]
 [ext_resource type="Shader" path="res://Scripts/region_shader.gdshader" id="3_tmliv"]

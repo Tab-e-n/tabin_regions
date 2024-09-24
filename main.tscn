@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ckbitpcqxs5ao"]
+[gd_scene load_steps=20 format=3 uid="uid://ckbitpcqxs5ao"]
 
 [ext_resource type="Script" path="res://Scripts/GameControl.gd" id="1_2axsc"]
 [ext_resource type="Script" path="res://Scripts/GameCamera.gd" id="1_we6ai"]
@@ -7,13 +7,17 @@
 [ext_resource type="StyleBox" uid="uid://crwlkegnfaves" path="res://Styles/style_label_align_picker.tres" id="5_mbtgw"]
 [ext_resource type="Texture2D" uid="uid://jb8ugdvfra1h" path="res://Sprites/current_power.png" id="6_duti3"]
 [ext_resource type="Texture2D" uid="uid://b5wmm400auwgm" path="res://Sprites/pause_button.png" id="7_6wsra"]
+[ext_resource type="Texture2D" uid="uid://cate3b6eswfv2" path="res://Sprites/end_turn.png" id="7_7ft3b"]
 [ext_resource type="StyleBox" uid="uid://l8vkqqi4prkx" path="res://Styles/style_label_normal_box.tres" id="7_r48wm"]
+[ext_resource type="Texture2D" uid="uid://3uf3acu0wy42" path="res://Sprites/forfeit.png" id="8_chkrk"]
 [ext_resource type="PackedScene" uid="uid://dt0hijbeupo" path="res://Objects/command_callout.tscn" id="8_gv3dv"]
 [ext_resource type="Script" path="res://Scripts/alignment_list.gd" id="8_y476x"]
 [ext_resource type="Texture2D" uid="uid://b83fxlgeqmrwf" path="res://Sprites/turn_order_players.png" id="9_gke1b"]
 [ext_resource type="Texture2D" uid="uid://c2duva1ycjs8u" path="res://Sprites/city.png" id="10_5d75i"]
 [ext_resource type="Texture2D" uid="uid://66jp7txq175w" path="res://Sprites/capital.png" id="11_i48c4"]
 [ext_resource type="Texture2D" uid="uid://bht6umkfovrvf" path="res://Sprites/exit.png" id="12_st2cf"]
+[ext_resource type="Texture2D" uid="uid://dm2nl24gy8gxh" path="res://Sprites/accept.png" id="17_0hp27"]
+[ext_resource type="Texture2D" uid="uid://ex66wqntm5fi" path="res://Sprites/deny.png" id="18_mtr1x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lm2d1"]
 bg_color = Color(0.247059, 0.247059, 0.282353, 1)
@@ -28,14 +32,17 @@ script = ExtResource("1_2axsc")
 [node name="AIControler" type="Node" parent="."]
 script = ExtResource("2_w08l3")
 
-[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "AdvanceTurnButton", "PauseButton", "TurnOrder", "Attacks", "PowerSprite", "PowerAmount", "CurrentTurn", "CurrentAction", "VictoryMessage", "LeaveMessage", "CommandCallout")]
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "PlayerActions", "AdvanceTurnButton", "EndTurnButton", "ForfeitButton", "PauseButton", "TurnOrder", "Attacks", "PowerSprite", "PowerAmount", "CurrentTurn", "CurrentAction", "VictoryMessage", "LeaveMessage", "ForfeitMessage", "CommandCallout")]
 z_index = 30
 script = ExtResource("1_we6ai")
 UI = NodePath("UI")
 UIHideable = NodePath("UI/Hideable")
 PauseMenu = NodePath("UI/pause")
 PlayerInfo = NodePath("UI/player_info")
-AdvanceTurnButton = NodePath("UI/Hideable/AdvanceTurn")
+PlayerActions = NodePath("UI/Hideable/PlayerActions")
+AdvanceTurnButton = NodePath("UI/Hideable/PlayerActions/AdvanceTurn")
+EndTurnButton = NodePath("UI/Hideable/PlayerActions/EndTurn")
+ForfeitButton = NodePath("UI/Hideable/PlayerActions/Forfeit")
 PauseButton = NodePath("UI/gearbox")
 TurnOrder = NodePath("UI/Hideable/turn_order")
 Attacks = NodePath("UI/Hideable/Attacks")
@@ -45,6 +52,7 @@ CurrentTurn = NodePath("UI/Hideable/Turn")
 CurrentAction = NodePath("UI/Hideable/Action")
 VictoryMessage = NodePath("UI/win")
 LeaveMessage = NodePath("UI/leave")
+ForfeitMessage = NodePath("UI/forfeit")
 CommandCallout = NodePath("UI/command_callout")
 
 [node name="UI" type="Control" parent="GameCamera"]
@@ -78,14 +86,6 @@ offset_right = 1152.0
 offset_bottom = 632.0
 theme_override_styles/panel = ExtResource("5_mbtgw")
 
-[node name="AdvanceTurn" type="TextureButton" parent="GameCamera/UI/Hideable"]
-layout_mode = 0
-offset_left = 992.0
-offset_top = 504.0
-offset_right = 1120.0
-offset_bottom = 632.0
-texture_normal = ExtResource("5_1p0vp")
-
 [node name="Turn" type="Label" parent="GameCamera/UI/Hideable"]
 layout_mode = 0
 offset_left = 160.0
@@ -108,6 +108,35 @@ theme_override_font_sizes/font_size = 64
 text = "ACTION"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PlayerActions" type="Control" parent="GameCamera/UI/Hideable"]
+anchors_preset = 0
+offset_top = 504.0
+offset_right = 40.0
+offset_bottom = 544.0
+
+[node name="AdvanceTurn" type="TextureButton" parent="GameCamera/UI/Hideable/PlayerActions"]
+layout_mode = 0
+offset_left = 992.0
+offset_right = 1120.0
+offset_bottom = 128.0
+texture_normal = ExtResource("5_1p0vp")
+
+[node name="EndTurn" type="TextureButton" parent="GameCamera/UI/Hideable/PlayerActions"]
+layout_mode = 0
+offset_left = 912.0
+offset_top = 56.0
+offset_right = 976.0
+offset_bottom = 120.0
+texture_normal = ExtResource("7_7ft3b")
+
+[node name="Forfeit" type="TextureButton" parent="GameCamera/UI/Hideable/PlayerActions"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 56.0
+offset_right = 240.0
+offset_bottom = 120.0
+texture_normal = ExtResource("8_chkrk")
 
 [node name="Power" type="TextureRect" parent="GameCamera/UI/Hideable"]
 layout_mode = 0
@@ -283,16 +312,65 @@ vertical_alignment = 1
 [node name="leave" type="Label" parent="GameCamera/UI"]
 visible = false
 layout_mode = 0
-offset_left = 432.0
-offset_top = 272.0
-offset_right = 720.0
-offset_bottom = 368.0
+offset_left = 464.0
+offset_top = 248.0
+offset_right = 688.0
+offset_bottom = 400.0
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("7_r48wm")
-text = "Press esc to
-confirm leaving..."
+text = "Do you want
+to leave?"
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="yes" type="TextureButton" parent="GameCamera/UI/leave"]
+modulate = Color(0.713726, 0.890196, 0.65098, 1)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 96.0
+offset_right = 96.0
+offset_bottom = 144.0
+texture_normal = ExtResource("17_0hp27")
+
+[node name="no" type="TextureButton" parent="GameCamera/UI/leave"]
+modulate = Color(1, 0.717647, 0.698039, 1)
+layout_mode = 0
+offset_left = 128.0
+offset_top = 96.0
+offset_right = 176.0
+offset_bottom = 144.0
+texture_normal = ExtResource("18_mtr1x")
+
+[node name="forfeit" type="Label" parent="GameCamera/UI"]
+visible = false
+layout_mode = 0
+offset_left = 464.0
+offset_top = 248.0
+offset_right = 688.0
+offset_bottom = 400.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("7_r48wm")
+text = "Do you want
+to forfeit?
+ "
+horizontal_alignment = 1
+
+[node name="yes" type="TextureButton" parent="GameCamera/UI/forfeit"]
+modulate = Color(0.713726, 0.890196, 0.65098, 1)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 96.0
+offset_right = 96.0
+offset_bottom = 144.0
+texture_normal = ExtResource("17_0hp27")
+
+[node name="no" type="TextureButton" parent="GameCamera/UI/forfeit"]
+modulate = Color(1, 0.717647, 0.698039, 1)
+layout_mode = 0
+offset_left = 128.0
+offset_top = 96.0
+offset_right = 176.0
+offset_bottom = 144.0
+texture_normal = ExtResource("18_mtr1x")
 
 [node name="Cross" type="Polygon2D" parent="."]
 visible = false
@@ -300,4 +378,8 @@ z_index = 25
 color = Color(0.137255, 0.137255, 0.137255, 1)
 polygon = PackedVector2Array(-32, 64, 0, 32, 32, 64, 64, 32, 32, 0, 64, -32, 32, -64, 0, -32, -32, -64, -64, -32, -32, 0, -64, 32)
 
-[connection signal="pressed" from="GameCamera/UI/pause/leave" to="GameCamera" method="leave"]
+[connection signal="pressed" from="GameCamera/UI/pause/leave" to="GameCamera" method="_leaving"]
+[connection signal="pressed" from="GameCamera/UI/leave/yes" to="GameCamera" method="leave"]
+[connection signal="pressed" from="GameCamera/UI/leave/no" to="GameCamera" method="_not_leaving"]
+[connection signal="pressed" from="GameCamera/UI/forfeit/yes" to="GameCamera" method="_forfeit"]
+[connection signal="pressed" from="GameCamera/UI/forfeit/no" to="GameCamera" method="_forfeit_hide"]
