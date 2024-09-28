@@ -109,16 +109,6 @@ func _deffered_ready():
 		farthest_up = -window_size.y / 2
 	
 	@warning_ignore("narrowing_conversion")
-	farthest_right -= window_size.x / 3
-	@warning_ignore("narrowing_conversion")
-	farthest_left += window_size.x / 3
-	@warning_ignore("narrowing_conversion")
-	farthest_down -= window_size.y / 3 - 64
-	@warning_ignore("narrowing_conversion")
-	farthest_up += window_size.y / 3
-#	print(farthest_right, " ",farthest_left, " ",farthest_down, " ",farthest_up,)
-	
-	@warning_ignore("narrowing_conversion")
 	farthest_right += region_control.offset.x
 	@warning_ignore("narrowing_conversion")
 	farthest_left += region_control.offset.x
@@ -126,6 +116,8 @@ func _deffered_ready():
 	farthest_down += region_control.offset.y
 	@warning_ignore("narrowing_conversion")
 	farthest_up += region_control.offset.y
+	
+#	print(farthest_right, " ",farthest_left, " ",farthest_down, " ",farthest_up,)
 	
 	if position.x > farthest_right:
 		position.x = farthest_right

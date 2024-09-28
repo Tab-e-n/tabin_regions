@@ -81,13 +81,6 @@ func _on_map_list_item_activated(index):
 	start_playing(index)
 
 
-func flip_color(c : Color) -> Color:
-	c.r = 1 - c.r
-	c.g = 1 - c.g
-	c.b = 1 - c.b
-	return c
-
-
 func _on_map_list_item_selected(index):
 	if current_map != null:
 		current_map.queue_free()
@@ -99,14 +92,7 @@ func _on_map_list_item_selected(index):
 	current_map.position = Vector2(768, 384)
 	current_map.scale = Vector2(0.5, 0.5)
 	
-	var temp_color : Color = current_map.color
-	
-	temp_color = flip_color(temp_color)
-	temp_color *= 0.333
-	temp_color = flip_color(temp_color)
-	temp_color.a = 1.0
-	
-	tintable_ui.modulate = temp_color
+	tintable_ui.modulate = current_map.slight_tint(current_map.color)
 	
 	$map.add_child(current_map)
 	

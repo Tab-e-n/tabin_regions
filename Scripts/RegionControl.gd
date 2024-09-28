@@ -661,3 +661,22 @@ func alignment_friendly(your_align, opposing_align) -> bool:
 
 func alignment_neutral(align) -> bool:
 	return align == 0 or align >= align_amount
+
+
+func flip_color(c : Color) -> Color:
+	c.r = 1 - c.r
+	c.g = 1 - c.g
+	c.b = 1 - c.b
+	return c
+
+
+func slight_tint(tint_color : Color) -> Color:
+	var temp_color : Color
+	
+	temp_color = flip_color(tint_color)
+	temp_color *= 0.333
+	temp_color = flip_color(temp_color)
+	temp_color.a = 1.0
+	
+	return temp_color
+

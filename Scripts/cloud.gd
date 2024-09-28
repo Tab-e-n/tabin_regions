@@ -31,6 +31,7 @@ func _ready():
 		var r : int = randi_range(0, SECRET_CLOUDS.size() - 1)
 		texture = SECRET_CLOUDS[r]
 	var f : int = randi_range(0, 3)
+	@warning_ignore("integer_division")
 	flip_h = f / 2
 	flip_v = f % 2
 	$shadow.self_modulate = self_modulate

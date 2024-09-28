@@ -17,6 +17,7 @@ func _ready():
 	if packed_map:
 		current_map = packed_map.instantiate()
 		current_map.dummy = true
+		$play.modulate = current_map.slight_tint(current_map.color)
 		$map.add_child(current_map)
 	
 	if current_map.random_player_align_range == 0:

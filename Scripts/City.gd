@@ -24,17 +24,23 @@ func _ready():
 	text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	text.size = Vector2(64, 64)
 	text.z_index = 1
+	text.add_theme_font_size_override("font_size", 16)
 	add_child(text)
 	
 	region_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	region_name.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	region_name.size = Vector2(256, 32)
-	region_name.position = Vector2(-96, -32)
+	region_name.visible = false
+	region_name.z_index = 2
+	
+	region_name.add_theme_font_size_override("font_size", 16)
+	region_name.clip_contents = true
 	region_name.text = region.name + " (" + String.num(region.max_power) + ")"
 	if OS.has_feature("editor"):
 		region_name.text += " (" + String.num(region.distance_from_capital) + ")"
-	region_name.visible = false
-	region_name.z_index = 2
+	region_name.size = region_name.get_theme_font("font").get_string_size(region_name.text, HORIZONTAL_ALIGNMENT_CENTER, -1, 16)
+	region_name.position = Vector2(region_name.size.x * -0.5 + 24, -32)
+	
+	region_name.add_theme_stylebox_override("normal", preload("res://Styles/style_label_city_name.tres"))
 	add_child(region_name)
 
 
@@ -69,10 +75,18 @@ func color_self(new_color : Color):
 	self_modulate = new_color
 	if new_color.v > region.region_control.COLOR_TOO_BRIGHT:
 		text.self_modulate = Color(0, 0, 0)
-		region_name.self_modulate = Color(0, 0, 0)
+#		region_name.self_modulate = Color(0, 0, 0)
+#		region_name.remove_theme_color_override("font_color")
+#		region_name.add_theme_color_override("font_color", Color(0, 0, 0))
+#		region_name.remove_theme_color_override("font_outline")
+#		region_name.add_theme_color_override("font_outline", Color(1, 1, 1))
 	else:
 		text.self_modulate = Color(1, 1, 1)
-		region_name.self_modulate = Color(1, 1, 1)
+#		region_name.self_modulate = Color(1, 1, 1)
+#		region_name.remove_theme_color_override("font_color")
+#		region_name.add_theme_color_override("font_color", Color(1, 1, 1))
+#		region_name.remove_theme_color_override("font_outline")
+#		region_name.add_theme_color_override("font_outline", Color(0, 0, 0))
 		
 
 
