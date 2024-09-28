@@ -22,9 +22,10 @@ func _ready():
 	
 	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	text.size = Vector2(64, 64)
+	text.size = Vector2(128, 128)
 	text.z_index = 1
-	text.add_theme_font_size_override("font_size", 16)
+	text.add_theme_font_size_override("font_size", 36)
+	text.scale = Vector2(0.5, 0.5)
 	add_child(text)
 	
 	region_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -32,7 +33,8 @@ func _ready():
 	region_name.visible = false
 	region_name.z_index = 2
 	
-	region_name.add_theme_font_size_override("font_size", 16)
+	region_name.add_theme_font_size_override("font_size", 32)
+	region_name.scale = Vector2(0.5, 0.5)
 	region_name.clip_contents = true
 	region_name.text = region.name + " (" + String.num(region.max_power) + ")"
 	if OS.has_feature("editor"):

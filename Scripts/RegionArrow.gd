@@ -43,7 +43,7 @@ func _ready():
 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		label.size = Vector2(256, 24)
 		label.position = to_position + Vector2(-128, -16)
-		label.z_index = 20
+		label.z_index = 11
 		add_child(label)
 	elif power_reduction > 0:
 		var label = Label.new()
@@ -52,7 +52,7 @@ func _ready():
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		label.size = Vector2(64, 24)
-		label.z_index = 20
+		label.z_index = 11
 		add_child(label)
 	
 	default_color = Color(0, 0, 0.2)
