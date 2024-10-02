@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfn3th0xmjeb7"]
+[gd_scene load_steps=7 format=3 uid="uid://dfn3th0xmjeb7"]
 
 [ext_resource type="Shader" path="res://Scripts/region_shader.gdshader" id="1_ksj41"]
 [ext_resource type="Texture2D" uid="uid://bvrj84vn7prqo" path="res://Sprites/region.png" id="2_dleqm"]
@@ -7,14 +7,20 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbibh"]
 shader = ExtResource("1_ksj41")
 shader_parameter/changing_color = true
-shader_parameter/n = 0.0
+shader_parameter/n = 1.0
 shader_parameter/previous_color = Color(0, 0.717647, 0.447059, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tiige"]
 shader = ExtResource("1_ksj41")
 shader_parameter/changing_color = true
 shader_parameter/n = 0.5
-shader_parameter/previous_color = Color(0, 0, 0, 1)
+shader_parameter/previous_color = Color(0.494118, 0.494118, 0.494118, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5erc"]
+shader = ExtResource("1_ksj41")
+shader_parameter/changing_color = false
+shader_parameter/n = 0.0
+shader_parameter/previous_color = Color(1, 1, 1, 1)
 
 [node name="Shader Test Scene" type="Node2D"]
 
@@ -31,6 +37,8 @@ polygon = PackedVector2Array(400, 256, 400, 192, 464, 128, 528, 192, 528, 256)
 uv = PackedVector2Array(0, 128, 0, 64, 64, 0, 128, 64, 128, 128)
 
 [node name="Region2" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_c5erc")
 position = Vector2(616, 120)
+texture = ExtResource("2_dleqm")
 polygon = PackedVector2Array(16, -56, -56, -8, -48, 80, 120, 88, 152, 8)
 script = ExtResource("3_n571l")

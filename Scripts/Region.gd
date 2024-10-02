@@ -5,6 +5,7 @@ class_name Region
 
 const TEXTURE_SIZE : Vector2 = Vector2(128, 128)
 const DISTANCE_CAP : int = 0b1111_1111_1111_1111
+const COLOR_CHANGE_SPEED : float = 2.4
 
 
 enum RENDER_MODE {DISABLED, ALIGNMENT, POWER, MAX_POWER, CAPITAL, POSITION}
@@ -58,14 +59,24 @@ func _ready():
 			if i.y > far_down:
 				far_down = i.y
 		
-		var width : float = far_right - far_left
-		var height : float = far_down - far_up
+		var width : float = abs(far_right - far_left)
+		var height : float = abs(far_down - far_up)
+		if width == 0.0:
+			width = 1.0
+		if height == 0.0:
+			height = 1.0
 		
-		uv.resize(polygon.size())
+		var temp_uv : PackedVector2Array = polygon.duplicate()
 		
-		for i in range(uv.size()):
-			uv[i].x = TEXTURE_SIZE.x * (polygon[i].x - far_left) / width
-			uv[i].y = TEXTURE_SIZE.y * (polygon[i].y - far_up) / height
+		for i in range(temp_uv.size()):
+			temp_uv[i].x = TEXTURE_SIZE.x * ((polygon[i].x - far_left) / width)
+			temp_uv[i].y = TEXTURE_SIZE.y * ((polygon[i].y - far_up) / height)
+#			print(temp_uv[i])
+		
+		set_uv(temp_uv)
+		
+#		print(polygon, " ", uv)
+	
 	
 	if Engine.is_editor_hint():
 		return
@@ -80,7 +91,8 @@ func _ready_deferred():
 	if !region_control.dummy:
 		city.pressed.connect(_on_capital_pressed)
 		city.mouse_entered.connect(make_region_arrows)
-	
+		
+
 	color_self(false)
 
 
@@ -109,7 +121,7 @@ func _process(delta):
 				color = Color(col1, col2, 0.5, 1)
 	if not Engine.is_editor_hint():
 		if color_change_time < 1.0:
-			color_change_time += delta * 2.0
+			color_change_time += delta * COLOR_CHANGE_SPEED
 			if color_change_time < 1.0:
 				material.set_shader_parameter("n", color_change_time)
 			else:
@@ -138,7 +150,7 @@ func color_self(animate : bool = true):
 		material.set_shader_parameter("changing_color", true)
 		material.set_shader_parameter("n", 0)
 		material.set_shader_parameter("previous_color", color)
-		color_change_time = 0
+		color_change_time = 0.0
 	color = region_control.align_color[alignment]
 	city.color_self(region_control.align_color[alignment])
 

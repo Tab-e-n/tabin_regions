@@ -11,7 +11,7 @@ void fragment() {
 		vec2 uv = UV;
 		if((uv.y * 1.5 - uv.x * 0.5 + 0.5) * 0.5 > n)
 		{
-			COLOR = previous_color;
+			COLOR = texture(TEXTURE, UV) * previous_color;
 		}
 //		if((uv.x * 1.5 + uv.y * 0.5) * 0.5 > n)
 //		{
