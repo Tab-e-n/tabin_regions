@@ -278,6 +278,7 @@ Ctrl + H  -  Toggle capitals
 Ctrl + U  -  Toggle UI
 Ctrl + T  -  Toggle turn order
 Ctrl + Alt + M  -  Toggle mouse scroll
+Ctrl + Alt + P  -  Toggle auto phase advancing.
 Hold Shift when mobilizing to grab all extra units"
 clip_text = true
 

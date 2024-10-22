@@ -21,12 +21,16 @@ const SECRET_CLOUDS : Array[Texture2D] = [
 ]
 
 @export var speed : float = 16
+@export var rarity : int = 49
+@export var rare_cloud : int = -1
 
 
 func _ready():
-	if randi_range(0, 49):
+	if randi_range(0, rarity):
 		var r : int = randi_range(0, CLOUDS.size() - 1)
 		texture = CLOUDS[r]
+	elif rare_cloud >= 0 and rare_cloud < SECRET_CLOUDS.size():
+		texture = SECRET_CLOUDS[rare_cloud]
 	else:
 		var r : int = randi_range(0, SECRET_CLOUDS.size() - 1)
 		texture = SECRET_CLOUDS[r]

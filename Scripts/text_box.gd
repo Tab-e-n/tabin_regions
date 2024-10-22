@@ -11,8 +11,8 @@ func _ready():
 	label.text = text
 
 
-func _on_toggled(pressed):
-	if pressed:
+func _on_toggled(down):
+	if down:
 		anim.play("appear")
 	else:
 		anim.play("disappear")

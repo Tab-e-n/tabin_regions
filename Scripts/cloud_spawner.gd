@@ -7,6 +7,8 @@ const CLOUD_DISTANCE_COVERED : float = 1024
 @export var time_range_bottom : float = 8
 @export var time_range_top : float = 24
 @export var color : Color = Color(1, 1, 1, 1)
+@export var rarity : int = 49
+@export var rare_cloud : int = -1
 
 
 var packed_cloud : PackedScene = preload("res://Objects/cloud.tscn")
@@ -40,4 +42,6 @@ func _process(delta):
 		if game_camera:
 			cloud.position.x = randf_range(game_camera.farthest_left + cloud_offset.x, game_camera.farthest_right + cloud_offset.y)
 			cloud.position.y = randf_range(game_camera.farthest_up + cloud_offset.z, game_camera.farthest_down + cloud_offset.w)
+		cloud.rarity = rarity
+		cloud.rare_cloud = rare_cloud
 		add_child(cloud)

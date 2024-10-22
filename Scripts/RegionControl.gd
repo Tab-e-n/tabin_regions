@@ -362,10 +362,6 @@ func _process(_delta):
 	if dummy:
 		return
 	
-	if Input.is_action_just_pressed("hide_capitals"):
-		cities_visible = not cities_visible
-		game_camera.CommandCallout.new_callout("Toggle hide capitols")
-	
 	if is_player_controled:
 		if Input.is_action_just_pressed("forfeit"):
 			forfeit()
@@ -447,6 +443,10 @@ func cross(capital_position : Vector2):
 	game_control.cross.position = capital_position
 
 
+func hide_capitals():
+	cities_visible = not cities_visible
+
+
 func change_region_amount(amount : int, alignment : int, is_capital : bool):
 	if alignment > 0 and alignment < align_amount and region_amount.size() > 0:
 		region_amount[alignment - 1] += amount
@@ -462,8 +462,8 @@ func action_done(region_name : String, amount : int = 1):
 			GameStats.add_to_stat(current_playing_align, "first actions done", 1)
 			action_amount -= 1
 			ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
-		if action_amount <= 0:
-			current_action = ACTION_MOBILIZE
+		if action_amount <= 0 and Options.auto_end_turn_phases and not ReplayControl.replay_active:
+			change_current_action()
 	elif current_action == ACTION_MOBILIZE:
 		for i in range(amount):
 			ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
@@ -472,9 +472,8 @@ func action_done(region_name : String, amount : int = 1):
 			GameStats.add_to_stat(current_playing_align, "bonus actions done", 1)
 			bonus_action_amount -= 1
 			ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
-		if bonus_action_amount <= 0:
-			current_action = ACTION_NORMAL
-			turn_end(false)
+		if bonus_action_amount <= 0 and Options.auto_end_turn_phases and not ReplayControl.replay_active:
+			change_current_action()
 
 
 func has_enough_actions() -> bool:
@@ -554,7 +553,7 @@ func check_victory():
 
 func victory(align_victory : int):
 	dummy = true
-	game_camera.win(align_victory)
+	game_control.win(align_victory)
 	GameStats.set_stat(align_victory, "placement", "1")
 #	GameStats.stats[align_victory]["placement"] = "1"
 	if use_aliances:

@@ -43,7 +43,7 @@ var replay_done_action : bool = true
 
 
 func _ready():
-	speedrun_ai_update(false)
+	speedrun_ai_update()
 	
 	game_control.ai_control = self
 	
@@ -69,10 +69,6 @@ func _process(delta):
 	if region_control.dummy:
 		return
 	
-	if Input.is_action_just_pressed("ai_speedrun"):
-		Options.speedrun_ai = not Options.speedrun_ai
-		speedrun_ai_update()
-	
 #	print(timer)
 	if region_control.is_player_controled:
 		timer = 0
@@ -85,15 +81,11 @@ func _process(delta):
 		timer_ended()
 
 
-func speedrun_ai_update(callouts : bool = true):
+func speedrun_ai_update():
 	if Options.speedrun_ai:
 		thinking_timer = THINKING_TIMER_SPEEDRUN
-		if callouts:
-			game_control.game_camera.CommandCallout.new_callout("Fast AI")
 	else:
 		thinking_timer = THINKING_TIMER_DEFAULT
-		if callouts:
-			game_control.game_camera.CommandCallout.new_callout("Slow AI")
 
 
 func start_turn(align : int, control : int):

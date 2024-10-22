@@ -40,13 +40,10 @@ var farthest_right : int = 0
 var farthest_up : int = 0
 var farthest_down : int = 0
 
-var win_timer : float = -1
-
 var cam_movement_stop : float = PREVENT_CAMERA_MOVEMENT_START
 
 
 var zoom_level : int = 0
-var mouse_wheel_input : int = 0
 
 var hovering_advance_turn : bool = false
 var hovering_turn_order : bool = false
@@ -59,23 +56,11 @@ func _ready():
 	window_size.y = ProjectSettings.get_setting("display/window/size/viewport_height")
 	
 	game_control.game_camera = self
+	game_control.command_callout = CommandCallout
 	call_deferred("_deffered_ready")
 	
 	zoom_level = ZOOM_START
 	zoom_change(0)
-
-
-func _input(event):
-#	if event is InputEventKey:
-#		if event.key_label != KEY_ESCAPE:
-#			LeaveMessage.visible = false
-	if event is InputEventMouseButton:
-#		LeaveMessage.visible = false
-		if event.is_pressed():
-			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				mouse_wheel_input = 1
-			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				mouse_wheel_input = -1
 
 
 func _deffered_ready():
@@ -158,88 +143,9 @@ func _ready_turn_order():
 		Attacks.size.x = TurnOrder.size.x
 
 
-func _physics_process(delta):
-	var mouse_position = get_viewport().get_mouse_position()
-	var shift = Input.is_action_pressed("shift")
-	var ctrl = Input.is_action_pressed("ctrl")
-	
-	if Input.is_action_just_pressed("escape"):
-		if LeaveMessage.visible:
-			leave()
-		LeaveMessage.visible = true
-	if win_timer > 0:
-		win_timer -= delta
-		if win_timer <= 0:
-			leave()
-			return
-	
-	var direction : Vector2 = Vector2(0, 0)
-	if Input.is_action_pressed("right"):
-		direction.x += 1
-	if Input.is_action_pressed("left"):
-		direction.x -= 1
-	if Input.is_action_pressed("down"):
-		direction.y += 1
-	if Input.is_action_pressed("up"):
-		direction.y -= 1
-	
+func _process(delta):
 	if hovering_advance_turn or hovering_turn_order:
 		cam_movement_stop = 1
-	
-	if cam_movement_stop > 0:
-		cam_movement_stop -= 1
-	elif Options.mouse_scroll_active:
-		if mouse_position.x > window_size.x - 64:
-			direction.x += 1
-		if mouse_position.x < 64:
-			direction.x -= 1
-		if mouse_position.y > window_size.y - 64:
-			direction.y += 1
-		if mouse_position.y < 64:
-			direction.y -= 1
-		
-	var move_speed = BASE_MOVE_SPEED * UI.scale.x
-	if shift:
-		move_speed *= 2.0
-	if ctrl:
-		move_speed *= 0.3
-	position += direction * Vector2(move_speed, move_speed)
-	
-	snapped(position, Vector2(1.0, 1.0))
-	if position.x > farthest_right:
-		position.x = farthest_right
-	if position.x < farthest_left:
-		position.x = farthest_left
-	if position.y < farthest_up:
-		position.y = farthest_up
-	if position.y > farthest_down:
-		position.y = farthest_down
-	
-	if Input.is_action_just_pressed("zoom_out") or mouse_wheel_input < 0:
-		zoom_change(-1)
-	if Input.is_action_just_pressed("zoom_in") or mouse_wheel_input > 0:
-		zoom_change(1)
-	if Input.is_action_just_pressed("zoom_reset"):
-		zoom_level = ZOOM_START
-		zoom_change(0)
-		CommandCallout.new_callout("Reset zoom")
-	
-	mouse_wheel_input = 0
-	
-	if Input.is_action_just_pressed("hide_ui"):
-		UIHideable.visible = not UIHideable.visible
-		CommandCallout.new_callout("Toggle hide UI")
-	
-	if Input.is_action_just_pressed("hide_turn_order"):
-		toggle_turn_order_visibility()
-		CommandCallout.new_callout("Toggle turn order")
-	
-	if Input.is_action_just_pressed("disable_mouse_scroll"):
-		Options.mouse_scroll_active = not Options.mouse_scroll_active
-		if Options.mouse_scroll_active:
-			CommandCallout.new_callout("Mouse scrolling active")
-		else:
-			CommandCallout.new_callout("Mouse scrolling disabled")
 	
 	PlayerActions.modulate = region_control.align_color[region_control.current_playing_align]
 	PowerSprite.self_modulate = region_control.align_color[region_control.current_playing_align]
@@ -267,7 +173,7 @@ func _physics_process(delta):
 	
 	PlayerInfo.visible = hovering_turn_order
 	if hovering_turn_order:
-		var hovering_over_player : int = (mouse_position.x - AlignmentList.PLAY_ORDER_SCREEN_BORDER_GAP) / (AlignmentList.PLAY_ORDER_SPACING * TurnOrder.scale.x)
+		var hovering_over_player : int = (game_control.mouse_position.x - AlignmentList.PLAY_ORDER_SCREEN_BORDER_GAP) / (AlignmentList.PLAY_ORDER_SPACING * TurnOrder.scale.x)
 		
 		if hovering_over_player >= region_control.align_amount - 1:
 			hovering_over_player = region_control.align_amount - 2
@@ -306,6 +212,25 @@ func _physics_process(delta):
 			PlayerInfo.visible = false
 
 
+func move_camera(direction : Vector2, shift : bool, ctrl : bool):
+	var move_speed = BASE_MOVE_SPEED * UI.scale.x
+	if shift:
+		move_speed *= 2.0
+	if ctrl:
+		move_speed *= 0.3
+	position += direction * Vector2(move_speed, move_speed)
+	
+	snapped(position, Vector2(1.0, 1.0))
+	if position.x > farthest_right:
+		position.x = farthest_right
+	if position.x < farthest_left:
+		position.x = farthest_left
+	if position.y < farthest_up:
+		position.y = farthest_up
+	if position.y > farthest_down:
+		position.y = farthest_down
+
+
 func zoom_change(amount : int):
 	zoom_level += amount
 	if zoom_level < ZOOM_OUT_MAX:
@@ -318,10 +243,9 @@ func zoom_change(amount : int):
 	UI.scale.y = UI.scale.x
 
 
-func win(align_victory : int):
-	VictoryMessage.visible = true
-	VictoryMessage.modulate = region_control.align_color[align_victory]
-	win_timer = 5.0
+func reset_zoom():
+	zoom_level = ZOOM_START
+	zoom_change(0)
 
 
 func _advance_turn():
@@ -338,6 +262,11 @@ func _forfeit_show():
 
 func _forfeit_hide():
 	ForfeitMessage.visible = false
+
+
+func show_victory_message(align : int):
+	VictoryMessage.visible = true
+	VictoryMessage.modulate = region_control.align_color[align]
 
 
 func _forfeit():
@@ -373,6 +302,10 @@ func update_current_turn():
 
 func show_pause_menu():
 	PauseMenu.visible = not PauseMenu.visible
+
+
+func toggle_ui_visibility():
+	UIHideable.visible = not UIHideable.visible
 
 
 func toggle_turn_order_visibility():
@@ -417,10 +350,6 @@ func _leaving():
 
 func _not_leaving():
 	LeaveMessage.visible = false
-
-
-func leave():
-	get_tree().change_scene_to_file("res://stats.tscn")
 
 
 func center_camera(pos : Vector2):
