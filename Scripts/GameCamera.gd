@@ -41,7 +41,7 @@ var farthest_up : int = 0
 var farthest_down : int = 0
 
 var cam_movement_stop : float = PREVENT_CAMERA_MOVEMENT_START
-
+var next_position : Vector2 = position
 
 var zoom_level : int = 0
 
@@ -112,6 +112,7 @@ func _deffered_ready():
 		position.y = farthest_down
 	if position.y < farthest_up:
 		position.y = farthest_up
+	next_position = position
 	
 	AdvanceTurnButton.pressed.connect(_advance_turn)
 	EndTurnButton.pressed.connect(_end_turn)
@@ -143,7 +144,11 @@ func _ready_turn_order():
 		Attacks.size.x = TurnOrder.size.x
 
 
-func _process(delta):
+func _physics_process(_delta):
+	position = next_position
+
+
+func _process(_delta):
 	if hovering_advance_turn or hovering_turn_order:
 		cam_movement_stop = 1
 	
@@ -173,7 +178,7 @@ func _process(delta):
 	
 	PlayerInfo.visible = hovering_turn_order
 	if hovering_turn_order:
-		var hovering_over_player : int = (game_control.mouse_position.x - AlignmentList.PLAY_ORDER_SCREEN_BORDER_GAP) / (AlignmentList.PLAY_ORDER_SPACING * TurnOrder.scale.x)
+		var hovering_over_player : int = int((game_control.mouse_position.x - AlignmentList.PLAY_ORDER_SCREEN_BORDER_GAP) / (AlignmentList.PLAY_ORDER_SPACING * TurnOrder.scale.x))
 		
 		if hovering_over_player >= region_control.align_amount - 1:
 			hovering_over_player = region_control.align_amount - 2
@@ -218,17 +223,17 @@ func move_camera(direction : Vector2, shift : bool, ctrl : bool):
 		move_speed *= 2.0
 	if ctrl:
 		move_speed *= 0.3
-	position += direction * Vector2(move_speed, move_speed)
+	next_position += direction * Vector2(move_speed, move_speed)
 	
-	snapped(position, Vector2(1.0, 1.0))
-	if position.x > farthest_right:
-		position.x = farthest_right
-	if position.x < farthest_left:
-		position.x = farthest_left
-	if position.y < farthest_up:
-		position.y = farthest_up
-	if position.y > farthest_down:
-		position.y = farthest_down
+	snapped(next_position, Vector2(1.0, 1.0))
+	if next_position.x > farthest_right:
+		next_position.x = farthest_right
+	if next_position.x < farthest_left:
+		next_position.x = farthest_left
+	if next_position.y < farthest_up:
+		next_position.y = farthest_up
+	if next_position.y > farthest_down:
+		next_position.y = farthest_down
 
 
 func zoom_change(amount : int):
@@ -264,9 +269,9 @@ func _forfeit_hide():
 	ForfeitMessage.visible = false
 
 
-func show_victory_message(align : int):
+func show_victory_message(alignment : int):
 	VictoryMessage.visible = true
-	VictoryMessage.modulate = region_control.align_color[align]
+	VictoryMessage.modulate = region_control.align_color[alignment]
 
 
 func _forfeit():
@@ -352,5 +357,9 @@ func _not_leaving():
 	LeaveMessage.visible = false
 
 
+func _confirmed_leave():
+	game_control.leave()
+
+
 func center_camera(pos : Vector2):
-	position = pos
+	next_position = pos

@@ -11,6 +11,7 @@ class_name GameControl
 @onready var command_callout : CommandCallouts
 
 var mouse_wheel_input : int = 0
+var mouse_position : Vector2
 
 var win_timer : float = -1
 
@@ -50,7 +51,7 @@ func _process(delta):
 			leave()
 		game_camera.LeaveMessage.visible = true
 	
-	var mouse_position = get_viewport().get_mouse_position()
+	mouse_position = get_viewport().get_mouse_position()
 	var shift = Input.is_action_pressed("shift")
 	var ctrl = Input.is_action_pressed("ctrl")
 	
@@ -108,7 +109,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("auto_phase"):
 		Options.auto_end_turn_phases = not Options.auto_end_turn_phases
 		if Options.auto_end_turn_phases:
-			command_callout.new_callout("Phases end when you have no actions left")
+			command_callout.new_callout("Phases end when no actions are left")
 		else:
 			command_callout.new_callout("Phases end only after user input")
 	

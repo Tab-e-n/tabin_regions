@@ -161,7 +161,7 @@ offset_right = 1072.0
 offset_bottom = 208.0
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_kl6wx")
-text = "MAP USES CUSTOM AI SETUP"
+text = "LOCKED BY MAP MAKER"
 horizontal_alignment = 1
 vertical_alignment = 1
 

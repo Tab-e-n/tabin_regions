@@ -112,8 +112,8 @@ func _on_map_list_item_selected(index):
 	slider_aliances.visible = not current_map.lock_aliances
 	slider_aliances.max_value = current_map.align_amount - 1
 	
-	ai_preset.visible = current_map.use_custom_ai_setup
-	ai_cursor.visible = !current_map.use_custom_ai_setup
+	ai_preset.visible = current_map.lock_ai_setup
+	ai_cursor.visible = !current_map.lock_ai_setup
 	
 	map_lore.text = current_map.tag + ", " + current_map.complexity + "\n" + current_map.lore
 	

@@ -155,13 +155,17 @@ func color_self(animate : bool = true):
 	city.color_self(region_control.align_color[alignment])
 
 
+func city_particle(is_mobilized : bool):
+	city.call_deferred("make_particle", is_mobilized)
+
+
 func _on_capital_pressed():
 	if region_control.is_player_controled and !region_control.dummy:
 		action_decided()
 
 
 func action_decided():
-	city.call_deferred("make_particle", region_control.current_action == region_control.ACTION_MOBILIZE)
+	city_particle(region_control.current_action == region_control.ACTION_MOBILIZE)
 	if region_control.current_action != region_control.ACTION_MOBILIZE:
 		if region_control.has_enough_actions():
 			if region_control.alignment_friendly(region_control.current_playing_align, alignment):
@@ -175,9 +179,12 @@ func action_decided():
 		region_control.cross(position)
 	else:
 		if region_control.current_playing_align == alignment:
-			var amount = mobilize()
-			if amount:
-				region_control.action_done(name, amount)
+			var amount_requested = 1
+			if Input.is_action_pressed("shift") and region_control.is_player_controled:
+				amount_requested = power - 1
+			var amount_gotten = mobilize(alignment, amount_requested)
+			if amount_gotten:
+				region_control.action_done(name, amount_gotten)
 				return
 		region_control.cross(position)
 
@@ -223,12 +230,9 @@ func reinforce(reinforce_align : int = alignment, addon_power : int = 1):
 	return true
 
 
-func mobilize(mobilize_align : int = alignment):
+func mobilize(mobilize_align : int = alignment, mobilize_amount : int = 1):
 	if power <= 1:
 		return 0
-	var mobilize_amount : int = 1
-	if Input.is_action_pressed("shift") and region_control.is_player_controled:
-		mobilize_amount = power - 1
 	GameStats.add_to_stat(mobilize_align, "units mobilized", mobilize_amount)
 #	GameStats.stats[mobilize_align]["units mobilized"] += 1
 	power -= mobilize_amount

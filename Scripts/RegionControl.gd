@@ -16,6 +16,7 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 
 @onready var bg_color : Color = color
 @onready var game_control : GameControl
+@onready var ai_control : AIControler
 @onready var game_camera : GameCamera
 
 
@@ -25,6 +26,8 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @export var lock_align_amount : bool = true
 @export var lock_player_amount : bool = false
 @export var lock_aliances : bool = false
+@export var lock_ai_setup : bool = false
+
 
 @export_subgroup("Gameplay")
 @export_enum ("Off", "Current Capital Amount", "Previous Capital Amount") var apply_penalties : int = APPLY_PENALTIES.OFF
@@ -58,8 +61,6 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @export_subgroup("AI")
 ## The default AI that computer players will use. Uses the 'CONTROLER_' enums from 'AIControler'. Default, Turtle, Neural and Cheater are all accessible in the setup scene. The Dummy AI does nothing, expecting to be controled by the map.
 @export_enum("None", "Default", "Turtle", "Neural", "Cheater", "Dummy") var default_ai_controler : int = AIControler.CONTROLER_DEFAULT
-## Enables the use of 'custom_ai_setup'. Will also prevent the user from changing the AI of the computer players.
-@export var use_custom_ai_setup : bool = false
 @export var custom_ai_setup : Array[int] = []
 
 @export_subgroup("Aliances")
@@ -171,6 +172,7 @@ func _ready():
 	game_control = get_parent()
 	game_control.region_control = self
 	game_camera = game_control.game_camera
+	ai_control = game_control.ai_control
 	
 	if ReplayControl.replay_active:
 		align_play_order = ReplayControl.replay_play_order
@@ -179,7 +181,7 @@ func _ready():
 		use_aliances = ReplayControl.replay_uses_aliances
 	else:
 		player_amount = MapSetup.player_amount
-		if not use_custom_ai_setup:
+		if not lock_ai_setup:
 			default_ai_controler = MapSetup.default_ai_controler
 		if not use_aliances and MapSetup.aliances_amount > 1:
 			use_aliances = true
@@ -285,10 +287,10 @@ func _ready():
 	if not ReplayControl.replay_active:
 		align_controlers.resize(align_amount - 1)
 		for i in range(align_amount - 1):
+			align_controlers[i] = default_ai_controler
 			if i < custom_ai_setup.size():
-				align_controlers[i] = custom_ai_setup[i]
-			else:
-				align_controlers[i] = default_ai_controler
+				if custom_ai_setup[i] != 0:
+					align_controlers[i] = custom_ai_setup[i]
 		for i in range(player_amount):
 			align_controlers[align_play_order[i] - 1] = AIControler.CONTROLER_USER
 	
@@ -387,6 +389,14 @@ func count_up_regions():
 			capital_amount[region.alignment - 1] += 1
 
 
+func get_region(reg_name : String) -> Region:
+	var node : Node = get_node(reg_name)
+	if node is Region:
+		return node
+	else:
+		return null
+
+
 func bake_capital_distance():
 	for capital in get_children():
 		if not capital is Region:
@@ -456,13 +466,14 @@ func change_region_amount(amount : int, alignment : int, is_capital : bool):
 
 
 func action_done(region_name : String, amount : int = 1):
+	var auto_end_phase : bool = (Options.auto_end_turn_phases or not is_player_controled) and not ReplayControl.replay_active
 	game_control.cross.visible = false
 	if current_action == ACTION_NORMAL:
 		if action_amount > 0:
 			GameStats.add_to_stat(current_playing_align, "first actions done", 1)
 			action_amount -= 1
 			ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
-		if action_amount <= 0 and Options.auto_end_turn_phases and not ReplayControl.replay_active:
+		if action_amount <= 0 and auto_end_phase:
 			change_current_action()
 	elif current_action == ACTION_MOBILIZE:
 		for i in range(amount):
@@ -472,7 +483,7 @@ func action_done(region_name : String, amount : int = 1):
 			GameStats.add_to_stat(current_playing_align, "bonus actions done", 1)
 			bonus_action_amount -= 1
 			ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
-		if bonus_action_amount <= 0 and Options.auto_end_turn_phases and not ReplayControl.replay_active:
+		if bonus_action_amount <= 0 and auto_end_phase:
 			change_current_action()
 
 
@@ -541,33 +552,34 @@ func turn_end(record : bool):
 
 
 func check_victory():
-	var aliance = null
+	var aliance : int = 0
+	var victory_align : int = 0
 	for i in range(region_amount.size()):
 		if region_amount[i] > 0:
-			if aliance == null:
+			if alignment_aliances[i + 1] < 0:
+				continue
+			elif aliance == 0:
+				victory_align = i + 1
 				aliance = alignment_aliances[i + 1]
 			elif aliance != alignment_aliances[i + 1]:
 				return
-	victory(current_playing_align)
+	victory(victory_align)
 
 
 func victory(align_victory : int):
 	dummy = true
 	game_control.win(align_victory)
 	GameStats.set_stat(align_victory, "placement", "1")
-#	GameStats.stats[align_victory]["placement"] = "1"
 	if use_aliances:
 		for i in range(align_amount - 1):
 			if alignment_aliances[i + 1] == alignment_aliances[align_victory]:
 				GameStats.set_stat(i + 1, "placement", "1")
-#				GameStats.stats[i + 1]["placement"] = "1"
 	
 	var placement = String.num(current_placement)
 	
 	for i in range(align_amount - 1):
-		if GameStats.get_stat(i + 1, "placement") == "N/A": #stats[i + 1]["placement"]
+		if GameStats.get_stat(i + 1, "placement") == "N/A":
 			GameStats.set_stat(i + 1, "placement", placement)
-#			GameStats.stats[i + 1]["placement"] = placement
 	
 	game_ended.emit(align_victory)
 
@@ -601,7 +613,7 @@ func reset():
 		is_player_controled = align_controlers[current_playing_align - 1] == AIControler.CONTROLER_USER
 	
 	if !is_player_controled:
-		game_control.ai_control.start_turn(current_playing_align, align_controlers[current_playing_align - 1])
+		ai_control.start_turn(current_playing_align, align_controlers[current_playing_align - 1])
 
 
 func calculate_penalty(alignment : int, end_of_turn : bool = false):

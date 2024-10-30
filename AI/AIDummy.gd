@@ -7,10 +7,10 @@ var current_alignment : int
 
 
 func think_normal():
-	controler.CALL_turn_end = true
+	controler.CALL_nothing = true
 
 func think_mobilize():
-	controler.CALL_turn_end = true
+	controler.CALL_nothing = true
 
 func think_bonus():
-	controler.CALL_turn_end = true
+	controler.CALL_nothing = true

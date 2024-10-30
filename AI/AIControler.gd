@@ -1,6 +1,10 @@
 extends Node
 class_name AIControler
 
+
+signal timer_has_ended
+
+
 @onready var game_control : GameControl = get_parent()
 @onready var region_control : RegionControl
 
@@ -57,6 +61,8 @@ func _ready():
 			controlers[i].controler_id = i
 			add_child(controlers[i])
 	
+	timer_has_ended.connect(timer_ended)
+	
 	call_deferred("_ready_deferred")
 
 
@@ -78,7 +84,7 @@ func _process(delta):
 			timer = -1
 	if timer < 0:
 		timer = 0
-		timer_ended()
+		timer_has_ended.emit()
 
 
 func speedrun_ai_update():

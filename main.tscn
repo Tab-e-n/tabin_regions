@@ -373,7 +373,7 @@ color = Color(0.137255, 0.137255, 0.137255, 1)
 polygon = PackedVector2Array(-32, 64, 0, 32, 32, 64, 64, 32, 32, 0, 64, -32, 32, -64, 0, -32, -32, -64, -64, -32, -32, 0, -64, 32)
 
 [connection signal="pressed" from="GameCamera/UI/pause/leave" to="GameCamera" method="_leaving"]
-[connection signal="pressed" from="GameCamera/UI/leave/yes" to="GameCamera" method="leave"]
+[connection signal="pressed" from="GameCamera/UI/leave/yes" to="GameCamera" method="_confirmed_leave"]
 [connection signal="pressed" from="GameCamera/UI/leave/no" to="GameCamera" method="_not_leaving"]
 [connection signal="pressed" from="GameCamera/UI/forfeit/yes" to="GameCamera" method="_forfeit"]
 [connection signal="pressed" from="GameCamera/UI/forfeit/no" to="GameCamera" method="_forfeit_hide"]
