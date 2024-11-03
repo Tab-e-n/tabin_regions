@@ -189,6 +189,15 @@ func action_decided():
 		region_control.cross(position)
 
 
+func overtake():
+	city_particle(false)
+	if region_control.alignment_friendly(region_control.current_playing_align, alignment):
+		reinforce(region_control.current_playing_align)
+	else:
+		incoming_attack(region_control.current_playing_align, max_power + 1)
+	region_control.record_overtake(name)
+
+
 func alignment_can_attack(attack_align : int) -> bool:
 	for region in connections.keys():
 		if region_control.get_node(region).alignment == attack_align:

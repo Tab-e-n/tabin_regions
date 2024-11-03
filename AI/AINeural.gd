@@ -1,20 +1,17 @@
-extends Node
-
-
-var controler : AIControler
-var controler_id : int
-var current_alignment : int
+extends AIBase
 
 
 func start_turn(align : int):
-	current_alignment = align
+	super.start_turn(align)
 
 
 func think_normal():
 	pass
 
+
 func think_mobilize():
 	pass
+
 
 func think_bonus():
 	pass

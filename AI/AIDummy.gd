@@ -1,16 +1,25 @@
-extends Node
+extends AIBase
+class_name AIDummy
 
 
-var controler : AIControler
-var controler_id : int
-var current_alignment : int
+signal started_turn
+signal thinking_normal
+signal thinking_mobilize
+signal thinking_bonus
+
+
+func start_turn(align : int):
+	super.start_turn(align)
+	started_turn.emit()
 
 
 func think_normal():
-	controler.CALL_nothing = true
+	thinking_normal.emit()
+
 
 func think_mobilize():
-	controler.CALL_nothing = true
+	thinking_mobilize.emit()
+
 
 func think_bonus():
-	controler.CALL_nothing = true
+	thinking_bonus.emit()

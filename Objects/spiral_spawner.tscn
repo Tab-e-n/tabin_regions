@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b08758y8g0dsv"]
+
+[ext_resource type="Script" path="res://Scripts/spiral_spawner.gd" id="1_tj0mq"]
+
+[node name="SpiralSpawner" type="Node2D"]
+script = ExtResource("1_tj0mq")

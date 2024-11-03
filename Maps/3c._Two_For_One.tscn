@@ -81,169 +81,169 @@ func _ready():
 _data = [Vector2(0, 0.772727), 0.0, 0.0, 0, 0, Vector2(0.163366, 0.6), 0.0, 0.0, 0, 0, Vector2(0.326733, 0.490909), 0.0, 0.0, 0, 0, Vector2(0.5, 0.545455), 0.0, 0.0, 0, 0, Vector2(0.737624, 0.436364), 0.0, 0.0, 0, 0, Vector2(0.960396, 0.163636), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 7
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8wh8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idilq"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ff8ui"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bof4t"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ri3p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8r84"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tow7m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wetlo"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sff1p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ugbee"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fxipp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yydf6"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gy60"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ogqf"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s0ko0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnxux"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0jwqw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdehm"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahw2p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xhel5"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_feqii"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynkjv"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vuwf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0d5ea"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ngmn2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q33ok"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fb0rc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sim2p"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cyc5s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gy1ne"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_klwxv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypgqs"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_upynq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jutjp"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3b4gw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64mq4"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dr2k0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2x8b"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqpye"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77fas"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dykxd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l1vik"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5deg2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8dwl"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_riutp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6mbs"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nud0r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bomk"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1vtt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_46r0u"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ma54h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyn26"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksn0e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yu1c3"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ebfkl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pxlij"]
 shader = ExtResource("3_ehuad")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
@@ -262,11 +262,13 @@ use_preset_alignments = true
 preset_alignments = Array[int]([1, 2, 3])
 use_aliances = true
 alignment_aliances = Array[int]([0, 1, 2, 3])
-tag = "Challenge"
-complexity = "Advanced"
+tag = 1
+complexity = 3
 lore = "Three for all!"
 align_color = Array[Color]([Color(0.4, 0.313726, 0.266667, 1), Color(0.929412, 0.521569, 0.552941, 1), Color(0.929412, 0.654902, 0.356863, 1), Color(0.682353, 0.356863, 0.0823529, 1)])
 align_names = Array[String](["", "Sand Witch", "Foucas", "Herit"])
+main_character = 1
+render_mode = 1
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_su0wr")
@@ -281,239 +283,295 @@ default_color = Color(0.25098, 0.219608, 0.2, 1)
 color = Color(0.25098, 0.219608, 0.2, 1)
 
 [node name="Sandwich" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_x8wh8")
+material = SubResource("ShaderMaterial_idilq")
 position = Vector2(208, 16)
+color = Color(0.929412, 0.521569, 0.552941, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-64, 80, -16, 72, 80, 32, 88, 16, 80, 0, 56, 0, 48, -24, 56, -40, 56, -56, 40, -64, 32, -64, 0, -48, -24, -80, -24, -96, -32, -104, -48, -104, -56, -96, -56, -80, -40, -72, -32, -40, -72, -32, -120, -16, -128, 0, -112, 16, -88, 16, -80, 40, -96, 56, -88, 72)
+uv = PackedVector2Array(37.9259, 128, 66.3704, 122.435, 123.259, 94.6087, 128, 83.4783, 123.259, 72.3478, 109.037, 72.3478, 104.296, 55.6522, 109.037, 44.5217, 109.037, 33.3913, 99.5556, 27.8261, 94.8148, 27.8261, 75.8519, 38.9565, 61.6296, 16.6957, 61.6296, 5.56522, 56.8889, 0, 47.4074, 0, 42.6667, 5.56522, 42.6667, 16.6957, 52.1481, 22.2609, 56.8889, 44.5217, 33.1852, 50.087, 4.74074, 61.2174, 0, 72.3478, 9.48148, 83.4783, 23.7037, 83.4783, 28.4444, 100.174, 18.963, 111.304, 23.7037, 122.435)
 script = ExtResource("2_urcg5")
 alignment = 1
 max_power = 4
 is_capital = true
 
 [node name="Yummers" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_ff8ui")
+material = SubResource("ShaderMaterial_bof4t")
 position = Vector2(48, 40)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-8, -64, 0, -72, 8, -72, 16, -64, 24, -48, 32, -40, 24, -24, 48, 0, 64, 0, 72, 16, 56, 32, 32, 40, 16, 56, 24, 80, 16, 96, -8, 88, -16, 64, -16, 48, -8, 32, -40, 48, -32, 72, -32, 88, -56, 88, -64, 64, -72, 48, -88, 32, -80, 16, -80, 0, -96, -16, -104, -24, -88, -40, -88, -64, -72, -72, -64, -80, -64, -104, -56, -112, -40, -112, -40, -96, -48, -80, -40, -48, 0, -40, 0, -48)
+uv = PackedVector2Array(69.8182, 29.5385, 75.6364, 24.6154, 81.4545, 24.6154, 87.2727, 29.5385, 93.0909, 39.3846, 98.9091, 44.3077, 93.0909, 54.1538, 110.545, 68.9231, 122.182, 68.9231, 128, 78.7692, 116.364, 88.6154, 98.9091, 93.5385, 87.2727, 103.385, 93.0909, 118.154, 87.2727, 128, 69.8182, 123.077, 64, 108.308, 64, 98.4615, 69.8182, 88.6154, 46.5455, 98.4615, 52.3636, 113.231, 52.3636, 123.077, 34.9091, 123.077, 29.0909, 108.308, 23.2727, 98.4615, 11.6364, 88.6154, 17.4545, 78.7692, 17.4545, 68.9231, 5.81818, 59.0769, 0, 54.1538, 11.6364, 44.3077, 11.6364, 29.5385, 23.2727, 24.6154, 29.0909, 19.6923, 29.0909, 4.92308, 34.9091, 0, 46.5455, 0, 46.5455, 9.84615, 40.7273, 19.6923, 46.5455, 39.3846, 75.6364, 44.3077, 75.6364, 39.3846)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Cuisine" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_8ri3p")
+material = SubResource("ShaderMaterial_k8r84")
 position = Vector2(-80, 136)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(24, -72, 48, -48, 64, -8, 8, -16, 0, -40, -16, -24, 0, -8, 40, 0, 16, 24, -24, 8, -40, -16, -32, -40, -48, -32, -48, -8, -40, 16, -64, 8, -32, 40, -8, 40, 16, 56, 32, 80, 24, 104, 0, 104, -16, 80, -56, 64, -80, 32, -80, -16, -72, -48, -48, -64, -16, -72)
+uv = PackedVector2Array(92.4444, 0, 113.778, 17.4545, 128, 46.5455, 78.2222, 40.7273, 71.1111, 23.2727, 56.8889, 34.9091, 71.1111, 46.5455, 106.667, 52.3636, 85.3333, 69.8182, 49.7778, 58.1818, 35.5556, 40.7273, 42.6667, 23.2727, 28.4444, 29.0909, 28.4444, 46.5455, 35.5556, 64, 14.2222, 58.1818, 42.6667, 81.4545, 64, 81.4545, 85.3333, 93.0909, 99.5556, 110.545, 92.4444, 128, 71.1111, 128, 56.8889, 110.545, 21.3333, 98.9091, 0, 75.6364, 0, 40.7273, 7.11111, 17.4545, 28.4444, 5.81818, 56.8889, 0)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Bish" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_tow7m")
+material = SubResource("ShaderMaterial_wetlo")
 position = Vector2(-232, 168)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(64, -48, 48, -32, 32, -32, 16, -48, -16, -48, -40, -40, -72, -40, -72, -24, -80, 0, -64, 16, -48, 48, -24, 40, 8, 48, 32, 40, 64, 56, 88, 56, 112, 48, 88, 40, 64, 8)
+uv = PackedVector2Array(96, 0, 85.3333, 19.6923, 74.6667, 19.6923, 64, 0, 42.6667, 0, 26.6667, 9.84615, 5.33333, 9.84615, 5.33333, 29.5385, 0, 59.0769, 10.6667, 78.7692, 21.3333, 118.154, 37.3333, 108.308, 58.6667, 118.154, 74.6667, 108.308, 96, 128, 112, 128, 128, 118.154, 112, 108.308, 96, 68.9231)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Heritcomess" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_sff1p")
+material = SubResource("ShaderMaterial_ugbee")
 position = Vector2(-344, 104)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(24, 64, 32, 40, 32, 24, -8, 8, -48, -16, -16, -8, 40, 8, 48, -8, 48, -32, -8, -40, -64, -48, -128, -56, -136, -48, -96, -16, -56, 16, -16, 48)
+uv = PackedVector2Array(111.304, 128, 116.87, 102.4, 116.87, 85.3333, 89.0435, 68.2667, 61.2174, 42.6667, 83.4783, 51.2, 122.435, 68.2667, 128, 51.2, 128, 25.6, 89.0435, 17.0667, 50.087, 8.53333, 5.56522, 0, 0, 8.53333, 27.8261, 42.6667, 55.6522, 76.8, 83.4783, 110.933)
 script = ExtResource("2_urcg5")
 power = 0
 max_power = 4
 
 [node name="Herit Landing" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_fxipp")
+material = SubResource("ShaderMaterial_yydf6")
 position = Vector2(-512, 96)
+color = Color(0.682353, 0.356863, 0.0823529, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(72, 0, 24, -40, 32, -48, -8, -80, -24, -64, -32, -40, -72, -48, -64, -32, -64, -16, -80, 0, -56, 16, -48, 32, -56, 56, -40, 56, -16, 48, 0, 56, 8, 72, 24, 64, 24, 48, 48, 56, 48, 32, 40, 16, 48, 8)
+uv = PackedVector2Array(128, 67.3684, 87.5789, 33.6842, 94.3158, 26.9474, 60.6316, 0, 47.1579, 13.4737, 40.4211, 33.6842, 6.73684, 26.9474, 13.4737, 40.4211, 13.4737, 53.8947, 0, 67.3684, 20.2105, 80.8421, 26.9474, 94.3158, 20.2105, 114.526, 33.6842, 114.526, 53.8947, 107.789, 67.3684, 114.526, 74.1053, 128, 87.5789, 121.263, 87.5789, 107.789, 107.789, 114.526, 107.789, 94.3158, 101.053, 80.8421, 107.789, 74.1053)
 script = ExtResource("2_urcg5")
 alignment = 3
 max_power = 4
 is_capital = true
 
 [node name="Tart" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_4gy60")
+material = SubResource("ShaderMaterial_7ogqf")
 position = Vector2(296, 104)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-8, -48, -88, -16, -80, 8, -72, 16, -56, 32, -56, 48, -40, 56, -24, 56, -8, 64, 8, 80, 16, 64, 32, 56, 40, 48, 64, 40, 80, 32, 80, 16, 72, 0, 64, -8, 56, -24, 40, -16, 16, -16, 0, -32)
+uv = PackedVector2Array(60.9524, 0, 0, 32, 6.09524, 56, 12.1905, 64, 24.381, 80, 24.381, 96, 36.5714, 104, 48.7619, 104, 60.9524, 112, 73.1429, 128, 79.2381, 112, 91.4286, 104, 97.5238, 96, 115.81, 88, 128, 80, 128, 64, 121.905, 48, 115.81, 40, 109.714, 24, 97.5238, 32, 79.2381, 32, 67.0476, 16)
 script = ExtResource("2_urcg5")
 power = 0
 max_power = 4
 
 [node name="Khilimsel" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_s0ko0")
+material = SubResource("ShaderMaterial_xnxux")
 position = Vector2(376, 16)
+color = Color(0.4, 0.313726, 0.266667, 1)
 offset = Vector2(-32, 0)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(8, 56, -8, 64, -32, 64, -40, 56, -48, 40, -48, 32, -40, 16, -48, 0, -40, -8, -24, -8, -8, -24, -8, -32, 0, -40, 24, -48, 32, -56, 64, -56, 80, -64, 104, -72, 112, -64, 104, -56, 112, -48, 128, -40, 128, -32, 120, -16, 96, -16, 80, 0, 80, 16, 72, 40, 48, 40, 40, 32, 24, 24, 16, 32, 8, 48)
+uv = PackedVector2Array(40.7273, 120.471, 29.0909, 128, 11.6364, 128, 5.81818, 120.471, 0, 105.412, 0, 97.8824, 5.81818, 82.8235, 0, 67.7647, 5.81818, 60.2353, 17.4545, 60.2353, 29.0909, 45.1765, 29.0909, 37.6471, 34.9091, 30.1176, 52.3636, 22.5882, 58.1818, 15.0588, 81.4545, 15.0588, 93.0909, 7.52941, 110.545, 0, 116.364, 7.52941, 110.545, 15.0588, 116.364, 22.5882, 128, 30.1176, 128, 37.6471, 122.182, 52.7059, 104.727, 52.7059, 93.0909, 67.7647, 93.0909, 82.8235, 87.2727, 105.412, 69.8182, 105.412, 64, 97.8824, 52.3636, 90.3529, 46.5455, 97.8824, 40.7273, 112.941)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Riwerla" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_0jwqw")
+material = SubResource("ShaderMaterial_gdehm")
 position = Vector2(248, -128)
+color = Color(0.4, 0.313726, 0.266667, 1)
 offset = Vector2(0, 32)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-56, -32, -40, -24, -32, -16, -32, 0, -24, 16, -8, 8, 16, 8, 40, 24, 48, 48, 48, 64, 56, 72, 64, 64, 72, 48, 64, 32, 64, 16, 72, -8, 56, -24, 32, -32, 24, -40, 24, -56, 24, -72, 0, -88, -16, -96, -40, -96, -48, -88, -48, -80, -40, -64, -48, -48, -56, -40)
+uv = PackedVector2Array(0, 48.7619, 16, 54.8571, 24, 60.9524, 24, 73.1429, 32, 85.3333, 48, 79.2381, 72, 79.2381, 96, 91.4286, 104, 109.714, 104, 121.905, 112, 128, 120, 121.905, 128, 109.714, 120, 97.5238, 120, 85.3333, 128, 67.0476, 112, 54.8571, 88, 48.7619, 80, 42.6667, 80, 30.4762, 80, 18.2857, 56, 6.09524, 40, 0, 16, 0, 8, 6.09524, 8, 12.1905, 16, 24.381, 8, 36.5714, 0, 42.6667)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Seaside Bridge" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_ahw2p")
+material = SubResource("ShaderMaterial_xhel5")
 position = Vector2(376, -96)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(32, 48, 48, 40, 40, 24, 24, 8, 8, 0, 16, -8, 24, -24, 8, -32, 8, -48, 16, -64, 8, -72, -16, -80, -32, -72, -40, -56, -48, -48, -56, -32, -64, -24, -48, -8, -56, 16, -56, 32, -48, 40, -32, 24, -16, 24, 0, 16, 16, 24, 24, 32)
+uv = PackedVector2Array(109.714, 128, 128, 120, 118.857, 104, 100.571, 88, 82.2857, 80, 91.4286, 72, 100.571, 56, 82.2857, 48, 82.2857, 32, 91.4286, 16, 82.2857, 8, 54.8571, 0, 36.5714, 8, 27.4286, 24, 18.2857, 32, 9.14286, 48, 0, 56, 18.2857, 72, 9.14286, 96, 9.14286, 112, 18.2857, 120, 36.5714, 104, 54.8571, 104, 73.1429, 96, 91.4286, 104, 100.571, 112)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Hifoucas Lowlands" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_feqii")
+material = SubResource("ShaderMaterial_ynkjv")
 position = Vector2(48, -208)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(40, 48, 48, 40, 56, 32, 64, 24, 56, 8, 40, 0, 16, 16, 0, 16, 16, 8, 24, -8, 40, -16, 48, -16, 64, -8, 56, -32, 32, -40, 48, -40, 64, -32, 72, -16, 80, -32, 80, -48, 64, -64, 56, -80, 24, -72, 0, -64, -8, -40, -24, -24, -24, -8, -56, 8, -64, 8, -80, 24, -64, 32, -48, 40, -32, 48, -8, 56, 8, 64, 16, 48, 32, 48)
+uv = PackedVector2Array(96, 113.778, 102.4, 106.667, 108.8, 99.5556, 115.2, 92.4444, 108.8, 78.2222, 96, 71.1111, 76.8, 85.3333, 64, 85.3333, 76.8, 78.2222, 83.2, 64, 96, 56.8889, 102.4, 56.8889, 115.2, 64, 108.8, 42.6667, 89.6, 35.5556, 102.4, 35.5556, 115.2, 42.6667, 121.6, 56.8889, 128, 42.6667, 128, 28.4444, 115.2, 14.2222, 108.8, 0, 83.2, 7.11111, 64, 14.2222, 57.6, 35.5556, 44.8, 49.7778, 44.8, 64, 19.2, 78.2222, 12.8, 78.2222, 0, 92.4444, 12.8, 99.5556, 25.6, 106.667, 38.4, 113.778, 57.6, 120.889, 70.4, 128, 76.8, 113.778, 89.6, 113.778)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Forgor" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_0vuwf")
+material = SubResource("ShaderMaterial_0d5ea")
 position = Vector2(-56, -280)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-32, 96, -24, 104, -8, 104, 8, 96, 16, 96, 40, 72, 48, 72, 72, 56, 72, 40, 88, 24, 96, 8, 88, 8, 88, -16, 80, -24, 64, -24, 16, -40, 16, -56, 24, -72, 24, -80, 8, -80, 0, -72, -16, -64, -16, -56, -8, -40, -8, -24, -24, -8, -40, 0, -48, 8, -64, 16, -64, 24, -48, 40, -24, 48, -8, 72)
+uv = PackedVector2Array(25.6, 122.435, 32, 128, 44.8, 128, 57.6, 122.435, 64, 122.435, 83.2, 105.739, 89.6, 105.739, 108.8, 94.6087, 108.8, 83.4783, 121.6, 72.3478, 128, 61.2174, 121.6, 61.2174, 121.6, 44.5217, 115.2, 38.9565, 102.4, 38.9565, 64, 27.8261, 64, 16.6957, 70.4, 5.56522, 70.4, 0, 57.6, 0, 51.2, 5.56522, 38.4, 11.1304, 38.4, 16.6957, 44.8, 27.8261, 44.8, 38.9565, 32, 50.087, 19.2, 55.6522, 12.8, 61.2174, 0, 66.7826, 0, 72.3478, 12.8, 83.4783, 32, 89.0435, 44.8, 105.739)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Hifoucas" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_ngmn2")
+material = SubResource("ShaderMaterial_q33ok")
 position = Vector2(32, -352)
+color = Color(0.929412, 0.654902, 0.356863, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-40, 24, -24, 32, 0, 24, 16, 48, 16, 72, 40, 64, 64, 56, 48, 32, 40, 16, 64, -8, 72, -32, 64, -40, 56, -56, 32, -64, 16, -56, -8, -64, -24, -72, -40, -80, -56, -56, -64, -48, -72, -32, -64, -24, -48, -24, -48, 0, -56, 16)
+uv = PackedVector2Array(28.4444, 87.5789, 42.6667, 94.3158, 64, 87.5789, 78.2222, 107.789, 78.2222, 128, 99.5556, 121.263, 120.889, 114.526, 106.667, 94.3158, 99.5556, 80.8421, 120.889, 60.6316, 128, 40.4211, 120.889, 33.6842, 113.778, 20.2105, 92.4444, 13.4737, 78.2222, 20.2105, 56.8889, 13.4737, 42.6667, 6.73684, 28.4444, 0, 14.2222, 20.2105, 7.11111, 26.9474, 0, 40.4211, 7.11111, 47.1579, 21.3333, 47.1579, 21.3333, 67.3684, 14.2222, 80.8421)
 script = ExtResource("2_urcg5")
 alignment = 2
 max_power = 4
 is_capital = true
 
 [node name="Loufoucas" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_fb0rc")
+material = SubResource("ShaderMaterial_sim2p")
 position = Vector2(80, -464)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(32, 56, 72, 32, 56, 24, 40, 0, 40, -24, 40, -56, 24, -80, -8, -88, -16, -80, 8, -64, 24, -8, -8, -56, -40, -80, -48, -72, -48, -64, -24, -40, 8, 0, -32, -24, -56, -56, -72, -48, -72, -40, -40, -8, 0, 16, -56, 0, -72, -24, -88, -24, -88, -8, -72, 16, -40, 32, -16, 32, 16, 40)
+uv = PackedVector2Array(96, 128, 128, 106.667, 115.2, 99.5556, 102.4, 78.2222, 102.4, 56.8889, 102.4, 28.4444, 89.6, 7.11111, 64, 0, 57.6, 7.11111, 76.8, 21.3333, 89.6, 71.1111, 64, 28.4444, 38.4, 7.11111, 32, 14.2222, 32, 21.3333, 51.2, 42.6667, 76.8, 78.2222, 44.8, 56.8889, 25.6, 28.4444, 12.8, 35.5556, 12.8, 42.6667, 38.4, 71.1111, 70.4, 92.4444, 25.6, 78.2222, 12.8, 56.8889, 0, 56.8889, 0, 71.1111, 12.8, 92.4444, 38.4, 106.667, 57.6, 106.667, 83.2, 113.778)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Hilly Beach" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_cyc5s")
+material = SubResource("ShaderMaterial_gy1ne")
 position = Vector2(160, -344)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(0, 104, -16, 96, -24, 96, -24, 80, -40, 64, -48, 48, -40, 40, -56, 24, -64, 16, -48, 0, -40, -40, -48, -56, -16, -72, 0, -80, 16, -64, 16, -40, 32, -24, 40, -8, 48, 0, 56, 16, 64, 32, 48, 40, 32, 40, 8, 48, 0, 72)
+uv = PackedVector2Array(64, 128, 48, 122.435, 40, 122.435, 40, 111.304, 24, 100.174, 16, 89.0435, 24, 83.4783, 8, 72.3478, 0, 66.7826, 16, 55.6522, 24, 27.8261, 16, 16.6957, 48, 5.56522, 64, 0, 80, 11.1304, 80, 27.8261, 96, 38.9565, 104, 50.087, 112, 55.6522, 120, 66.7826, 128, 77.913, 112, 83.4783, 96, 83.4783, 72, 89.0435, 64, 105.739)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Calispecs" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_klwxv")
+material = SubResource("ShaderMaterial_ypgqs")
 position = Vector2(160, -176)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(24, 48, 16, 48, 16, 80, 0, 80, 0, 48, -8, 48, -24, 40, -40, 24, -40, 16, -32, 8, -24, -8, -32, -24, -24, -40, -16, -48, 0, -40, 16, -48, 24, -56, 24, -64, 16, -80, 16, -88, 24, -104, 40, -112, 56, -112, 72, -120, 88, -112, 96, -104, 88, -88, 80, -80, 80, -72, 88, -64, 88, -48, 80, -40, 72, -32, 72, -24, 48, -24, 32, -8, 32, 0, 40, 16, 32, 32, 24, 40)
+uv = PackedVector2Array(60.2353, 107.52, 52.7059, 107.52, 52.7059, 128, 37.6471, 128, 37.6471, 107.52, 30.1176, 107.52, 15.0588, 102.4, 0, 92.16, 0, 87.04, 7.52941, 81.92, 15.0588, 71.68, 7.52941, 61.44, 15.0588, 51.2, 22.5882, 46.08, 37.6471, 51.2, 52.7059, 46.08, 60.2353, 40.96, 60.2353, 35.84, 52.7059, 25.6, 52.7059, 20.48, 60.2353, 10.24, 75.2941, 5.12, 90.3529, 5.12, 105.412, 0, 120.471, 5.12, 128, 10.24, 120.471, 20.48, 112.941, 25.6, 112.941, 30.72, 120.471, 35.84, 120.471, 46.08, 112.941, 51.2, 105.412, 56.32, 105.412, 61.44, 82.8235, 61.44, 67.7647, 71.68, 67.7647, 76.8, 75.2941, 87.04, 67.7647, 97.28, 60.2353, 102.4)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Dinjospecs" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_upynq")
+material = SubResource("ShaderMaterial_jutjp")
 position = Vector2(72, -56)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(72, -24, 80, -32, 64, -40, 48, -40, 40, -48, 24, -64, 16, -80, 16, -88, 0, -88, -8, -72, -24, -72, -40, -80, -64, -88, -80, -80, -88, -64, -96, -56, -96, -40, -80, -24, -64, -24, -56, -8, -64, 16, -56, 40, -32, 48, -40, 32, -32, 16, -16, 16, 0, 24, 8, 40, 16, 48, 64, 32, 96, 24, 88, 0, 72, -8)
+uv = PackedVector2Array(112, 60.2353, 117.333, 52.7059, 106.667, 45.1765, 96, 45.1765, 90.6667, 37.6471, 80, 22.5882, 74.6667, 7.52941, 74.6667, 0, 64, 0, 58.6667, 15.0588, 48, 15.0588, 37.3333, 7.52941, 21.3333, 0, 10.6667, 7.52941, 5.33333, 22.5882, 0, 30.1176, 0, 45.1765, 10.6667, 60.2353, 21.3333, 60.2353, 26.6667, 75.2941, 21.3333, 97.8824, 26.6667, 120.471, 42.6667, 128, 37.3333, 112.941, 42.6667, 97.8824, 53.3333, 97.8824, 64, 105.412, 69.3333, 120.471, 74.6667, 128, 106.667, 112.941, 128, 105.412, 122.667, 82.8235, 112, 75.2941)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Eatus" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_3b4gw")
+material = SubResource("ShaderMaterial_64mq4")
 position = Vector2(-72, -112)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(8, -48, 32, -56, 56, -48, 72, -32, 56, -24, 48, -8, 40, 0, 40, 16, 56, 32, 56, 40, 48, 48, 48, 72, 24, 88, 16, 80, -8, 72, -24, 72, -48, 80, -64, 72, -80, 48, -72, 16, -80, 0, -104, 0, -120, -16, -120, -24, -112, -24, -96, -32, -72, -32, -48, -40, -48, -48)
+uv = PackedVector2Array(85.3333, 7.11111, 101.333, 0, 117.333, 7.11111, 128, 21.3333, 117.333, 28.4444, 112, 42.6667, 106.667, 49.7778, 106.667, 64, 117.333, 78.2222, 117.333, 85.3333, 112, 92.4444, 112, 113.778, 96, 128, 90.6667, 120.889, 74.6667, 113.778, 64, 113.778, 48, 120.889, 37.3333, 113.778, 26.6667, 92.4444, 32, 64, 26.6667, 49.7778, 10.6667, 49.7778, 0, 35.5556, 0, 28.4444, 5.33333, 28.4444, 16, 21.3333, 32, 21.3333, 48, 14.2222, 48, 7.11111)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Duckless" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_dr2k0")
+material = SubResource("ShaderMaterial_l2x8b")
 position = Vector2(-168, -200)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(24, 48, 40, 40, 40, 32, 64, 32, 56, 16, 72, -8, 64, -16, 40, -24, 24, -40, -8, -40, -16, -64, -72, -72, -88, -64, -112, -40, -144, -24, -136, -8, -104, -8, -104, 16, -120, 48, -88, 56, -72, 72, -56, 72, -56, 64, -40, 48)
+uv = PackedVector2Array(99.5556, 106.667, 109.037, 99.5556, 109.037, 92.4444, 123.259, 92.4444, 118.519, 78.2222, 128, 56.8889, 123.259, 49.7778, 109.037, 42.6667, 99.5556, 28.4444, 80.5926, 28.4444, 75.8519, 7.11111, 42.6667, 0, 33.1852, 7.11111, 18.963, 28.4444, 0, 42.6667, 4.74074, 56.8889, 23.7037, 56.8889, 23.7037, 78.2222, 14.2222, 106.667, 33.1852, 113.778, 42.6667, 128, 52.1481, 128, 52.1481, 120.889, 61.6296, 106.667)
 script = ExtResource("2_urcg5")
 power = 0
 max_power = 4
 
 [node name="Eye Of The Cliffs" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_lqpye")
+material = SubResource("ShaderMaterial_77fas")
 position = Vector2(-264, -88)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-64, -48, -80, -8, -80, 24, -56, 40, -40, 40, -8, 48, 0, 40, 16, 56, 64, 56, 64, 24, 80, 16, 96, 16, 104, -8, 80, -8, 56, -24, 56, -32, 48, -40, 40, -32, 24, -32, 8, -48, -24, -56, -32, -56)
+uv = PackedVector2Array(11.1304, 9.14286, 0, 54.8571, 0, 91.4286, 16.6957, 109.714, 27.8261, 109.714, 50.087, 118.857, 55.6522, 109.714, 66.7826, 128, 100.174, 128, 100.174, 91.4286, 111.304, 82.2857, 122.435, 82.2857, 128, 54.8571, 111.304, 54.8571, 94.6087, 36.5714, 94.6087, 27.4286, 89.0435, 18.2857, 83.4783, 27.4286, 72.3478, 27.4286, 61.2174, 9.14286, 38.9565, 0, 33.3913, 0)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Spaikd Boot" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_dykxd")
+material = SubResource("ShaderMaterial_l1vik")
 position = Vector2(-336, 8)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-96, 40, -96, 24, -80, 16, -40, 24, -16, 8, -24, -16, -8, -32, -24, -56, 8, -40, 24, -40, 48, -32, 64, -16, 64, 8, 72, 16, 48, 24, 48, 40, 32, 56, -32, 48)
+uv = PackedVector2Array(0, 109.714, 0, 91.4286, 12.1905, 82.2857, 42.6667, 91.4286, 60.9524, 73.1429, 54.8571, 45.7143, 67.0476, 27.4286, 54.8571, 0, 79.2381, 18.2857, 91.4286, 18.2857, 109.714, 27.4286, 121.905, 45.7143, 121.905, 73.1429, 128, 82.2857, 109.714, 91.4286, 109.714, 109.714, 97.5238, 128, 48.7619, 118.857)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Lass" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_5deg2")
+material = SubResource("ShaderMaterial_k8dwl")
 position = Vector2(-432, -32)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-88, 40, -48, 72, -8, 80, -8, 64, 16, 48, 56, 56, 72, 48, 64, 24, 80, 8, 64, -16, 64, -56, 48, -64, 8, -56, -8, -64, -24, -40, -64, -40, -40, -8, -64, 8)
+uv = PackedVector2Array(0, 92.4444, 30.4762, 120.889, 60.9524, 128, 60.9524, 113.778, 79.2381, 99.5556, 109.714, 106.667, 121.905, 99.5556, 115.81, 78.2222, 128, 64, 115.81, 42.6667, 115.81, 7.11111, 103.619, 0, 73.1429, 7.11111, 60.9524, 0, 48.7619, 21.3333, 18.2857, 21.3333, 36.5714, 49.7778, 18.2857, 64)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Lil Cap" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_riutp")
+material = SubResource("ShaderMaterial_j6mbs")
 position = Vector2(-352, -200)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(32, -24, 24, -48, -8, -56, -48, -40, -64, -8, -40, 8, -56, 32, -40, 56, -8, 40, 24, 56, 56, 48, 72, 16, 72, 0, 40, 0)
+uv = PackedVector2Array(90.3529, 36.5714, 82.8235, 9.14286, 52.7059, 0, 15.0588, 18.2857, 0, 54.8571, 22.5882, 73.1429, 7.52941, 100.571, 22.5882, 128, 52.7059, 109.714, 82.8235, 128, 112.941, 118.857, 128, 82.2857, 128, 64, 97.8824, 64)
 script = ExtResource("2_urcg5")
 max_power = 4
 is_capital = true
 
 [node name="Crystal Salt Cove" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_nud0r")
+material = SubResource("ShaderMaterial_3bomk")
 position = Vector2(-464, -144)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-64, 24, -64, 8, -72, -16, -56, -40, -40, -24, -16, -16, 8, -24, 16, -48, 8, -72, 32, -80, 48, -80, 40, -64, 64, -48, 48, -24, 64, 8, 104, -8, 128, 8, 112, 40, 80, 24, 48, 32, 40, 32, 24, 16, -8, 56, -24, 56, -40, 32)
+uv = PackedVector2Array(5.12, 97.8824, 5.12, 82.8235, 0, 60.2353, 10.24, 37.6471, 20.48, 52.7059, 35.84, 60.2353, 51.2, 52.7059, 56.32, 30.1176, 51.2, 7.52941, 66.56, 0, 76.8, 0, 71.68, 15.0588, 87.04, 30.1176, 76.8, 52.7059, 87.04, 82.8235, 112.64, 67.7647, 128, 82.8235, 117.76, 112.941, 97.28, 97.8824, 76.8, 105.412, 71.68, 105.412, 61.44, 90.3529, 40.96, 128, 30.72, 128, 20.48, 105.412)
 script = ExtResource("2_urcg5")
 power = 0
 max_power = 4
 
 [node name="Loveless Port" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_o1vtt")
+material = SubResource("ShaderMaterial_46r0u")
 position = Vector2(-168, -320)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-64, 40, -8, 48, 0, 72, 24, 72, 40, 64, 40, 48, 64, 40, 72, 32, 88, 24, 96, 16, 96, 0, 88, -16, 88, -32, 112, -48, 120, -56, 120, -64, 136, -88, 144, -96, 128, -96, 104, -88, 96, -72, 56, -120, 32, -104, 72, -56, 56, -48, 40, -48, -8, -104, -32, -88, 16, -32, 8, -24, -16, -24, -32, 0, -40, 24)
+uv = PackedVector2Array(0, 106.667, 34.4615, 112, 39.3846, 128, 54.1538, 128, 64, 122.667, 64, 112, 78.7692, 106.667, 83.6923, 101.333, 93.5385, 96, 98.4615, 90.6667, 98.4615, 80, 93.5385, 69.3333, 93.5385, 58.6667, 108.308, 48, 113.231, 42.6667, 113.231, 37.3333, 123.077, 21.3333, 128, 16, 118.154, 16, 103.385, 21.3333, 98.4615, 32, 73.8462, 0, 59.0769, 10.6667, 83.6923, 42.6667, 73.8462, 48, 64, 48, 34.4615, 10.6667, 19.6923, 21.3333, 49.2308, 58.6667, 44.3077, 64, 29.5385, 64, 19.6923, 80, 14.7692, 96)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Faucet" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_ma54h")
+material = SubResource("ShaderMaterial_kyn26")
 position = Vector2(-96, 16)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-56, 64, -32, 48, 0, 40, 40, 40, 48, 48, 56, 40, 56, 24, 32, 0, 48, -16, 48, -32, 40, -40, 16, -48, 0, -48, -24, -40, -40, -48, -56, -72, -80, -72, -88, -64, -88, -32, -80, 8, -88, 56, -80, 64)
+uv = PackedVector2Array(28.4444, 128, 49.7778, 112.941, 78.2222, 105.412, 113.778, 105.412, 120.889, 112.941, 128, 105.412, 128, 90.3529, 106.667, 67.7647, 120.889, 52.7059, 120.889, 37.6471, 113.778, 30.1176, 92.4444, 22.5882, 78.2222, 22.5882, 56.8889, 30.1176, 42.6667, 22.5882, 28.4444, 0, 7.11111, 0, 0, 7.52941, 0, 37.6471, 7.11111, 75.2941, 0, 120.471, 7.11111, 128)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Djoumm" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_ksn0e")
+material = SubResource("ShaderMaterial_yu1c3")
 position = Vector2(-240, 80)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-56, 40, -56, 32, -48, 16, -48, -8, -32, -16, -32, -32, -8, -40, 0, -64, -16, -80, -16, -96, 48, -96, 56, -56, 48, -8, 64, 8, 80, 8, 72, 32, 56, 48, 40, 48, 24, 32, -8, 32, -32, 40)
+uv = PackedVector2Array(0, 120.889, 0, 113.778, 7.52941, 99.5556, 7.52941, 78.2222, 22.5882, 71.1111, 22.5882, 56.8889, 45.1765, 49.7778, 52.7059, 28.4444, 37.6471, 14.2222, 37.6471, 0, 97.8824, 0, 105.412, 35.5556, 97.8824, 78.2222, 112.941, 92.4444, 128, 92.4444, 120.471, 113.778, 105.412, 128, 90.3529, 128, 75.2941, 113.778, 45.1765, 113.778, 22.5882, 120.889)
 script = ExtResource("2_urcg5")
 max_power = 4
 
 [node name="Fraants" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_ebfkl")
+material = SubResource("ShaderMaterial_pxlij")
 position = Vector2(296, -200)
+color = Color(0.4, 0.313726, 0.266667, 1)
 texture = ExtResource("4_36nly")
 polygon = PackedVector2Array(-56, 0, -40, 8, -16, 24, -16, 64, 0, 72, 8, 72, 16, 72, 24, 56, 32, 48, 40, 32, 56, 16, 40, 8, 32, 0, 40, -8, 48, -24, 48, -40, 56, -64, 72, -80, 72, -96, 56, -104, 40, -120, 24, -120, 16, -104, 16, -80, 0, -72, 0, -64, -8, -48, -24, -40, -40, -40, -40, -24, -56, -8)
+uv = PackedVector2Array(0, 80, 16, 85.3333, 40, 96, 40, 122.667, 56, 128, 64, 128, 72, 128, 80, 117.333, 88, 112, 96, 101.333, 112, 90.6667, 96, 85.3333, 88, 80, 96, 74.6667, 104, 64, 104, 53.3333, 112, 37.3333, 128, 26.6667, 128, 16, 112, 10.6667, 96, 0, 80, 0, 72, 10.6667, 72, 26.6667, 56, 32, 56, 37.3333, 48, 48, 32, 53.3333, 16, 53.3333, 16, 64, 0, 74.6667)
 script = ExtResource("2_urcg5")
 max_power = 4
 

@@ -1,7 +1,7 @@
 extends Node
 
 
-enum {RECORD_TYPE_REGION, RECORD_TYPE_FUNCTION}
+enum {RECORD_TYPE_REGION, RECORD_TYPE_FUNCTION, RECORD_TYPE_OVERTAKE}
 
 
 var replay_active : bool = false

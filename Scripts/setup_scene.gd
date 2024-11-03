@@ -115,7 +115,7 @@ func _on_map_list_item_selected(index):
 	ai_preset.visible = current_map.lock_ai_setup
 	ai_cursor.visible = !current_map.lock_ai_setup
 	
-	map_lore.text = current_map.tag + ", " + current_map.complexity + "\n" + current_map.lore
+	map_lore.text = RegionControl.setup_tag_name(current_map.tag) + ", " + RegionControl.setup_complexity_name(current_map.complexity) + "\n" + current_map.lore
 	
 	if MapSetup.current_map_name != maps[index]:
 		if current_map.used_alignments >= 2:

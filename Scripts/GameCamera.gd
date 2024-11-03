@@ -27,6 +27,7 @@ const BASE_MOVE_SPEED : float = 8
 @export var CurrentTurn : Label
 @export var CurrentAction : Label
 @export var VictoryMessage : Control
+@export var DefeatMessage : Control
 @export var LeaveMessage : Control
 @export var ForfeitMessage : Control
 @export var CommandCallout : CommandCallouts
@@ -52,6 +53,7 @@ var hovered_player : int = -1
 
 
 func _ready():
+	z_index = 100
 	window_size.x = ProjectSettings.get_setting("display/window/size/viewport_width")
 	window_size.y = ProjectSettings.get_setting("display/window/size/viewport_height")
 	
@@ -272,6 +274,11 @@ func _forfeit_hide():
 func show_victory_message(alignment : int):
 	VictoryMessage.visible = true
 	VictoryMessage.modulate = region_control.align_color[alignment]
+
+
+func show_defeat_message(alignment : int):
+	DefeatMessage.visible = true
+	DefeatMessage.modulate = region_control.align_color[alignment]
 
 
 func _forfeit():

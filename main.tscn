@@ -25,7 +25,7 @@ script = ExtResource("1_2axsc")
 [node name="AIControler" type="Node" parent="."]
 script = ExtResource("2_w08l3")
 
-[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "PlayerActions", "AdvanceTurnButton", "EndTurnButton", "ForfeitButton", "PauseButton", "TurnOrder", "Attacks", "PowerSprite", "PowerAmount", "CurrentTurn", "CurrentAction", "VictoryMessage", "LeaveMessage", "ForfeitMessage", "CommandCallout")]
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "PlayerActions", "AdvanceTurnButton", "EndTurnButton", "ForfeitButton", "PauseButton", "TurnOrder", "Attacks", "PowerSprite", "PowerAmount", "CurrentTurn", "CurrentAction", "VictoryMessage", "DefeatMessage", "LeaveMessage", "ForfeitMessage", "CommandCallout")]
 z_index = 30
 script = ExtResource("1_we6ai")
 UI = NodePath("UI")
@@ -44,6 +44,7 @@ PowerAmount = NodePath("UI/Hideable/Power/text")
 CurrentTurn = NodePath("UI/Hideable/Turn")
 CurrentAction = NodePath("UI/Hideable/Action")
 VictoryMessage = NodePath("UI/win")
+DefeatMessage = NodePath("UI/lose")
 LeaveMessage = NodePath("UI/leave")
 ForfeitMessage = NodePath("UI/forfeit")
 CommandCallout = NodePath("UI/command_callout")
@@ -299,7 +300,20 @@ offset_right = 768.0
 offset_bottom = 384.0
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = ExtResource("7_r48wm")
-text = "VICTORY"
+text = "VICTORY!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lose" type="Label" parent="GameCamera/UI"]
+visible = false
+layout_mode = 0
+offset_left = 384.0
+offset_top = 256.0
+offset_right = 768.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("7_r48wm")
+text = "DEFEAT..."
 horizontal_alignment = 1
 vertical_alignment = 1
 

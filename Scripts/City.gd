@@ -75,7 +75,7 @@ func make_particle(mobilize : bool):
 
 func color_self(new_color : Color):
 	self_modulate = new_color
-	if new_color.v > region.region_control.COLOR_TOO_BRIGHT:
+	if new_color.v > RegionControl.COLOR_TOO_BRIGHT:
 		text.self_modulate = Color(0, 0, 0)
 #		region_name.self_modulate = Color(0, 0, 0)
 #		region_name.remove_theme_color_override("font_color")

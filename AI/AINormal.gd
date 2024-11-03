@@ -1,21 +1,16 @@
-extends Node
+extends AIBase
 
 
-var controler : AIControler
-var controler_id : int
-var current_alignment : int
-
-
-func _ready():
-	pass
+var cheater : bool = false
+var cheated : bool = false
 
 
 func start_turn(align : int):
-	current_alignment = align
-	
+	super.start_turn(align)
+	cheated = false
 	if controler.region_control != null:
-		if controler_id == controler.CONTROLER_CHEATER and controler.region_control.current_turn % 6 == 0:
-			controler.region_control.action_amount += 1
+		if cheater and controler.region_control.current_turn % 6 == 0:
+			controler.CALL_cheat = true
 
 
 func think_bonus():
@@ -109,9 +104,11 @@ func think_mobilize():
 		if controler.get_bonus_action_amount() == 0:
 			controler.CALL_turn_end = true
 		else:
-			controler.CALL_change_current_action = true
-			if controler.region_control.current_turn % 6 == 0 and controler_id == controler.CONTROLER_CHEATER:
-				controler.region_control.bonus_action_amount += controler.region_control.bonus_action_amount
+			if cheater and not cheated and controler.region_control.current_turn % 6 == 0:
+				controler.CALL_cheat = true
+				cheated = true
+			else:
+				controler.CALL_change_current_action = true
 
 
 func calculate_benefit_default(region : Region, is_bonus : bool):

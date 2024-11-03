@@ -18,6 +18,7 @@ const SECRET_CLOUDS : Array[Texture2D] = [
 	preload("res://Sprites/cloud_secret_1.png"),
 	preload("res://Sprites/cloud_secret_2.png"),
 	preload("res://Sprites/cloud_secret_3.png"),
+	preload("res://Sprites/cloud_secret_4.png"),
 ]
 
 @export var speed : float = 16

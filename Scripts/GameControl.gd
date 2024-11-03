@@ -135,6 +135,11 @@ func win(align : int):
 	win_timer = 5.0
 
 
+func lose(align : int):
+	game_camera.show_defeat_message(align)
+	win_timer = 5.0
+
+
 func leave():
 	get_tree().change_scene_to_file("res://stats.tscn")
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=47 format=3 uid="uid://03dtr6sjdp7c"]
+[gd_scene load_steps=48 format=3 uid="uid://03dtr6sjdp7c"]
 
 [ext_resource type="Script" path="res://Scripts/RegionControl.gd" id="1_o4us8"]
 [ext_resource type="Script" path="res://Scripts/Region.gd" id="2_bj333"]
 [ext_resource type="PackedScene" uid="uid://s6v72p116y03" path="res://Objects/bg.tscn" id="2_w34l4"]
 [ext_resource type="Shader" path="res://Scripts/region_shader.gdshader" id="3_31jw3"]
 [ext_resource type="Texture2D" uid="uid://bvrj84vn7prqo" path="res://Sprites/region.png" id="4_jjvyw"]
+[ext_resource type="PackedScene" uid="uid://b08758y8g0dsv" path="res://Objects/spiral_spawner.tscn" id="6_eboci"]
 
 [sub_resource type="GDScript" id="GDScript_ajqca"]
 script/source = "extends Node
@@ -102,241 +103,241 @@ func _ready():
 	queue_free()
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ibqp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_voqpe"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h5ulu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qouy7"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1fcjq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_30olu"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a5oln"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_80tnd"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ir1g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcskg"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_frm2c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o820y"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_emstk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7c7m2"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3nro0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ncuge"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hm7q2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5kg8"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mb8v1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spgqu"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0nxnt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0601"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5qdu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edba4"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_actd2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nr1t6"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pq41k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rtbcw"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_juh04"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_us4ye"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oins0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r1r0m"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ofb3q"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v18e5"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wngi6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qamy"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eln1w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_maq2c"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_as75a"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4att4"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mwfn8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvx6a"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yawev"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tivie"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pwcmg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jtmi"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d1cen"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sv8ks"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqajj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ukdb"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_en62x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2mgk"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrg5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0hlax"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gn02f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rln7j"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u45tg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcthc"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xiic5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8pfs4"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r68l1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0024v"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lel52"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lns7p"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_05c2q"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5niw8"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nplbh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c52q5"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ied5s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k7v5m"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvjps"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05mt0"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rtdiv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_feu5l"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n8k8i"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_scy7d"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pdvw4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndhtn"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
 shader_parameter/previous_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p1l1t"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ywb5y"]
 shader = ExtResource("3_31jw3")
 shader_parameter/changing_color = false
 shader_parameter/n = 0.0
@@ -348,7 +349,7 @@ polygon = PackedVector2Array(-320, 640, 320, 640, 704, 0, 320, -640, -320, -640,
 script = ExtResource("1_o4us8")
 lock_align_amount = false
 align_amount = 7
-complexity = "Simple"
+complexity = 2
 lore = "Somewhere in the harsh desert a secret battleground is located,
 where only the best bug themed armies compete to see who is the greatest amongst them."
 align_color = Array[Color]([Color(0.733333, 0.631373, 0.454902, 1), Color(0.647059, 0.509804, 0.376471, 1), Color(0.815686, 0.623529, 0.0823529, 1), Color(0.843137, 0.878431, 0.419608, 1), Color(0.682353, 0.356863, 0.0823529, 1), Color(0.403922, 0.227451, 0.168627, 1), Color(0.929412, 0.654902, 0.356863, 1)])
@@ -362,7 +363,7 @@ script = SubResource("GDScript_ajqca")
 color = Color(0.729412, 0.611765, 0.403922, 1)
 
 [node name="Heart Of The Honeycom" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_3ibqp")
+material = SubResource("ShaderMaterial_voqpe")
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
@@ -372,7 +373,7 @@ power = 3
 is_capital = true
 
 [node name="Center Left Comb" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_h5ulu")
+material = SubResource("ShaderMaterial_qouy7")
 position = Vector2(-136, -88)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -381,7 +382,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Center Right Comb" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_1fcjq")
+material = SubResource("ShaderMaterial_30olu")
 position = Vector2(136, -88)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -390,7 +391,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Center Bottom Comb" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_a5oln")
+material = SubResource("ShaderMaterial_80tnd")
 position = Vector2(0, 176)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -399,7 +400,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Maggot Comb" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_5ir1g")
+material = SubResource("ShaderMaterial_tcskg")
 position = Vector2(272, -528)
 color = Color(0.647059, 0.509804, 0.376471, 1)
 texture = ExtResource("4_jjvyw")
@@ -410,7 +411,7 @@ alignment = 1
 is_capital = true
 
 [node name="Wasp Comb" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_frm2c")
+material = SubResource("ShaderMaterial_o820y")
 position = Vector2(544, 0)
 color = Color(0.815686, 0.623529, 0.0823529, 1)
 texture = ExtResource("4_jjvyw")
@@ -421,7 +422,7 @@ alignment = 2
 is_capital = true
 
 [node name="Stinkbug Comb" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_emstk")
+material = SubResource("ShaderMaterial_7c7m2")
 position = Vector2(272, 528)
 color = Color(0.843137, 0.878431, 0.419608, 1)
 texture = ExtResource("4_jjvyw")
@@ -432,7 +433,7 @@ alignment = 3
 is_capital = true
 
 [node name="Termite Comb" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_3nro0")
+material = SubResource("ShaderMaterial_ncuge")
 position = Vector2(-272, 528)
 color = Color(0.682353, 0.356863, 0.0823529, 1)
 texture = ExtResource("4_jjvyw")
@@ -443,7 +444,7 @@ alignment = 4
 is_capital = true
 
 [node name="Ant Comb" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_hm7q2")
+material = SubResource("ShaderMaterial_j5kg8")
 position = Vector2(-544, 0)
 color = Color(0.403922, 0.227451, 0.168627, 1)
 texture = ExtResource("4_jjvyw")
@@ -454,7 +455,7 @@ alignment = 5
 is_capital = true
 
 [node name="Beetle Comb" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_mb8v1")
+material = SubResource("ShaderMaterial_spgqu")
 position = Vector2(-272, -528)
 color = Color(0.929412, 0.654902, 0.356863, 1)
 texture = ExtResource("4_jjvyw")
@@ -465,7 +466,7 @@ alignment = 6
 is_capital = true
 
 [node name="Maggot Left" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_0nxnt")
+material = SubResource("ShaderMaterial_a0601")
 position = Vector2(272, -352)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -475,7 +476,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Maggot Right" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_n5qdu")
+material = SubResource("ShaderMaterial_edba4")
 position = Vector2(136, -440)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -485,7 +486,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Wasp Left" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_actd2")
+material = SubResource("ShaderMaterial_nr1t6")
 position = Vector2(408, 88)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -495,7 +496,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Wasp Right" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_pq41k")
+material = SubResource("ShaderMaterial_rtbcw")
 position = Vector2(408, -88)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -505,7 +506,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Stinkbug Left" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_juh04")
+material = SubResource("ShaderMaterial_us4ye")
 position = Vector2(136, 440)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -515,7 +516,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Stinkbug Right" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_oins0")
+material = SubResource("ShaderMaterial_r1r0m")
 position = Vector2(272, 352)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -525,7 +526,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Termite Left" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_ofb3q")
+material = SubResource("ShaderMaterial_v18e5")
 position = Vector2(-272, 352)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -535,7 +536,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Termite Right" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_wngi6")
+material = SubResource("ShaderMaterial_1qamy")
 position = Vector2(-136, 440)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -545,7 +546,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Ant Left" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_eln1w")
+material = SubResource("ShaderMaterial_maq2c")
 position = Vector2(-408, -88)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -555,7 +556,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Ant Right" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_as75a")
+material = SubResource("ShaderMaterial_4att4")
 position = Vector2(-408, 88)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -565,7 +566,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Beetle Left" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_mwfn8")
+material = SubResource("ShaderMaterial_jvx6a")
 position = Vector2(-136, -440)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -575,7 +576,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Beetle Right" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_yawev")
+material = SubResource("ShaderMaterial_tivie")
 position = Vector2(-272, -352)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -585,7 +586,7 @@ script = ExtResource("2_bj333")
 power = 0
 
 [node name="Beetle Maggots" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_pwcmg")
+material = SubResource("ShaderMaterial_5jtmi")
 position = Vector2(0, -528)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -594,7 +595,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Maggot Wasps" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_d1cen")
+material = SubResource("ShaderMaterial_sv8ks")
 position = Vector2(408, -264)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -603,7 +604,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Wasp Stinkbugs" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_lqajj")
+material = SubResource("ShaderMaterial_1ukdb")
 position = Vector2(408, 264)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -612,7 +613,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Stinkbug Termites" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_en62x")
+material = SubResource("ShaderMaterial_e2mgk")
 position = Vector2(0, 528)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -621,7 +622,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Termite Ants" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_ngrg5")
+material = SubResource("ShaderMaterial_0hlax")
 position = Vector2(-408, 264)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -630,7 +631,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Ant Beetles" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_gn02f")
+material = SubResource("ShaderMaterial_rln7j")
 position = Vector2(-408, -264)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -639,7 +640,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Top Wall" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_u45tg")
+material = SubResource("ShaderMaterial_pcthc")
 position = Vector2(0, -352)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -648,7 +649,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Right Wall" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_xiic5")
+material = SubResource("ShaderMaterial_8pfs4")
 position = Vector2(272, 176)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -657,7 +658,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Left Wall" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_r68l1")
+material = SubResource("ShaderMaterial_0024v")
 position = Vector2(-272, 176)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -666,7 +667,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Right Line" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_lel52")
+material = SubResource("ShaderMaterial_lns7p")
 position = Vector2(272, -176)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -675,7 +676,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Bottom Line" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_05c2q")
+material = SubResource("ShaderMaterial_5niw8")
 position = Vector2(0, 352)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -684,7 +685,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Left Line" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_nplbh")
+material = SubResource("ShaderMaterial_c52q5")
 position = Vector2(-272, -176)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -693,7 +694,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Center Maggots" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_ied5s")
+material = SubResource("ShaderMaterial_k7v5m")
 position = Vector2(136, -264)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -702,7 +703,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Center Wasps" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_qvjps")
+material = SubResource("ShaderMaterial_05mt0")
 position = Vector2(272, 0)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -711,7 +712,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Center Stinkbugs" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_rtdiv")
+material = SubResource("ShaderMaterial_feu5l")
 position = Vector2(136, 264)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -720,7 +721,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Center Termites" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_n8k8i")
+material = SubResource("ShaderMaterial_scy7d")
 position = Vector2(-136, 264)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -729,7 +730,7 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Center Ants" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_pdvw4")
+material = SubResource("ShaderMaterial_ndhtn")
 position = Vector2(-272, 0)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
@@ -738,10 +739,14 @@ uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 
 script = ExtResource("2_bj333")
 
 [node name="Center Beetles" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_p1l1t")
+material = SubResource("ShaderMaterial_ywb5y")
 position = Vector2(-136, -264)
 color = Color(0.733333, 0.631373, 0.454902, 1)
 texture = ExtResource("4_jjvyw")
 polygon = PackedVector2Array(-40, -80, 40, -80, 88, 0, 40, 80, -40, 80, -88, 0)
 uv = PackedVector2Array(34.9091, 0, 93.0909, 0, 128, 64, 93.0909, 128, 34.9091, 128, 0, 64)
 script = ExtResource("2_bj333")
+
+[node name="SpiralSpawner" parent="." instance=ExtResource("6_eboci")]
+time_range_top = 2.0
+color = Color(0.988235, 0.882353, 0.721569, 0.615686)

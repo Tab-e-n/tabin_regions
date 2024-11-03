@@ -12,6 +12,9 @@ signal game_ended(winner)
 const COLOR_TOO_BRIGHT : float = 0.9
 
 enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
+## Skirmishes are basic maps with not much special. Challenges are curated experiences that are meant to challenge the player in some way. Bot battles are maps with no human players. 
+enum SETUP_TAG {SKIRMISH, CHALLENGE, BOT_BATTLE, GUIDE}
+enum SETUP_COMPLEXITY {UNSPECIFIED, BEGINNER, SIMPLE, INTERMEDIATE, ADVANCED, DIFFICULT, EXTREME, ROCKET_SCIENCE}
 
 
 @onready var bg_color : Color = color
@@ -70,13 +73,13 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 @export var autoaliances_divisions_amount : int = 2
 
 @export_subgroup("Cosmetics")
-## Tells the player what type of map this map is. Skirmishes are basic maps with not much special. Challenges are curated experiences that are meant to challenge the player in some way. Bot battles are maps with no human players. 
-@export_enum("Skirmish", "Challenge", "Bot Battle") var tag : String = "Skirmish"
-## Tells the player how experienced with the game they should be to play this map.
-@export_enum("Unspecified", "Beginner", "Simple", "Intermediate", "Advanced", "Difficult", "Extreme") var complexity : String = "Unspecified"
-## Text explaing the context of the map. Show up in the setup scene.
+## Tells the player the type of the map.
+@export var tag : SETUP_TAG = SETUP_TAG.SKIRMISH
+## Tells the player how experienced with the game they should be before playing this map.
+@export var complexity : SETUP_COMPLEXITY = SETUP_COMPLEXITY.UNSPECIFIED
+## Text explaing the context of the map.
 @export_multiline var lore : String = """Insert lore here"""
-## Colors used by the maps alignments. The first color is used for neutral regions.
+## Colors used by the map's alignments. The first color is used for neutral regions.
 @export var align_color : Array[Color] = [
 		Color("625775"), # purplish gray
 		
@@ -118,6 +121,11 @@ enum APPLY_PENALTIES {OFF, CURRENT_CAPITAL, PREVIOUS_CAPITAL}
 ]
 ## Names of alignments. Includes the neutral alignment.
 @export var align_names : Array[String] = []
+## Determines what message gets show at the end of the game.
+## When set to 0 or lower, map will always show a victory message.
+## When set to a positive integer, map will show a victory message only if an alignment of the same number wins, else it will show defeat.
+## If aliances are turn on, this check applies to aliances and not to individual alignments.
+@export var main_character : int = 0
 ## When set to true, the RegionControl will color itself based on which alignment is currently playing.
 @export var color_bg_according_to_alignment : bool = true
 ## Controls the scale of cities. Smaller cities will make the map feel larger, without it taking up more space.
@@ -151,6 +159,8 @@ var is_player_controled : bool
 var region_amount : Array = []
 var last_turn_region_amount : Array = []
 var capital_amount : Array = []
+
+var removed_alignments : Array = []
 
 enum {ACTION_NORMAL, ACTION_MOBILIZE, ACTION_BONUS}
 const ACTION_MODES_AMOUNT : int = 3
@@ -187,9 +197,9 @@ func _ready():
 			use_aliances = true
 			use_autoaliances = true
 			autoaliances_divisions_amount = MapSetup.aliances_amount
-		if not use_preset_alignments and use_alignment_picker:
-			preset_alignments = MapSetup.preset_alignments.duplicate()
-			use_preset_alignments = true
+#		if not use_preset_alignments and use_alignment_picker:
+#			preset_alignments = MapSetup.preset_alignments.duplicate()
+#			use_preset_alignments = true
 		used_alignments = MapSetup.used_aligments
 	
 	for link in connections:
@@ -222,8 +232,6 @@ func _ready():
 	
 	bake_capital_distance()
 	
-	var removed_alignments : Array = []
-	
 	if not ReplayControl.replay_active:
 		var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 		rng.randomize()
@@ -238,6 +246,10 @@ func _ready():
 			used_alignments = preset_alignments_amount
 		for i in preset_alignments:
 			players.erase(i)
+		
+		if use_alignment_picker:
+			for i in MapSetup.preset_alignments:
+				players.erase(i)
 		
 		if used_alignments >= 2 and used_alignments < align_amount - 1:
 			var removed_align_count : int = align_amount - used_alignments - 1
@@ -262,6 +274,12 @@ func _ready():
 					break
 				if preset_alignments[i] != 0:
 					align_play_order[i] = preset_alignments[i]
+		
+		if use_alignment_picker:
+			for i in range(MapSetup.preset_alignments.size()):
+				if align_play_order.size() <= i:
+					break
+				align_play_order[i] = MapSetup.preset_alignments[i]
 		
 	#	print(align_play_order)
 		
@@ -347,7 +365,11 @@ func _ready():
 					if region.is_capital:
 						break
 		game_camera.center_camera(center_camera)
-	
+		
+	call_deferred("save_replay_data")
+
+
+func save_replay_data():
 	if not ReplayControl.replay_active:
 		ReplayControl.clear_replay()
 		
@@ -465,8 +487,17 @@ func change_region_amount(amount : int, alignment : int, is_capital : bool):
 			calculate_penalty(alignment)
 
 
+func add_action():
+	match(current_action):
+		ACTION_NORMAL:
+			action_amount += 1
+		ACTION_MOBILIZE, ACTION_BONUS:
+			bonus_action_amount += 1
+	ReplayControl.record_move(ReplayControl.RECORD_TYPE_FUNCTION, "add_action")
+
+
 func action_done(region_name : String, amount : int = 1):
-	var auto_end_phase : bool = (Options.auto_end_turn_phases or not is_player_controled) and not ReplayControl.replay_active
+	var auto_end_phase : bool = Options.auto_end_turn_phases and is_player_controled and not ReplayControl.replay_active
 	game_control.cross.visible = false
 	if current_action == ACTION_NORMAL:
 		if action_amount > 0:
@@ -485,6 +516,10 @@ func action_done(region_name : String, amount : int = 1):
 			ReplayControl.record_move(ReplayControl.RECORD_TYPE_REGION, region_name)
 		if bonus_action_amount <= 0 and auto_end_phase:
 			change_current_action()
+
+
+func record_overtake(region_name : String):
+	ReplayControl.record_move(ReplayControl.RECORD_TYPE_OVERTAKE, region_name)
 
 
 func has_enough_actions() -> bool:
@@ -556,7 +591,7 @@ func check_victory():
 	var victory_align : int = 0
 	for i in range(region_amount.size()):
 		if region_amount[i] > 0:
-			if alignment_aliances[i + 1] < 0:
+			if alignment_aliances[i + 1] <= 0:
 				continue
 			elif aliance == 0:
 				victory_align = i + 1
@@ -568,18 +603,28 @@ func check_victory():
 
 func victory(align_victory : int):
 	dummy = true
-	game_control.win(align_victory)
+	
+	if main_character <= 0:
+		game_control.win(align_victory)
+	elif alignment_aliances[align_victory] == main_character:
+		game_control.win(align_victory)
+	else:
+		game_control.lose(align_victory)
+	
 	GameStats.set_stat(align_victory, "placement", "1")
-	if use_aliances:
-		for i in range(align_amount - 1):
-			if alignment_aliances[i + 1] == alignment_aliances[align_victory]:
-				GameStats.set_stat(i + 1, "placement", "1")
 	
 	var placement = String.num(current_placement)
 	
 	for i in range(align_amount - 1):
-		if GameStats.get_stat(i + 1, "placement") == "N/A":
-			GameStats.set_stat(i + 1, "placement", placement)
+		var align : int = i + 1
+		if alignment_aliances[align] <= 0:
+			continue
+		if use_aliances:
+			if alignment_aliances[align] == alignment_aliances[align_victory]:
+				GameStats.set_stat(align, "placement", "1")
+				continue
+		if GameStats.get_stat(align, "placement") == "N/A":
+			GameStats.set_stat(align, "placement", placement)
 	
 	game_ended.emit(align_victory)
 
@@ -691,3 +736,38 @@ func slight_tint(tint_color : Color) -> Color:
 	
 	return temp_color
 
+
+static func setup_tag_name(stag : SETUP_TAG) -> String:
+	match(stag):
+		SETUP_TAG.SKIRMISH:
+			return "Skirmish"
+		SETUP_TAG.CHALLENGE:
+			return "Challenge"
+		SETUP_TAG.BOT_BATTLE:
+			return "Bot Battle"
+		SETUP_TAG.GUIDE:
+			return "Guide"
+		_:
+			return "No Tag"
+
+
+static func setup_complexity_name(compx : SETUP_COMPLEXITY) -> String:
+	match(compx):
+		SETUP_COMPLEXITY.UNSPECIFIED:
+			return "Unspecified"
+		SETUP_COMPLEXITY.BEGINNER:
+			return "Beginner"
+		SETUP_COMPLEXITY.SIMPLE:
+			return "Simple"
+		SETUP_COMPLEXITY.INTERMEDIATE:
+			return "Intermediate"
+		SETUP_COMPLEXITY.ADVANCED:
+			return "Advanced"
+		SETUP_COMPLEXITY.DIFFICULT:
+			return "Difficult"
+		SETUP_COMPLEXITY.EXTREME:
+			return "Extreme"
+		SETUP_COMPLEXITY.ROCKET_SCIENCE:
+			return "Rocket Science"
+		_:
+			return "Unknown"

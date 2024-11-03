@@ -24,6 +24,7 @@ _data = {
 }
 
 [node name="ElectricityDecor" type="Node2D"]
+z_index = 32
 script = ExtResource("1_mukh7")
 
 [node name="bolt" type="Line2D" parent="."]

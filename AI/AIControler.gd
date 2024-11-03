@@ -40,6 +40,8 @@ var CALL_change_current_action : bool = false
 var CALL_turn_end : bool = false
 var CALL_forfeit : bool = false
 var CALL_nothing : bool = false
+var CALL_cheat : bool = false
+var CALL_overtake : bool = false
 
 var controlers : Array = []
 
@@ -58,8 +60,9 @@ func _ready():
 			controlers[i] = Node.new()
 			controlers[i].set_script(PACKED_CONTROLERS[i])
 			controlers[i].controler = self
-			controlers[i].controler_id = i
 			add_child(controlers[i])
+	controlers[CONTROLER_CHEATER].cheater = true
+	
 	
 	timer_has_ended.connect(timer_ended)
 	
@@ -123,6 +126,9 @@ func think():
 #			print(current_alignment, " ", next_move)
 			if next_move[0] == ReplayControl.RECORD_TYPE_REGION:
 				selected_capital = next_move[1]
+			elif next_move[0] == ReplayControl.RECORD_TYPE_OVERTAKE:
+				selected_capital = next_move[1]
+				CALL_overtake = true
 			else:
 				match(next_move[1]):
 					"forfeit":
@@ -133,6 +139,8 @@ func think():
 						CALL_change_current_action = true
 					"nothing":
 						CALL_nothing = true
+					"add_action":
+						CALL_cheat = true
 	else:
 		find_owned_regions()
 		
@@ -167,14 +175,22 @@ func timer_ended():
 	elif CALL_change_current_action:
 		reset_CALL()
 		region_control.change_current_action()
-		should_think = region_control.current_action != region_control.ACTION_NORMAL
-	else:
+		should_think = region_control.current_action != RegionControl.ACTION_NORMAL
+	elif CALL_cheat:
 		reset_CALL()
-		var previous_action = region_control.current_action
+		region_control.add_action()
+		should_think = true
+	elif CALL_overtake:
+		reset_CALL()
+		region_control.get_node(selected_capital).overtake()
+		if not ReplayControl.replay_active:
+			current_moves[current_alignment].append(selected_capital)
+		should_think = true
+	else:
 		region_control.get_node(selected_capital).action_decided()
 		if not ReplayControl.replay_active:
 			current_moves[current_alignment].append(selected_capital)
-		should_think = not (previous_action != region_control.ACTION_NORMAL and region_control.current_action == region_control.ACTION_NORMAL)
+	
 	replay_done_action = true
 	if should_think:
 		think()
@@ -186,6 +202,8 @@ func reset_CALL():
 	CALL_turn_end = false
 	CALL_change_current_action = false
 	CALL_nothing = false
+	CALL_cheat = false
+	CALL_overtake = false
 
 
 func find_owned_regions(alignment : int = current_alignment):
@@ -239,14 +257,14 @@ func get_alingment_amount() -> int:
 	return region_control.align_amount
 
 
-func get_capital_amount() -> int:
-	return region_control.capital_amount[current_alignment - 1]
+func get_capital_amount(align : int = current_alignment) -> int:
+	return region_control.capital_amount[align - 1]
 
 
-func alignment_friendly(your_align, opposing_align) -> bool:
+func alignment_friendly(your_align : int, opposing_align : int) -> bool:
 	return region_control.alignment_friendly(your_align, opposing_align)
 
 
-func alignment_neutral(align) -> bool:
+func alignment_neutral(align : int) -> bool:
 	return region_control.alignment_neutral(align)
 

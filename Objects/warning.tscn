@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwitn4dkuahku"]
+[gd_scene load_steps=4 format=3 uid="uid://bwitn4dkuahku"]
 
 [ext_resource type="Script" path="res://Scripts/warning.gd" id="1_oe6ge"]
 [ext_resource type="Texture2D" uid="uid://c12inu0dvxucj" path="res://Sprites/warning.png" id="1_qsarw"]
+[ext_resource type="Texture2D" uid="uid://dnxl8mo0vyte8" path="res://Sprites/warning_outline.png" id="3_0pbcf"]
 
 [node name="Warning" type="Node2D"]
 script = ExtResource("1_oe6ge")
@@ -10,3 +11,7 @@ script = ExtResource("1_oe6ge")
 z_index = 21
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_qsarw")
+
+[node name="outline" type="Sprite2D" parent="visual"]
+show_behind_parent = true
+texture = ExtResource("3_0pbcf")
