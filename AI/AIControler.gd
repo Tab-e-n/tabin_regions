@@ -14,7 +14,7 @@ const THINKING_TIMER_SPEEDRUN : float = 0.05
 var thinking_timer : float = THINKING_TIMER_DEFAULT
 
 enum {CONTROLER_USER, CONTROLER_DEFAULT, CONTROLER_TURTLE, CONTROLER_NEURAL, CONTROLER_CHEATER, CONTROLER_DUMMY}
-const CONTROLER_NAMES : Array = ["User Controled", "Simple", "Turtle", "Neural", "Cheater", "Dummy"]
+const CONTROLER_NAMES : Array = ["User Controled", "Simple", "Turtle", "Neural", "Cheater", "Environment"]
 const PACKED_CONTROLERS : Array = [
 	null, # CONTROLER_USER (can be just null)
 	preload("res://AI/AINormal.gd"), # CONTROLER_DEFAULT

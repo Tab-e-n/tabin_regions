@@ -294,6 +294,7 @@ func make_region_arrows():
 			arrow.to_name = target
 			arrow.num = i
 			arrow.power_reduction = connections[target]
+			arrow.width *= region_control.city_size
 			region_control.add_child(arrow)
 			i += 1
 

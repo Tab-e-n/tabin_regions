@@ -130,6 +130,11 @@ var connections : Array = [
 
 func _ready():
 	get_parent().connections = connections.duplicate()
+	call_deferred(\"_deferred_ready\")
+	
+func _deferred_ready():
+	if not get_parent().dummy:
+		get_parent().alignment_aliances[7] = 0
 	queue_free()
 
 "
@@ -414,19 +419,19 @@ shader_parameter/previous_color = Color(1, 1, 1, 1)
 color = Color(0.356863, 0.501961, 0.745098, 1)
 polygon = PackedVector2Array(-664, 792, 248, 928, 752, 752, 1024, 328, 920, -160, 592, -480, 32, -664, -552, -584, -888, -80, -960, 400)
 script = ExtResource("1_bj04g")
-align_amount = 7
+align_amount = 8
 random_player_align_range = 5
 max_player_amount = 5
 use_preset_alignments = true
-preset_alignments = Array[int]([0, 0, 0, 0, 0, 6])
-custom_ai_setup = Array[int]([0, 0, 0, 0, 0, 5])
+preset_alignments = Array[int]([0, 0, 0, 0, 0, 6, 7])
+custom_ai_setup = Array[int]([0, 0, 0, 0, 0, 5, 0])
 complexity = 3
 lore = "The short-sighted tribes of the Volcanic Islands have angered the Gods.
-They will all soon die, but instead if escaping they instead spend their
+Soon, they will all die, but instead if escaping they shall spend their
 last moments on earth doing the only thing they know how to do:
 fighting each other."
 align_color = Array[Color]([Color(0.247059, 0.423529, 0.356863, 1), Color(0.843137, 0.792157, 0.333333, 1), Color(0.827451, 0.533333, 0.215686, 1), Color(0.784314, 0.364706, 0.615686, 1), Color(0.427451, 0.666667, 0.741176, 1), Color(0.454902, 0.835294, 0.560784, 1), Color(0.478431, 0.180392, 0.192157, 1), Color(0.576471, 0.537255, 0.815686, 1)])
-align_names = Array[String](["Volcano Islands", "Svetlina", "Presto", "Esigo", "Maydi", "Torna", "Volcano"])
+align_names = Array[String](["Volcano Islands", "Svetlina", "Presto", "Esigo", "Maydi", "Torna", "Volcano", "Lost Tribe"])
 color_bg_according_to_alignment = false
 snap_camera_to_first_align_capital = false
 render_mode = 1
