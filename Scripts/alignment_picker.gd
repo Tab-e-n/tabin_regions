@@ -8,6 +8,8 @@ var align_size : int = 0
 var hovering_available : bool = false
 var hovering_players : bool = false
 
+var wait : bool = true
+
 @onready var available : AlignmentList = $available
 @onready var players : AlignmentList = $players
 
@@ -17,7 +19,7 @@ func _ready():
 	if packed_map:
 		current_map = packed_map.instantiate()
 		current_map.dummy = true
-		$play.modulate = current_map.slight_tint(current_map.color)
+		$play.modulate = RegionControl.slight_tint(current_map.color)
 		$map.add_child(current_map)
 	
 	if current_map.random_player_align_range == 0:
@@ -31,11 +33,17 @@ func _ready():
 		leader.frame = 0
 		available.color_leader(leader, current_map.align_color[i + 1])
 	players.set_align_list_size(MapSetup.player_amount)
+	players.random_leader_indicators(MapSetup.player_amount)
 	
 	player_alignments.resize(MapSetup.player_amount)
 
 
 func _process(_delta):
+	if wait:
+		wait = false
+		return
+		# AAAAAAAAAAAAAAA <- That is a reference to Punk Tactics
+	
 	if Input.is_action_just_pressed("escape"):
 		get_tree().change_scene_to_file("res://setup_scene.tscn")
 	

@@ -18,10 +18,10 @@ func think_bonus():
 
 
 func think_normal(is_bonus : bool = false):
-	if is_bonus and controler.region_control.bonus_action_amount == 0:
+	if is_bonus and controler.get_bonus_action_amount() == 0:
 		controler.CALL_change_current_action = true
 		return
-	if not is_bonus and controler.region_control.action_amount == 0:
+	if not is_bonus and controler.get_action_amount() == 0:
 		controler.CALL_change_current_action = true
 		return
 	
@@ -30,7 +30,7 @@ func think_normal(is_bonus : bool = false):
 	
 	var friendly_regions : Array = controler.get_owned_regions()
 	
-	if controler.region_control.use_aliances:
+	if controler.aliances_on():
 		friendly_regions.append_array(controler.get_allied_regions())
 	
 #	print(current_alignment)
@@ -59,12 +59,12 @@ func think_normal(is_bonus : bool = false):
 #	print(eligable_regions)
 	
 	var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.randomize()
 	
 	if eligable_regions.size() > 0:
 		controler.selected_capital = eligable_regions[0].name
 		var highest_benefit : int = calculate_benefit_default(eligable_regions.pop_front(), is_bonus)
 		var lowest_distance : int
-		rng.randomize()
 		var results : Array = []
 		for region in eligable_regions:
 			var benefit : int = calculate_benefit_default(region, is_bonus)

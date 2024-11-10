@@ -134,14 +134,12 @@ offset_right = 800.0
 offset_bottom = 192.0
 texture_normal = ExtResource("2_qggyn")
 
-[node name="ai_neuron" type="TextureButton" parent="tintable_ui/diff"]
-modulate = Color(0.447059, 0.447059, 0.447059, 1)
+[node name="ai_neural" type="TextureButton" parent="tintable_ui/diff"]
 layout_mode = 0
 offset_left = 832.0
 offset_top = 96.0
 offset_right = 928.0
 offset_bottom = 192.0
-disabled = true
 texture_normal = ExtResource("3_g3ljl")
 
 [node name="ai_cheater" type="TextureButton" parent="tintable_ui/diff"]
@@ -206,7 +204,7 @@ filters = PackedStringArray("*.json")
 [connection signal="value_changed" from="tintable_ui/def/aliances" to="." method="_on_def_slider_value_changed"]
 [connection signal="pressed" from="tintable_ui/diff/ai_turtle" to="." method="_on_ai_turtle_pressed"]
 [connection signal="pressed" from="tintable_ui/diff/ai_default" to="." method="_on_ai_default_pressed"]
-[connection signal="pressed" from="tintable_ui/diff/ai_neuron" to="." method="_on_ai_default_pressed"]
+[connection signal="pressed" from="tintable_ui/diff/ai_neural" to="." method="_on_ai_neural_pressed"]
 [connection signal="pressed" from="tintable_ui/diff/ai_cheater" to="." method="_on_ai_cheater_pressed"]
 [connection signal="pressed" from="tintable_ui/next_menu" to="." method="_on_next_menu_pressed"]
 [connection signal="pressed" from="tintable_ui/replay" to="." method="_on_replay_pressed"]

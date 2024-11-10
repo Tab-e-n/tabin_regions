@@ -227,6 +227,10 @@ func get_owned_regions(alignment : int = current_alignment) -> Array:
 		return []
 
 
+func aliances_on() -> bool:
+	return region_control.use_aliances
+
+
 func get_allied_regions(alignment : int = current_alignment) -> Array:
 	var allied_regs : Array = []
 	for i in range(region_control.align_amount - 1):
@@ -251,6 +255,13 @@ func get_action_amount() -> int:
 
 func get_bonus_action_amount() -> int:
 	return region_control.bonus_action_amount
+
+
+func get_actions_contextual() -> int:
+	if region_control.current_action == RegionControl.ACTION_NORMAL:
+		return region_control.action_amount
+	else:
+		return region_control.bonus_action_amount
 
 
 func get_alingment_amount() -> int:

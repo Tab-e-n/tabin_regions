@@ -1,12 +1,14 @@
 extends Sprite2D
 
-var timer : int = 0
+
+var timer : float = 0
 var mobilize : bool = false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	if mobilize:
 		scale = Vector2(2, 2)
+
 
 func _process(delta):
 	if !mobilize:
@@ -19,3 +21,7 @@ func _process(delta):
 	timer += delta
 	if timer > 1:
 		queue_free()
+
+
+func set_color(color : Color):
+	self_modulate = color * Color(0.75, 0.75, 0.75, 1.0)

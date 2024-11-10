@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://crqr6a72firf7"]
+
+[ext_resource type="Script" path="res://AI/AIControler.gd" id="1_krini"]
+[ext_resource type="Script" path="res://AI/NetworkTrainer.gd" id="1_vin74"]
+[ext_resource type="Script" path="res://Scripts/GameCamera.gd" id="2_1vnln"]
+
+[node name="NetworkTrainer" type="Node2D"]
+script = ExtResource("1_vin74")
+
+[node name="AIControler" type="Node" parent="."]
+script = ExtResource("1_krini")
+
+[node name="GameCamera" type="Camera2D" parent="."]
+script = ExtResource("2_1vnln")

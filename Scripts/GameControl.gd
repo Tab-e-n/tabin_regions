@@ -2,10 +2,9 @@ extends Node2D
 class_name GameControl
 
 
-@export var map : String = "Testlandia.tscn"
+@export var map : String = "2._Testlandia.tscn"
 
 @onready var game_camera : GameCamera
-@onready var cross : Polygon2D = $Cross
 @onready var region_control : RegionControl
 @onready var ai_control : AIControler
 @onready var command_callout : CommandCallouts
@@ -19,11 +18,10 @@ var hide_cross : float = 0
 
 
 func _ready():
-	map = MapSetup.current_map_name
-	var packed_map : PackedScene = load("res://Maps/" + map)
-	region_control = packed_map.instantiate()
-	add_child(region_control)
-	move_child(region_control, 1)
+	if not MapSetup.current_map_name.is_empty():
+		map = MapSetup.current_map_name
+	
+	load_map(map)
 
 
 func _input(event):
@@ -122,12 +120,26 @@ func _process(delta):
 			command_callout.new_callout("Slow AI")
 	
 	mouse_wheel_input = 0
+
+
+func load_map(map_name : String):
+	var packed_map : PackedScene = load("res://Maps/" + map_name)
+	region_control = packed_map.instantiate()
+	add_child(region_control)
+	move_child(region_control, 1)
+
+
+func change_map(map_name : String):
+	if region_control:
+		remove_child(region_control)
+		region_control.queue_free()
 	
-	if cross.visible == true and hide_cross < 0:
-		hide_cross = 1
-	hide_cross -= delta
-	if hide_cross < 0:
-		cross.visible = false
+	load_map(map_name)
+	
+	game_camera.region_control = region_control
+	ai_control.region_control = region_control
+	
+	ReplayControl.clear_replay()
 
 
 func win(align : int):

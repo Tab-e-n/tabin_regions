@@ -165,16 +165,17 @@ func _on_capital_pressed():
 
 
 func action_decided():
-	city_particle(region_control.current_action == region_control.ACTION_MOBILIZE)
 	if region_control.current_action != region_control.ACTION_MOBILIZE:
 		if region_control.has_enough_actions():
 			if region_control.alignment_friendly(region_control.current_playing_align, alignment):
 				if reinforce(region_control.current_playing_align):
 					region_control.action_done(name)
+					city_particle(false)
 					return
 			elif alignment_can_attack(region_control.current_playing_align):
 				if incoming_attack(region_control.current_playing_align):
 					region_control.action_done(name)
+					city_particle(false)
 					return
 		region_control.cross(position)
 	else:
@@ -185,6 +186,7 @@ func action_decided():
 			var amount_gotten = mobilize(alignment, amount_requested)
 			if amount_gotten:
 				region_control.action_done(name, amount_gotten)
+				city_particle(true)
 				return
 		region_control.cross(position)
 
@@ -265,6 +267,27 @@ func get_adjacent_attack_power() -> Array[int]:
 				attacks[target.alignment] += region_attack_power(i)
 	
 	return attacks
+
+
+func strongest_enemy_attack(align : int = alignment) -> int:
+	var attacks : Array[int] = get_adjacent_attack_power()
+	var strongest : int = 0
+	for i in range(attacks.size()):
+		if i == align:
+			continue
+		if attacks[i] > strongest:
+			strongest = attacks[i]
+	return strongest
+
+
+func self_attack_power(align : int = alignment) -> int:
+	var attack : int = 0
+	for i in connections.keys():
+		var target : Node = region_control.get_node(i)
+		if target is Region:
+			if target.alignment == align:
+				attack += region_attack_power(i)
+	return attack
 
 
 func incoming_attack_captures(attack_power : int) -> bool:

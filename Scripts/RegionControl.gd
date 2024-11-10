@@ -279,6 +279,7 @@ func _ready():
 			for i in range(MapSetup.preset_alignments.size()):
 				if align_play_order.size() <= i:
 					break
+#				if align_play_order[i] == 0:
 				align_play_order[i] = MapSetup.preset_alignments[i]
 		
 	#	print(align_play_order)
@@ -471,8 +472,13 @@ func remove_alignment(align : int, remove_capitals : bool):
 
 
 func cross(capital_position : Vector2):
-	game_control.cross.visible = true
-	game_control.cross.position = capital_position
+	var part : Sprite2D = Sprite2D.new()
+	part.set_script(preload("res://Scripts/CrossParticle.gd"))
+	part.texture = preload("res://Sprites/cross.png")
+	part.position = capital_position
+	part.set_color(color)
+	part.z_index = 25
+	add_child(part)
 
 
 func hide_capitals():
@@ -498,7 +504,6 @@ func add_action():
 
 func action_done(region_name : String, amount : int = 1):
 	var auto_end_phase : bool = Options.auto_end_turn_phases and is_player_controled and not ReplayControl.replay_active
-	game_control.cross.visible = false
 	if current_action == ACTION_NORMAL:
 		if action_amount > 0:
 			GameStats.add_to_stat(current_playing_align, "first actions done", 1)
@@ -533,7 +538,6 @@ func has_enough_actions() -> bool:
 
 
 func change_current_action():
-	game_control.cross.visible = false
 	if current_action == ACTION_NORMAL and action_amount > 0:
 		bonus_action_amount = action_amount
 	current_action += 1
@@ -719,14 +723,14 @@ func alignment_neutral(align) -> bool:
 	return align == 0 or align >= align_amount
 
 
-func flip_color(c : Color) -> Color:
+static func flip_color(c : Color) -> Color:
 	c.r = 1 - c.r
 	c.g = 1 - c.g
 	c.b = 1 - c.b
 	return c
 
 
-func slight_tint(tint_color : Color) -> Color:
+static func slight_tint(tint_color : Color) -> Color:
 	var temp_color : Color
 	
 	temp_color = flip_color(tint_color)
@@ -749,6 +753,13 @@ static func setup_tag_name(stag : SETUP_TAG) -> String:
 			return "Guide"
 		_:
 			return "No Tag"
+
+
+static func text_color(value : float) -> Color:
+	if value > COLOR_TOO_BRIGHT:
+		return Color(0, 0, 0, 1)
+	else:
+		return Color(1, 1, 1, 1)
 
 
 static func setup_complexity_name(compx : SETUP_COMPLEXITY) -> String:

@@ -25,6 +25,16 @@ func add_leader(pos : int, alignment : int) -> Sprite2D:
 	return leader
 
 
+func random_leader_indicators(amount : int):
+	for i in range(amount):
+		var leader : Sprite2D = Sprite2D.new()
+		leader.texture = preload("res://Sprites/align_picker_random.png")
+		leader.position.x = PLAY_ORDER_SPACING / 2 + PLAY_ORDER_SPACING * i
+		leader.position.y = PLAY_ORDER_VERTICAL_OFFSET
+		leader.z_index = -1
+		add_child(leader)
+
+
 func get_leader(alignment : int) -> Sprite2D:
 	return get_node(String.num(alignment))
 

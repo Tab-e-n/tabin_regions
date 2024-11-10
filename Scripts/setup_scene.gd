@@ -92,7 +92,7 @@ func _on_map_list_item_selected(index):
 	current_map.position = Vector2(768, 384)
 	current_map.scale = Vector2(0.5, 0.5)
 	
-	tintable_ui.modulate = current_map.slight_tint(current_map.color)
+	tintable_ui.modulate = RegionControl.slight_tint(current_map.color)
 	
 	$map.add_child(current_map)
 	
@@ -184,6 +184,11 @@ func _on_ai_turtle_pressed():
 
 func _on_ai_default_pressed():
 	MapSetup.default_ai_controler = AIControler.CONTROLER_DEFAULT
+	ai_selected_pos()
+
+
+func _on_ai_neural_pressed():
+	MapSetup.default_ai_controler = AIControler.CONTROLER_NEURAL
 	ai_selected_pos()
 
 

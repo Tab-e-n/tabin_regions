@@ -20,6 +20,7 @@ const BASE_MOVE_SPEED : float = 8
 @export var EndTurnButton : BaseButton
 @export var ForfeitButton : BaseButton
 @export var PauseButton : BaseButton
+@export var LeaveButton : BaseButton
 @export var TurnOrder : AlignmentList
 @export var Attacks : RichTextLabel
 @export var PowerSprite : TextureRect
@@ -116,19 +117,25 @@ func _deffered_ready():
 		position.y = farthest_up
 	next_position = position
 	
-	AdvanceTurnButton.pressed.connect(_advance_turn)
-	EndTurnButton.pressed.connect(_end_turn)
-	ForfeitButton.pressed.connect(_forfeit_show)
-	AdvanceTurnButton.mouse_entered.connect(_button_cam_disable)
-	AdvanceTurnButton.mouse_exited.connect(_button_cam_enable)
-	EndTurnButton.mouse_entered.connect(_button_cam_disable)
-	EndTurnButton.mouse_exited.connect(_button_cam_enable)
-	ForfeitButton.mouse_entered.connect(_button_cam_disable)
-	ForfeitButton.mouse_exited.connect(_button_cam_enable)
-	TurnOrder.mouse_entered.connect(_TurnOrder_cam_disable)
-	TurnOrder.mouse_exited.connect(_TurnOrder_cam_enable)
-	
-	PauseButton.pressed.connect(show_pause_menu)
+	if AdvanceTurnButton:
+		AdvanceTurnButton.pressed.connect(_advance_turn)
+		AdvanceTurnButton.mouse_entered.connect(_button_cam_disable)
+		AdvanceTurnButton.mouse_exited.connect(_button_cam_enable)
+	if EndTurnButton:
+		EndTurnButton.pressed.connect(_end_turn)
+		EndTurnButton.mouse_entered.connect(_button_cam_disable)
+		EndTurnButton.mouse_exited.connect(_button_cam_enable)
+	if ForfeitButton:
+		ForfeitButton.pressed.connect(_forfeit_show)
+		ForfeitButton.mouse_entered.connect(_button_cam_disable)
+		ForfeitButton.mouse_exited.connect(_button_cam_enable)
+	if TurnOrder:
+		TurnOrder.mouse_entered.connect(_TurnOrder_cam_disable)
+		TurnOrder.mouse_exited.connect(_TurnOrder_cam_enable)
+	if PauseButton:
+		PauseButton.pressed.connect(toggle_pause_menu)
+	if LeaveButton:
+		LeaveButton.pressed.connect(_leaving)
 	
 	call_deferred("_ready_turn_order")
 	
@@ -138,12 +145,16 @@ func _deffered_ready():
 
 
 func _ready_turn_order():
+	if not TurnOrder:
+		return
+	
 	TurnOrder._ready_list(region_control)
 	
-	if TurnOrder.size.x > AlignmentList.PLAY_ORDER_MAX_SIZE:
-		Attacks.size.x = AlignmentList.PLAY_ORDER_MAX_SIZE
-	else:
-		Attacks.size.x = TurnOrder.size.x
+	if Attacks:
+		if TurnOrder.size.x > AlignmentList.PLAY_ORDER_MAX_SIZE:
+			Attacks.size.x = AlignmentList.PLAY_ORDER_MAX_SIZE
+		else:
+			Attacks.size.x = TurnOrder.size.x
 
 
 func _physics_process(_delta):
@@ -154,32 +165,28 @@ func _process(_delta):
 	if hovering_advance_turn or hovering_turn_order:
 		cam_movement_stop = 1
 	
-	PlayerActions.modulate = region_control.align_color[region_control.current_playing_align]
-	PowerSprite.self_modulate = region_control.align_color[region_control.current_playing_align]
-	PlayerActions.modulate.a = 1
-	PowerSprite.self_modulate.a = 1
-	if PowerSprite.self_modulate.v > 0.9:
-		PowerAmount.self_modulate = Color(0, 0, 0)
-	else:
-		PowerAmount.self_modulate = Color(1, 1, 1)
-	can_translate_messages()
-	if region_control.current_action == 0:
-		CurrentAction.text = "FIRST ACTION"
-		CurrentAction.text = "FIRST ACTION"
-		PowerAmount.text = String.num(region_control.action_amount)
-	if region_control.current_action == 1:
-		CurrentAction.text = "MOBILIZE"
-		PowerAmount.text = String.num(region_control.bonus_action_amount)
-	if region_control.current_action == 2:
-		CurrentAction.text = "BONUS ACTION"
-		PowerAmount.text = String.num(region_control.bonus_action_amount)
+	if PlayerActions:
+		PlayerActions.modulate = region_control.align_color[region_control.current_playing_align]
+		PlayerActions.modulate.a = 1
+		PlayerActions.visible = region_control.is_player_controled and not ReplayControl.replay_active
+	if PowerSprite:
+		PowerSprite.self_modulate = region_control.align_color[region_control.current_playing_align]
+		PowerSprite.self_modulate.a = 1
+		if PowerAmount:
+			PowerAmount.self_modulate = RegionControl.text_color(PowerSprite.self_modulate.v)
 	
-	PlayerActions.visible = region_control.is_player_controled and not ReplayControl.replay_active
-	if not region_control.is_player_controled:
-		hovering_advance_turn = false
+	if CurrentAction:
+		const ACTIONS : Array[String] = ["FIRST ACTION", "MOBILIZE", "BONUS ACTION"]
+		CurrentAction.text = ACTIONS[region_control.current_action]
+	if PowerAmount:
+		if region_control.current_action == RegionControl.ACTION_NORMAL:
+			PowerAmount.text = String.num(region_control.action_amount)
+		else:
+			PowerAmount.text = String.num(region_control.bonus_action_amount)
 	
-	PlayerInfo.visible = hovering_turn_order
-	if hovering_turn_order:
+	if PlayerInfo:
+		PlayerInfo.visible = hovering_turn_order
+	if hovering_turn_order and TurnOrder and PlayerInfo:
 		var hovering_over_player : int = int((game_control.mouse_position.x - AlignmentList.PLAY_ORDER_SCREEN_BORDER_GAP) / (AlignmentList.PLAY_ORDER_SPACING * TurnOrder.scale.x))
 		
 		if hovering_over_player >= region_control.align_amount - 1:
@@ -219,8 +226,20 @@ func _process(_delta):
 			PlayerInfo.visible = false
 
 
+func _turn_ended():
+	if TurnOrder:
+		TurnOrder.update_list(region_control)
+	
+	if not region_control.is_player_controled:
+		hovering_advance_turn = false
+	
+	update_current_turn()
+
+
 func move_camera(direction : Vector2, shift : bool, ctrl : bool):
-	var move_speed = BASE_MOVE_SPEED * UI.scale.x
+	var move_speed = BASE_MOVE_SPEED
+	if UI:
+		move_speed *= UI.scale.x
 	if shift:
 		move_speed *= 2.0
 	if ctrl:
@@ -246,8 +265,9 @@ func zoom_change(amount : int):
 		zoom_level = ZOOM_IN_MAX
 	zoom.x = pow(1.25, zoom_level)
 	zoom.y = zoom.x
-	UI.scale.x = 1 / zoom.x
-	UI.scale.y = UI.scale.x
+	if UI:
+		UI.scale.x = 1 / zoom.x
+		UI.scale.y = UI.scale.x
 
 
 func reset_zoom():
@@ -264,21 +284,25 @@ func _end_turn():
 
 
 func _forfeit_show():
-	ForfeitMessage.visible = true
+	if ForfeitMessage:
+		ForfeitMessage.visible = true
 
 
 func _forfeit_hide():
-	ForfeitMessage.visible = false
+	if ForfeitMessage:
+		ForfeitMessage.visible = false
 
 
 func show_victory_message(alignment : int):
-	VictoryMessage.visible = true
-	VictoryMessage.modulate = region_control.align_color[alignment]
+	if VictoryMessage:
+		VictoryMessage.visible = true
+		VictoryMessage.modulate = region_control.align_color[alignment]
 
 
 func show_defeat_message(alignment : int):
-	DefeatMessage.visible = true
-	DefeatMessage.modulate = region_control.align_color[alignment]
+	if DefeatMessage:
+		DefeatMessage.visible = true
+		DefeatMessage.modulate = region_control.align_color[alignment]
 
 
 func _forfeit():
@@ -302,29 +326,35 @@ func _TurnOrder_cam_enable():
 	hovering_turn_order = false
 
 
-func _turn_ended():
-	TurnOrder.update_list(region_control)
-	
-	update_current_turn()
-
-
 func update_current_turn():
-	CurrentTurn.text = "TURN " + str(region_control.current_turn)
+	if CurrentTurn:
+		CurrentTurn.text = "TURN " + str(region_control.current_turn)
 
 
-func show_pause_menu():
-	PauseMenu.visible = not PauseMenu.visible
+func toggle_pause_menu():
+	if PauseMenu:
+		PauseMenu.visible = not PauseMenu.visible
+	_not_leaving()
+
+
+func hide_pause_menu():
+	if PauseMenu:
+		PauseMenu.visible = false
 
 
 func toggle_ui_visibility():
-	UIHideable.visible = not UIHideable.visible
+	if UIHideable:
+		UIHideable.visible = not UIHideable.visible
 
 
 func toggle_turn_order_visibility():
-	TurnOrder.visible = not TurnOrder.visible
+	if TurnOrder:
+		TurnOrder.visible = not TurnOrder.visible
 
 
 func show_attacks(region : Region):
+	if not TurnOrder:
+		return
 	if not TurnOrder.visible:
 		return
 	
@@ -344,7 +374,7 @@ func show_attacks(region : Region):
 		text += "[cell][bgcolor=#" + color.to_html() + "][color=#" + text_color.to_html() + "] "
 		text += String.num(adjanced[alignment]) + " [/color][/bgcolor][/cell]"
 	
-	if align_amount > 0:
+	if Attacks and align_amount > 0:
 		text = "[center][table=" + String.num(align_amount) + "]" + text + "[/table][/center]"
 		
 		Attacks.clear()
@@ -353,15 +383,21 @@ func show_attacks(region : Region):
 
 
 func hide_attacks():
-	Attacks.visible = false
+	if Attacks:
+		Attacks.visible = false
 
 
 func _leaving():
-	LeaveMessage.visible = true
+	hide_pause_menu()
+	if LeaveMessage:
+		LeaveMessage.visible = true
+	else:
+		_confirmed_leave()
 
 
 func _not_leaving():
-	LeaveMessage.visible = false
+	if LeaveMessage:
+		LeaveMessage.visible = false
 
 
 func _confirmed_leave():

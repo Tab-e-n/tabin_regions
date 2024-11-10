@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ckbitpcqxs5ao"]
+[gd_scene load_steps=20 format=3 uid="uid://ckbitpcqxs5ao"]
 
 [ext_resource type="Script" path="res://Scripts/GameControl.gd" id="1_2axsc"]
 [ext_resource type="Script" path="res://Scripts/GameCamera.gd" id="1_we6ai"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://c2duva1ycjs8u" path="res://Sprites/city.png" id="10_5d75i"]
 [ext_resource type="Texture2D" uid="uid://66jp7txq175w" path="res://Sprites/capital.png" id="11_i48c4"]
 [ext_resource type="Texture2D" uid="uid://bht6umkfovrvf" path="res://Sprites/exit.png" id="12_st2cf"]
+[ext_resource type="StyleBox" uid="uid://ciikkahxcqynr" path="res://Styles/style_label_pause.tres" id="16_ixm5t"]
 [ext_resource type="Texture2D" uid="uid://dm2nl24gy8gxh" path="res://Sprites/accept.png" id="17_0hp27"]
 [ext_resource type="Texture2D" uid="uid://ex66wqntm5fi" path="res://Sprites/deny.png" id="18_mtr1x"]
 
@@ -25,7 +26,7 @@ script = ExtResource("1_2axsc")
 [node name="AIControler" type="Node" parent="."]
 script = ExtResource("2_w08l3")
 
-[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "PlayerActions", "AdvanceTurnButton", "EndTurnButton", "ForfeitButton", "PauseButton", "TurnOrder", "Attacks", "PowerSprite", "PowerAmount", "CurrentTurn", "CurrentAction", "VictoryMessage", "DefeatMessage", "LeaveMessage", "ForfeitMessage", "CommandCallout")]
+[node name="GameCamera" type="Camera2D" parent="." node_paths=PackedStringArray("UI", "UIHideable", "PauseMenu", "PlayerInfo", "PlayerActions", "AdvanceTurnButton", "EndTurnButton", "ForfeitButton", "PauseButton", "LeaveButton", "TurnOrder", "Attacks", "PowerSprite", "PowerAmount", "CurrentTurn", "CurrentAction", "VictoryMessage", "DefeatMessage", "LeaveMessage", "ForfeitMessage", "CommandCallout")]
 z_index = 30
 script = ExtResource("1_we6ai")
 UI = NodePath("UI")
@@ -37,6 +38,7 @@ AdvanceTurnButton = NodePath("UI/Hideable/PlayerActions/AdvanceTurn")
 EndTurnButton = NodePath("UI/Hideable/PlayerActions/EndTurn")
 ForfeitButton = NodePath("UI/Hideable/PlayerActions/Forfeit")
 PauseButton = NodePath("UI/gearbox")
+LeaveButton = NodePath("UI/pause/leave")
 TurnOrder = NodePath("UI/Hideable/turn_order")
 Attacks = NodePath("UI/Hideable/Attacks")
 PowerSprite = NodePath("UI/Hideable/Power")
@@ -241,7 +243,7 @@ offset_left = 128.0
 offset_top = 136.0
 offset_right = 1024.0
 offset_bottom = 472.0
-theme_override_styles/panel = ExtResource("7_r48wm")
+theme_override_styles/panel = ExtResource("16_ixm5t")
 
 [node name="keys1" type="Label" parent="GameCamera/UI/pause"]
 layout_mode = 0
@@ -321,11 +323,11 @@ vertical_alignment = 1
 visible = false
 layout_mode = 0
 offset_left = 464.0
-offset_top = 248.0
+offset_top = 240.0
 offset_right = 688.0
 offset_bottom = 400.0
 theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("7_r48wm")
+theme_override_styles/normal = ExtResource("16_ixm5t")
 text = "Do you want
 to leave?"
 horizontal_alignment = 1
@@ -352,11 +354,11 @@ texture_normal = ExtResource("18_mtr1x")
 visible = false
 layout_mode = 0
 offset_left = 464.0
-offset_top = 248.0
+offset_top = 240.0
 offset_right = 688.0
 offset_bottom = 400.0
 theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("7_r48wm")
+theme_override_styles/normal = ExtResource("16_ixm5t")
 text = "Do you want
 to forfeit?
  "
@@ -380,13 +382,6 @@ offset_right = 176.0
 offset_bottom = 144.0
 texture_normal = ExtResource("18_mtr1x")
 
-[node name="Cross" type="Polygon2D" parent="."]
-visible = false
-z_index = 25
-color = Color(0.137255, 0.137255, 0.137255, 1)
-polygon = PackedVector2Array(-32, 64, 0, 32, 32, 64, 64, 32, 32, 0, 64, -32, 32, -64, 0, -32, -32, -64, -64, -32, -32, 0, -64, 32)
-
-[connection signal="pressed" from="GameCamera/UI/pause/leave" to="GameCamera" method="_leaving"]
 [connection signal="pressed" from="GameCamera/UI/leave/yes" to="GameCamera" method="_confirmed_leave"]
 [connection signal="pressed" from="GameCamera/UI/leave/no" to="GameCamera" method="_not_leaving"]
 [connection signal="pressed" from="GameCamera/UI/forfeit/yes" to="GameCamera" method="_forfeit"]

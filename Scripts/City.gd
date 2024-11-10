@@ -65,31 +65,17 @@ func _process(_delta):
 
 func make_particle(mobilize : bool):
 	var part : Sprite2D = Sprite2D.new()
-	part.texture = preload("res://Sprites/circle.png")
 	part.set_script(preload("res://Scripts/CitySelectedParticle.gd"))
+	part.texture = preload("res://Sprites/circle.png")
 	part.position = Vector2(32, 32)
-	part.modulate = self_modulate
+	part.set_color(self_modulate)
 	part.mobilize = mobilize
-	add_child(part) 
+	add_child(part)
 
 
 func color_self(new_color : Color):
 	self_modulate = new_color
-	if new_color.v > RegionControl.COLOR_TOO_BRIGHT:
-		text.self_modulate = Color(0, 0, 0)
-#		region_name.self_modulate = Color(0, 0, 0)
-#		region_name.remove_theme_color_override("font_color")
-#		region_name.add_theme_color_override("font_color", Color(0, 0, 0))
-#		region_name.remove_theme_color_override("font_outline")
-#		region_name.add_theme_color_override("font_outline", Color(1, 1, 1))
-	else:
-		text.self_modulate = Color(1, 1, 1)
-#		region_name.self_modulate = Color(1, 1, 1)
-#		region_name.remove_theme_color_override("font_color")
-#		region_name.add_theme_color_override("font_color", Color(1, 1, 1))
-#		region_name.remove_theme_color_override("font_outline")
-#		region_name.add_theme_color_override("font_outline", Color(0, 0, 0))
-		
+	text.self_modulate = RegionControl.text_color(new_color.v)
 
 
 func show_attacks():

@@ -9,6 +9,10 @@ var mouse_scroll_active : bool = true
 var auto_end_turn_phases : bool = false
 
 
+func _ready():
+	DirAccess.make_dir_absolute("user://Dev")
+
+
 func save_options():
 	var options : Dictionary = {
 		"speedrun_ai" : speedrun_ai,
