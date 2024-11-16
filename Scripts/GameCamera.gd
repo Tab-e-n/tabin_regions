@@ -137,11 +137,15 @@ func _deffered_ready():
 	if LeaveButton:
 		LeaveButton.pressed.connect(_leaving)
 	
+	connect_region_control_signals()
+	
 	call_deferred("_ready_turn_order")
 	
-	region_control.turn_ended.connect(_turn_ended)
-	
 	update_current_turn()
+
+
+func connect_region_control_signals():
+	region_control.turn_ended.connect(_turn_ended)
 
 
 func _ready_turn_order():
@@ -368,9 +372,7 @@ func show_attacks(region : Region):
 			align_amount -= 1
 			continue
 		var color : Color = region_control.align_color[alignment]
-		var text_color : Color = Color(1, 1, 1)
-		if color.v > region_control.COLOR_TOO_BRIGHT:
-			text_color = Color(0, 0, 0)
+		var text_color : Color = RegionControl.text_color(color.v)
 		text += "[cell][bgcolor=#" + color.to_html() + "][color=#" + text_color.to_html() + "] "
 		text += String.num(adjanced[alignment]) + " [/color][/bgcolor][/cell]"
 	

@@ -176,6 +176,8 @@ var penalty_amount : Array = []
 
 
 func _ready():
+#	MapSetup.print_map_data()
+	
 	if dummy:
 		return
 	
@@ -238,11 +240,14 @@ func _ready():
 		var players : Array = range(align_amount)
 		players.pop_front()
 		
+		if used_alignments < 2 or used_alignments >= align_amount:
+			used_alignments = align_amount - 1
+		
 		var preset_alignments_amount : int = 0
 		for i in preset_alignments:
 			if i != 0:
 				preset_alignments_amount += 1
-		if used_alignments < preset_alignments_amount:
+		if preset_alignments_amount > 0 and used_alignments < preset_alignments_amount:
 			used_alignments = preset_alignments_amount
 		for i in preset_alignments:
 			players.erase(i)

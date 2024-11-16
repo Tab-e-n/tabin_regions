@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name Network
 
 
@@ -146,21 +146,28 @@ func load_network(net_name : String):
 		
 		file.close()
 		
-		var input_amount : int = save["input_amount"]
-		var layer_amount : int = save["layer_amount"]
-		var layer_sizes : Array = []
-		for i in range(layer_amount):
-			layer_sizes.append(save[str(i)])
-		
-		setup_network(input_amount, layer_sizes)
-		
-		for i in range(layers.size()):
-			var layer : Array = layers[i]
-			for j in range(layer.size()):
-				var neuron : Neuron = layer[j] as Neuron
-				neuron.bias = save[str(i) + "_bias"][j]
-				neuron.weights = save[str(i) + "_" + str(j)]
+		load_network_from_dict(save)
 		
 		return true
 	else:
 		return false
+
+
+func load_network_from_dict(save : Dictionary):
+	if save.is_empty():
+		return
+	
+	var input_amount : int = save["input_amount"]
+	var layer_amount : int = save["layer_amount"]
+	var layer_sizes : Array = []
+	for i in range(layer_amount):
+		layer_sizes.append(save[str(i)])
+	
+	setup_network(input_amount, layer_sizes)
+	
+	for i in range(layers.size()):
+		var layer : Array = layers[i]
+		for j in range(layer.size()):
+			var neuron : Neuron = layer[j] as Neuron
+			neuron.bias = save[str(i) + "_bias"][j]
+			neuron.weights = save[str(i) + "_" + str(j)]

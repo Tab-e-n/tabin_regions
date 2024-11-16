@@ -1,5 +1,8 @@
 extends AIBase
 
+const FINAL_NETWORK_ATTACK : Dictionary = {}
+const FINAL_NETWORK_REINFORCE : Dictionary = {}
+const FINAL_NETWORK_MOBILIZE : Dictionary = {}
 
 enum {
 	INPUT_CAPITAL,
@@ -13,39 +16,29 @@ enum {
 }
 
 
+var trainer : NetworkTrainer = null
+
 var network_attack : Network
 var network_reinforce : Network
 var network_mobilize : Network
-var loading_net : bool = false
 
 
 func _ready():
-	network_attack = Network.new()
-	network_reinforce = Network.new()
-	network_mobilize = Network.new()
-	if loading_net:
-		network_attack.load_network("test0")
-		network_reinforce.load_network("test1")
-		network_mobilize.load_network("test2")
-#		network_attack.print_network()
-	else:
-		network_attack.setup_network(8, [8, 8, 1])
-		network_attack.randomize_network()
-		add_child(network_attack)
-		network_attack.save_network("test0")
-		
-		network_reinforce.setup_network(8, [8, 8, 1])
-		network_reinforce.randomize_network()
-		add_child(network_reinforce)
-		network_reinforce.save_network("test1")
-		
-		network_mobilize.setup_network(8, [8, 8, 1])
-		network_mobilize.randomize_network()
-		add_child(network_mobilize)
-		network_mobilize.save_network("test2")
+	trainer = controler.game_control as NetworkTrainer
+	if not trainer:
+		network_attack = Network.new()
+		network_reinforce = Network.new()
+		network_mobilize = Network.new()
+		network_attack.load_network_from_dict(FINAL_NETWORK_ATTACK)
+		network_reinforce.load_network_from_dict(FINAL_NETWORK_REINFORCE)
+		network_mobilize.load_network_from_dict(FINAL_NETWORK_MOBILIZE)
 
 
 func start_turn(align : int):
+	if trainer:
+		network_attack = trainer.get_network_for_align(align, 0)
+		network_reinforce = trainer.get_network_for_align(align, 1)
+		network_mobilize = trainer.get_network_for_align(align, 2)
 	super.start_turn(align)
 
 

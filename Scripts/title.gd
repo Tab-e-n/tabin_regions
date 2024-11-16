@@ -12,6 +12,9 @@ var current_region : int = 0
 var current_align : int = 1
 
 
+var going_network : bool = false
+
+
 func _ready():
 	Options.load_options()
 	
@@ -39,4 +42,15 @@ func _process(delta):
 #		print(current_region, " ", current_align)
 	
 	if Input.is_action_just_pressed("left_click"):
-		get_tree().change_scene_to_file("res://setup_scene.tscn")
+		if going_network:
+			get_tree().change_scene_to_file("res://AI/network_trainer.tscn")
+		else:
+			get_tree().change_scene_to_file("res://setup_scene.tscn")
+
+
+func _on_network_mouse_entered():
+	going_network = true
+
+
+func _on_network_mouse_exited():
+	going_network = false

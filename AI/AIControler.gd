@@ -10,6 +10,7 @@ signal timer_has_ended
 
 const THINKING_TIMER_DEFAULT : float = 0.5
 const THINKING_TIMER_SPEEDRUN : float = 0.05
+const THINKING_TIMER_NETWORK : float = 0.02
 
 var thinking_timer : float = THINKING_TIMER_DEFAULT
 
@@ -91,7 +92,9 @@ func _process(delta):
 
 
 func speedrun_ai_update():
-	if Options.speedrun_ai:
+	if game_control is NetworkTrainer:
+		thinking_timer = THINKING_TIMER_NETWORK
+	elif Options.speedrun_ai:
 		thinking_timer = THINKING_TIMER_SPEEDRUN
 	else:
 		thinking_timer = THINKING_TIMER_DEFAULT

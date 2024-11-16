@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://t2528ie7ag6n"]
+[gd_scene load_steps=4 format=3 uid="uid://t2528ie7ag6n"]
 
 [ext_resource type="PackedScene" uid="uid://cnxb64453xeqg" path="res://Maps/1._Title_Map.tscn" id="1_dr8vy"]
 [ext_resource type="Script" path="res://Scripts/title.gd" id="1_wam5a"]
+[ext_resource type="Texture2D" uid="uid://tmryy03p6doc" path="res://Sprites/ai_neuron.png" id="3_ofd00"]
 
 [node name="title" type="Node2D"]
 script = ExtResource("1_wam5a")
@@ -21,3 +22,13 @@ theme_override_font_sizes/font_size = 64
 text = "Click to continue"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="network" type="TextureButton" parent="."]
+offset_left = 16.0
+offset_top = 528.0
+offset_right = 112.0
+offset_bottom = 624.0
+texture_normal = ExtResource("3_ofd00")
+
+[connection signal="mouse_entered" from="network" to="." method="_on_network_mouse_entered"]
+[connection signal="mouse_exited" from="network" to="." method="_on_network_mouse_exited"]

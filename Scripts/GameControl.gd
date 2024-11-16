@@ -137,6 +137,7 @@ func change_map(map_name : String):
 	load_map(map_name)
 	
 	game_camera.region_control = region_control
+	game_camera.connect_region_control_signals()
 	ai_control.region_control = region_control
 	
 	ReplayControl.clear_replay()
