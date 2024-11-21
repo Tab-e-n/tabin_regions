@@ -6,7 +6,6 @@
 
 [node name="NetworkTrainer" type="Node2D"]
 script = ExtResource("1_vin74")
-turn_cutoff = 10
 
 [node name="AIControler" type="Node" parent="."]
 script = ExtResource("1_krini")
@@ -23,7 +22,27 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="turn" type="Label" parent="GameCamera/ui"]
+layout_mode = 0
+offset_left = -568.0
+offset_top = -272.0
+offset_right = -236.0
+offset_bottom = -249.0
+
+[node name="save" type="Button" parent="GameCamera/ui"]
+layout_mode = 0
 offset_left = -568.0
 offset_top = -312.0
-offset_right = -236.0
-offset_bottom = -289.0
+offset_right = -521.0
+offset_bottom = -281.0
+text = "SAVE"
+
+[node name="toggle_vis" type="Button" parent="GameCamera/ui"]
+layout_mode = 0
+offset_left = -512.0
+offset_top = -312.0
+offset_right = -363.0
+offset_bottom = -281.0
+text = "REGION CONTROL VISIBLE"
+
+[connection signal="pressed" from="GameCamera/ui/save" to="." method="save_all_networks"]
+[connection signal="pressed" from="GameCamera/ui/toggle_vis" to="." method="toggle_region_control_visibility"]

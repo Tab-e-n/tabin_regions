@@ -25,6 +25,9 @@ func _ready():
 	
 	alignments = range(1, 30)
 	alignments.shuffle()
+	
+	if OS.has_feature("editor"):
+		$network.visible = true
 
 
 func _process(delta):

@@ -23,6 +23,8 @@ func save_options():
 	var file = FileAccess.open(SAVEFILE, FileAccess.WRITE)
 	
 	file.store_string(JSON.stringify(options))
+	
+	file.close()
 
 
 func load_options():

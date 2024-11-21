@@ -155,6 +155,6 @@ func calculate_benefit(network : Network, region : Region) -> float:
 	
 	network.set_inputs(inputs)
 	network.calculate_results()
-	var results = network.get_results()
+	var results : Array = network.get_results()
 	
 	return results[0]

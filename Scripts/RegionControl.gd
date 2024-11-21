@@ -613,13 +613,6 @@ func check_victory():
 func victory(align_victory : int):
 	dummy = true
 	
-	if main_character <= 0:
-		game_control.win(align_victory)
-	elif alignment_aliances[align_victory] == main_character:
-		game_control.win(align_victory)
-	else:
-		game_control.lose(align_victory)
-	
 	GameStats.set_stat(align_victory, "placement", "1")
 	
 	var placement = String.num(current_placement)
@@ -635,15 +628,27 @@ func victory(align_victory : int):
 		if GameStats.get_stat(align, "placement") == "N/A":
 			GameStats.set_stat(align, "placement", placement)
 	
+	if main_character <= 0:
+		game_control.win(align_victory)
+	elif alignment_aliances[align_victory] == main_character:
+		game_control.win(align_victory)
+	else:
+		game_control.lose(align_victory)
+	
 	game_ended.emit(align_victory)
 
 
 func reset():
-	
-	if region_amount[current_playing_align - 1] > GameStats.get_stat(current_playing_align, "most regions owned"): #GameStats.stats[current_playing_align]["most regions owned"]
+	var reg_amount = GameStats.get_stat(current_playing_align, "most regions owned")
+	if reg_amount == null:
+		reg_amount = 0
+	var cap_amount = GameStats.get_stat(current_playing_align, "most capitals owned")
+	if cap_amount == null:
+		cap_amount = 0
+	if region_amount[current_playing_align - 1] > int(reg_amount): #GameStats.stats[current_playing_align]["most regions owned"]
 		GameStats.set_stat(current_playing_align, "most regions owned", region_amount[current_playing_align - 1])
 #		GameStats.stats[current_playing_align]["most regions owned"] = region_amount[current_playing_align - 1]
-	if capital_amount[current_playing_align - 1] > GameStats.get_stat(current_playing_align, "most capitals owned"): #GameStats.stats[current_playing_align]["most capitals owned"]
+	if capital_amount[current_playing_align - 1] > int(cap_amount): #GameStats.stats[current_playing_align]["most capitals owned"]
 		GameStats.set_stat(current_playing_align, "most capitals owned", capital_amount[current_playing_align - 1])
 #		GameStats.stats[current_playing_align]["most capitals owned"] = capital_amount[current_playing_align - 1]
 	calculate_penalty(current_playing_align)

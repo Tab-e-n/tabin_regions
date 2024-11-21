@@ -26,7 +26,6 @@ const PACKED_CONTROLERS : Array = [
 ]
 
 
-var current_alignment : int
 var current_controler : int
 
 var timer : float = 0
@@ -91,6 +90,15 @@ func _process(delta):
 		timer_has_ended.emit()
 
 
+func reset():
+	owned_regions = {}
+	current_moves = {}
+	previous_moves = []
+	selected_capital = ""
+	reset_CALL()
+	timer = 0
+
+
 func speedrun_ai_update():
 	if game_control is NetworkTrainer:
 		thinking_timer = THINKING_TIMER_NETWORK
@@ -100,19 +108,18 @@ func speedrun_ai_update():
 		thinking_timer = THINKING_TIMER_DEFAULT
 
 
-func start_turn(align : int, control : int):
+func start_turn(alignment : int, control : int):
 #	print("start turn")
 	
-	current_alignment = align
 	current_controler = control
 	
 	if not ReplayControl.replay_active:
-		if current_moves.has(current_alignment):
-			previous_moves = current_moves[current_alignment].duplicate()
-		current_moves[current_alignment] = []
+		if current_moves.has(current_align()):
+			previous_moves = current_moves[current_align()].duplicate()
+		current_moves[current_align()] = []
 		
 		if controlers[current_controler].has_method("start_turn"):
-			controlers[current_controler].call("start_turn", align)
+			controlers[current_controler].call("start_turn", alignment)
 	
 	call_deferred("think")
 
@@ -187,12 +194,16 @@ func timer_ended():
 		reset_CALL()
 		region_control.get_node(selected_capital).overtake()
 		if not ReplayControl.replay_active:
-			current_moves[current_alignment].append(selected_capital)
+			if not current_moves.has(current_align()):
+				current_moves[current_align()] = []
+			current_moves[current_align()].append(selected_capital)
 		should_think = true
 	else:
 		region_control.get_node(selected_capital).action_decided()
 		if not ReplayControl.replay_active:
-			current_moves[current_alignment].append(selected_capital)
+			if not current_moves.has(current_align()):
+				current_moves[current_align()] = []
+			current_moves[current_align()].append(selected_capital)
 	
 	replay_done_action = true
 	if should_think:
@@ -209,7 +220,14 @@ func reset_CALL():
 	CALL_overtake = false
 
 
-func find_owned_regions(alignment : int = current_alignment):
+func current_align() -> int:
+	if region_control:
+		return region_control.current_playing_align
+	else:
+		return 0
+
+
+func find_owned_regions(alignment : int = current_align()):
 	owned_regions[alignment] = []
 	for region in region_control.get_children():
 		if not region is Region:
@@ -223,18 +241,17 @@ func used_region_previously(region_name) -> bool:
 	return previous_moves.has(region_name)
 
 
-func get_owned_regions(alignment : int = current_alignment) -> Array:
-	if owned_regions.has(alignment):
-		return owned_regions[alignment].duplicate()
-	else:
-		return []
+func get_owned_regions(alignment : int = current_align()) -> Array:
+	if not owned_regions.has(alignment):
+		find_owned_regions(alignment)
+	return owned_regions[alignment].duplicate()
 
 
 func aliances_on() -> bool:
 	return region_control.use_aliances
 
 
-func get_allied_regions(alignment : int = current_alignment) -> Array:
+func get_allied_regions(alignment : int = current_align()) -> Array:
 	var allied_regs : Array = []
 	for i in range(region_control.align_amount - 1):
 		if alignment_friendly(alignment, i + 1) and alignment != i + 1:
@@ -249,7 +266,9 @@ func get_region(connection_name : String) -> Region:
 
 
 func get_current_moves() -> Array:
-	return current_moves[current_alignment].duplicate()
+	if not current_moves.has(current_align()):
+		current_moves[current_align()] = []
+	return current_moves[current_align()].duplicate()
 
 
 func get_action_amount() -> int:
@@ -271,14 +290,14 @@ func get_alingment_amount() -> int:
 	return region_control.align_amount
 
 
-func get_capital_amount(align : int = current_alignment) -> int:
-	return region_control.capital_amount[align - 1]
+func get_capital_amount(alignment : int = current_align()) -> int:
+	return region_control.capital_amount[alignment - 1]
 
 
 func alignment_friendly(your_align : int, opposing_align : int) -> bool:
 	return region_control.alignment_friendly(your_align, opposing_align)
 
 
-func alignment_neutral(align : int) -> bool:
-	return region_control.alignment_neutral(align)
+func alignment_neutral(alignment : int = current_align()) -> bool:
+	return region_control.alignment_neutral(alignment)
 

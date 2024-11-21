@@ -92,7 +92,6 @@ func _ready_deferred():
 		city.pressed.connect(_on_capital_pressed)
 		city.mouse_entered.connect(make_region_arrows)
 		
-
 	color_self(false)
 
 

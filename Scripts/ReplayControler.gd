@@ -66,6 +66,8 @@ func save_replay(replay_name : String):
 	var file = FileAccess.open("user://REPLAY " + replay_name + ".json", FileAccess.WRITE)
 	
 	file.store_string(JSON.stringify(replay_save))
+	
+	file.close()
 
 
 func load_replay(replay_name : String):
