@@ -6,15 +6,15 @@ const NETWORK_SAVE_DIR : String = "user://Networks"
 const NET_NAMES : Array[String] = ["attack", "reinforce", "mobilize"]
 const ALLOWED_MAPS : Dictionary = {
 	"2._Testlandia.tscn" : [5, 20],
-	"1._Title_Map.tscn" : [2, 15],
+#	"1._Title_Map.tscn" : [2, 15], # Stalematy
 	"1._Odd_&_Even.tscn" : [2, 15],
 	"2._House_Of_90_Degrees.tscn" : [2, 15],
-	"1._Music_Land.tscn" : [2, 25],
+#	"1._Music_Land.tscn" : [2, 25], # Stalematy
 	"2._Trees_Trees_Trees.tscn" : [3, 25],
-	"2._The_Power_Of_Two.tscn" : [4, 15],
+	"2._The_Power_Of_Two.tscn" : [4, 25],
 	"1._Cubical_Warfare.tscn" : [4, 20],
 	"2._We_Didn't_Start_the_Fire.tscn" : [5, 25],
-	"2._Honeycomb_Madness.tscn" : [6, 30],
+	"2._Honeycomb_Madness.tscn" : [6, 25],
 	"2._On_The_Slots.tscn" : [7, 30],
 	"2._No_Tickes_Left_To_Ride.tscn" : [8, 30],
 }
@@ -23,7 +23,8 @@ enum {MAP_ALIGN_AMOUNT, MAP_TURN_CUTOFF}
 
 
 @export var network_amount : int = 100
-@export var remove_amount : int = 30
+@export var remove_amount : int = 40
+@export var new_creatures : int = 10
 @export var network_inputs : int = 8
 @export var network_specifications : Array = [8, 8, 1]
 @export var turn_cutoff_mult : int = 3
@@ -160,19 +161,28 @@ func remove_last_networks(removed : int):
 		network.queue_free()
 
 
-func fill_missing_networks(net_amount : int):
+func fill_missing_networks(net_amount : int, new_amount : int):
+	var n : int = 0
 	for i in range(net_amount):
 		if networks.has_node(str(i)):
 			continue
 		var net_set : Node = Node.new()
 		net_set.name = str(i)
 		networks.add_child(net_set)
-		var net_set_parent : Node = networks.get_node(str(choosable_networks[randi_range(0, choosable_networks.size() - 1)]))
-		for j in range(3):
-			var net : Network = net_set_parent.get_node(NET_NAMES[j]).copy_self()
-			net.name = NET_NAMES[j]
-			net.mutate()
-			net_set.add_child(net)
+		if n < new_amount:
+			for j in range(3):
+				var net : Network = Network.new()
+				net.setup_network(network_inputs, network_specifications)
+				net.randomize_network()
+				net.name = NET_NAMES[j]
+				net_set.add_child(net)
+		else:
+			var net_set_parent : Node = networks.get_node(str(choosable_networks[randi_range(0, choosable_networks.size() - 1)]))
+			for j in range(3):
+				var net : Network = net_set_parent.get_node(NET_NAMES[j]).copy_self()
+				net.name = NET_NAMES[j]
+				net.mutate()
+				net_set.add_child(net)
 
 
 func win(_align : int):
@@ -181,6 +191,13 @@ func win(_align : int):
 	var turn_penalty : float = 0.1 * (float(region_control.current_turn) / float(turn_cutoff))
 	print("Turn penalty: ",  turn_penalty)
 	
+	var highest_placement : float = 0
+	for i in range(chosen_networks.size()):
+		var placement : String = GameStats.get_stat(i + 1, "placement") as String
+		if placement.is_valid_int():
+			var place : float = 1.0 - float(placement.to_int()) / float(chosen_networks.size())
+			if highest_placement < place:
+				highest_placement = place
 	for i in range(chosen_networks.size()):
 		var placement : String = GameStats.get_stat(i + 1, "placement") as String
 #		print(placement)
@@ -189,7 +206,7 @@ func win(_align : int):
 		if placement.is_valid_int():
 			current_rankings[al] += 1.0 - float(placement.to_int()) / float(chosen_networks.size())
 		else:
-			current_rankings[al] += 0.5
+			current_rankings[al] += highest_placement
 		current_rankings[al] -= turn_penalty
 	
 	if chosen_variations >= chosen_networks.size() - 1:
@@ -221,7 +238,7 @@ func win(_align : int):
 			sort_networks()
 			remove_last_networks(remove_amount)
 			# Generate new nets
-			fill_missing_networks(network_amount)
+			fill_missing_networks(network_amount, new_creatures)
 			
 			choosable_networks = range(network_amount)
 			choose_networks()

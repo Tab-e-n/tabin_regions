@@ -43,6 +43,9 @@ func start_turn(align : int):
 
 
 func think_normal():
+	if not network_attack or not network_reinforce:
+		controler.CALL_nothing = true
+		return
 	if controler.get_actions_contextual() <= 0:
 		controler.CALL_change_current_action = true
 		return
@@ -84,6 +87,9 @@ func think_normal():
 
 
 func think_mobilize():
+	if not network_mobilize:
+		controler.CALL_nothing = true
+		return
 	var mobilize_regions : Array = []
 	var friendly_regions : Array = controler.get_owned_regions()
 	
